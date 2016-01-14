@@ -19,7 +19,7 @@ var source = {
 		main: './app/main.js',
 		src: [
 			// application config
-			path.join(process.cwd(), 'app.config.js'),
+			'./app.config.js',
 
 			// application bootstrap file
 			'./app/main.js',
@@ -68,11 +68,11 @@ gulp.task('vendor', function(){
 		.pipe(gulp.dest(destinations.js));
 });
 
-gulp.task('watch', function(){
+gulp.task('watch', ['build', 'html-minify', 'html-index'], function(){
 	gulp.watch(source.js.src, ['build']);
 	gulp.watch(source.js.tpl, ['build']);
 	gulp.watch(source.html, ['html-minify']);
-	gulp.watch(path.join(process.cwd(), 'index.html'), ['html-index']);
+	gulp.watch('./index.html', ['html-index']);
 });
 
 gulp.task('connect', function() {
@@ -95,7 +95,7 @@ gulp.task('html-minify', function(){
 });
 
 gulp.task('resource', function() {
-	return gulp.src(['./plugin/**/*', './smartadmin-plugin/**/*', './sound/*', './api/*', './styles/**/*', './app.scripts.json'], {
+	return gulp.src(['./plugin/**/*', './smartadmin-plugin/**/*', './sound/*', './api/*', './styles/**/*', '!./styles/css/**/*', './app.scripts.json'], {
 		base: './'
 	}).pipe(gulp.dest(path.join(destinations.js)));
 });
