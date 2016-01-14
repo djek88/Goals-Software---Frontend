@@ -6,90 +6,120 @@ var connect = require('gulp-connect');
 var templateCache = require('gulp-angular-templatecache');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
-
+var minifyCss = require('gulp-minify-css');
+var useref = require('gulp-useref');
+var minifyHTML = require('gulp-minify-html');
+var gulpif = require('gulp-if');
+var rename = require('gulp-rename');
 
 var scripts = require('./app.scripts.json');
 
 var source = {
-    js: {
-        main: 'app/main.js',
-        src: [
-            // application config
-            'app.config.js',
+	js: {
+		main: './app/main.js',
+		src: [
+			// application config
+			path.join(process.cwd(), 'app.config.js'),
 
-            // application bootstrap file
-            'app/main.js',
+			// application bootstrap file
+			'./app/main.js',
 
-            // main module
-            'app/app.js',
+			// main module
+			'./app/app.js',
 
-            // module files
+			// module files
+			'./app/**/module.js',
 
-            'app/**/module.js',
-
-            // other js files [controllers, services, etc.]
-            'app/**/!(module)*.js',
-        ],
-        tpl: 'app/**/*.tpl.html',
-        nonTpl: 'app/**/!(.tpl).html'
-    }
+			// other js files [controllers, services, etc.]
+			'./app/**/!(module)*.js',
+		],
+		tpl: './app/**/*.tpl.html'
+	},
+	html: './app/**/*.html'
 };
 
 var destinations = {
-    js: 'build'
+	js: './dist'
 };
 
-
 gulp.task('build', function(){
-    return es.merge(gulp.src(source.js.src) , getTemplateStream())
-        // .pipe(ngAnnotate())
-        // .pipe(uglify())
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest(destinations.js))
-        .pipe(connect.reload());
+	return es.merge(gulp.src(source.js.src), getTemplateStream())
+		.pipe(concat('app.js'))
+		.pipe(gulp.dest(destinations.js))
+		.pipe(connect.reload());
+});
+
+gulp.task('app-minify', ['build'], function() {
+	gulp.src(path.join(destinations.js, 'app.js'))
+		.pipe(ngAnnotate())
+		.pipe(uglify())
+		.pipe(rename({extname: '.min.js'}))
+		.pipe(gulp.dest(destinations.js));
 });
 
 gulp.task('vendor', function(){
-    var paths = [];
-    scripts.prebuild.forEach(function(script){
-        paths.push(scripts.paths[script]);
-    });
-    gulp.src(paths)
-        .pipe(concat('vendor.js'))
-        //.on('error', swallowError)
-        .pipe(gulp.dest(destinations.js))
+	var paths = [];
+	scripts.prebuild.forEach(function(script) {
+		paths.push(scripts.paths[script]);
+	});
+	gulp.src(paths)
+		.pipe(concat('vendor.js'))
+		//.on('error', swallowError)
+		.pipe(gulp.dest(destinations.js));
 });
 
 gulp.task('watch', function(){
-    gulp.watch(source.js.src, ['build']);
-    gulp.watch(source.js.tpl, ['build']);
+	gulp.watch(source.js.src, ['build']);
+	gulp.watch(source.js.tpl, ['build']);
+	gulp.watch(source.html, ['html-minify']);
+	gulp.watch(path.join(process.cwd(), 'index.html'), ['html-index']);
 });
 
 gulp.task('connect', function() {
-    connect.server({
-        port: 8888,
-        root: 'buid/app',
-        livereload: true
-    });
+	connect.server({
+		port: 1337,
+		root: './dist',
+		fallback: './dist/index.html',
+		livereload: true
+	});
 });
 
-gulp.task('html-copy', function() {
-    gulp.src(source.js.nonTpl)
-       .pipe(gulp.dest(path.join(destinations.js, 'app')))
-       .pipe(connect.reload());
+gulp.task('html-minify', function(){
+	gulp.src(source.html)
+		.pipe(minifyHTML({
+			conditionals: true,
+			spare: true
+		}))
+		.pipe(gulp.dest(path.join(destinations.js, 'app')))
+		.pipe(connect.reload());
 });
 
-gulp.task('default', ['vendor', 'build', 'watch', 'connect']);
+gulp.task('resource', function() {
+	return gulp.src(['./plugin/**/*', './smartadmin-plugin/**/*', './sound/*', './api/*', './styles/**/*', './app.scripts.json'], {
+		base: './'
+	}).pipe(gulp.dest(path.join(destinations.js)));
+});
+
+gulp.task('html-index', function(){
+	gulp.src(['./index.html'])
+		.pipe(useref())
+		.pipe(gulpif('*.css', minifyCss()))
+		.pipe(gulpif('*.html', minifyHTML()))
+		.pipe(gulp.dest(destinations.js))
+		.pipe(connect.reload());
+});
+
+gulp.task('default', ['vendor', 'build', 'app-minify', 'html-index', 'html-minify', 'resource', 'watch', 'connect']);
 
 var swallowError = function(error){
-    console.log(error.toString());
-    this.emit('end')
+	console.log(error.toString());
+	this.emit('end');
 };
 
-var getTemplateStream = function () {
-    return gulp.src(source.js.tpl)
-        .pipe(templateCache({
-            root: 'app/',
-            module: 'app'
-        }))
+var getTemplateStream = function(){
+	return gulp.src(source.js.tpl)
+		.pipe(templateCache({
+			root: 'app/',
+			module: 'app'
+		}));
 };

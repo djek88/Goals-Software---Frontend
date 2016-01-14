@@ -10,32 +10,30 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- #CSS Links -->
-		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/font-awesome.min.css">
+		<!-- build:css ./vendors.css -->
+			<!-- Basic Styles -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/bootstrap.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/font-awesome.min.css">
 
-		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production-plugins.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-skins.min.css">
-		
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-angular.css">
+			<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production-plugins.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-skins.min.css">
+			
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-angular.css">
 
-		<!-- SmartAdmin RTL Support (Not using RTL? Disable the CSS below to save bandwidth) -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-rtl.min.css">
+			<!-- SmartAdmin RTL Support (Not using RTL? Disable the CSS below to save bandwidth) -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-rtl.min.css">
 
-		<!-- We recommend you use "your_style.css" to override SmartAdmin
-		specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
-		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/demo.min.css">
+			<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/demo.min.css">
+		<!-- endbuild -->
 
 		<!-- #FAVICONS -->
 		<link rel="shortcut icon" href="styles/img/favicon/favicon.ico" type="image/x-icon">
 
 		<!-- #GOOGLE FONT -->
-	<!-- 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> -->
+		<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> -->
 
 		<!-- #APP SCREEN / ICONS -->
 		<!-- Specifying a Webpage Icon for Web Clip
@@ -111,15 +109,14 @@
 		<![endif]-->
 
 		<!--[if lt IE 9]>
+			<!-- build:js ./ie.js -->
 			<script src="plugin/es5-shim/es5-shim.js"></script>
 			<script src="plugin/json3/lib/json3.min.js"></script>
+			<!-- endbuild -->
 		<![endif]-->
 
 		<!-- Use for production after building the project with grunt --> 
-		<script src="build/vendor.js"></script>		
-		<script src="build/app.js"></script>
-
-
-		</body>
-	
+		<script src="./vendor.js"></script>		
+		<script src="./app.js"></script>
+	</body>
 </html>
