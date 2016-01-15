@@ -17,9 +17,11 @@
     "fullcalendar",
     "notification",
     "smartwidgets",
-    "easy-pie"
+    "easy-pie",
+    "api"
   ],
   "paths": {
+    "api": "plugin/api-backend/api-services.js",
 
     "jquery": "plugin/jquery/dist/jquery.min.js",
     "jquery-ui": "plugin/jquery-ui/jquery-ui.min.js",
@@ -167,6 +169,5 @@
     "jquery-jvectormap-world-mill-en": { "deps": ["jquery-jvectormap"]},
 
     "smartwidgets": { "deps": ["jquery-ui"]}
-
   }
-}   
+}

@@ -24,6 +24,7 @@ angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (form
                     }
                 }
             };
+
             form.find('[data-smart-validate-input], [smart-validate-input]').each(function () {
                 var $input = $(this), fieldName = $input.attr('name');
 

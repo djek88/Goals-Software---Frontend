@@ -1,45 +1,116 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 text-center animated fadeInDown">
-            <div>
-                <h1 class="logo-name">My Orange</h1>
-            </div>
-            <h3>Welcome to My Orange</h3>
+<header id="header"  class="animated fadeInDown" >
 
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-            </p>
+	<div id="logo-group">
+		<span id="logo"> <img src="styles/img/logo.png" alt="SmartAdmin"> </span>
+	</div>
 
-            <p>Login in. To see it in action.</p>
+	<span id="extr-page-header-space">
+		<span class="hidden-mobile hiddex-xs">Need an account?</span>
+		<a ui-sref="register" class="btn btn-danger">Create account</a>
+	</span>
 
-            <form class="m-t" role="form" action="#">
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Username" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block m-b">Login</button>
+</header>
+<div id="main" role="main"  class="animated fadeInDown" >
 
-                <a ui-sref="account.forgot">
-                    <small>Forgot password?</small>
-                </a>
+	<div id="content" class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+				<h1 class="txt-color-red login-header-big">SmartAdmin</h1>
 
-                <p class="text-muted text-center">
-                    <small>Do not have an account?</small>
-                </p>
-                <a class="btn btn-sm btn-white btn-block" ui-sref="account.register">Create an account</a>
+				<div class="hero">
+					<div class="pull-left login-desc-box-l">
+						<h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin,
+							everywhere you go!</h4>
 
-                <br/>
+						<div class="login-app-icons">
+							<a ui-sref="app.dashboard" class="btn btn-danger btn-sm">Frontend Template</a>
+							<a href-void class="btn btn-danger btn-sm">Find out more</a>
+						</div>
+					</div>
+					<img src="styles/img/demo/iphoneview.png" class="pull-right display-image" alt style="width:210px">
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
 
-                <google-signin></google-signin>
+						<p>
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+							laudantium, totam rem aperiam, eaque ipsa.
+						</p>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<h5 class="about-heading">Not just your average template!</h5>
 
-                <facebook-signin></facebook-signin>
+						<p>
+							Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta
+							nobis est eligendi voluptatem accusantium!
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+				<div class="well no-padding">
+					<form ng-submit="login()" id="login-form" class="smart-form client-form" data-smart-validate-form>
+						<header>
+							Sign In
+						</header>
+						<fieldset>
+							<section>
+								<label class="label">E-mail</label>
+								<label class="input"> <i class="icon-append fa fa-user"></i>
+									<input type="email" name="email"
+										data-ng-model="credentials.email"
+										data-smart-validate-input
+										data-required
+										data-email
+										data-message-required="Please enter your email address"
+										data-message-email="Please enter a VALID email address">
+									<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
+										Please enter email address/username</b></label>
+							</section>
+							<section>
+								<label class="label">Password</label>
+								<label class="input"> <i class="icon-append fa fa-lock"></i>
+									<input type="password" name="password"
+										data-ng-model="credentials.password"
+										data-smart-validate-input
+										data-required
+										data-minlength="3"
+										data-maxlength="20"
+										data-message="Please enter your email password">
+									<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
+										your password</b> </label>
 
-                <br/>
-            </form>
-            <p class="m-t">
-                <small>My Orange app framework base on Bootstrap 3 © 2014</small>
-            </p>
-        </div>
-    </div>
+								<div class="note">
+									<a ui-sref="forgotPassword">Forgot password?</a>
+								</div>
+							</section>
+							<section>
+								<label class="checkbox">
+									<input type="checkbox" name="remember" ng-model="rememberMe">
+									<i></i>Stay signed in</label>
+							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn btn-primary">
+								Sign in
+							</button>
+						</footer>
+					</form>
+				</div>
+				<h5 class="text-center"> - Or sign in using -</h5>
+				<ul class="list-inline text-center">
+					<li>
+						<a href-void class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
+					</li>
+					<li>
+						<a href-void class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
+					</li>
+					<li>
+						<a href-void class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>

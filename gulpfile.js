@@ -11,6 +11,7 @@ var useref = require('gulp-useref');
 var minifyHTML = require('gulp-minify-html');
 var gulpif = require('gulp-if');
 var rename = require('gulp-rename');
+var wrap = require('gulp-wrap');
 
 var scripts = require('./app.scripts.json');
 
@@ -44,6 +45,7 @@ var destinations = {
 
 gulp.task('build', function(){
 	return es.merge(gulp.src(source.js.src), getTemplateStream())
+		.pipe(wrap('(function(){\n<%= contents %>\n})();'))
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest(destinations.js))
 		.pipe(connect.reload());
