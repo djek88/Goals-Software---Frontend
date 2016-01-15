@@ -45,23 +45,10 @@ function config($provide, $httpProvider, LoopBackResourceProvider) {
 	// config backend api
 	LoopBackResourceProvider.setUrlBase('http://localhost:3443/api');
 
-	$httpProvider.interceptors.push(function($q, $location, LoopBackAuth) {
-		return {
-			responseError: function(rejection) {
-				if (rejection.status == 401) {
-					LoopBackAuth.clearUser();
-					LoopBackAuth.clearStorage();
-					$location.nextAfterLogin = $location.path();
-					$location.path('/login');
-				}
-				return $q.reject(rejection);
-			}
-		};
-	});
-
 	// Intercept http calls.
-	$provide.factory('ErrorHttpInterceptor', function ($q) {
+	$provide.factory('ErrorHttpInterceptor', function ($q, $location, LoopBackAuth) {
 		var errorCounter = 0;
+
 		function notifyError(rejection){
 			console.log(rejection);
 			$.bigBox({
@@ -79,13 +66,20 @@ function config($provide, $httpProvider, LoopBackResourceProvider) {
 			requestError: function (rejection) {
 				// show notification
 				notifyError(rejection);
-
 				// Return the promise rejection.
 				return $q.reject(rejection);
 			},
 
 			// On response failure
 			responseError: function (rejection) {
+				// safe clear session and redirect to login page
+				if (rejection.status == 401) {
+					LoopBackAuth.clearUser();
+					LoopBackAuth.clearStorage();
+					$location.nextAfterLogin = $location.path();
+					$location.path('/login');
+				}
+
 				// show notification
 				notifyError(rejection);
 				// Return the promise rejection.
