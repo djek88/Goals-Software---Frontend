@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 angular
 	.module('app.layout', [
 		'ui.router'
 	])
-	.config(config)
+	.config(config);
 
 function config($stateProvider, $urlRouterProvider) {
 	$stateProvider
@@ -16,11 +16,21 @@ function config($stateProvider, $urlRouterProvider) {
 				}
 			},
 			resolve: {
-				scripts: function(lazyScript){
+				customer: function($q, Customer) {
+					var deferred = $q.defer();
+
+					Customer.getCurrent(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				scripts: function(lazyScript) {
 					return lazyScript.register([
-							'sparkline',
-							'easy-pie'
-						]);
+						'sparkline',
+						'easy-pie'
+					]);
 				}
 			}
 		});
