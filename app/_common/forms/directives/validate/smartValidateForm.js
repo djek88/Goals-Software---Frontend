@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (formsCommon) {
+angular.module('SmartAdmin.Forms').directive('smartValidateForm', function () {
     return {
         restrict: 'A',
         link: function (scope, form, attributes) {

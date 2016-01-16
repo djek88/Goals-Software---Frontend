@@ -14,14 +14,14 @@ function config($stateProvider) {
 			url: '/profile',
 			template: '<ui-view/>'
 		})
-		.state('app.profile.view', {
+		/*.state('app.profile.view', {
 			url: '/view',
 			views: {
 				'content@app': {
 					templateUrl: 'app/profile/views/profile-view.html'
 				}
 			}
-		})
+		})*/
 		.state('app.profile.settings', {
 			url: '/settings',
 			views: {

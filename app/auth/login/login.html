@@ -50,7 +50,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 				<div class="well no-padding">
-					<form ng-submit="login()" id="login-form" class="smart-form client-form" data-smart-validate-form>
+					<form ng-submit="login()" name="loginForm" id="login-form" class="smart-form client-form" data-smart-validate-form>
 						<header>
 							Sign In
 						</header>
@@ -80,7 +80,6 @@
 										data-message="Please enter your email password">
 									<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter
 										your password</b> </label>
-
 								<div class="note">
 									<a ui-sref="forgotPassword">Forgot password?</a>
 								</div>
@@ -92,7 +91,7 @@
 							</section>
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn btn-primary">
+							<button class="btn btn-primary">
 								Sign in
 							</button>
 						</footer>

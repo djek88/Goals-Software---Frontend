@@ -45,7 +45,7 @@ function config($stateProvider
 						])
 				}
 			}
-		})
+		});
 
 		// .state('realLogin', {
 		// 	url: '/real-login',

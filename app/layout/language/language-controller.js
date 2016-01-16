@@ -1,39 +1,35 @@
 "use strict";
 
-angular.module('app').controller("LanguagesCtrl",  function LanguagesCtrl($scope, $rootScope, $log, Language){
+angular
+	.module('app')
+	.controller("LanguagesCtrl", LanguagesCtrl);
 
-    $rootScope.lang = {};
-    
-    Language.getLanguages(function(data){
+function LanguagesCtrl($scope, $rootScope, $log, Language){
+	$rootScope.lang = {};
 
-        $rootScope.currentLanguage = data[0];
+	Language.getLanguages(function(data){
+		$rootScope.languages = data;
+		$rootScope.currentLanguage = data[0];
 
-        $rootScope.languages = data;
+		Language.getLang(data[0].key, function(data){
+			$rootScope.lang = data;
+		});
+	});
 
-        Language.getLang(data[0].key,function(data){
+	$scope.selectLanguage = function(language){
+		$rootScope.currentLanguage = language;
 
-            $rootScope.lang = data;
-        });
+		Language.getLang(language.key,function(data){
+			$rootScope.lang = data;
+		});
+	};
 
-    });
-
-    $scope.selectLanguage = function(language){
-        $rootScope.currentLanguage = language;
-        
-        Language.getLang(language.key,function(data){
-
-            $rootScope.lang = data;
-            
-        });
-    }
-
-    $rootScope.getWord = function(key){
-        if(angular.isDefined($rootScope.lang[key])){
-            return $rootScope.lang[key];
-        } 
-        else {
-            return key;
-        }
-    }
-
-});
+	$rootScope.getWord = function(key){
+		if(angular.isDefined($rootScope.lang[key])){
+			return $rootScope.lang[key];
+		}
+		else {
+			return key;
+		}
+	};
+};

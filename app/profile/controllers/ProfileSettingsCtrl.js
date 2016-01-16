@@ -4,8 +4,9 @@ angular
 	.module('app.profile')
 	.controller('ProfileSettingsCtrl', function ($rootScope, $scope, LoopBackAuth, Customer) {
 		var customer = Customer.getCachedCurrent();
+
 		var tz = jstz.determine();
-		
+
 		$scope.timezoneMap = [];
 		$scope.profile = {
 			firstName: customer.firstName,
@@ -14,7 +15,8 @@ angular
 			username: customer.username,
 			timeZone: customer.timeZone,
 			description: customer.description,
-			social: customer.social
+			social: customer.social,
+			avatar: customer.avatar
 		};
 
 		$scope.save = save;

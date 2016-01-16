@@ -24,44 +24,49 @@ angular
 		// App
 		'app.auth',
 		'app.layout',
-		'app.chat',
-		'app.dashboard',
-		'app.calendar',
-		'app.inbox',
-		'app.graphs',
-		'app.tables',
-		'app.forms',
-		'app.ui',
-		'app.widgets',
-		'app.maps',
-		'app.appViews',
-		'app.misc',
-		'app.smartAdmin',
+
+		// 'app.chat',
+		// 'app.dashboard',
+		// 'app.calendar',
+		// 'app.inbox',
+		// 'app.graphs',
+		// 'app.tables',
+		// 'app.forms',
+		// 'app.ui',
+		// 'app.widgets',
+		// 'app.maps',
+		// 'app.appViews',
+		// 'app.misc',
+		// 'app.smartAdmin',
 		'app.profile'
 	])
 	.config(config)
 	.constant('APP_CONFIG', window.appConfig)
 	.run(run);
 
+var apiUrl = 'http://localhost:3443/api';
+
 function config($provide, $httpProvider, $locationProvider, LoopBackResourceProvider) {
 	// Enable HTML5
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false
+	});
 
 	// LoopBack config
-	LoopBackResourceProvider.setUrlBase('http://localhost:3443/api');
+	LoopBackResourceProvider.setUrlBase(apiUrl);
 
 	// Intercept http calls.
 	$provide.factory('ErrorHttpInterceptor', function($q, $location, LoopBackAuth) {
 		var errorCounter = 0;
 
-		function notifyError(rejection) {
+		function notifyError(rejection){
+			console.log(rejection);
 			var data = rejection.data;
 
 			if (data.error) {
 				data = data.error.message;
 			}
-
-			console.log(rejection);
 
 			$.bigBox({
 				title: rejection.status + ' ' + rejection.statusText,
@@ -104,19 +109,22 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
-function run($rootScope, $state, $stateParams, Customer, LoopBackAuth) {
+function run($rootScope, $state, $stateParams, Language, Customer) {
+	$rootScope.urlBase = apiUrl;
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
-	$rootScope.logout = function() {
-		console.log('Client logout...');
-
-		Customer.logout(null, null, function() {
-			LoopBackAuth.clearUser();
-			LoopBackAuth.clearStorage();
-			$state.go('login');
-		});
-	};
+	$rootScope.logout = logout;
 	// editableOptions.theme = 'bs3';
+
+	// Set current language
+	$rootScope.lang = {};
+	$rootScope.getWord = getWord;
+
+	Language.getLanguages(function(data){
+		Language.getLang(data[0].key, function(data){
+			$rootScope.lang = data;
+		});
+	});
 
 	// UnAuthenticated redirect to login page
 	$rootScope.$on('$stateChangeStart', function (e, toState) {
@@ -126,4 +134,21 @@ function run($rootScope, $state, $stateParams, Customer, LoopBackAuth) {
 			e.preventDefault();
 		}
 	});
+
+	function getWord(key){
+		if(angular.isDefined($rootScope.lang[key])){
+			return $rootScope.lang[key];
+		}
+		else {
+			return key;
+		}
+	}
+
+	function logout() {
+		console.log('Client logout...');
+
+		Customer.logout(null, null, function() {
+			$state.go('login');
+		});
+	}
 }

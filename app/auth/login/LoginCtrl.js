@@ -5,23 +5,25 @@ angular
 	.controller('LoginCtrl', loginCtrl);
 
 function loginCtrl($scope, $location, Customer) {
+	$scope.rememberMe = false;
 	$scope.credentials = {
 		email: '',
 		password: ''
 	};
 
-	$scope.rememberMe = false;
 	$scope.login = login;
 
 	function login() {
-		Customer.login({ rememberMe: $scope.rememberMe }, $scope.credentials,
-			function() {
-				var next = $location.nextAfterLogin || '/';
+		if ($scope.loginForm.$valid) {
+			Customer.login({ rememberMe: $scope.rememberMe }, $scope.credentials,
+				function() {
+					var next = $location.nextAfterLogin || '/profile/settings';
 
-				$location.nextAfterLogin = null;
-				$location.path(next);
-			}
-		);
+					$location.nextAfterLogin = null;
+					$location.path(next);
+				}
+			);
+		}
 	}
 
 	/*$scope.$on('event:google-plus-signin-success', function (event, authResult) {
