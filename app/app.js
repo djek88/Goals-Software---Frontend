@@ -50,12 +50,19 @@ function config($provide, $httpProvider, LoopBackResourceProvider) {
 		var errorCounter = 0;
 
 		function notifyError(rejection){
+			var data = rejection.data;
+
+			if (data.error) {
+				data = data.error.message;
+			}
+
 			console.log(rejection);
+
 			$.bigBox({
 				title: rejection.status + ' ' + rejection.statusText,
-				content: rejection.data,
-				color: "#C46A69",
-				icon: "fa fa-warning shake animated",
+				content: data,
+				color: '#C46A69',
+				icon: 'fa fa-warning shake animated',
 				number: ++errorCounter,
 				timeout: 6000
 			});

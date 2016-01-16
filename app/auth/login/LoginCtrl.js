@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 angular
 	.module('app.auth')
@@ -9,13 +9,15 @@ function loginCtrl($scope, $location, Customer) {
 		email: '',
 		password: ''
 	};
+
 	$scope.rememberMe = false;
 	$scope.login = login;
 
 	function login() {
-		Customer.login({rememberMe: $scope.rememberMe}, $scope.credentials,
+		Customer.login({ rememberMe: $scope.rememberMe }, $scope.credentials,
 			function() {
 				var next = $location.nextAfterLogin || '/';
+
 				$location.nextAfterLogin = null;
 				$location.path(next);
 			}
