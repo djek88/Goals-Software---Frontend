@@ -1,0 +1,81 @@
+<div id="content">
+	<div class="row">
+		<div class="col-sm-12">
+			<form id="checkout-form" class="smart-form" novalidate="novalidate">
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-6">
+						<label class="input"> <i class="icon-prepend fa fa-user"></i>
+							<input ng-model="profile.firstName" type="text" placeholder="First name">
+						</label>
+					</section>
+					<section class="col col-6">
+						<label class="input"> <i class="icon-prepend fa fa-user"></i>
+							<input ng-model="profile.lastName" type="text" placeholder="Last name">
+						</label>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-6">
+						<label class="input"> <i class="icon-prepend fa fa-key"></i>
+							<input ng-model="profile.password" type="password" placeholder="Password">
+						</label>
+					</section>
+					<section class="col col-6">
+						<label class="input"> <i class="icon-prepend fa fa-key"></i>
+							<input ng-model="profile.passwordConfirm" type="password" placeholder="Confirm">
+						</label>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-6">
+						<label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
+							<input ng-model="profile.email" type="email" placeholder="E-mail">
+						</label>
+					</section>
+
+					<section class="col col-6">
+						<select placeholder="Timezone" ng-model="profile.timeZone" ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in timezoneMap" data-smart-select2 style="width:100%" class="select2"></select>
+					</section>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-5">
+						<label class="input"> <i class="icon-prepend fa fa-facebook"></i>
+							<input ng-model="profile.social.fb" type="text" placeholder="Facebook">
+						</label>
+					</section>
+
+					<section class="col col-4">
+						<label class="input"> <i class="icon-prepend fa fa-twitter"></i>
+							<input ng-model="profile.social.tw" type="text" placeholder="Twiter">
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="input"> <i class="icon-prepend fa fa-linkedin"></i>
+							<input ng-model="profile.social.li" type="text" placeholder="LinkedIn">
+						</label>
+					</section>
+
+					<section class="col col-xs-12">
+						<img style="height: 124px; float: left;" class="img-responsive" src="./styles/img/avatars/sunny-big.png">
+						<label class="textarea" style="display: flex; padding-left: 15px;">
+							<textarea rows="7" ng-model="profile.description" placeholder="Description"></textarea>
+						</label>
+					</section>
+				</div>
+			</fieldset>
+
+			<footer>
+				<button ng-click="save()" type="submit" class="btn btn-primary">Save</button>
+			</footer>
+			</form>
+		</div>
+	</div>
+</div>

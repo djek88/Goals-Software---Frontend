@@ -13,7 +13,7 @@
     "restangular",
     "fastclick",
     "moment",
-    "moment-timezone",
+    "moment-timezone-with-data",
     "fullcalendar",
     "notification",
     "smartwidgets",
@@ -22,6 +22,7 @@
   ],
   "paths": {
     "api": "plugin/api-backend/api-services.js",
+    "jstz": "plugin/jstz/jstz.min.js",
 
     "jquery": "plugin/jquery/dist/jquery.min.js",
     "jquery-ui": "plugin/jquery-ui/jquery-ui.min.js",
@@ -63,6 +64,7 @@
 
     "moment": "plugin/moment/min/moment-with-locales.min.js",
     "moment-timezone": "plugin/moment-timezone/builds/moment-timezone.min.js",
+    "moment-timezone-with-data": "plugin/moment-timezone/builds/moment-timezone-with-data.min.js",
 
     "sparkline": "plugin/relayfoods-jquery.sparkline/dist/jquery.sparkline.min.js",
     "easy-pie": "plugin/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js",

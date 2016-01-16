@@ -36,7 +36,8 @@ angular
 		'app.maps',
 		'app.appViews',
 		'app.misc',
-		'app.smartAdmin'
+		'app.smartAdmin',
+		'app.profile'
 	])
 	.config(config)
 	.constant('APP_CONFIG', window.appConfig)
