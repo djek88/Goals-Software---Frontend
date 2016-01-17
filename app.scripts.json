@@ -18,11 +18,13 @@
     "notification",
     "smartwidgets",
     "easy-pie",
-    "api"
+    "api",
+    "file-model"
   ],
   "paths": {
     "api": "plugin/api-backend/api-services.js",
     "jstz": "plugin/jstz/jstz.min.js",
+    "file-model": "plugin/angular-file-model/angular-file-model.js",
 
     "jquery": "plugin/jquery/dist/jquery.min.js",
     "jquery-ui": "plugin/jquery-ui/jquery-ui.min.js",

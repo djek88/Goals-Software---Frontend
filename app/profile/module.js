@@ -3,7 +3,8 @@
 angular
 	.module('app.profile', [
 		'ui.router',
-		'backendApi'
+		'backendApi',
+		'file-model'
 	])
 	.config(config);
 
@@ -14,16 +15,19 @@ function config($stateProvider) {
 			url: '/profile',
 			template: '<ui-view/>'
 		})
-		/*.state('app.profile.view', {
+		.state('app.profile.view', {
 			url: '/view',
 			views: {
 				'content@app': {
 					templateUrl: 'app/profile/views/profile-view.html'
 				}
 			}
-		})*/
+		})
 		.state('app.profile.settings', {
 			url: '/settings',
+			data: {
+				title: 'Settings page'
+			},
 			views: {
 				'content@app': {
 					controller: 'ProfileSettingsCtrl',

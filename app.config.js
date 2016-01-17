@@ -253,7 +253,7 @@ if (appConfig.voice_command) {
 	};
 }
 
-appConfig.apiRootUrl = '/api';
+appConfig.apiRootUrl = 'http://localhost:3443/api';
 
 window.appConfig = appConfig;
 

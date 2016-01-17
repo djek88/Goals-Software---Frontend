@@ -4,9 +4,9 @@ angular
 	.module('app')
 	.factory('Language', Language);
 
-function Language($http, APP_CONFIG){
+function Language($http){
 	function getLanguage(key, callback) {
-		$http.get(APP_CONFIG.apiRootUrl + '/langs/' + key + '.json').success(function(data){
+		$http.get('/api/langs/' + key + '.json').success(function(data){
 			callback(data);
 		}).error(function(){
 			$log.log('Error');
@@ -15,7 +15,7 @@ function Language($http, APP_CONFIG){
 	}
 
 	function getLanguages(callback) {
-		$http.get(APP_CONFIG.apiRootUrl + '/languages.json').success(function(data){
+		$http.get('/api/languages.json').success(function(data){
 			callback(data);
 		}).error(function(){
 			$log.log('Error');

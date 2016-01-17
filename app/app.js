@@ -44,8 +44,6 @@ angular
 	.constant('APP_CONFIG', window.appConfig)
 	.run(run);
 
-var apiUrl = 'http://localhost:3443/api';
-
 function config($provide, $httpProvider, $locationProvider, LoopBackResourceProvider) {
 	// Enable HTML5
 	$locationProvider.html5Mode({
@@ -54,15 +52,15 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	});
 
 	// LoopBack config
-	LoopBackResourceProvider.setUrlBase(apiUrl);
+	LoopBackResourceProvider.setUrlBase(window.appConfig.apiRootUrl);
 
 	// Intercept http calls.
 	$provide.factory('ErrorHttpInterceptor', function($q, $location, LoopBackAuth) {
 		var errorCounter = 0;
 
 		function notifyError(rejection){
-			console.log(rejection);
-			var data = rejection.data;
+			console.log('app.js rejection', rejection);
+			var data = rejection.data || 'Lost connection!';
 
 			if (data.error) {
 				data = data.error.message;
@@ -109,8 +107,8 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
-function run($rootScope, $state, $stateParams, Language, Customer) {
-	$rootScope.urlBase = apiUrl;
+function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
+	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
 	$rootScope.logout = logout;
