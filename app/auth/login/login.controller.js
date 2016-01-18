@@ -2,27 +2,27 @@
 
 angular
 	.module('app.auth')
-	.controller('LoginCtrl', loginCtrl);
+	.controller('loginController', loginController);
 
-function loginCtrl($scope, $location, Customer) {
-	$scope.rememberMe = false;
-	$scope.credentials = {
+function loginController($scope, $location, Customer) {
+	var vm = this;
+
+	vm.rememberMe = false;
+	vm.credentials = {
 		email: '',
 		password: ''
 	};
 
-	$scope.login = login;
+	vm.login = login;
 
 	function login() {
 		if ($scope.loginForm.$valid) {
-			Customer.login({ rememberMe: $scope.rememberMe }, $scope.credentials,
-				function() {
-					var next = $location.nextAfterLogin || '/profile/settings';
+			Customer.login({ rememberMe: vm.rememberMe }, vm.credentials, function() {
+				var next = $location.nextAfterLogin || '/profile/settings';
 
-					$location.nextAfterLogin = null;
-					$location.path(next);
-				}
-			);
+				$location.nextAfterLogin = null;
+				$location.path(next);
+			});
 		}
 	}
 

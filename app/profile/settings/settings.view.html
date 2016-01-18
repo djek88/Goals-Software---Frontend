@@ -7,12 +7,12 @@
 				<div class="row">
 					<section class="col col-6">
 						<label class="input"> <i class="icon-prepend fa fa-user"></i>
-							<input ng-model="profile.firstName" type="text" placeholder="First name">
+							<input ng-model="vm.customer.firstName" type="text" placeholder="First name">
 						</label>
 					</section>
 					<section class="col col-6">
 						<label class="input"> <i class="icon-prepend fa fa-user"></i>
-							<input ng-model="profile.lastName" type="text" placeholder="Last name">
+							<input ng-model="vm.customer.lastName" type="text" placeholder="Last name">
 						</label>
 					</section>
 				</div>
@@ -20,12 +20,12 @@
 				<div class="row">
 					<section class="col col-6">
 						<label class="input"> <i class="icon-prepend fa fa-key"></i>
-							<input ng-model="profile.password" type="password" placeholder="Password">
+							<input ng-model="vm.customer.password" type="password" placeholder="Password">
 						</label>
 					</section>
 					<section class="col col-6">
 						<label class="input"> <i class="icon-prepend fa fa-key"></i>
-							<input ng-model="profile.passwordConfirm" type="password" placeholder="Confirm">
+							<input ng-model="vm.customer.passwordConfirm" type="password" placeholder="Confirm">
 						</label>
 					</section>
 				</div>
@@ -33,12 +33,18 @@
 				<div class="row">
 					<section class="col col-6">
 						<label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-							<input ng-model="profile.email" type="email" placeholder="E-mail">
+							<input ng-model="vm.customer.email" type="email" placeholder="E-mail">
 						</label>
 					</section>
 
 					<section class="col col-6">
-						<select placeholder="Timezone" ng-model="profile.timeZone" ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in timezoneMap" data-smart-select2 style="width:100%" class="select2"></select>
+						<label class="select">
+							<select 
+								ng-model="vm.customer.timeZone"
+								ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
+							</select>
+						</label>
+
 					</section>
 				</div>
 			</fieldset>
@@ -47,39 +53,39 @@
 				<div class="row">
 					<section class="col col-4">
 						<label class="input"> <i class="icon-prepend fa fa-facebook"></i>
-							<input ng-model="profile.social.fb" type="text" placeholder="Facebook">
+							<input ng-model="vm.customer.social.fb" type="text" placeholder="Facebook">
 						</label>
 					</section>
 
 					<section class="col col-4">
 						<label class="input"> <i class="icon-prepend fa fa-twitter"></i>
-							<input ng-model="profile.social.tw" type="text" placeholder="Twiter">
+							<input ng-model="vm.customer.social.tw" type="text" placeholder="Twiter">
 						</label>
 					</section>
 
 					<section class="col col-4">
 						<label class="input"> <i class="icon-prepend fa fa-linkedin"></i>
-							<input ng-model="profile.social.li" type="text" placeholder="LinkedIn">
+							<input ng-model="vm.customer.social.li" type="text" placeholder="LinkedIn">
 						</label>
 					</section>
 
 					<section class="col col-xs-12">
 						<label style="display: block;" for="picture">
-							<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{picture.selectedPicture}}">
+							<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
+							<div style="display: none;">
+								<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
+							</div>
 						</label>
-						<div style="display: none;">
-							<input id="picture" type="file" class="provider-image-file" file-model="picture.newProviderPicture">
-						</div>
 
 						<label class="textarea" style="display: flex; padding-left: 15px;">
-							<textarea rows="7" ng-model="profile.description" placeholder="Description"></textarea>
+							<textarea rows="7" ng-model="vm.customer.description" placeholder="Description"></textarea>
 						</label>
 					</section>
 				</div>
 			</fieldset>
 
 			<footer>
-				<button ng-click="save()" type="submit" class="btn btn-primary">Save</button>
+				<button ng-click="vm.save()" type="submit" class="btn btn-primary">Save</button>
 			</footer>
 
 			</form>

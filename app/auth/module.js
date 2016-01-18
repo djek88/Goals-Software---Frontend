@@ -30,8 +30,9 @@ function config($stateProvider
 			url: '/login',
 			views: {
 				root: {
-					templateUrl: 'app/auth/login/login.html',
-					controller: 'LoginCtrl'
+					templateUrl: 'app/auth/login/login.view.html',
+					controller: 'loginController',
+					controllerAs: 'vm'
 				}
 			},
 			data: {
@@ -42,7 +43,7 @@ function config($stateProvider
 				srcipts: function(lazyScript){
 					return lazyScript.register([
 						'jquery-validation'
-						])
+					]);
 				}
 			}
 		});

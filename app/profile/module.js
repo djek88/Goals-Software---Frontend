@@ -15,14 +15,14 @@ function config($stateProvider) {
 			url: '/profile',
 			template: '<ui-view/>'
 		})
-		.state('app.profile.view', {
+		/*.state('app.profile.view', {
 			url: '/view',
 			views: {
 				'content@app': {
 					templateUrl: 'app/profile/views/profile-view.html'
 				}
 			}
-		})
+		})*/
 		.state('app.profile.settings', {
 			url: '/settings',
 			data: {
@@ -30,8 +30,9 @@ function config($stateProvider) {
 			},
 			views: {
 				'content@app': {
-					controller: 'ProfileSettingsCtrl',
-					templateUrl: 'app/profile/views/profile-settings.html'
+					templateUrl: 'app/profile/settings/settings.view.html',
+					controller: 'settingsController',
+					controllerAs: 'vm',
 				}
 			},
 			resolve: {
