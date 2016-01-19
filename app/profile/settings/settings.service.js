@@ -50,9 +50,6 @@ function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) 
 		delete customer.passwordConfirm;
 		if (!customer.password) delete customer.password;
 
-		// костыль
-		delete customer.avatar;
-
 		Customer.prototype$updateAttributes({id: customer._id}, customer, function(customer) {
 			// Update localStorage
 			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);

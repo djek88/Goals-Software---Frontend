@@ -17,7 +17,6 @@ function settingsController($scope, $rootScope, settingsService) {
 		// Check password
 		if (vm.customer.password || vm.customer.passwordConfirm) {
 			if (vm.customer.password !== vm.customer.passwordConfirm) {
-
 				vm.customer.password = vm.customer.passwordConfirm = '';
 
 				return $.smallBox({
