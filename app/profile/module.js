@@ -26,7 +26,7 @@ function config($stateProvider) {
 		.state('app.profile.settings', {
 			url: '/settings',
 			data: {
-				title: 'Settings page'
+				title: 'Settings'
 			},
 			views: {
 				'content@app': {

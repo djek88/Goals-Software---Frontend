@@ -49,121 +49,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Customer#prototype$__findById__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Find a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__findById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Customers/:id/accessTokens/:fk",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__destroyById__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Delete a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "prototype$__destroyById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Customers/:id/accessTokens/:fk",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__updateById__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Update a related item by id for accessTokens.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `fk` – `{*}` - Foreign key for accessTokens
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__updateById__accessTokens": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Customers/:id/accessTokens/:fk",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Customer#prototype$__get__Social
          * @methodOf backendApi.Customer
          *
@@ -195,43 +80,6 @@ module.factory(
         "prototype$__get__Social": {
           url: urlBase + "/Customers/:id/Social",
           method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__create__Social
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Creates a new instance in Social of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__create__Social": {
-          url: urlBase + "/Customers/:id/Social",
-          method: "POST"
         },
 
         /**
@@ -273,36 +121,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Customer#prototype$__destroy__Social
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Deletes Social of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "prototype$__destroy__Social": {
-          url: urlBase + "/Customers/:id/Social",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Customer#prototype$__get__Balance
          * @methodOf backendApi.Customer
          *
@@ -334,43 +152,6 @@ module.factory(
         "prototype$__get__Balance": {
           url: urlBase + "/Customers/:id/Balance",
           method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__create__Balance
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Creates a new instance in Balance of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__create__Balance": {
-          url: urlBase + "/Customers/:id/Balance",
-          method: "POST"
         },
 
         /**
@@ -408,173 +189,6 @@ module.factory(
         "prototype$__update__Balance": {
           url: urlBase + "/Customers/:id/Balance",
           method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__destroy__Balance
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Deletes Balance of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "prototype$__destroy__Balance": {
-          url: urlBase + "/Customers/:id/Balance",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__get__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Queries accessTokens of Customer.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__get__accessTokens": {
-          isArray: true,
-          url: urlBase + "/Customers/:id/accessTokens",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__create__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Creates a new instance in accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__create__accessTokens": {
-          url: urlBase + "/Customers/:id/accessTokens",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__delete__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Deletes all accessTokens of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "prototype$__delete__accessTokens": {
-          url: urlBase + "/Customers/:id/accessTokens",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__count__accessTokens
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Counts accessTokens of Customer.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        "prototype$__count__accessTokens": {
-          url: urlBase + "/Customers/:id/accessTokens/count",
-          method: "GET"
         },
 
         /**
@@ -652,44 +266,6 @@ module.factory(
           isArray: true,
           url: urlBase + "/Customers",
           method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#upsert
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/Customers",
-          method: "PUT"
         },
 
         /**
@@ -1198,7 +774,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `status` – `{string=}` - 
+         *  - `customer` – `{object=}` - 
          */
         "prototype$uploadAvatar": {
           url: urlBase + "/Customers/:id/upload-avatar",
@@ -1218,24 +794,6 @@ module.factory(
           },
           url: urlBase + "/Groups/:id/Members/:fk",
           method: "GET"
-        },
-
-        // INTERNAL. Use Group.Members.destroyById() instead.
-        "::destroyById::Group::Members": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Groups/:id/Members/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Group.Members.updateById() instead.
-        "::updateById::Group::Members": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Groups/:id/Members/:fk",
-          method: "PUT"
         },
 
         // INTERNAL. Use Group.Members.link() instead.
@@ -1270,25 +828,6 @@ module.factory(
           isArray: true,
           url: urlBase + "/Groups/:id/Members",
           method: "GET"
-        },
-
-        // INTERNAL. Use Group.Members.create() instead.
-        "::create::Group::Members": {
-          url: urlBase + "/Groups/:id/Members",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Group.Members.createMany() instead.
-        "::createMany::Group::Members": {
-          isArray: true,
-          url: urlBase + "/Groups/:id/Members",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Group.Members.destroyAll() instead.
-        "::delete::Group::Members": {
-          url: urlBase + "/Groups/:id/Members",
-          method: "DELETE"
         },
 
         // INTERNAL. Use Group.Members.count() instead.
@@ -1431,41 +970,6 @@ module.factory(
     );
 
 
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#updateOrCreate
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
 
         /**
          * @ngdoc method
@@ -1654,24 +1158,6 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Group.Members.destroyById() instead.
-        "prototype$__destroyById__Members": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Groups/:id/Members/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Group.Members.updateById() instead.
-        "prototype$__updateById__Members": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Groups/:id/Members/:fk",
-          method: "PUT"
-        },
-
         // INTERNAL. Use Group.Members.link() instead.
         "prototype$__link__Members": {
           params: {
@@ -1748,43 +1234,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Group#prototype$__create__SessionConf
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Creates a new instance in SessionConf of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        "prototype$__create__SessionConf": {
-          url: urlBase + "/Groups/:id/SessionConf",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Group#prototype$__update__SessionConf
          * @methodOf backendApi.Group
          *
@@ -1820,53 +1269,11 @@ module.factory(
           method: "PUT"
         },
 
-        /**
-         * @ngdoc method
-         * @name backendApi.Group#prototype$__destroy__SessionConf
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Deletes SessionConf of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "prototype$__destroy__SessionConf": {
-          url: urlBase + "/Groups/:id/SessionConf",
-          method: "DELETE"
-        },
-
         // INTERNAL. Use Group.Members() instead.
         "prototype$__get__Members": {
           isArray: true,
           url: urlBase + "/Groups/:id/Members",
           method: "GET"
-        },
-
-        // INTERNAL. Use Group.Members.create() instead.
-        "prototype$__create__Members": {
-          url: urlBase + "/Groups/:id/Members",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Group.Members.destroyAll() instead.
-        "prototype$__delete__Members": {
-          url: urlBase + "/Groups/:id/Members",
-          method: "DELETE"
         },
 
         // INTERNAL. Use Group.Members.count() instead.
@@ -1950,44 +1357,6 @@ module.factory(
           isArray: true,
           url: urlBase + "/Groups",
           method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group#upsert
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/Groups",
-          method: "PUT"
         },
 
         /**
@@ -2315,41 +1684,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Group#updateOrCreate
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
-
-        /**
-         * @ngdoc method
          * @name backendApi.Group#update
          * @methodOf backendApi.Group
          *
@@ -2574,146 +1908,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Group.Members#create
-         * @methodOf backendApi.Group.Members
-         *
-         * @description
-         *
-         * Creates a new instance in Members of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Members.create = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::create::Group::Members"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group.Members#createMany
-         * @methodOf backendApi.Group.Members
-         *
-         * @description
-         *
-         * Creates a new instance in Members of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Members.createMany = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::createMany::Group::Members"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group.Members#destroyAll
-         * @methodOf backendApi.Group.Members
-         *
-         * @description
-         *
-         * Deletes all Members of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.Members.destroyAll = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::delete::Group::Members"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group.Members#destroyById
-         * @methodOf backendApi.Group.Members
-         *
-         * @description
-         *
-         * Delete a related item by id for Members.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Members
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.Members.destroyById = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::destroyById::Group::Members"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
          * @name backendApi.Group.Members#exists
          * @methodOf backendApi.Group.Members
          *
@@ -2854,46 +2048,6 @@ module.factory(
         R.Members.unlink = function() {
           var TargetResource = $injector.get("Customer");
           var action = TargetResource["::unlink::Group::Members"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group.Members#updateById
-         * @methodOf backendApi.Group.Members
-         *
-         * @description
-         *
-         * Update a related item by id for Members.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Members
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Members.updateById = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::updateById::Group::Members"];
           return action.apply(R, arguments);
         };
 

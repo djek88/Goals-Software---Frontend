@@ -1,21 +1,21 @@
 'use strict';
 
 angular
-	.module('app.profile')
-	.factory('settingsService', settingsService);
+	.module('app.group')
+	.factory('myGroupsService', myGroupsService);
 
-function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) {
+function myGroupsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) {
 	var service = {
-		timeZoneMap: buidTimeZoneMap(),
+		/*timeZoneMap: buidTimeZoneMap(),
 		getCustomer: prepareCustomer,
 		saveCustomer: saveCustomer,
 		getDefaultImgData: getDefaultImgData,
 		readFileAsDataUrl: readFileAsDataUrl,
-		uploadPicture: uploadPicture
+		uploadPicture: uploadPicture*/
 	};
 	return service;
 
-	function buidTimeZoneMap() {
+	/*function buidTimeZoneMap() {
 		var results = [];
 
 		moment.tz.names().forEach(function(zoneName) {
@@ -32,7 +32,7 @@ function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) 
 		return results;
 	}
 
-	function prepareCustomer() {
+	function prepareCustomer(argument) {
 		var detectedTz = jstz.determine();
 		var customer = Customer.getCachedCurrent();
 		customer.passwordConfirm = '';
@@ -93,5 +93,5 @@ function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) 
 			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
 			cb();
 		});
-	}
+	}*/
 }

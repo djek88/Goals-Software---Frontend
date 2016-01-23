@@ -24,7 +24,6 @@ angular
 		// App
 		'app.auth',
 		'app.layout',
-
 		// 'app.chat',
 		// 'app.dashboard',
 		// 'app.calendar',
@@ -38,7 +37,8 @@ angular
 		// 'app.appViews',
 		// 'app.misc',
 		// 'app.smartAdmin',
-		'app.profile'
+		'app.profile',
+		'app.group'
 	])
 	.config(config)
 	.constant('APP_CONFIG', window.appConfig)
