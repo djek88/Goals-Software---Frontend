@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('myGroupsController', myGroupsController);
 
-function myGroupsController(myGroupsService, customer, groups) {
+function myGroupsController(customer, groups) {
 	var vm = this;
 
 	vm.curCustomer = customer;

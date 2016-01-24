@@ -796,15 +796,6 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Group.Members.link() instead.
-        "::link::Group::Members": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Groups/:id/Members/rel/:fk",
-          method: "PUT"
-        },
-
         // INTERNAL. Use Group.Members.unlink() instead.
         "::unlink::Group::Members": {
           params: {
@@ -1156,15 +1147,6 @@ module.factory(
           },
           url: urlBase + "/Groups/:id/Members/:fk",
           method: "GET"
-        },
-
-        // INTERNAL. Use Group.Members.link() instead.
-        "prototype$__link__Members": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Groups/:id/Members/rel/:fk",
-          method: "PUT"
         },
 
         // INTERNAL. Use Group.Members.unlink() instead.
@@ -1666,6 +1648,43 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$changeGroupOwner
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Change group owner.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `ownerId` – `{string}` - New owner id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `group` – `{object=}` - 
+         */
+        "prototype$changeGroupOwner": {
+          url: urlBase + "/Groups/:id/change-owner/:ownerId",
+          method: "PUT"
+        },
+
         // INTERNAL. Use Session.Group() instead.
         "::get::Session::Group": {
           url: urlBase + "/Sessions/:id/Group",
@@ -1975,46 +1994,6 @@ module.factory(
         R.Members.findById = function() {
           var TargetResource = $injector.get("Customer");
           var action = TargetResource["::findById::Group::Members"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group.Members#link
-         * @methodOf backendApi.Group.Members
-         *
-         * @description
-         *
-         * Add a related item by id for Members.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Members
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method does not accept any data. Supply an empty object.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Members.link = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::link::Group::Members"];
           return action.apply(R, arguments);
         };
 

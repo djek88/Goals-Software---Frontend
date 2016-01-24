@@ -1,0 +1,53 @@
+<div id="content">
+	<div class="row">
+
+		<h3>
+			Group name: {{vm.group.name}}
+			<a class="btn btn-default"
+				ng-href="#">
+				<i class="fa fa-envelope"></i>
+			</a>
+		</h3>
+
+		<h3>Other Members</h3>
+
+		<section class="col col-xs-12" ng-repeat="member in vm.members">
+			<label style="display: block;">
+				<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.urlBase + member.avatar}}">
+			</label>
+
+			<label style="display: block;">
+				<h3>
+					{{member.firstName + member.lastName}}
+					<span ng-if="vm.group._ownerId == member._id"> - Group Owner</span>
+				</h3>
+				<h3>{{member.description}}</h3>
+			</label>
+
+			<label style="display: block;">
+				<a class="btn btn-default"
+					ng-href="{{member.social.fb}}">
+					<i class="fa fa-facebook-square"></i>
+				</a>
+				<a class="btn btn-default"
+					ng-href="{{member.social.tw}}">
+					<i class="fa fa-twitter-square"></i>
+				</a>
+				<a class="btn btn-default"
+					ng-href="{{member.social.li}}">
+					<i class="fa fa-linkedin-square"></i>
+				</a>
+				<a class="btn btn-default"
+					ng-href="#">
+					<i class="fa fa-envelope"></i>
+				</a>
+				<a class="btn btn-default"
+					ng-if="vm.group._ownerId == vm.curCustomer._id"
+					ng-click="vm.removeMember(member._id)"><!-- передавать id нового ownera -->
+					<i class="fa fa-times-circle"></i>
+				</a>
+			</label>
+		</section>
+
+	</div>
+</div>
