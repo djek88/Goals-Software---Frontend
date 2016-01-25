@@ -9,9 +9,9 @@
 			</a>
 		</h3>
 
-		<h3>Other Members</h3>
+		<h3>Members:</h3>
 
-		<section class="col col-xs-12" ng-repeat="member in vm.members">
+		<section class="col col-xs-12" ng-repeat="member in vm.listMembersWithOwner">
 			<label style="display: block;">
 				<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.urlBase + member.avatar}}">
 			</label>
@@ -25,6 +25,7 @@
 			</label>
 
 			<label style="display: block;">
+
 				<a class="btn btn-default"
 					ng-href="{{member.social.fb}}">
 					<i class="fa fa-facebook-square"></i>
@@ -41,11 +42,17 @@
 					ng-href="#">
 					<i class="fa fa-envelope"></i>
 				</a>
-				<a class="btn btn-default"
-					ng-if="vm.group._ownerId == vm.curCustomer._id"
-					ng-click="vm.removeMember(member._id)"><!-- передавать id нового ownera -->
-					<i class="fa fa-times-circle"></i>
-				</a>
+
+				<span ng-if="vm.group._ownerId == vm.curCustomer._id">
+					<a class="btn btn-default"
+						ng-click="vm.group._ownerId == member._id
+							? vm.removeOwner()
+							: vm.removeMember(member._id)">
+
+						<i class="fa fa-times-circle"></i>
+					</a>
+				</span>
+
 			</label>
 		</section>
 

@@ -7,39 +7,52 @@ angular
 function groupDetailController($rootScope, groupDetailService, customer, group) {
 	var vm = this;
 
+	vm.urlBase = $rootScope.urlBase;
 	vm.curCustomer = customer;
 	vm.group = group;
-	vm.members = groupDetailService.getMembers(group);
-	vm.urlBase = $rootScope.urlBase;
+	vm.listMembersWithOwner = groupDetailService.getMembersWithOwner(group);
+	//vm.isCurCustomerGroupMember = groupDetailService.customerIsMember(vm.curCustomer._id, vm.group);
 
+	vm.removeOwner = removeOwner;
 	vm.removeMember = removeMember;
 
-	function removeMember(memberId) {
-		// if owner want alive group
-		if (memberId == vm.group._ownerId) {
-			console.log('Delete Group Owner');
-			return groupDetailService.changeOwner(group, '56a4d8fb3cff56a0034f6ea2', function(group) {
-				
-			});
-		}
+	function removeOwner() {
+		groupDetailService.deleteOwnerBox(group, function(buttonPressed, newOwnerId) {
+			switch (buttonPressed) {
+				case 'Delete group':
+					groupDetailService.deleteGroup(vm.group._id, function() {
+						groupDetailService.notifyAndLeavePage({
+							title: 'Remove group...',
+							message: 'Group removed success!',
+							toState: 'app.group.myGroups'
+						});
+					});
+					break;
 
-		groupDetailService.removeMember(group, memberId, function(group) {
-			vm.group = group;
-			vm.members = groupDetailService.getMembers(group);
-
-			$.smallBox({
-				title: 'Ding Dong!',
-				content: 'Removed',
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
-			});
+				case 'Select new owner' && newOwnerId:
+					groupDetailService.changeOwner(vm.group, newOwnerId, function() {
+						groupDetailService.notifyAndLeavePage({
+							title: 'Change owner...',
+							message: 'Owner changed success!',
+							toState: 'app.group.myGroups'
+						});
+					});
+					break;
+			}
 		});
 	}
 
+	function removeMember(memberId) {
+		groupDetailService.deleteMemberBox(function() {
+			groupDetailService.removeMemberFromGroup(group, memberId, function(group) {
+				vm.group = group;
+				vm.listMembersWithOwner = groupDetailService.getMembersWithOwner(group);
 
-
-	/*console.log('curCustomer', vm.curCustomer);
-	console.log('group', vm.group);
-	console.log('members', vm.members);*/
+				groupDetailService.notifyAndLeavePage({
+					title: 'Remove member...',
+					message: 'Group member removed success!'
+				});
+			});
+		});
+	}
 }
