@@ -2,42 +2,36 @@
 	<div class="row">
 
 		<article class="col-sm-12">
-			<div>
-				<div>
-					<div class="widget-body">
-						<div class="table-responsive">
-							<table class="table table-bordered">
-								<tbody>
-									<tr ng-repeat="group in vm.groups">
-										<td>{{group.name}}</td>
-										<td>
-											<a class="btn btn-default"
-												ng-if="group._ownerId == vm.curCustomer._id"
-												ui-sref="app.group.myGroups">
-												<i class="fa fa-pencil"></i></a>
-										</td>
-										<td>
-											<a class="btn btn-default"
-												ui-sref="app.group.detail({id: group._id})">
-												<i class="fa fa-eye"></i>
-											</a>
-										</td>
-										<td>
-											<a class="btn btn-default">
-												<i class="fa fa-envelope"></i>
-											</a>
-										</td>
-										<td>
-											<a class="btn btn-default">
-												<i class="fa fa-sign-out"></i>
-											</a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr ng-repeat="group in vm.groups">
+							<td>{{group.name}}</td>
+							<td>
+								<a class="btn btn-default"
+									ng-if="group._ownerId == vm.curCustomer._id"
+									ui-sref="app.group.myGroups">
+									<i class="fa fa-pencil"></i></a>
+							</td>
+							<td>
+								<a class="btn btn-default"
+									ui-sref="app.group.detail({id: group._id})">
+									<i class="fa fa-eye"></i>
+								</a>
+							</td>
+							<td>
+								<a class="btn btn-default">
+									<i class="fa fa-envelope"></i>
+								</a>
+							</td>
+							<td>
+								<a class="btn btn-default">
+									<i class="fa fa-sign-out"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</article>
 

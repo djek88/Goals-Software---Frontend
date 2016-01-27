@@ -6,7 +6,8 @@ angular
 
 function groupDetailService($http, $state, APP_CONFIG, Group) {
 	var service = {
-		//customerIsMember: customerIsMember,
+		prepareGroup: prepareGroup,
+		customerIsMember: customerIsMember,
 		getMembersWithOwner: getMembersWithOwner,
 		changeOwner: changeOwner,
 		deleteGroup: deleteGroup,
@@ -17,18 +18,42 @@ function groupDetailService($http, $state, APP_CONFIG, Group) {
 	};
 	return service;
 
-	/*function customerIsMember(customerId, group) {
-		return group._memberIds.some(function(mId) {
-			return mId.toString() == customerId;
+	function prepareGroup(group, frequencyTypes) {
+		var created = new Date(group.createdAt).toLocaleString("en-US", {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
 		});
-	}*/
+		var mastermindSessions = formatMastermindSession(group.sessionConf, frequencyTypes);
+
+		return {
+			_id: group._id,
+			_ownerId: group._ownerId,
+			name: group.name,
+			created: created,
+			penalty: group.penalty,
+			description: group.description,
+			mastermindSessions: mastermindSessions,
+			isHasFreePlace: group._memberIds.length < group.maxMembers,
+			memberCanInvite: group.memberCanInvite
+		};
+	}
+
+	function customerIsMember(customerId, group) {
+		var isOwner = group._ownerId === customerId;
+		var isMember = group._memberIds.some(function(mId) {
+			return mId === customerId;
+		});
+
+		return isOwner || isMember;
+	}
 
 	function getMembersWithOwner(group) {
 		return [group.Owner].concat(group.Members);
 	}
 
-	function changeOwner(group, newOwnerId, cb) {
-		var url = APP_CONFIG.apiRootUrl + '/Groups/' + group._id + '/change-owner/' + newOwnerId;
+	function changeOwner(groupId, newOwnerId, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId + '/change-owner/' + newOwnerId;
 
 		$http.put(url, {transformRequest: angular.identity}).success(cb);
 	}
@@ -114,5 +139,27 @@ function groupDetailService($http, $state, APP_CONFIG, Group) {
 		});
 
 		if (options.toState) $state.go(options.toState);
+	}
+
+	function formatMastermindSession(sessionConf, frequencyTypes) {
+		var result = 'Manually Scheduled';
+
+		if (sessionConf.sheduled) {
+			var date = new Date(sessionConf.date)
+				.toLocaleString("en-US", {
+					weekday: 'long',
+					hour: 'numeric',
+					timeZoneName: 'short'
+				}).split(' ');
+
+			var weekday = date[0].slice(0, -1)
+			var time = date[1] + date[2].toLowerCase();
+			var timeZone = date[3];
+			var freqType = frequencyTypes[sessionConf.frequencyType];
+
+			result = freqType + ' on ' + weekday + ' of the month at ' + time + ' ' + timeZone;
+		}
+
+		return result;
 	}
 }

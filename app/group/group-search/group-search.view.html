@@ -1,0 +1,49 @@
+<div id="content">
+	<div class="row">
+
+		<div>
+			<h3>Group Type:</h3>
+			<select ng-model="vm.criteria.type"
+				ng-options="key as value for (key, value) in vm.groupTypes">
+			</select>
+		</div>
+
+		<div>
+			<h3>Amount Willing To Risk:</h3>
+			<select ng-model="vm.criteria.penalty"
+				ng-options="amount as ('$' + amount) for amount in vm.penaltyAmounts">
+			</select>
+		</div>
+
+		<div>
+			<a class="btn btn-default"
+				ng-click="vm.searchGroups()">
+				Search For Groups
+			</a>
+		</div>
+
+		<article class="col-sm-12">
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr ng-repeat="group in vm.groups">
+							<td>{{group.name}}</td>
+							<td>
+								Members: {{group.members}}
+							</td>
+							<td>
+								Created: {{group.created}}
+							</td>
+							<td>
+								<a class="btn btn-default"
+									ui-sref="app.group.detail({id: group._id})">
+									<i class="fa fa-eye"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</article>
+
+	</div>
+</div>

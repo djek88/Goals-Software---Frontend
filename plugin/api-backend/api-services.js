@@ -4294,6 +4294,149 @@ module.factory(
     return R;
   }]);
 
+/**
+ * @ngdoc object
+ * @name backendApi.Additional
+ * @header backendApi.Additional
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Additional` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Additional",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Additionals/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#sessionFrequencyTypes
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return session frequency types.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `types` – `{object=}` - 
+         */
+        "sessionFrequencyTypes": {
+          url: urlBase + "/Additionals/session-frequency-types",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#groupTypes
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return group types.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `types` – `{object=}` - 
+         */
+        "groupTypes": {
+          url: urlBase + "/Additionals/group-types",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#penaltyAmounts
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return penalty amounts.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `types` – `{object=}` - 
+         */
+        "penaltyAmounts": {
+          url: urlBase + "/Additionals/penalty-amounts",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name backendApi.Additional#modelName
+    * @propertyOf backendApi.Additional
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Additional`.
+    */
+    R.modelName = "Additional";
+
+
+    return R;
+  }]);
+
 
 module
   .factory('LoopBackAuth', function() {

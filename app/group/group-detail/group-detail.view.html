@@ -2,12 +2,35 @@
 	<div class="row">
 
 		<h3>
-			Group name: {{vm.group.name}}
+			Group Name: {{vm.group.name}}
 			<a class="btn btn-default"
-				ng-href="#">
+				ng-if="vm.isCurCustomerGroupMember"
+				ng-click="">
 				<i class="fa fa-envelope"></i>
 			</a>
 		</h3>
+
+		<span ng-if="!vm.isCurCustomerGroupMember">
+			<h3>
+				Created: {{vm.group.created}}
+			</h3>
+
+			<h3>
+				Number Of Mastermind Session: {{vm.sessionsPassed}}
+			</h3>
+
+			<h3>
+				Penalty Level: ${{vm.group.penalty}}
+			</h3>
+
+			<h3>
+				Description: {{vm.group.description}}
+			</h3>
+
+			<h3>
+				Mastermind Sessions: {{vm.group.mastermindSessions}}
+			</h3>
+		</span>
 
 		<h3>Members:</h3>
 
@@ -39,7 +62,8 @@
 					<i class="fa fa-linkedin-square"></i>
 				</a>
 				<a class="btn btn-default"
-					ng-href="#">
+					ng-if="vm.isCurCustomerGroupMember"
+					ng-click="">
 					<i class="fa fa-envelope"></i>
 				</a>
 
@@ -55,6 +79,23 @@
 
 			</label>
 		</section>
+
+		<div ng-if="vm.group.isHasFreePlace">
+			<span ng-if="vm.isCurCustomerGroupMember">
+				<a class="btn btn-default"
+					ng-if="(vm.group._ownerId == vm.curCustomer._id || vm.group.memberCanInvite)"
+					ui-sref="app.group.invite({id: vm.group._id})">
+					Invite Someone To This Group
+				</a>
+			</span>
+
+			<span ng-if="!vm.isCurCustomerGroupMember">
+				<a class="btn btn-default"
+					ui-sref="app.group.join({id: vm.group._id})">
+					Request To Join This Group
+				</a>
+			</span>
+		</div>
 
 	</div>
 </div>
