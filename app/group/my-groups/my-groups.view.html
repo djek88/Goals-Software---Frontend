@@ -20,7 +20,8 @@
 								</a>
 							</td>
 							<td>
-								<a class="btn btn-default">
+								<a class="btn btn-default"
+									ng-click="vm.showEmailModal(group._id)">
 									<i class="fa fa-envelope"></i>
 								</a>
 							</td>
@@ -36,7 +37,7 @@
 		</article>
 
 		<article class="col-sm-12">
-			<a class="btn btn-default" ui-sref="app.group.myGroups">
+			<a class="btn btn-default" ui-sref="app.group.search">
 				Join A New Group
 			</a>
 			<a class="btn btn-default" ui-sref="app.group.myGroups">

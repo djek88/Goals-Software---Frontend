@@ -88,7 +88,7 @@ function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) 
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
 		}).success(function(result){
-			var customer = result.customer;
+			var customer = result;
 			// update cached Customer
 			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
 			cb();

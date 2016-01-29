@@ -772,9 +772,10 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `customer` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
          */
         "prototype$uploadAvatar": {
           url: urlBase + "/Customers/:id/upload-avatar",
@@ -1659,8 +1660,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -1676,13 +1676,86 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `group` – `{object=}` - 
+         * This method returns no data.
          */
         "prototype$changeGroupOwner": {
           url: urlBase + "/Groups/:id/change-owner/:ownerId",
           method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$sendEmailToGroup
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Send email to group members.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `message` – `{string}` - Message
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$sendEmailToGroup": {
+          url: urlBase + "/Groups/:id/send-email-group",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$sendEmailToMember
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Send email to group member.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `message` – `{string}` - Message
+         *
+         *  - `memberId` – `{string}` - Receiver id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$sendEmailToMember": {
+          url: urlBase + "/Groups/:id/send-email-member/:memberId",
+          method: "POST"
         },
 
         // INTERNAL. Use Session.Group() instead.

@@ -4,11 +4,12 @@ angular
 	.module('app.group')
 	.factory('groupDetailService', groupDetailService);
 
-function groupDetailService($http, $state, APP_CONFIG, Group) {
+function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 	var service = {
 		prepareGroup: prepareGroup,
 		customerIsMember: customerIsMember,
 		getMembersWithOwner: getMembersWithOwner,
+		emailModalOpen: emailModalOpen,
 		changeOwner: changeOwner,
 		deleteGroup: deleteGroup,
 		removeMemberFromGroup: removeMemberFromGroup,
@@ -50,6 +51,22 @@ function groupDetailService($http, $state, APP_CONFIG, Group) {
 
 	function getMembersWithOwner(group) {
 		return [group.Owner].concat(group.Members);
+	}
+
+	function emailModalOpen(groupId, receiverId, cb) {
+		$uibModal.open({
+			animation: true,
+			templateUrl: 'app/group/email-modal/email-modal.html',
+			controller: 'emailModalController',
+			controllerAs: 'vm',
+			resolve: {
+				modalTitle: function() {
+					return receiverId ? 'Send Email To Member' : 'Send Email To Group';
+				},
+				groupId: function() { return groupId; },
+				receiverId: function() { return receiverId; }
+			}
+		}).result.then(cb);
 	}
 
 	function changeOwner(groupId, newOwnerId, cb) {

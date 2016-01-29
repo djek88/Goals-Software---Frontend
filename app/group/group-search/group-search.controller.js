@@ -14,12 +14,16 @@ function groupSearchController(groupSearchService, customer, groupTypes, penalty
 		penalty: penaltyAmounts[4]
 	};
 	vm.groups = [];
+	vm.totalGroupsCount = 0;
+	vm.groupsPerPage = 10;
+	vm.curPageNumber = 1;
 
 	vm.searchGroups = searchGroups;
 
 	function searchGroups() {
 		groupSearchService.findGroupsByCriteria(vm.criteria, function(groups) {
 			vm.groups = groupSearchService.preparedGroups(groups);
+			vm.totalGroupsCount = vm.groups.length;
 		});
 	}
 }

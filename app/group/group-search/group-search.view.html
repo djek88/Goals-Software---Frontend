@@ -26,7 +26,7 @@
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<tbody>
-						<tr ng-repeat="group in vm.groups">
+						<tr ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
 							<td>{{group.name}}</td>
 							<td>
 								Members: {{group.members}}
@@ -44,6 +44,16 @@
 				</table>
 			</div>
 		</article>
+
+		<uib-pagination class="pagination-sm"
+			ng-if="vm.totalGroupsCount > vm.groupsPerPage"
+			total-items="vm.totalGroupsCount"
+			items-per-page="vm.groupsPerPage"
+			ng-model="vm.curPageNumber"
+
+			max-size="5"
+			boundary-links="true">
+		</uib-pagination>
 
 	</div>
 </div>

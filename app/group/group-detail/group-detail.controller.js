@@ -7,8 +7,6 @@ angular
 function groupDetailController($rootScope, groupDetailService, customer, group, sessionsPassed, frequencyTypes) {
 	var vm = this;
 
-	console.log(group);
-
 	vm.urlBase = $rootScope.urlBase;
 	vm.curCustomer = customer;
 	vm.sessionsPassed = sessionsPassed;
@@ -18,8 +16,18 @@ function groupDetailController($rootScope, groupDetailService, customer, group, 
 
 	refreshData(group);
 
+	vm.showEmailModal = showEmailModal;
 	vm.removeOwner = removeOwner;
 	vm.removeMember = removeMember;
+
+	function showEmailModal(memberId) {
+		groupDetailService.emailModalOpen(group._id, memberId, function() {
+			groupDetailService.notifyAndLeavePage({
+				title: 'Send Email...',
+				message: 'Message sent success'
+			});
+		});
+	}
 
 	function refreshData(freshGroup) {
 		group = freshGroup;
@@ -41,7 +49,7 @@ function groupDetailController($rootScope, groupDetailService, customer, group, 
 					});
 					break;
 
-				case 'Select new owner' && newOwnerId:
+				case newOwnerId && 'Select new owner':
 					groupDetailService.changeOwner(group._id, newOwnerId, function() {
 						groupDetailService.notifyAndLeavePage({
 							title: 'Change owner...',
