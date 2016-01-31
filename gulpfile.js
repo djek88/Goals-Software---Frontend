@@ -80,7 +80,6 @@ gulp.task('watch', ['build', 'html-minify', 'html-index'], function(){
 gulp.task('connect', function() {
 	connect.server({
 		port: 1337,
-		host: '192.168.0.100',
 		root: './dist',
 		fallback: './dist/index.html',
 		livereload: true
@@ -106,7 +105,7 @@ gulp.task('resource', function() {
 gulp.task('html-index', function(){
 	gulp.src(['./index.html'])
 		.pipe(useref())
-		.pipe(gulpif('*.css', cssnano({discardComments: {removeAll: true}})))
+		//.pipe(gulpif('*.css', cssnano({discardComments: {removeAll: true}})))
 		.pipe(gulpif('*.html', minifyHTML()))
 		.pipe(gulp.dest(destinations.js))
 		.pipe(connect.reload());
