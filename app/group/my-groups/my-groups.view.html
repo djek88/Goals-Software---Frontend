@@ -26,7 +26,9 @@
 								</a>
 							</td>
 							<td>
-								<a class="btn btn-default">
+								<a class="btn btn-default"
+									ng-if="group._ownerId != vm.curCustomer._id"
+									ng-click="vm.leaveGroup(group._id)">
 									<i class="fa fa-sign-out"></i>
 								</a>
 							</td>

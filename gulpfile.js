@@ -97,7 +97,7 @@ gulp.task('html-minify', function(){
 });
 
 gulp.task('resource', function() {
-	return gulp.src(['./plugin/**/*', './smartadmin-plugin/**/*', './sound/*', './api/*', './styles/**/*', '!./styles/css/**/*', './app.scripts.json'], {
+	return gulp.src(['./plugin/**/*', './smartadmin-plugin/**/*', './sound/*', './langs/*', './styles/**/*', '!./styles/css/**/*', './app.scripts.json'], {
 		base: './'
 	}).pipe(gulp.dest(path.join(destinations.js)));
 });

@@ -4,9 +4,14 @@ angular
 	.module('app')
 	.factory('Language', Language);
 
-function Language($http){
+function Language($http, $log){
+	return {
+		getLanguages: getLanguages,
+		getLang: getLanguage
+	}
+
 	function getLanguage(key, callback) {
-		$http.get('/api/langs/' + key + '.json').success(function(data){
+		$http.get('/langs/' + key + '.json').success(function(data){
 			callback(data);
 		}).error(function(){
 			$log.log('Error');
@@ -15,7 +20,7 @@ function Language($http){
 	}
 
 	function getLanguages(callback) {
-		$http.get('/api/languages.json').success(function(data){
+		$http.get('/langs/languages.json').success(function(data){
 			callback(data);
 		}).error(function(){
 			$log.log('Error');
@@ -23,8 +28,4 @@ function Language($http){
 		});
 	}
 
-	return {
-		getLanguages: getLanguages,
-		getLang: getLanguage
-	}
 };

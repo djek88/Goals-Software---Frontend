@@ -6,7 +6,8 @@ angular
 
 function myGroupsService($uibModal) {
 	var service = {
-		emailModalOpen: emailModalOpen
+		emailModalOpen: emailModalOpen,
+		leaveGroupBox: leaveGroupBox
 	};
 	return service;
 
@@ -22,5 +23,15 @@ function myGroupsService($uibModal) {
 				receiverId: function() { return null; }
 			}
 		}).result.then(cb);
+	}
+
+	function leaveGroupBox(cb) {
+		$.SmartMessageBox({
+			title: "Leave group!",
+			content: "Are you sure, you want to leave this group?",
+			buttons: '[No][Yes]'
+		}, function (buttonPressed) {
+			if (buttonPressed === 'Yes') cb();
+		});
 	}
 }
