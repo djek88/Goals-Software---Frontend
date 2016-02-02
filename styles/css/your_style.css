@@ -17,3 +17,27 @@
  * - BODY
  * - CUSTOM STYLES
  */
+
+#header {
+	top: 0;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	background-image: none;
+	background-color: #272727;
+}
+
+body {
+	padding-top: 53px!important;
+}
+
+.top-nav-icon a {
+	color: #b5f700!important;
+	background-color: #363636!important;
+	background-image: none!important;
+	border-color: #636363!important;
+}
+
+.top-nav-icon a:hover {
+	color: #ddf700!important;
+}

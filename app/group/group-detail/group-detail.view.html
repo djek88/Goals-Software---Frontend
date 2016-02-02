@@ -1,89 +1,93 @@
 <div id="content">
-	<div class="row">
 
+	<h3>
+		Group Name: {{vm.group.name}}
+		<a class="btn btn-default btn-circle"
+			ng-if="vm.isCurCustomerGroupMember"
+			ng-click="vm.showEmailModal()">
+			<i class="fa fa-envelope"></i>
+		</a>
+	</h3>
+
+	<span ng-if="!vm.isCurCustomerGroupMember">
 		<h3>
-			Group Name: {{vm.group.name}}
-			<a class="btn btn-default"
-				ng-if="vm.isCurCustomerGroupMember"
-				ng-click="vm.showEmailModal()">
-				<i class="fa fa-envelope"></i>
-			</a>
+			Created: {{vm.group.created}}
 		</h3>
 
-		<span ng-if="!vm.isCurCustomerGroupMember">
-			<h3>
-				Created: {{vm.group.created}}
-			</h3>
+		<h3>
+			Number Of Mastermind Session: {{vm.sessionsPassed}}
+		</h3>
 
-			<h3>
-				Number Of Mastermind Session: {{vm.sessionsPassed}}
-			</h3>
+		<h3>
+			Penalty Level: ${{vm.group.penalty}}
+		</h3>
 
-			<h3>
-				Penalty Level: ${{vm.group.penalty}}
-			</h3>
+		<h3>
+			Description: {{vm.group.description}}
+		</h3>
 
-			<h3>
-				Description: {{vm.group.description}}
-			</h3>
+		<h3>
+			Mastermind Sessions: {{vm.group.mastermindSessions}}
+		</h3>
+	</span>
 
-			<h3>
-				Mastermind Sessions: {{vm.group.mastermindSessions}}
-			</h3>
-		</span>
+	<h3>Members:</h3>
+	<div class="row">
+		<div class="col-md-6" ng-repeat="member in vm.listMembersWithOwner">
+			<div class="well padding-10">
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object" height="128px" ng-src="{{vm.urlBase + member.avatar}}" alt="...">
+					</div>
+					<div class="media-body" style="vertical-align: bottom;">
+						<h4 class="media-heading">
+							{{member.firstName + member.lastName}}
+							<span ng-if="vm.group._ownerId == member._id"> - Group Owner</span>
+						</h4>
+						{{member.description}}
 
-		<h3>Members:</h3>
+						<hr>
 
-		<section class="col col-xs-12" ng-repeat="member in vm.listMembersWithOwner">
-			<label style="display: block;">
-				<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.urlBase + member.avatar}}">
-			</label>
+						<a class="btn btn-default btn-circle"
+							ng-href="{{member.social.fb}}">
+							<i class="fa fa-facebook-square"></i>
+						</a>
+						<a class="btn btn-default btn-circle"
+							ng-href="{{member.social.tw}}">
+							<i class="fa fa-twitter-square"></i>
+						</a>
+						<a class="btn btn-default btn-circle"
+							ng-href="{{member.social.li}}">
+							<i class="fa fa-linkedin-square"></i>
+						</a>
+						<a class="btn btn-default btn-circle"
+							ng-if="vm.isCurCustomerGroupMember
+								&& vm.curCustomer._id != member._id"
+							ng-click="vm.showEmailModal(member._id)">
+							<i class="fa fa-envelope"></i>
+						</a>
 
-			<label style="display: block;">
-				<h3>
-					{{member.firstName + member.lastName}}
-					<span ng-if="vm.group._ownerId == member._id"> - Group Owner</span>
-				</h3>
-				<h3>{{member.description}}</h3>
-			</label>
+						<div class="pull-right">
+							<span ng-if="vm.group._ownerId == vm.curCustomer._id">
+								<a class="btn btn-default btn-circle"
+									ng-click="vm.group._ownerId == member._id
+										? vm.removeOwner()
+										: vm.removeMember(member._id)">
 
-			<label style="display: block;">
+									<i class="fa fa-times-circle"></i>
+								</a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-				<a class="btn btn-default"
-					ng-href="{{member.social.fb}}">
-					<i class="fa fa-facebook-square"></i>
-				</a>
-				<a class="btn btn-default"
-					ng-href="{{member.social.tw}}">
-					<i class="fa fa-twitter-square"></i>
-				</a>
-				<a class="btn btn-default"
-					ng-href="{{member.social.li}}">
-					<i class="fa fa-linkedin-square"></i>
-				</a>
-				<a class="btn btn-default"
-					ng-if="vm.isCurCustomerGroupMember
-						&& vm.curCustomer._id != member._id"
-					ng-click="vm.showEmailModal(member._id)">
-					<i class="fa fa-envelope"></i>
-				</a>
-
-				<span ng-if="vm.group._ownerId == vm.curCustomer._id">
-					<a class="btn btn-default"
-						ng-click="vm.group._ownerId == member._id
-							? vm.removeOwner()
-							: vm.removeMember(member._id)">
-
-						<i class="fa fa-times-circle"></i>
-					</a>
-				</span>
-
-			</label>
-		</section>
-
-		<div ng-if="vm.group.isHasFreePlace">
+	<div ng-if="vm.group.isHasFreePlace">
+		<div align="center">
 			<span ng-if="vm.isCurCustomerGroupMember">
-				<a class="btn btn-default"
+				<a class="btn btn-primary btn-lg"
 					ng-if="(vm.group._ownerId == vm.curCustomer._id || vm.group.memberCanInvite)"
 					ui-sref="app.group.invite({id: vm.group._id})">
 					Invite Someone To This Group
@@ -91,12 +95,12 @@
 			</span>
 
 			<span ng-if="!vm.isCurCustomerGroupMember">
-				<a class="btn btn-default"
+				<a class="btn btn-primary btn-lg"
 					ui-sref="app.group.join({id: vm.group._id})">
 					Request To Join This Group
 				</a>
 			</span>
 		</div>
-
 	</div>
+
 </div>

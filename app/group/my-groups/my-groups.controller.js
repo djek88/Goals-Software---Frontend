@@ -9,6 +9,9 @@ function myGroupsController(myGroupsService, Group, customer, groups) {
 
 	vm.curCustomer = customer;
 	vm.groups = groups;
+	vm.totalGroupsCount = groups.length;
+	vm.groupsPerPage = 10;
+	vm.curPageNumber = 1;
 
 	vm.showEmailModal = showEmailModal;
 	vm.leaveGroup = leaveGroup;

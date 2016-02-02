@@ -1,51 +1,81 @@
 <div id="content">
 	<div class="row">
 
-		<article class="col-sm-12">
-			<div class="table-responsive">
-				<table class="table table-bordered">
-					<tbody>
-						<tr ng-repeat="group in vm.groups">
-							<td>{{group.name}}</td>
-							<td>
-								<a class="btn btn-default"
-									ng-if="group._ownerId == vm.curCustomer._id"
-									ui-sref="app.group.myGroups">
-									<i class="fa fa-pencil"></i></a>
-							</td>
-							<td>
-								<a class="btn btn-default"
-									ui-sref="app.group.detail({id: group._id})">
-									<i class="fa fa-eye"></i>
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-default"
-									ng-click="vm.showEmailModal(group._id)">
-									<i class="fa fa-envelope"></i>
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-default"
-									ng-if="group._ownerId != vm.curCustomer._id"
-									ng-click="vm.leaveGroup(group._id)">
-									<i class="fa fa-sign-out"></i>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</article>
+		<section widget-grid id="widget-grid">
+			<article class="col-sm-12" ng-if="vm.groups.length">
+				<div jarvis-widget
+					data-widget-color="blue"
+					data-widget-editbutton="false"
+					data-widget-deletebutton="false"
+					data-widget-sortable="false"
+					data-widget-togglebutton="false"
+					data-widget-fullscreenbutton="false"
+					data-widget-refreshbutton="false"
+					data-widget-colorbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>My Groups</h2>
 
-		<article class="col-sm-12">
-			<a class="btn btn-default" ui-sref="app.group.search">
-				Join A New Group
-			</a>
-			<a class="btn btn-default" ui-sref="app.group.myGroups">
-				Create A New Group
-			</a>
-		</article>
+						<div class="widget-toolbar">
+							<uib-pagination class="pagination-sm"
+								ng-if="vm.totalGroupsCount > vm.groupsPerPage"
+								total-items="vm.totalGroupsCount"
+								items-per-page="vm.groupsPerPage"
+								ng-model="vm.curPageNumber"
+
+								max-size="5"
+								boundary-links="true">
+							</uib-pagination>
+						</div>
+					</header>
+					<div>
+						<div class="widget-body">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Group Name</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
+										<td width="80%">{{group.name}}</td>
+										<td width="20%">
+											<a class="btn btn-default"
+												ng-if="group._ownerId == vm.curCustomer._id"
+												ui-sref="app.group.myGroups">
+												<i class="fa fa-pencil"></i></a>
+
+
+											<a class="btn btn-default"
+												ui-sref="app.group.detail({id: group._id})">
+												<i class="fa fa-eye"></i></a>
+
+											<a class="btn btn-default"
+												ng-click="vm.showEmailModal(group._id)">
+												<i class="fa fa-envelope"></i></a>
+
+											<a class="btn btn-default"
+												ng-if="group._ownerId != vm.curCustomer._id"
+												ng-click="vm.leaveGroup(group._id)">
+												<i class="fa fa-sign-out"></i></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="widget-footer">
+							<a class="btn btn-primary btn-lg pull-left" ui-sref="app.group.search">
+								Join A New Group</a>
+
+							<a class="btn btn-primary btn-lg" ui-sref="app.group.myGroups">
+								<i class="fa fa-search"></i>
+								Create A New Group</a>
+						</div>
+					</div>
+				</div>
+			</article>
+		</section>
 
 	</div>
 </div>
