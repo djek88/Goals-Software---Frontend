@@ -176,5 +176,23 @@ function config($stateProvider) {
 					return lazyScript.register([]);
 				}
 			}
+		})
+		.state('app.group.create', {
+			url: '/create',
+			data: {
+				title: 'Create new group'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/group-create/group-create.view.html',
+					controller: 'groupCreateController',
+					controllerAs: 'vm',
+				}
+			},
+			resolve: {
+				scripts: function(lazyScript){
+					return lazyScript.register([]);
+				}
+			}
 		});
 }
