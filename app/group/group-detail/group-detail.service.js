@@ -135,7 +135,7 @@ function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 		var result = [];
 
 		group.Members.forEach(function(member) {
-			var str = '[' + member.firstName + ' ' + member.lastName + ' (' + member._id + ')]';
+			var str = '[' + member.firstName + ' ' + member.lastName + ']';
 			result.push(str);
 		});
 

@@ -41,3 +41,15 @@ body {
 .top-nav-icon a:hover {
 	color: #ddf700!important;
 }
+
+.jarviswidget>div {
+	background-color: #F8F8F8!important;
+}
+
+.smart-form header {
+	background: #F8F8F8;
+}
+
+.smart-form fieldset {
+	background: #F8F8F8;
+}
