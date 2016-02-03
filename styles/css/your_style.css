@@ -27,8 +27,27 @@
 	background-color: #272727;
 }
 
+#logo {
+	margin-top: 10px;
+}
+
+#logo img {
+	width: auto;
+	height: 30px;
+}
+
 body {
 	padding-top: 53px!important;
+	background: none;
+	background-color: #f5f5f5!important;
+}
+
+body.container {
+	box-shadow: none;
+}
+
+.no-menu #main {
+	background-color: #f5f5f5;
 }
 
 .top-nav-icon a {
@@ -46,10 +65,14 @@ body {
 	background-color: #F8F8F8!important;
 }
 
-.smart-form header {
-	background: #F8F8F8;
+.smart-form header, fieldset, footer {
+	background: #f5f5f5!important;
 }
 
-.smart-form fieldset {
-	background: #F8F8F8;
+.smart-form footer {
+	border-top: none;
+}
+
+.smart-form fieldset+fieldset {
+	border-top: none;
 }
