@@ -1,6 +1,5 @@
 <div id="content">
 	<div class="row">
-
 		<form class="smart-form" novalidate="novalidate">
 			<fieldset>
 				<div class="row">
@@ -22,71 +21,50 @@
 				</div>
 			</fieldset>
 
-			<footer>
-				<a class="btn btn-primary"
+			<div align="center">
+				<a class="btn btn-primary btn-lg"
 					ng-click="vm.searchGroups()">
 					<i class="fa fa-search"></i>
 					Search For Groups
 				</a>
-			</footer>
+			</div>
 		</form>
+	</div>
 
-		<section widget-grid id="widget-grid">
-			<article class="col-sm-12" ng-if="vm.groups.length">
-				<div jarvis-widget
-					data-widget-color="blue"
-					data-widget-editbutton="false"
-					data-widget-deletebutton="false"
-					data-widget-sortable="false"
-					data-widget-togglebutton="false"
-					data-widget-fullscreenbutton="false"
-					data-widget-refreshbutton="false"
-					data-widget-colorbutton="false">
-					<header>
-						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
-						<h2>Groups found</h2>
-
-						<div class="widget-toolbar">
-							<uib-pagination class="pagination-sm"
-								ng-if="vm.totalGroupsCount > vm.groupsPerPage"
-								total-items="vm.totalGroupsCount"
-								items-per-page="vm.groupsPerPage"
-								ng-model="vm.curPageNumber"
-
-								max-size="5"
-								boundary-links="true">
-							</uib-pagination>
-						</div>
-					</header>
-					<div>
-						<div class="widget-body">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>Group Name</th>
-										<th>Members</th>
-										<th>Created</th>
-										<th>Show Detail</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
-										<td>{{group.name}}</td>
-										<td>{{group.members}}</td>
-										<td>{{group.created}}</td>
-										<td>
-											<a class="btn btn-default"
-												ui-sref="app.group.detail({id: group._id})">
-												<i class="fa fa-eye"></i></a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+	<div class="row">
+		<fieldset class="col-sm-12" ng-if="vm.groups.length" style="margin-top: 40px;">
+			<div class="well" style="margin: 8px;" ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
+				<div class="row">
+					<div class="col-xs-6">
+						{{group.name}}
+					</div>
+					<div class="col-xs-3">
+						Members: {{group.members}}
+					</div>
+					<div class="col-xs-2">
+						Created: {{group.created}}
+					</div>
+					<div class="col-xs-1">
+						<div class="pull-right">
+							<a class="btn btn-default"
+								ui-sref="app.group.detail({id: group._id})">
+								<i class="fa fa-eye"></i></a>
 						</div>
 					</div>
 				</div>
-			</article>
-		</section>
+			</div>
 
+			<div align="center">
+				<uib-pagination class="pagination-sm"
+					ng-if="vm.totalGroupsCount > vm.groupsPerPage"
+					total-items="vm.totalGroupsCount"
+					items-per-page="vm.groupsPerPage"
+					ng-model="vm.curPageNumber"
+
+					max-size="5"
+					boundary-links="true">
+				</uib-pagination>
+			</div>
+		</fieldset>
 	</div>
 </div>

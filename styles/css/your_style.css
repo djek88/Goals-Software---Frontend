@@ -18,6 +18,10 @@
  * - CUSTOM STYLES
  */
 
+html {
+	background: none; 
+}
+
 #header {
 	top: 0;
 	position: fixed;
@@ -44,6 +48,7 @@ body {
 
 body.container {
 	box-shadow: none;
+	border: none;
 }
 
 .no-menu #main {
@@ -75,4 +80,28 @@ body.container {
 
 .smart-form fieldset+fieldset {
 	border-top: none;
+}
+
+.btn-primary {
+	border-color: #636363;
+	background: #b5f700;
+	color: #363636;
+}
+
+.btn-primary:hover {
+	background: #ddf700;
+	color: #363636;
+}
+
+.pagination>.active>a, .pagination>.active>a:hover {
+	background-color: #363636;
+	border-color: #363636;
+}
+
+.pagination>li>a, .pagination>li>a:hover {
+	color: #363636;
+}
+
+.smart-form .checkbox:hover i, .smart-form .input:hover input, .smart-form .radio:hover i, .smart-form .select:hover select, .smart-form .textarea:hover textarea, .smart-form .toggle:hover i {
+    border-color: #5D98CC;
 }

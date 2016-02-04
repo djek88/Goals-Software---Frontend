@@ -18,7 +18,7 @@ function loginController($scope, $location, Customer) {
 	function login() {
 		if ($scope.loginForm.$valid) {
 			Customer.login({ rememberMe: vm.rememberMe }, vm.credentials, function() {
-				var next = $location.nextAfterLogin || '/profile/settings';
+				var next = $location.nextAfterLogin || '/group/my-groups';
 
 				$location.nextAfterLogin = null;
 				$location.path(next);

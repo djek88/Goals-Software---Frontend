@@ -1,7 +1,7 @@
 <div id="content">
 
 	<h3>
-		Group Name: {{vm.group.name}}
+		{{vm.group.name}}
 		<a class="btn btn-default btn-circle"
 			ng-if="vm.isCurCustomerGroupMember"
 			ng-click="vm.showEmailModal()">
@@ -31,21 +31,19 @@
 		</h3>
 	</span>
 
-	<h3>Members:</h3>
 	<div class="row">
 		<div class="col-md-6" ng-repeat="member in vm.listMembersWithOwner">
 			<div class="well padding-10">
 				<div class="media">
 					<div class="media-left">
-						<img class="media-object" height="128px" ng-src="{{vm.urlBase + member.avatar}}" alt="...">
+						<img class="media-object" height="128px" width="128px" ng-src="{{vm.urlBase + member.avatar}}" alt="...">
 					</div>
-					<div class="media-body" style="vertical-align: bottom;">
+					<div class="media-body">
 						<h4 class="media-heading">
 							{{member.firstName + member.lastName}}
 							<span ng-if="vm.group._ownerId == member._id"> - Group Owner</span>
 						</h4>
-						{{member.description}}
-
+						<p style="padding-bottom: 17px;">{{member.description}}</p>
 						<hr>
 
 						<a class="btn btn-default btn-circle"
