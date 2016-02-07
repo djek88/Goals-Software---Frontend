@@ -1,7 +1,7 @@
 <div id="content">
 	<div class="row">
 
-		<form class="smart-form ng-pristine ng-valid">
+		<form ng-submit="vm.create()" class="smart-form ng-pristine ng-valid">
 			<header>
 				Create new group
 			</header>
@@ -11,19 +11,17 @@
 					<section class="col col-4">
 						<label class="label">Group Name</label>
 						<label class="input"> <i class="icon-prepend fa fa-group"></i>
-							<input type="text" placeholder="Group name">
+							<input type="text" placeholder="Group name"
+								ng-model="vm.group.name">
 						</label>
 					</section>
 
 					<section class="col col-4">
 						<label class="label">Group Type</label>
 						<label class="select">
-							<select>
-								<option value="1">Other</option>
-								<option value="2">Business</option>
-								<option value="3">Investment</option>
-								<option value="4">Personal Development</option>
-								<option value="5">Health and Fitness</option>
+							<select
+								ng-model="vm.group.type"
+								ng-options="key as value for (key, value) in vm.groupTypes">
 							</select> <i></i>
 						</label>
 					</section>
@@ -31,16 +29,9 @@
 					<section class="col col-4">
 						<label class="label">Penalty Amount</label>
 						<label class="select">
-							<select>
-								<option value="1">$2</option>
-								<option value="1">$5</option>
-								<option value="1">$10</option>
-								<option value="1">$15</option>
-								<option value="1">$20</option>
-								<option value="1">$30</option>
-								<option value="1">$50</option>
-								<option value="1">$75</option>
-								<option value="1">$100</option>
+							<select
+								ng-model="vm.group.penalty"
+								ng-options="penalty as ('$' + penalty) for penalty in vm.penaltyAmounts">
 							</select> <i></i>
 						</label>
 					</section>
@@ -50,7 +41,9 @@
 					<section class="col col-3">
 						<label class="label">Maximum No. Of Members</label>
 						<label class="input"> <i class="icon-prepend fa fa-sort-numeric-asc"></i>
-							<input type="number" min="0" placeholder="Number">
+							<input type="number" placeholder="Number"
+								ng-model="vm.group.maxMembers"
+								min="1">
 						</label>
 					</section>
 
@@ -58,11 +51,15 @@
 						<label class="label">Make group</label>
 						<div class="inline-group">
 							<label class="radio">
-								<input type="radio" name="radio-group-1" checked="checked">
+								<input type="radio" name="private-group"
+									ng-model="vm.group.private"
+									ng-value="true">
 								<i></i>Private (invite only)
 							</label>
 							<label class="radio">
-								<input type="radio" name="adio-group-1">
+								<input type="radio" name="private-group"
+									 ng-model="vm.group.private"
+									ng-value="false">
 								<i></i>Public (show in group search result)
 							</label>
 						</div>
@@ -72,7 +69,7 @@
 						<label class="label">Allow members to invite new members</label>
 						<div class="inline-group">
 							<label class="checkbox">
-								<input type="checkbox" name="checkbox-inline" checked="checked">
+								<input ng-model="vm.group.memberCanInvite" type="checkbox">
 								<i></i>(you still have control to accept or reject applications)
 							</label>
 						</div>
@@ -84,7 +81,9 @@
 				<section>
 					<label class="label">Description</label>
 					<label class="textarea">
-						<textarea rows="8" class="custom-scroll" placeholder="What is your group?"></textarea>
+						<textarea class="custom-scroll" placeholder="What is your group?"
+							ng-model="vm.group.description" rows="8">
+						</textarea>
 					</label>
 				</section>
 			</fieldset>
@@ -95,11 +94,15 @@
 						<label class="label">Mastermind sessions</label>
 						<div class="inline-group">
 							<label class="radio">
-								<input type="radio" name="radio-group-2" checked="checked">
+								<input type="radio" name="sheduled-group"
+									ng-model="vm.group.sessionConf.sheduled"
+									ng-value="true">
 								<i></i>Scheduled
 							</label>
 							<label class="radio">
-								<input type="radio" name="radio-group-2">
+								<input type="radio" name="sheduled-group"
+									ng-model="vm.group.sessionConf.sheduled"
+									ng-value="false">
 								<i></i>Manually scheduled
 							</label>
 						</div>
@@ -110,10 +113,9 @@
 					<section class="col col-3">
 						<label class="label">Day</label>
 						<label class="select">
-							<select>
-								<option value="1">Sunday</option>
-								<option value="2">Monday</option>
-								<option value="3">...</option>
+							<select ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.day"
+								ng-options="key as value for (key, value) in vm.days">
 							</select> <i></i>
 						</label>
 					</section>
@@ -121,8 +123,9 @@
 					<section class="col col-3">
 						<label class="label">Time</label>
 						<label class="select">
-							<select>
-								<option value="1">7.30</option>
+							<select ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.time"
+								ng-options="time.key as time.value for time in vm.times">
 							</select> <i></i>
 						</label>
 					</section>
@@ -130,8 +133,9 @@
 					<section class="col col-3">
 						<label class="label">Time zone</label>
 						<label class="select">
-							<select>
-								<option value="1">EST</option>
+							<select ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.timeZone"
+								ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
 							</select> <i></i>
 						</label>
 					</section>
@@ -139,8 +143,10 @@
 					<section class="col col-3">
 						<label class="label">Frequency</label>
 						<label class="select">
-							<select>
-								<option value="1">Weekly</option>
+							<select
+								ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.frequencyType"
+								ng-options="key as value for (key, value) in vm.frequency">
 							</select> <i></i>
 						</label>
 					</section>
@@ -156,28 +162,32 @@
 					<section class="col col-3">
 						<label class="label">Round 1 (seconds)</label>
 						<label class="input">
-							<input type="number" min="0">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roudLength[0]">
 						</label>
 					</section>
 
 					<section class="col col-3">
 						<label class="label">Round 2 - Part A (seconds)</label>
 						<label class="input">
-							<input type="number" min="0">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roudLength[1]">
 						</label>
 					</section>
 
 					<section class="col col-3">
 						<label class="label">Round 2 - Part B (seconds)</label>
 						<label class="input">
-							<input type="number" min="0">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roudLength[2]">
 						</label>
 					</section>
 
 					<section class="col col-3">
 						<label class="label">Round 3 (seconds)</label>
 						<label class="input">
-							<input type="number" min="0">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roudLength[3]">
 						</label>
 					</section>
 				</div>

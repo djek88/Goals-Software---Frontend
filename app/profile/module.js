@@ -37,7 +37,7 @@ function config($stateProvider) {
 			},
 			resolve: {
 				scripts: function(lazyScript){
-					return lazyScript.register(['select2', 'jstz']);
+					return lazyScript.register(['jstz']);
 				}
 			}
 		});

@@ -4490,6 +4490,72 @@ module.factory(
           url: urlBase + "/Additionals/penalty-amounts",
           method: "GET"
         },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#sessionDayTypes
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return session day types.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `types` – `{object=}` - 
+         */
+        "sessionDayTypes": {
+          url: urlBase + "/Additionals/session-day-types",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#sessionTimeTypes
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return session time types.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `types` – `{object=}` - 
+         */
+        "sessionTimeTypes": {
+          url: urlBase + "/Additionals/session-time-types",
+          method: "GET"
+        },
       }
     );
 

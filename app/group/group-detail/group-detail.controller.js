@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupDetailController', groupDetailController);
 
-function groupDetailController($rootScope, groupDetailService, customer, group, sessionsPassed, frequencyTypes) {
+function groupDetailController($rootScope, groupDetailService, customer, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.urlBase = $rootScope.urlBase;
@@ -31,7 +31,12 @@ function groupDetailController($rootScope, groupDetailService, customer, group, 
 
 	function refreshData(freshGroup) {
 		group = freshGroup;
-		vm.group = groupDetailService.prepareGroup(freshGroup, frequencyTypes);
+		vm.group = groupDetailService.prepareGroup(
+			freshGroup,
+			frequencyTypes,
+			sessionDayTypes,
+			sessionTimeTypes
+		);
 		vm.listMembersWithOwner = groupDetailService.getMembersWithOwner(freshGroup);
 		vm.isCurCustomerGroupMember = groupDetailService.customerIsMember(customer._id, freshGroup);
 	}

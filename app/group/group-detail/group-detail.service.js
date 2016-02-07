@@ -19,13 +19,13 @@ function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 	};
 	return service;
 
-	function prepareGroup(group, frequencyTypes) {
+	function prepareGroup(group, freqTypes, dayTypes, timeTypes) {
 		var created = new Date(group.createdAt).toLocaleString("en-US", {
 			year: 'numeric',
 			month: 'long',
 			day: 'numeric'
 		});
-		var mastermindSessions = formatMastermindSession(group.sessionConf, frequencyTypes);
+		var mastermindSessions = formatMastermindSession(group.sessionConf, freqTypes, dayTypes, timeTypes);
 
 		return {
 			_id: group._id,
@@ -158,25 +158,16 @@ function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 		if (options.toState) $state.go(options.toState);
 	}
 
-	function formatMastermindSession(sessionConf, frequencyTypes) {
-		var result = 'Manually Scheduled';
+	function formatMastermindSession(sessionConf, freqTypes, dayTypes, timeTypes) {
+		if (!sessionConf.sheduled) return 'Manually Scheduled';
 
-		if (sessionConf.sheduled) {
-			var date = new Date(sessionConf.date)
-				.toLocaleString("en-US", {
-					weekday: 'long',
-					hour: 'numeric',
-					timeZoneName: 'short'
-				}).split(' ');
+		var freqType = freqTypes[sessionConf.frequencyType];
+		var weekday = dayTypes[sessionConf.day];
+		var timeZone = sessionConf.timeZone;
+		var offset = '(UTC' + moment.tz(sessionConf.timeZone).format('Z') + ')';
+		var time = timeTypes[sessionConf.time].split(' ');
+		time = time[0] + time[1].toLowerCase();
 
-			var weekday = date[0].slice(0, -1)
-			var time = date[1] + date[2].toLowerCase();
-			var timeZone = date[3];
-			var freqType = frequencyTypes[sessionConf.frequencyType];
-
-			result = freqType + ' on ' + weekday + ' of the month at ' + time + ' ' + timeZone;
-		}
-
-		return result;
+		return (freqType + ' on ' + weekday + ' of the month at ' + time + ' ' + timeZone + offset);
 	}
 }

@@ -113,6 +113,8 @@ gulp.task('html-index', function(){
 
 gulp.task('default', ['vendor', 'build', 'app-minify', 'html-index', 'html-minify', 'resource', 'watch', 'connect']);
 
+gulp.task('dev', ['vendor', 'build', 'html-index', 'resource', 'watch', 'connect']);
+
 gulp.task('prod', ['vendor', 'build', 'app-minify', 'html-index', 'html-minify', 'resource']);
 
 var swallowError = function(error){

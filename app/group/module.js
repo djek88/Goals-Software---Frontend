@@ -136,8 +136,28 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
+				sessionDayTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionDayTypes(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionTimeTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionTimeTypes(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
-					return lazyScript.register([]);
+					return lazyScript.register(['jstz']);
 				}
 			}
 		})
@@ -190,8 +210,58 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
+				groupTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.groupTypes(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				penaltyAmounts: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.penaltyAmounts(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionFrequencyTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionFrequencyTypes(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionDayTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionDayTypes(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionTimeTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionTimeTypes(
+						function(result) { deferred.resolve(result.types); },
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
-					return lazyScript.register([]);
+					return lazyScript.register(['jstz']);
 				}
 			}
 		});

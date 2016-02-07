@@ -103,5 +103,5 @@ body.container {
 }
 
 .smart-form .checkbox:hover i, .smart-form .input:hover input, .smart-form .radio:hover i, .smart-form .select:hover select, .smart-form .textarea:hover textarea, .smart-form .toggle:hover i {
-    border-color: #5D98CC;
+	border-color: #ddf700;
 }
