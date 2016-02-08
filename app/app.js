@@ -55,7 +55,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	LoopBackResourceProvider.setUrlBase(window.appConfig.apiRootUrl);
 
 	// Intercept http calls.
-	$provide.factory('ErrorHttpInterceptor', function($q, $location, LoopBackAuth) {
+	$provide.factory('ErrorHttpInterceptor', function($q, $injector, LoopBackAuth) {
 		var errorCounter = 0;
 
 		function notifyError(rejection){
@@ -91,8 +91,8 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 				if (rejection.status == 401) {
 					LoopBackAuth.clearUser();
 					LoopBackAuth.clearStorage();
-					$location.nextAfterLogin = $location.path();
-					$location.path('/login');
+
+					$injector.get('$state').go('login');
 				}
 
 				// show notification
@@ -125,11 +125,14 @@ function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
 	});
 
 	// UnAuthenticated redirect to login page
-	$rootScope.$on('$stateChangeStart', function (e, toState) {
+	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
 		if (toState.name.substr(0, 3) === 'app' && !Customer.isAuthenticated()) {
 			console.log('UnAuthenticated: redirect to login.');
+			$state.nextAfterLogin = toState.name;
+			$state.nextAfterLoginParams = fromParams
+
 			$state.go('login');
-			e.preventDefault();
+			event.preventDefault();
 		}
 	});
 

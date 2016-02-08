@@ -1,0 +1,52 @@
+<header id="header">
+	<div id="logo-group">
+		<span id="logo">
+			<a ui-sref="app.group.myGroups">
+				<img src="styles/img/logo.png" alt="Mastermind">
+			</a>
+		</span>
+	</div>
+</header>
+
+<div id="main" role="main">
+
+	<div data-smart-router-animation-wrap="content content@app" data-wrap-for="#content">
+		<div id="content">
+			<h3>
+				{{vm.group.name}}
+			</h3>
+
+			<span>
+				<h3>
+					Created: {{vm.group.created}}
+				</h3>
+
+				<h3>
+					Number Of Mastermind Session: {{vm.sessionsPassed}}
+				</h3>
+
+				<h3>
+					Penalty Level: ${{vm.group.penalty}}
+				</h3>
+
+				<h3>
+					Description: {{vm.group.description}}
+				</h3>
+
+				<h3>
+					Mastermind Sessions: {{vm.group.mastermindSessions}}
+				</h3>
+			</span>
+
+			<div align="center">
+				<span>
+					<a class="btn btn-primary btn-lg"
+						ui-sref="app.group.join({id: vm.group._id})">
+						Request To Join This Group
+					</a>
+				</span>
+			</div>
+		</div>
+	</div>
+
+</div>

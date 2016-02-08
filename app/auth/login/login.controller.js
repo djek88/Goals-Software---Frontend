@@ -4,7 +4,7 @@ angular
 	.module('app.auth')
 	.controller('loginController', loginController);
 
-function loginController($scope, $location, Customer) {
+function loginController($scope, $state, Customer) {
 	var vm = this;
 
 	vm.rememberMe = false;
@@ -18,10 +18,13 @@ function loginController($scope, $location, Customer) {
 	function login() {
 		if ($scope.loginForm.$valid) {
 			Customer.login({ rememberMe: vm.rememberMe }, vm.credentials, function() {
-				var next = $location.nextAfterLogin || '/group/my-groups';
+				var next = $state.nextAfterLogin || 'app.group.myGroups';
+				var nextParams = $state.nextAfterLoginParams || null;
 
-				$location.nextAfterLogin = null;
-				$location.path(next);
+				$state.nextAfterLogin = null;
+				$state.nextAfterLoginParams = null;
+
+				$state.go(next, nextParams);
 			});
 		}
 	}

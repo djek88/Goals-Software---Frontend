@@ -4,8 +4,15 @@ angular
 	.module('app.group')
 	.controller('groupInviteController', groupInviteController);
 
-function groupInviteController(customer) {
+function groupInviteController(groupInviteService, customer, group) {
 	var vm = this;
 
-	console.log('invite');
+	vm.emails = '';
+	vm.inviteMessage = groupInviteService.defaultMessage(customer, group);
+
+	vm.sendInvite = sendInvite;
+
+	function sendInvite() {
+		alert('send');
+	}
 }

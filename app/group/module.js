@@ -9,6 +9,84 @@ angular
 
 function config($stateProvider) {
 	$stateProvider
+		.state('reviewGroup', {
+			url: '/review/:id/group',
+			data: {
+				title: 'Review group'
+			},
+			views: {
+				root: {
+					templateUrl: 'app/group/review-group/review-group.view.html',
+					controller: 'reviewGroupController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				group: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.prototype$getBaseGroupInfo({
+							id: $stateParams.id
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionsPassed: function($q, $stateParams, Session) {
+					var deferred = $q.defer();
+
+					Session.find({
+							filter: {
+								where: {
+									_groupId: $stateParams.id,
+									startAt: {lt: new Date()}
+								}
+							}
+						}, function() {
+							deferred.resolve(arguments[0].length);
+						},
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				frequencyTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionFrequencyTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionDayTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionDayTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionTimeTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionTimeTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				scripts: function(lazyScript){
+					return lazyScript.register(['jstz']);
+				}
+			}
+		})
 		.state('app.group', {
 			abstract: true,
 			url: '/group',
@@ -61,7 +139,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.groupTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -71,7 +149,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.penaltyAmounts(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -130,7 +208,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionFrequencyTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -140,7 +218,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionDayTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -150,7 +228,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionTimeTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -192,6 +270,18 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
+				group: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.findById({
+							id: $stateParams.id
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
 					return lazyScript.register([]);
 				}
@@ -214,7 +304,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.groupTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -224,7 +314,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.penaltyAmounts(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -234,7 +324,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionFrequencyTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -244,7 +334,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionDayTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -254,7 +344,7 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionTimeTypes(
-						function(result) { deferred.resolve(result.types); },
+						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 

@@ -1,7 +1,7 @@
 <div id="content">
 	<div class="row">
 		<div class="jarviswidget jarviswidget-sortable">
-			<form class="form-horizontal ng-pristine ng-valid">
+			<form ng-submit="vm.sendInvite()" class="form-horizontal ng-pristine ng-valid">
 				<fieldset align="center">
 					<legend>Invite To This Group</legend>
 				</fieldset>
@@ -10,7 +10,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label">Email</label>
 						<div class="col-md-8">
-							<input class="form-control" type="text">
+							<input ng-model="vm.emails" class="form-control" type="text" placeholder="Emails">
 							<p class="note"><strong>Note:</strong> if more that one email separate each email address with a ;</p>
 						</div>
 					</div>
@@ -18,7 +18,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label">Invite message</label>
 						<div class="col-md-8">
-							<textarea class="form-control" placeholder="Enter your invite..." rows="10"></textarea>
+							<textarea ng-model="vm.inviteMessage" class="form-control" placeholder="Enter your invite..." rows="10"></textarea>
 						</div>
 					</div>
 				</fieldset>

@@ -1651,6 +1651,43 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name backendApi.Group#prototype$getBaseGroupInfo
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Get base group info for non authenticated users
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$getBaseGroupInfo": {
+          url: urlBase + "/Groups/:id/get-base-info",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
          * @name backendApi.Group#prototype$changeGroupOwner
          * @methodOf backendApi.Group
          *
@@ -1730,8 +1767,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -1755,6 +1791,45 @@ module.factory(
          */
         "prototype$sendEmailToMember": {
           url: urlBase + "/Groups/:id/send-email-member/:memberId",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$inviteNewMembers
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Invite new members to the group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `emails` – `{string}` - Email addresses. Separate each address with a ";"
+         *
+         *  - `request` – `{string}` - Invite request
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$inviteNewMembers": {
+          url: urlBase + "/Groups/:id/invite-new-members",
           method: "POST"
         },
 
@@ -4416,9 +4491,10 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `types` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
          */
         "sessionFrequencyTypes": {
           url: urlBase + "/Additionals/session-frequency-types",
@@ -4449,9 +4525,10 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `types` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
          */
         "groupTypes": {
           url: urlBase + "/Additionals/group-types",
@@ -4472,21 +4549,23 @@ module.factory(
          *   This method does not accept any parameters.
          *   Supply an empty object or omit this argument altogether.
          *
-         * @param {function(Object,Object)=} successCb
+         * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
          *
          * @param {function(Object)=} errorCb Error callback with one argument:
          *   `httpResponse`.
          *
-         * @returns {Object} An empty reference that will be
+         * @returns {Array.<Object>} An empty reference that will be
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `types` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
          */
         "penaltyAmounts": {
+          isArray: true,
           url: urlBase + "/Additionals/penalty-amounts",
           method: "GET"
         },
@@ -4515,9 +4594,10 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `types` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
          */
         "sessionDayTypes": {
           url: urlBase + "/Additionals/session-day-types",
@@ -4548,9 +4628,10 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * Data properties:
-         *
-         *  - `types` – `{object=}` - 
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
          */
         "sessionTimeTypes": {
           url: urlBase + "/Additionals/session-time-types",

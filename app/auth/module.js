@@ -28,16 +28,16 @@ function config($stateProvider
 	$stateProvider
 		.state('login', {
 			url: '/login',
+			data: {
+				title: 'Login',
+				htmlId: 'extr-page'
+			},
 			views: {
 				root: {
 					templateUrl: 'app/auth/login/login.view.html',
 					controller: 'loginController',
 					controllerAs: 'vm'
 				}
-			},
-			data: {
-				title: 'Login',
-				htmlId: 'extr-page'
 			},
 			resolve: {
 				srcipts: function(lazyScript){
