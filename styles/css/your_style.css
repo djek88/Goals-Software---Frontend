@@ -88,10 +88,14 @@ body.container {
 	color: #363636;
 }
 
-.btn-primary:hover {
-	background: #ddf700;
+.btn-primary:hover, .btn-primary:focus {
+	background-color: #ddf700;
 	color: #363636;
 }
+
+/*.btn-primary:active {
+	background-color:#ddf700;
+}*/
 
 .pagination>.active>a, .pagination>.active>a:hover {
 	background-color: #363636;

@@ -47,10 +47,14 @@ function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) 
 	}
 
 	function saveCustomer(customer, cb) {
+		var customerId = customer._id;
+
+		delete customer._id;
 		delete customer.passwordConfirm;
 		if (!customer.password) delete customer.password;
 
-		Customer.prototype$updateAttributes({id: customer._id}, customer, function(customer) {
+
+		Customer.prototype$updateAttributes({id: customerId}, customer, function(customer) {
 			// Update localStorage
 			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
 			$rootScope.$applyAsync();
