@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.factory('groupDetailService', groupDetailService);
 
-function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
+function groupDetailService($state, $uibModal, APP_CONFIG, Group) {
 	var service = {
 		prepareGroup: prepareGroup,
 		customerIsMember: customerIsMember,
@@ -70,15 +70,11 @@ function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 	}
 
 	function changeOwner(groupId, newOwnerId, cb) {
-		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId + '/change-owner/' + newOwnerId;
-
-		$http.put(url, {transformRequest: angular.identity}).success(cb);
+		Group.prototype$changeGroupOwner({id: groupId, ownerId: newOwnerId}, null, cb);
 	}
 
 	function deleteGroup(groupId, cb) {
-		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId;
-
-		$http.delete(url, {transformRequest: angular.identity}).success(cb);
+		Group.deleteById({id: groupId}, cb);
 	}
 
 	function removeMemberFromGroup(group, memberId, cb) {
@@ -114,7 +110,7 @@ function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 
 		$.SmartMessageBox(options, function(buttonPressed, selectVal) {
 			if (selectVal) {
-				arguments[1] = getIdFromOption(selectVal);
+				arguments[1] = getIdFromOption(group.Members, selectVal);
 			}
 
 			cb.apply(null, arguments);
@@ -142,8 +138,12 @@ function groupDetailService($http, $state, $uibModal, APP_CONFIG, Group) {
 		return result.join('');
 	}
 
-	function getIdFromOption(str) {
-		return str.split('(').pop().slice(0, -1);
+	function getIdFromOption(members, initialsSelectedMember) {
+		for (var i = members.length - 1; i >= 0; i--) {
+			var initials = members[i].firstName + ' ' + members[i].lastName;
+
+			if (initialsSelectedMember === initials) return members[i]._id;
+		}
 	}
 
 	function notifyAndLeavePage(options) {

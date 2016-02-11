@@ -1651,43 +1651,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Group#prototype$getBaseGroupInfo
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Get base group info for non authenticated users
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method does not accept any data. Supply an empty object.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        "prototype$getBaseGroupInfo": {
-          url: urlBase + "/Groups/:id/get-base-info",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Group#prototype$changeGroupOwner
          * @methodOf backendApi.Group
          *
@@ -1805,8 +1768,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -1830,6 +1792,182 @@ module.factory(
          */
         "prototype$inviteNewMembers": {
           url: urlBase + "/Groups/:id/invite-new-members",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$requestToJoin
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Request to join the group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `request` – `{string}` - Message to group owner requesting permission to join.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$requestToJoin": {
+          url: urlBase + "/Groups/:id/request-to-join",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$baseGroupInfo
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Get base group info for non authenticated users.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$baseGroupInfo": {
+          url: urlBase + "/Groups/:id/base-info",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$activeJoinRequests
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Get active requests to join the group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$activeJoinRequests": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/active-join-requests",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$approveRequest
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Approve request to join the group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `requestId` – `{string}` - Request id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$approveRequest": {
+          url: urlBase + "/Groups/:id/approve-request/:requestId",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$rejectRequest
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Reject request to join the group.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `requestId` – `{string}` - Request id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$rejectRequest": {
+          url: urlBase + "/Groups/:id/reject-request/:requestId",
           method: "POST"
         },
 

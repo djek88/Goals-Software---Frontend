@@ -25,7 +25,7 @@ function config($stateProvider) {
 				group: function($q, $stateParams, Group) {
 					var deferred = $q.defer();
 
-					Group.prototype$getBaseGroupInfo({
+					Group.prototype$baseGroupInfo({
 							id: $stateParams.id
 						},
 						deferred.resolve.bind(deferred),
@@ -252,6 +252,36 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
+				scripts: function(lazyScript){
+					return lazyScript.register([]);
+				}
+			}
+		})
+		.state('app.group.joinRequests', {
+			url: '/:id/join-requests',
+			data: {
+				title: 'Join requests'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/group-join-requests/group-join-requests.view.html',
+					controller: 'groupJoinRequestsController',
+					controllerAs: 'vm',
+				}
+			},
+			resolve: {
+				activeRequests: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.prototype$activeJoinRequests({
+							id: $stateParams.id
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
 					return lazyScript.register([]);
 				}

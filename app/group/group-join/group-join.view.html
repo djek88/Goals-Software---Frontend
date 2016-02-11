@@ -1,7 +1,7 @@
 <div id="content">
 	<div class="row">
 		<div class="jarviswidget jarviswidget-sortable">
-			<form class="form-horizontal ng-pristine ng-valid">
+			<form ng-submit="vm.requestToGroup()" class="form-horizontal ng-pristine ng-valid">
 				<fieldset align="center">
 					<legend>Request To Join Group</legend>
 				</fieldset>
@@ -10,7 +10,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label">Request Message</label>
 						<div class="col-md-8">
-							<textarea class="form-control" placeholder="Enter your request..." rows="10"></textarea>
+							<textarea ng-model="vm.requestMessage" class="form-control" placeholder="Enter your request..." rows="10"></textarea>
 						</div>
 					</div>
 				</fieldset>
