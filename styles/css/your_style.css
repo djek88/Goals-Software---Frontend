@@ -88,16 +88,14 @@ body.container {
 	color: #363636;
 }
 
-.btn-primary:hover, .btn-primary:focus {
+.btn-primary:hover,
+.btn-primary:focus {
 	background-color: #ddf700;
 	color: #363636;
 }
 
-/*.btn-primary:active {
-	background-color:#ddf700;
-}*/
-
-.pagination>.active>a, .pagination>.active>a:hover {
+.pagination>.active>a,
+.pagination>.active>a:hover {
 	background-color: #363636;
 	border-color: #363636;
 }
@@ -106,6 +104,20 @@ body.container {
 	color: #363636;
 }
 
-.smart-form .checkbox:hover i, .smart-form .input:hover input, .smart-form .radio:hover i, .smart-form .select:hover select, .smart-form .textarea:hover textarea, .smart-form .toggle:hover i {
-	border-color: #ddf700;
+.smart-form .checkbox:hover i,
+.smart-form .checkbox:focus i,
+.smart-form .radio:hover i,
+.smart-form .radio:focus i,
+.smart-form .input input:hover,
+.smart-form .input input:focus,
+.smart-form .select select:hover,
+.smart-form .select select:focus,
+.smart-form .textarea textarea:hover,
+.smart-form .textarea textarea:focus,
+.smart-form .toggle i:hover,
+.smart-form .toggle i:focus {
+	border-color: #ddf700!important;
 }
+
+
+
