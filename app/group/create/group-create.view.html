@@ -21,7 +21,7 @@
 						<label class="select">
 							<select
 								ng-model="vm.group.type"
-								ng-options="key as value for (key, value) in vm.groupTypes">
+								ng-options="+key as value for (key, value) in vm.groupTypes">
 							</select> <i></i>
 						</label>
 					</section>
@@ -115,7 +115,7 @@
 						<label class="select">
 							<select ng-disabled="!vm.group.sessionConf.sheduled"
 								ng-model="vm.group.sessionConf.day"
-								ng-options="key as value for (key, value) in vm.days">
+								ng-options="+key as value for (key, value) in vm.days">
 							</select> <i></i>
 						</label>
 					</section>
@@ -146,7 +146,7 @@
 							<select
 								ng-disabled="!vm.group.sessionConf.sheduled"
 								ng-model="vm.group.sessionConf.frequencyType"
-								ng-options="key as value for (key, value) in vm.frequency">
+								ng-options="+key as value for (key, value) in vm.frequency">
 							</select> <i></i>
 						</label>
 					</section>

@@ -2,18 +2,25 @@
 
 angular
 	.module('app.profile')
-	.controller('settingsController', settingsController);
+	.controller('profileSettingsController', profileSettingsController);
 
-function settingsController($scope, $rootScope, settingsService) {
+function profileSettingsController($scope, $rootScope, profileSettingsService, loadAppData) {
 	var vm = this;
 
-	vm.customer = settingsService.getCustomer();
-	vm.timezoneMap = settingsService.timeZoneMap;
-	vm.imgData = settingsService.getDefaultImgData();
+	var isChange = false;
+	vm.customer = profileSettingsService.getCustomer();
+	vm.timezoneMap = profileSettingsService.timeZoneMap;
+	vm.imgData = profileSettingsService.getDefaultImgData();
 
 	vm.save = save;
 
+	$scope.$watch('vm.customer', function(newValue, oldValue) {
+		isChange = newValue !== oldValue;
+	}, true);
+
 	function save() {
+		if (!isChange) return;
+
 		// Check password
 		if (vm.customer.password || vm.customer.passwordConfirm) {
 			if (vm.customer.password !== vm.customer.passwordConfirm) {
@@ -29,8 +36,9 @@ function settingsController($scope, $rootScope, settingsService) {
 			}
 		}
 
-		settingsService.saveCustomer(vm.customer, function(result) {
-			vm.customer = settingsService.getCustomer();
+		profileSettingsService.saveCustomer(vm.customer, function(customer) {
+			vm.customer = profileSettingsService.getCustomer();
+			setTimeout(function() { isChange = false; }, 50);
 
 			$.smallBox({
 				title: 'Ding Dong!',
@@ -44,7 +52,7 @@ function settingsController($scope, $rootScope, settingsService) {
 
 	$scope.$watch('vm.imgData.newPicture', function(newValue, oldValue) {
 		if (newValue === oldValue || !newValue) {
-			vm.imgData = settingsService.getDefaultImgData();
+			vm.imgData = profileSettingsService.getDefaultImgData();
 			return;
 		}
 
@@ -55,7 +63,7 @@ function settingsController($scope, $rootScope, settingsService) {
 		// if (file.size / 1024 > 200)
 
 		// Update image display
-		settingsService.readFileAsDataUrl(file, function(result) {
+		profileSettingsService.readFileAsDataUrl(file, function(result) {
 			vm.imgData.selectedPicture = result;
 
 			updateCustomerPicture();
@@ -63,11 +71,11 @@ function settingsController($scope, $rootScope, settingsService) {
 	});
 
 	function updateCustomerPicture() {
-		settingsService.uploadPicture(
+		profileSettingsService.uploadPicture(
 			vm.customer._id,
 			vm.imgData.newPicture,
 			function() {
-				vm.imgData = settingsService.getDefaultImgData();
+				vm.imgData = profileSettingsService.getDefaultImgData();
 
 				$.smallBox({
 					title: 'Ding Dong!',

@@ -4,11 +4,11 @@ angular
 	.module('app.group')
 	.controller('groupInviteController', groupInviteController);
 
-function groupInviteController($state, groupInviteService, customer, group) {
+function groupInviteController($state, Customer, groupInviteService, loadAppData, group) {
 	var vm = this;
 
 	vm.emails = '';
-	vm.inviteMessage = groupInviteService.defaultMessage(customer, group);
+	vm.inviteMessage = groupInviteService.defaultMessage(Customer.getCachedCurrent(), group);
 
 	vm.inviteToGroup = inviteToGroup;
 

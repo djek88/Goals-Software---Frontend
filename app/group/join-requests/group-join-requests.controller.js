@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupJoinRequestsController', groupJoinRequestsController);
 
-function groupJoinRequestsController(groupJoinRequestsService, customer, activeRequests) {
+function groupJoinRequestsController(groupJoinRequestsService, activeRequests) {
 	var vm = this;
 
 	vm.requests = activeRequests;

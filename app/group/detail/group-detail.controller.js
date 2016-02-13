@@ -4,11 +4,11 @@ angular
 	.module('app.group')
 	.controller('groupDetailController', groupDetailController);
 
-function groupDetailController($rootScope, groupDetailService, customer, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupDetailController($rootScope, Customer, groupDetailService, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.urlBase = $rootScope.urlBase;
-	vm.curCustomer = customer;
+	vm.curCustomer = Customer.getCachedCurrent();
 	vm.sessionsPassed = sessionsPassed;
 	vm.group = null;
 	vm.listMembersWithOwner = null;
@@ -38,7 +38,7 @@ function groupDetailController($rootScope, groupDetailService, customer, group, 
 			sessionTimeTypes
 		);
 		vm.listMembersWithOwner = groupDetailService.getMembersWithOwner(freshGroup);
-		vm.isCurCustomerGroupMember = groupDetailService.customerIsMember(customer._id, freshGroup);
+		vm.isCurCustomerGroupMember = groupDetailService.customerIsMember(vm.curCustomer._id, freshGroup);
 	}
 
 	function removeOwner() {

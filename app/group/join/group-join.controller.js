@@ -4,10 +4,10 @@ angular
 	.module('app.group')
 	.controller('groupJoinController', groupJoinController);
 
-function groupJoinController($state, $stateParams, groupJoinService, customer) {
+function groupJoinController($state, $stateParams, Customer, groupJoinService, loadAppData) {
 	var vm = this;
 
-	vm.requestMessage = groupJoinService.defaultMessage(customer);
+	vm.requestMessage = groupJoinService.defaultMessage(Customer.getCachedCurrent());
 
 	vm.requestToGroup = requestToGroup;
 

@@ -15,24 +15,46 @@ function config($stateProvider) {
 			url: '/profile',
 			template: '<ui-view/>'
 		})
-		/*.state('app.profile.view', {
-			url: '/view',
-			views: {
-				'content@app': {
-					templateUrl: 'app/profile/views/profile-view.html'
-				}
-			}
-		})*/
-		.state('app.profile.settings', {
-			url: '/settings',
+		.state('app.profile.detail', {
+			url: '/:id/detail',
 			data: {
-				title: 'Settings'
+				title: 'Detail profile'
 			},
 			views: {
 				'content@app': {
-					templateUrl: 'app/profile/settings/settings.view.html',
-					controller: 'settingsController',
-					controllerAs: 'vm',
+					templateUrl: 'app/profile/detail/profile-detail.view.html',
+					controller: 'profileDetailController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				customer: function($q, $stateParams, Customer) {
+					var deferred = $q.defer();
+
+					Customer.prototype$baseCustomerInfo({
+							id: $stateParams.id
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				scripts: function(lazyScript){
+					return lazyScript.register([]);
+				}
+			}
+		})
+		.state('app.profile.settings', {
+			url: '/settings',
+			data: {
+				title: 'Settings profile'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/profile/settings/profile-settings.view.html',
+					controller: 'profileSettingsController',
+					controllerAs: 'vm'
 				}
 			},
 			resolve: {

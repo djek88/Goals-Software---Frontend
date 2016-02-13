@@ -4,10 +4,12 @@ angular
 	.module('app.group')
 	.factory('myGroupsService', myGroupsService);
 
-function myGroupsService($uibModal) {
+function myGroupsService($uibModal, Group) {
 	var service = {
 		emailModalOpen: emailModalOpen,
-		leaveGroupBox: leaveGroupBox
+		leaveGroupBox: leaveGroupBox,
+		leaveGroup: leaveGroup,
+		updateGroups: updateGroups
 	};
 	return service;
 
@@ -33,5 +35,18 @@ function myGroupsService($uibModal) {
 		}, function (buttonPressed) {
 			if (buttonPressed === 'Yes') cb();
 		});
+	}
+
+	function leaveGroup(groupId, customerId, cb) {
+		Group.Members.unlink({id: groupId, fk: customerId}, cb);
+	}
+
+	function updateGroups(groupId, groups) {
+		for (var i = groups.length - 1; i >= 0; i--) {
+			if (groups[i]._id == groupId) {
+				groups.splice(i, 1);
+				break;
+			}
+		}
 	}
 }

@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupSearchController', groupSearchController);
 
-function groupSearchController(groupSearchService, customer, groupTypes, penaltyAmounts) {
+function groupSearchController(groupSearchService, groupTypes, penaltyAmounts) {
 	var vm = this;
 
 	vm.groupTypes = groupSearchService.prepareGroupTypes(groupTypes);

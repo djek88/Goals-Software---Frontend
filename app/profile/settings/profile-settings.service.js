@@ -2,9 +2,9 @@
 
 angular
 	.module('app.profile')
-	.factory('settingsService', settingsService);
+	.factory('profileSettingsService', profileSettingsService);
 
-function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) {
+function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_CONFIG) {
 	var service = {
 		timeZoneMap: buidTimeZoneMap(),
 		getCustomer: prepareCustomer,
@@ -57,9 +57,8 @@ function settingsService($rootScope, LoopBackAuth, $http, Customer, APP_CONFIG) 
 		Customer.prototype$updateAttributes({id: customerId}, customer, function(customer) {
 			// Update localStorage
 			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
-			$rootScope.$applyAsync();
 
-			cb(customer);
+			cb();
 		});
 	}
 

@@ -40,7 +40,7 @@
 					</div>
 					<div class="media-body">
 						<h4 class="media-heading">
-							{{member.firstName + member.lastName}}
+							{{member.firstName + ' ' + member.lastName}}
 							<span ng-if="vm.group._ownerId == member._id"> - Group Owner</span>
 						</h4>
 						<p style="padding-bottom: 17px;">{{member.description}}</p>

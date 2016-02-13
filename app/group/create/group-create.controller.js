@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupCreateController', groupCreateController);
 
-function groupCreateController($state, groupCreateService, customer, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupCreateController($state, groupCreateService, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.groupTypes = groupTypes;
@@ -15,15 +15,15 @@ function groupCreateController($state, groupCreateService, customer, groupTypes,
 	vm.frequency = sessionFrequencyTypes;
 	vm.group = groupCreateService.prepareGroup(groupTypes, penaltyAmounts, sessionDayTypes, sessionTimeTypes, sessionFrequencyTypes);
 
-	vm.create = createGroup;
+	vm.create = create;
 
-	function createGroup() {
+	function create() {
 		groupCreateService.createGroup(vm.group, function(newGroup) {
 			$state.go('app.group.detail', {id: newGroup._id});
 
 			$.smallBox({
 				title: 'Create group...',
-				content: 'Group was created successfully!',
+				content: 'Group created successfully!',
 				color: '#296191',
 				timeout: 3000,
 				icon: 'fa fa-bell swing animated'

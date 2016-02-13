@@ -16,7 +16,7 @@ function config($stateProvider, $urlRouterProvider) {
 				}
 			},
 			resolve: {
-				customer: function($q, Customer) {
+				loadAppData: function($q, Customer) {
 					var deferred = $q.defer();
 
 					Customer.getCurrent(

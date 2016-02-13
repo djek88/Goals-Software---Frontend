@@ -4,10 +4,10 @@ angular
 	.module('app.group')
 	.controller('myGroupsController', myGroupsController);
 
-function myGroupsController(myGroupsService, Group, customer, groups) {
+function myGroupsController(Customer, myGroupsService, loadAppData, groups) {
 	var vm = this;
 
-	vm.curCustomer = customer;
+	vm.curCustomer = Customer.getCachedCurrent();
 	vm.groups = groups;
 	vm.totalGroupsCount = groups.length;
 	vm.groupsPerPage = 10;
@@ -30,14 +30,8 @@ function myGroupsController(myGroupsService, Group, customer, groups) {
 
 	function leaveGroup(groupId) {
 		myGroupsService.leaveGroupBox(function() {
-			Group.Members.unlink({id: groupId, fk: vm.curCustomer._id}, function() {
-				// update group list
-				for (var i = vm.groups.length - 1; i >= 0; i--) {
-					if (vm.groups[i]._id == groupId) {
-						vm.groups.splice(i, 1);
-						break;
-					}
-				}
+			myGroupsService.leaveGroup(groupId, vm.curCustomer._id, function() {
+				myGroupsService.updateGroups(groupId, vm.groups);
 
 				$.smallBox({
 					title: 'Leave group...',
