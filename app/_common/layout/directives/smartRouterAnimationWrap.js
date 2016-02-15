@@ -12,12 +12,13 @@ function smartRouterAnimationWrap($rootScope,$timeout) {
 
 			element.addClass('router-animation-container');
 
-
 			var $loader = $('<div class="router-animation-loader"><i class="fa fa-gear fa-4x fa-spin"></i></div>')
 				.css({
-					position: 'absolute',
-					top: 50,
-					left: 10
+					position: 'fixed',
+					top: '50%',
+					left: '50%',
+					marginTop: '-26px',
+					marginLeft: '-22px'
 				}).hide().appendTo(element);
 
 
@@ -59,8 +60,9 @@ function smartRouterAnimationWrap($rootScope,$timeout) {
 				var isAnimRequired = _.any(viewsToMatch, function(view){
 					return _.has(toState.views, view) || _.has(fromState.views, view);
 				});
+
 				if(isAnimRequired){
-					contentViewAnimStart()
+					contentViewAnimStart();
 				}
 			});
 
@@ -71,7 +73,6 @@ function smartRouterAnimationWrap($rootScope,$timeout) {
 			element.on('$destroy', function(){
 				destroyForStart();
 				destroyForEnd();
-
 			});
 		}
 	}

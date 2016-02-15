@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.factory('groupDetailService', groupDetailService);
 
-function groupDetailService($state, $uibModal, Group) {
+function groupDetailService($state, $uibModal, layoutLoader, Group) {
 	var service = {
 		prepareGroup: prepareGroup,
 		customerIsMember: customerIsMember,

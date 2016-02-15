@@ -4,7 +4,7 @@ angular
 	.module('app.profile')
 	.controller('profileSettingsController', profileSettingsController);
 
-function profileSettingsController($scope, $rootScope, profileSettingsService, loadAppData) {
+function profileSettingsController($scope, $rootScope, layoutLoader, profileSettingsService, loadAppData) {
 	var vm = this;
 
 	var isChange = false;
@@ -36,7 +36,11 @@ function profileSettingsController($scope, $rootScope, profileSettingsService, l
 			}
 		}
 
+		layoutLoader.on();
+
 		profileSettingsService.saveCustomer(vm.customer, function(customer) {
+			layoutLoader.off();
+
 			vm.customer = profileSettingsService.getCustomer();
 			setTimeout(function() { isChange = false; }, 50);
 

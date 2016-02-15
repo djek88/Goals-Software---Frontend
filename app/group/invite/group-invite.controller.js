@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupInviteController', groupInviteController);
 
-function groupInviteController($state, Customer, groupInviteService, loadAppData, group) {
+function groupInviteController($state, Customer, layoutLoader, groupInviteService, loadAppData, group) {
 	var vm = this;
 
 	vm.emails = '';
@@ -13,7 +13,11 @@ function groupInviteController($state, Customer, groupInviteService, loadAppData
 	vm.inviteToGroup = inviteToGroup;
 
 	function inviteToGroup() {
+		layoutLoader.on();
+
 		groupInviteService.sendInvite(group._id, vm.emails, vm.inviteMessage, function() {
+			layoutLoader.off();
+
 			$state.go('app.group.myGroups');
 
 			$.smallBox({

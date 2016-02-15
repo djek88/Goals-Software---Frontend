@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupDetailController', groupDetailController);
 
-function groupDetailController($rootScope, Customer, groupDetailService, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupDetailController($rootScope, layoutLoader, groupDetailService, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.urlBase = $rootScope.urlBase;
@@ -45,6 +45,8 @@ function groupDetailController($rootScope, Customer, groupDetailService, loadApp
 		groupDetailService.deleteOwnerBox(group, function(buttonPressed, newOwnerId) {
 			switch (buttonPressed) {
 				case 'Delete group':
+					layoutLoader.on();
+
 					groupDetailService.deleteGroup(group._id, function() {
 						groupDetailService.notifyAndLeavePage({
 							title: 'Remove group...',
@@ -55,6 +57,8 @@ function groupDetailController($rootScope, Customer, groupDetailService, loadApp
 					break;
 
 				case newOwnerId && 'Select new owner':
+					layoutLoader.on();
+
 					groupDetailService.changeOwner(group._id, newOwnerId, function() {
 						groupDetailService.notifyAndLeavePage({
 							title: 'Change owner...',
@@ -69,7 +73,10 @@ function groupDetailController($rootScope, Customer, groupDetailService, loadApp
 
 	function removeMember(memberId) {
 		groupDetailService.deleteMemberBox(function() {
+			layoutLoader.on();
+
 			groupDetailService.removeMemberFromGroup(group, memberId, function(freshGroup) {
+				layoutLoader.off();
 				refreshData(freshGroup);
 
 				groupDetailService.notifyAndLeavePage({

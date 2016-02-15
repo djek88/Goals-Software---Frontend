@@ -119,5 +119,16 @@ body.container {
 	border-color: #ddf700!important;
 }
 
+.loader {
+	position: absolute;
+	overflow: auto;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
 
-
+.loader-content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -20px;
+	margin-left: -20px;
+}

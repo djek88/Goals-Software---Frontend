@@ -11,7 +11,6 @@
 
 angular
 	.module('app', [
-		//'ngSanitize',
 		'ngAnimate',
 		'restangular',
 		'ui.router',
@@ -24,19 +23,6 @@ angular
 		// App
 		'app.auth',
 		'app.layout',
-		// 'app.chat',
-		// 'app.dashboard',
-		// 'app.calendar',
-		// 'app.inbox',
-		// 'app.graphs',
-		// 'app.tables',
-		// 'app.forms',
-		// 'app.ui',
-		// 'app.widgets',
-		// 'app.maps',
-		// 'app.appViews',
-		// 'app.misc',
-		// 'app.smartAdmin',
 		'app.profile',
 		'app.group'
 	])
@@ -54,8 +40,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	// LoopBack config
 	LoopBackResourceProvider.setUrlBase(window.appConfig.apiRootUrl);
 
-	// Intercept http calls.
-	$provide.factory('ErrorHttpInterceptor', function($q, $injector, LoopBackAuth) {
+	$provide.factory('ErrorHttpInterceptor', function($q, $injector, LoopBackAuth, layoutLoader) {
 		var errorCounter = 0;
 
 		function notifyError(rejection){
@@ -77,16 +62,16 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 		}
 
 		return {
-			// On request failure
 			requestError: function(rejection) {
-				// show notification
+				layoutLoader.off();
+
 				notifyError(rejection);
-				// Return the promise rejection.
 				return $q.reject(rejection);
 			},
 
-			// On response failure
 			responseError: function(rejection) {
+				layoutLoader.off();
+
 				// safe clear session and redirect to login page
 				if (rejection.status == 401) {
 					LoopBackAuth.clearUser();
@@ -95,15 +80,12 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 					$injector.get('$state').go('login');
 				}
 
-				// show notification
 				notifyError(rejection);
-				// Return the promise rejection.
 				return $q.reject(rejection);
 			}
 		};
 	});
 
-	// Add the interceptor to the $httpProvider.
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
@@ -125,7 +107,7 @@ function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
 	});
 
 	// UnAuthenticated redirect to login page
-	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app' && !Customer.isAuthenticated()) {
 			console.log('UnAuthenticated: redirect to login.');
 			$state.nextAfterLogin = toState.name;

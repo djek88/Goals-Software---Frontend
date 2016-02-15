@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupCreateController', groupCreateController);
 
-function groupCreateController($state, groupCreateService, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupCreateController($state, layoutLoader, groupCreateService, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.groupTypes = groupTypes;
@@ -18,7 +18,11 @@ function groupCreateController($state, groupCreateService, groupTypes, penaltyAm
 	vm.create = create;
 
 	function create() {
+		layoutLoader.on();
+
 		groupCreateService.createGroup(vm.group, function(newGroup) {
+			layoutLoader.off();
+
 			$state.go('app.group.detail', {id: newGroup._id});
 
 			$.smallBox({

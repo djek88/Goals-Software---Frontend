@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupJoinController', groupJoinController);
 
-function groupJoinController($state, $stateParams, Customer, groupJoinService, loadAppData) {
+function groupJoinController($state, $stateParams, Customer, layoutLoader, groupJoinService, loadAppData) {
 	var vm = this;
 
 	vm.requestMessage = groupJoinService.defaultMessage(Customer.getCachedCurrent());
@@ -13,8 +13,11 @@ function groupJoinController($state, $stateParams, Customer, groupJoinService, l
 
 	function requestToGroup() {
 		var groupId = $stateParams.id;
+		layoutLoader.on();
 
 		groupJoinService.sendRequest(groupId, vm.requestMessage, function() {
+			layoutLoader.off();
+
 			$state.go('app.group.detail', {id: groupId});
 
 			$.smallBox({

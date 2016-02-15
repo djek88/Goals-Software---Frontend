@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupEditController', groupEditController);
 
-function groupEditController($scope, $state, groupEditService, group, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupEditController($scope, $state, layoutLoader, groupEditService, group, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	var isChange = false;
@@ -24,8 +24,11 @@ function groupEditController($scope, $state, groupEditService, group, groupTypes
 
 	function edit() {
 		if (!isChange) return;
+		layoutLoader.on();
 
 		groupEditService.updateGroup(vm.group, function(freshGroup) {
+			layoutLoader.off();
+
 			vm.group = freshGroup;
 			isChange = false;
 

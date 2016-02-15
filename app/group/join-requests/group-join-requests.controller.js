@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupJoinRequestsController', groupJoinRequestsController);
 
-function groupJoinRequestsController(groupJoinRequestsService, activeRequests) {
+function groupJoinRequestsController(layoutLoader, groupJoinRequestsService, activeRequests) {
 	var vm = this;
 
 	vm.requests = activeRequests;
@@ -15,7 +15,11 @@ function groupJoinRequestsController(groupJoinRequestsService, activeRequests) {
 	vm.reqManage = reqManage;
 
 	function reqManage(requestId, approve) {
+		layoutLoader.on();
+
 		groupJoinRequestsService.manageRequest(requestId, approve, function() {
+			layoutLoader.off();
+
 			groupJoinRequestsService.removeRequest(requestId, vm.requests);
 
 			var content = 'Request was ' + (approve ? 'approved' : 'rejected') + ' successfully!';

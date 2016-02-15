@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('myGroupsController', myGroupsController);
 
-function myGroupsController(Customer, myGroupsService, loadAppData, groups) {
+function myGroupsController(Customer, layoutLoader, myGroupsService, loadAppData, groups) {
 	var vm = this;
 
 	vm.curCustomer = Customer.getCachedCurrent();
@@ -30,7 +30,11 @@ function myGroupsController(Customer, myGroupsService, loadAppData, groups) {
 
 	function leaveGroup(groupId) {
 		myGroupsService.leaveGroupBox(function() {
+			layoutLoader.on();
+
 			myGroupsService.leaveGroup(groupId, vm.curCustomer._id, function() {
+				layoutLoader.off();
+
 				myGroupsService.updateGroups(groupId, vm.groups);
 
 				$.smallBox({
