@@ -1,21 +1,28 @@
-var path = require('path');
-var es = require('event-stream');
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var connect = require('gulp-connect');
-var templateCache = require('gulp-angular-templatecache');
-var ngAnnotate = require('gulp-ng-annotate');
-var uglify = require('gulp-uglify');
-var cssnano = require('gulp-cssnano');
-var useref = require('gulp-useref');
-var minifyHTML = require('gulp-minify-html');
-var gulpif = require('gulp-if');
-var rename = require('gulp-rename');
-var wrap = require('gulp-wrap');
+'use strict';
 
-var scripts = require('./app.scripts.json');
+const del = require('del');
+const path = require('path');
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const wrap = require('gulp-wrap');
+const notify = require('gulp-notify');
+const templateCache = require('gulp-angular-templatecache');
+const combiner = require('stream-combiner2').obj;
+const ngAnnotate = require('gulp-ng-annotate');
+const uglify = require('gulp-uglify');
+const useref = require('gulp-useref');
+const gulpif = require('gulp-if');
+const cssnano = require('gulp-cssnano');
+const minifyHTML = require('gulp-minify-html');
+const bs = require('browser-sync').create();
+const historyApiFallback = require('connect-history-api-fallback')
+//const rename = require('gulp-rename');
+//const gulpIgnore = require('gulp-ignore');
 
-var source = {
+let scripts = require('./app.scripts.json');
+
+let source = {
+	html: './app/**/*.html',
 	js: {
 		main: './app/main.js',
 		src: [
@@ -33,99 +40,149 @@ var source = {
 
 			// other js files [controllers, services, etc.]
 			'./app/**/!(module)*.js',
-		],
-		tpl: './app/**/*.tpl.html'
+		]
 	},
-	html: './app/**/*.html'
+	tmpl: './app/**/*.tpl.html'
 };
 
-var destinations = {
-	js: './dist'
-};
+let destination = './dist';
 
-gulp.task('build', function(){
-	return es.merge(gulp.src(source.js.src), getTemplateStream())
-		.pipe(wrap('(function(){\n<%= contents %>\n})();'))
-		.pipe(concat('app.js'))
-		.pipe(gulp.dest(destinations.js))
-		.pipe(connect.reload());
+gulp.task('clean', function(cb) {
+	return del(destination, {force: true});
 });
 
-gulp.task('app-minify', ['build'], function() {
-	gulp.src(path.join(destinations.js, 'app.js'))
-		.pipe(ngAnnotate())
-		.pipe(uglify())
-		.pipe(rename({extname: '.min.js'}))
-		.pipe(gulp.dest(destinations.js));
+gulp.task('indexHtml:build', function(cb) {
+	return combiner(
+		gulp.src('./index.html'),
+		useref(),
+		gulpif('*.html', minifyHTML()),
+		gulpif('*.js', uglify()),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
 });
 
-gulp.task('vendor', function(){
+gulp.task('app:concat', function(cb) {
+	return combiner(
+		gulp.src(source.tmpl),
+		templateCache({root: 'app/', module: 'app'}),
+		gulp.src(source.js.src, {passthrough: true}),
+		wrap('(function(){\n<%= contents %>\n})();'),
+		concat('app.js'),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
+});
+
+gulp.task('vendor:concat', function(cb) {
 	var paths = [];
 	scripts.prebuild.forEach(function(script) {
 		paths.push(scripts.paths[script]);
 	});
-	gulp.src(paths)
-		.pipe(concat('vendor.js'))
-		//.on('error', swallowError)
-		.pipe(gulp.dest(destinations.js));
+
+	return combiner(
+		gulp.src(paths),
+		concat('vendor.js'),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
 });
 
-gulp.task('watch', ['build', 'html-minify', 'html-index'], function(){
-	gulp.watch(source.js.src, ['build']);
-	gulp.watch(source.js.tpl, ['build']);
-	gulp.watch(source.html, ['html-minify']);
-	gulp.watch('./index.html', ['html-index']);
+gulp.task('resource', function(cb) {
+	return combiner(
+		gulp.src([
+			'{plugin,smartadmin-plugin}/**/*',
+			'{sound,langs}/**/*',
+			'styles/{fonts,img}/**/*',
+			'app.scripts.json'
+		], {base: '.'}),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
 });
 
-gulp.task('connect', function() {
-	connect.server({
-		port: 1337,
-		root: './dist',
-		fallback: './dist/index.html',
-		livereload: true
-	});
-});
-
-gulp.task('html-minify', function(){
-	gulp.src(source.html)
-		.pipe(minifyHTML({
+gulp.task('html:minify', function(cb) {
+	return combiner(
+		gulp.src(source.html, {base: '.'}),
+		minifyHTML({
 			conditionals: true,
 			spare: true
-		}))
-		.pipe(gulp.dest(path.join(destinations.js, 'app')))
-		.pipe(connect.reload());
+		}),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
 });
 
-gulp.task('resource', function() {
-	return gulp.src(['./plugin/**/*', './smartadmin-plugin/**/*', './sound/*', './langs/*', './styles/**/*', '!./styles/css/**/*', './app.scripts.json'], {
-		base: './'
-	}).pipe(gulp.dest(path.join(destinations.js)));
+gulp.task('vendor:minify', gulp.series('vendor:concat', function(cb) {
+	return combiner(
+		gulp.src(path.join(destination, 'vendor.js')),
+		uglify(),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
+}));
+
+gulp.task('styles:minify', gulp.series('indexHtml:build', function(cb) {
+	return combiner(
+		gulp.src(path.join(destination, 'styles/css/vendor.css'), {base: destination}),
+		cssnano({discardComments: {removeAll: true}}),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
+}));
+
+gulp.task('app:minify', gulp.series('app:concat', function(cb) {
+	return combiner(
+		gulp.src(path.join(destination, 'app.js')),
+		ngAnnotate(),
+		uglify(),
+		gulp.dest(destination)
+	).on('error', notify.onError(function(err) {cb();return err;}));
+}));
+
+gulp.task('serve', function(cb) {
+	bs.init({
+		port: 1337,
+		notify: true,
+		server: {
+			baseDir: destination,
+			middleware: [historyApiFallback()]
+		}
+	}, cb);
+
+	bs.watch(
+		path.join(destination, '/{app,styles}/**/*'),
+		path.join(destination, '/*.*')
+	).on('change', bs.reload);
 });
 
-gulp.task('html-index', function(){
-	gulp.src(['./index.html'])
-		.pipe(useref())
-		//.pipe(gulpif('*.css', cssnano({discardComments: {removeAll: true}})))
-		.pipe(gulpif('*.html', minifyHTML()))
-		.pipe(gulp.dest(destinations.js))
-		.pipe(connect.reload());
+gulp.task('watch', function(cb) {
+	gulp.watch('index.html', gulp.series('indexHtml:build'));// index.html file
+	gulp.watch(source.html, gulp.series('html:minify'));// custom files (html)
+	gulp.watch([source.js.src, source.tmpl], gulp.series('app:concat'));// custom files (js)
+	gulp.watch('styles/css/*', gulp.series('indexHtml:build'));// custom files (css)
+	gulp.watch('app.scripts.json', gulp.parallel('vendor:concat', function moveScriptsFile() {// vendor
+		return gulp.src('app.scripts.json')
+			.pipe(gulp.dest(destination));
+	}));
+	cb();
 });
 
-gulp.task('default', ['vendor', 'build', 'app-minify', 'html-index', 'html-minify', 'resource', 'watch', 'connect']);
+gulp.task('default', gulp.series(
+	'clean',
+	gulp.parallel(
+		'resource',
+		'indexHtml:build',
+		'vendor:concat',
+		'html:minify',
+		'app:concat'
+	),
+	gulp.parallel(
+		'watch',
+		'serve'
+	)
+));
 
-gulp.task('dev', ['vendor', 'build', 'html-index', 'resource', 'watch', 'connect']);
-
-gulp.task('prod', ['vendor', 'build', 'app-minify', 'html-index', 'html-minify', 'resource']);
-
-var swallowError = function(error){
-	console.log(error.toString());
-	this.emit('end');
-};
-
-var getTemplateStream = function(){
-	return gulp.src(source.js.tpl)
-		.pipe(templateCache({
-			root: 'app/',
-			module: 'app'
-		}));
-};
+gulp.task('prod', gulp.series(
+	'clean',
+	gulp.parallel(
+		'styles:minify',
+		'app:minify',
+		'vendor:minify',
+		'resource',
+		'html:minify'
+	)
+));
