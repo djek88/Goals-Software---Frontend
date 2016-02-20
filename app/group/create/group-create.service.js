@@ -37,10 +37,12 @@ function groupCreateService(Group) {
 		var result = [];
 
 		for (var key in timeTypes) {
-			result.push({
-				key: key,
-				value: timeTypes[key]
-			});
+			if (isFinite(key)) {
+				result.push({
+					key: key,
+					value: timeTypes[key]
+				});
+			}
 		}
 
 		return result;

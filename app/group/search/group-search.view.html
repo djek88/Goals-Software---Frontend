@@ -35,13 +35,13 @@
 		<fieldset class="col-sm-12" ng-if="vm.groups.length" style="margin-top: 40px;">
 			<div class="well" style="margin: 8px;" ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 						{{group.name}}
 					</div>
 					<div class="col-xs-3">
 						Members: {{group.members}}
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-3">
 						Created: {{group.created}}
 					</div>
 					<div class="col-xs-1">

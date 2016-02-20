@@ -1,0 +1,68 @@
+<div id="content">
+	<div class="row">
+
+		<section widget-grid id="widget-grid">
+			<article class="col-sm-12">
+				<div>
+
+					home
+					<!-- <div class="well" style="margin: 8px;" ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
+						<div class="row">
+							<div class="col-xs-7">
+								<h4>{{group.name}}</h4>
+							</div>
+							<div class="col-xs-5">
+								<div class="pull-right">
+									<a class="btn btn-default"
+										ng-if="group._ownerId == vm.curCustomer._id"
+										ui-sref="app.group.edit({id: group._id})">
+										<i class="fa fa-pencil"></i></a>
+
+									<a class="btn btn-default"
+										ng-if="group._ownerId == vm.curCustomer._id"
+										ui-sref="app.group.joinRequests({id: group._id})">
+										<i class="fa fa-send"></i></a>
+
+									<a class="btn btn-default"
+										ui-sref="app.group.detail({id: group._id})">
+										<i class="fa fa-eye"></i></a>
+
+									<a class="btn btn-default"
+										ng-if="group._memberIds.length"
+										ng-click="vm.showEmailModal(group._id)">
+										<i class="fa fa-envelope"></i></a>
+
+									<a class="btn btn-default"
+										ng-if="group._ownerId != vm.curCustomer._id"
+										ng-click="vm.leaveGroup(group._id)">
+										<i class="fa fa-sign-out"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div align="center">
+						<uib-pagination class="pagination-sm"
+							ng-if="vm.totalGroupsCount > vm.groupsPerPage"
+							total-items="vm.totalGroupsCount"
+							items-per-page="vm.groupsPerPage"
+							ng-model="vm.curPageNumber"
+
+							max-size="5"
+							boundary-links="true">
+						</uib-pagination>
+					</div>
+
+					<div align="center">
+						<a class="btn btn-primary btn-lg" ui-sref="app.group.search">
+							Join A New Group</a>
+
+						<a class="btn btn-primary btn-lg" ui-sref="app.group.create">
+							Create A New Group</a>
+					</div> -->
+				</div>
+			</article>
+		</section>
+
+	</div>
+</div>

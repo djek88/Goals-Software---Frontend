@@ -135,7 +135,6 @@ gulp.task('app:minify', gulp.series('app:concat', function(cb) {
 
 gulp.task('serve', function(cb) {
 	bs.init({
-		port: 1337,
 		notify: true,
 		server: {
 			baseDir: destination,
@@ -143,10 +142,10 @@ gulp.task('serve', function(cb) {
 		}
 	}, cb);
 
-	bs.watch(
+	bs.watch([
 		path.join(destination, '/{app,styles}/**/*'),
 		path.join(destination, '/*.*')
-	).on('change', bs.reload);
+	]).on('change', bs.reload);
 });
 
 gulp.task('watch', function(cb) {

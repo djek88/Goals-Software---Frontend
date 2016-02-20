@@ -96,7 +96,7 @@ function groupDetailService($state, $uibModal, layoutLoader, Group) {
 		var membList = prepareOptions(group);
 
 		var options = {
-			title: 'Alive the group!',
+			title: 'Decide the future fate of your group...',
 			content: 'You can delete group',
 			buttons: '[Cancel][Delete group]'
 		};

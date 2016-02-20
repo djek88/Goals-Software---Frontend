@@ -21,8 +21,9 @@ angular
 		'SmartAdmin',
 
 		// App
-		'app.auth',
 		'app.layout',
+		'app.auth',
+		'app.basic',
 		'app.profile',
 		'app.group'
 	])
