@@ -1978,8 +1978,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -2002,6 +2001,39 @@ module.factory(
         "prototype$rejectRequest": {
           url: urlBase + "/Groups/:id/reject-request/:requestId",
           method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$countPassedSessions
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Get count for passed sessions.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "prototype$countPassedSessions": {
+          url: urlBase + "/Groups/:id/passed-sessions-count",
+          method: "GET"
         },
 
         // INTERNAL. Use Session.Group() instead.

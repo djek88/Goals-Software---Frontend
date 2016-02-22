@@ -34,18 +34,14 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
-				sessionsPassed: function($q, $stateParams, Session) {
+				sessionsPassed: function($q, $stateParams, Group) {
 					var deferred = $q.defer();
 
-					Session.find({
-							filter: {
-								where: {
-									_groupId: $stateParams.id,
-									startAt: {lt: new Date()}
-								}
-							}
-						}, function() {
-							deferred.resolve(arguments[0].length);
+					Group.prototype$countPassedSessions({
+							id: $stateParams.id
+						},
+						function() {
+							deferred.resolve(arguments[0].count);
 						},
 						deferred.reject.bind(deferred)
 					);
@@ -180,18 +176,14 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
-				sessionsPassed: function($q, $stateParams, Session) {
+				sessionsPassed: function($q, $stateParams, Group) {
 					var deferred = $q.defer();
 
-					Session.find({
-							filter: {
-								where: {
-									_groupId: $stateParams.id,
-									startAt: {lt: new Date()}
-								}
-							}
-						}, function() {
-							deferred.resolve(arguments[0].length);
+					Group.prototype$countPassedSessions({
+							id: $stateParams.id
+						},
+						function() {
+							deferred.resolve(arguments[0].count);
 						},
 						deferred.reject.bind(deferred)
 					);
