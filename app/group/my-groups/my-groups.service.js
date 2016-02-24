@@ -16,7 +16,7 @@ function myGroupsService($uibModal, Group) {
 	function emailModalOpen(groupId, cb) {
 		$uibModal.open({
 			animation: true,
-			templateUrl: 'app/group/email-modal/email-modal.html',
+			templateUrl: 'app/shared/modal-components/modal.view.html',
 			controller: 'emailModalController',
 			controllerAs: 'vm',
 			resolve: {

@@ -16,45 +16,28 @@ function config($stateProvider) {
 			},
 			views: {
 				'content@app': {
-					templateUrl: 'app/basic/home/home.view.html',
-					controller: 'homeController',
+					templateUrl: 'app/basic/home/basic-home.view.html',
+					controller: 'basicHomeController',
 					controllerAs: 'vm'
 				}
 			},
-			/*resolve: {
-				customer: function($q, $stateParams, Customer) {
+			resolve: {
+				groups: function($q, Group, Customer, loadAppData) {
 					var deferred = $q.defer();
+					var id = Customer.getCachedCurrent()._id;
 
-					Customer.prototype$baseCustomerInfo({
-							id: $stateParams.id
+					Group.find({
+							filter: {
+								where: {or: [{_ownerId: id}, {_memberIds: id}]},
+								include: 'NextSession'
+							}
 						},
 						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
 					return deferred.promise;
-				},
-				scripts: function(lazyScript){
-					return lazyScript.register([]);
-				}
-			}*/
-		})
-		/*.state('app.profile.settings', {
-			url: '/settings',
-			data: {
-				title: 'Settings profile'
-			},
-			views: {
-				'content@app': {
-					templateUrl: 'app/profile/settings/profile-settings.view.html',
-					controller: 'profileSettingsController',
-					controllerAs: 'vm'
-				}
-			},
-			resolve: {
-				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
 				}
 			}
-		})*/;
+		});
 }

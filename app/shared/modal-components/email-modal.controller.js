@@ -1,19 +1,19 @@
 'use strict';
 
 angular
-	.module('app.group')
+	.module('app.shared')
 	.controller('emailModalController', emailModalController);
 
-function emailModalController($http, $uibModalInstance, layoutLoader, Group, modalTitle, groupId, receiverId) {
+function emailModalController($uibModalInstance, layoutLoader, Group, modalTitle, groupId, receiverId) {
 	var vm = this;
 
 	vm.message = '';
 	vm.modalTitle = modalTitle;
 
-	vm.sendEmail = sendEmail;
+	vm.send = send;
 	vm.cancel = $uibModalInstance.dismiss;
 
-	function sendEmail() {
+	function send() {
 		if (!vm.message) return $uibModalInstance.dismiss();
 
 		layoutLoader.on();
@@ -44,6 +44,6 @@ function emailModalController($http, $uibModalInstance, layoutLoader, Group, mod
 
 	function dismiss() {
 		layoutLoader.off();
-		$uibModalInstance.close();
+		$uibModalInstance.dismiss();
 	}
 }

@@ -22,6 +22,7 @@ angular
 
 		// App
 		'app.layout',
+		'app.shared',
 		'app.auth',
 		'app.basic',
 		'app.profile',

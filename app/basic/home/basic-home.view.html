@@ -1,0 +1,60 @@
+<div id="content">
+	<div class="row">
+
+		<section widget-grid id="widget-grid">
+			<article class="col-sm-12">
+				<div style="margin-bottom: 50px;" ng-repeat="group in vm.groups">
+					<div class="well" style="margin: 8px; min-height: 187px;">
+						<div class="col-xs-4">
+							<h4>{{group.name}}</h4>
+						</div>
+
+						<div class="col-xs-8">
+							<div style="margin-top: 10px;">
+								<div ng-if="group._nextSessionId">
+									<div ng-if="!(group.NextSession.startAt | isLessThanMins:10)">
+										Next mastermind on:
+										<div style="width: 50%;">
+											<div style="min-height: 80px; background-color: #FF6624; text-align: center; line-height: 3; font-size: 26px;">
+												{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}
+											</div>
+											<div style="margin-top: 8px;" align="right">
+												<a ng-click="vm.showExcuseModal(group._id)">
+													Make your excuse now</a>
+											</div>
+										</div>
+									</div>
+
+									<div ng-if="(group.NextSession.startAt | isLessThanMins:10)">
+										Mastermind starting in:<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)"></g-timer>
+										<div style="width: 50%;">
+											<a class="btn btn-primary btn-lg" style="min-height: 80px; text-align: center; line-height: 2; font-size: 26px; width: 100%;"
+												ui-sref="app.group.create">
+												Join mastermind now</a>
+											<div style="margin-top: 8px;" align="right">
+												<a ng-click="vm.showExcuseModal(group._id)">
+													Make your excuse now</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div ng-if="!group._nextSessionId" style="width: 50%;">
+									<div style="min-height: 80px; background-color: #FF6624; text-align: center; line-height: 3; font-size: 26px;">
+										Not sheduled
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div ng-if="group._ownerId == vm.curCustomer._id" align="center">
+						<a class="btn btn-primary btn-lg" ui-sref="app.group.create">
+							Sheduled mastermind session</a>
+					</div>
+				</div>
+			</article>
+		</section>
+
+	</div>
+</div>
