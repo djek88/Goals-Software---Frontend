@@ -26,7 +26,11 @@
 									</div>
 
 									<div ng-if="(group.NextSession.startAt | isLessThanMins:10)">
-										Mastermind starting in:<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)"></g-timer>
+										Mastermind starting in:
+										<b style="font-size: 18px;">
+											<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)"></g-timer>
+										</b>
+
 										<div style="width: 50%;">
 											<a class="btn btn-primary btn-lg" style="min-height: 80px; text-align: center; line-height: 2; font-size: 26px; width: 100%;"
 												ui-sref="app.group.create">

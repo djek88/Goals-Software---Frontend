@@ -4,7 +4,7 @@ angular
 	.module('app.profile')
 	.controller('profileSettingsController', profileSettingsController);
 
-function profileSettingsController($scope, $rootScope, layoutLoader, profileSettingsService, loadAppData) {
+function profileSettingsController($scope, $rootScope, notifyAndLeave, layoutLoader, profileSettingsService, loadAppData) {
 	var vm = this;
 
 	var isChange = false;
@@ -26,12 +26,9 @@ function profileSettingsController($scope, $rootScope, layoutLoader, profileSett
 			if (vm.customer.password !== vm.customer.passwordConfirm) {
 				vm.customer.password = vm.customer.passwordConfirm = '';
 
-				return $.smallBox({
+				return notifyAndLeave({
 					title: 'Confirm password',
-					content: 'Don\'t you know your own password?',
-					color: '#C46A69',
-					iconSmall: 'fa fa-thumbs-down bounce animated',
-					timeout: 3000
+					content: 'Don\'t you know your own password?'
 				});
 			}
 		}
@@ -44,12 +41,9 @@ function profileSettingsController($scope, $rootScope, layoutLoader, profileSett
 			vm.customer = profileSettingsService.getCustomer();
 			setTimeout(function() { isChange = false; }, 50);
 
-			$.smallBox({
-				title: 'Ding Dong!',
-				content: 'Saved',
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
+			notifyAndLeave({
+				title: 'Saving info...',
+				content: 'Saved.'
 			});
 		});
 	}
@@ -81,12 +75,9 @@ function profileSettingsController($scope, $rootScope, layoutLoader, profileSett
 			function() {
 				vm.imgData = profileSettingsService.getDefaultImgData();
 
-				$.smallBox({
-					title: 'Ding Dong!',
-					content: 'Saved',
-					color: '#296191',
-					timeout: 3000,
-					icon: 'fa fa-bell swing animated'
+				notifyAndLeave({
+					title: 'Updating picture...',
+					content: 'Updated.'
 				});
 			});
 	}

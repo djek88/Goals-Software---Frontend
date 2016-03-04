@@ -1,13 +1,13 @@
 'use strict';
 
 angular
-	.module('app.basic')
+	.module('app.shared')
 	.directive('gTimer', gTimer);
 
 function gTimer($interval) {
 	return {
 		restrict: 'E',
-		template: '<b style="font-size: 18px;"> {{output}}</b>',
+		template: '<span>{{output}}</span>',
 		scope: {
 			countTo: '@',
 			callback: '&'

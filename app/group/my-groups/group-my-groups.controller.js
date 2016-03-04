@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('myGroupsController', myGroupsController);
 
-function myGroupsController(Customer, layoutLoader, myGroupsService, loadAppData, groups) {
+function myGroupsController(Customer, notifyAndLeave, layoutLoader, myGroupsService, loadAppData, groups) {
 	var vm = this;
 
 	vm.curCustomer = Customer.getCachedCurrent();
@@ -37,12 +37,9 @@ function myGroupsController(Customer, layoutLoader, myGroupsService, loadAppData
 
 				myGroupsService.updateGroups(groupId, vm.groups);
 
-				$.smallBox({
+				notifyAndLeave({
 					title: 'Leave group...',
-					content: 'Leave group success',
-					color: '#296191',
-					timeout: 3000,
-					icon: 'fa fa-bell swing animated'
+					content: 'Leave group success'
 				});
 			});
 		});

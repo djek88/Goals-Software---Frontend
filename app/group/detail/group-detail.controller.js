@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupDetailController', groupDetailController);
 
-function groupDetailController($rootScope, layoutLoader, groupDetailService, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDetailService, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.urlBase = $rootScope.urlBase;
@@ -22,9 +22,9 @@ function groupDetailController($rootScope, layoutLoader, groupDetailService, Cus
 
 	function showEmailModal(memberId) {
 		groupDetailService.emailModalOpen(group._id, memberId, function() {
-			groupDetailService.notifyAndLeavePage({
+			notifyAndLeave({
 				title: 'Send Email...',
-				message: 'Message sent success'
+				content: 'Message sent success'
 			});
 		});
 	}
@@ -48,10 +48,10 @@ function groupDetailController($rootScope, layoutLoader, groupDetailService, Cus
 					layoutLoader.on();
 
 					groupDetailService.deleteGroup(group._id, function() {
-						groupDetailService.notifyAndLeavePage({
+						notifyAndLeave({
 							title: 'Remove group...',
-							message: 'Group removed success!',
-							toState: 'app.group.myGroups'
+							content: 'Group removed success!',
+							leave: {to: 'app.group.myGroups'}
 						});
 					});
 					break;
@@ -60,10 +60,10 @@ function groupDetailController($rootScope, layoutLoader, groupDetailService, Cus
 					layoutLoader.on();
 
 					groupDetailService.changeOwner(group._id, newOwnerId, function() {
-						groupDetailService.notifyAndLeavePage({
+						notifyAndLeave({
 							title: 'Change owner...',
-							message: 'Owner changed success!',
-							toState: 'app.group.myGroups'
+							content: 'Owner changed success!',
+							leave: {to: 'app.group.myGroups'}
 						});
 					});
 					break;
@@ -79,9 +79,9 @@ function groupDetailController($rootScope, layoutLoader, groupDetailService, Cus
 				layoutLoader.off();
 				refreshData(freshGroup);
 
-				groupDetailService.notifyAndLeavePage({
+				notifyAndLeave({
 					title: 'Remove member...',
-					message: 'Group member removed success!'
+					content: 'Group member removed success!'
 				});
 			});
 		});

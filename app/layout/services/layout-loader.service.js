@@ -5,22 +5,16 @@ angular
 	.factory('layoutLoader', layoutLoader);
 
 function layoutLoader($rootScope) {
-	$rootScope.$on('$stateChangeStart', onStateChangeStart);
-	$rootScope.$on('$stateChangeSuccess', onStateChangeSuccess);
-
 	var service = {
 		on: on,
 		off: off
 	};
+
+	$rootScope.$on('$stateChangeStart', service.on);
+	$rootScope.$on('$stateChangeSuccess', service.off);
+	$rootScope.$on('$stateChangeError', service.off);
+
 	return service;
-
-	function onStateChangeStart(event, toState, toParams, fromState, fromParams) {
-		service.on();
-	}
-
-	function onStateChangeSuccess(event, toState, toParams, fromState, fromParams) {
-		service.off();
-	}
 
 	function on() {
 		$rootScope.showLoader = true;

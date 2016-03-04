@@ -14,8 +14,7 @@ function groupDetailService($state, $uibModal, layoutLoader, Group) {
 		deleteGroup: deleteGroup,
 		removeMemberFromGroup: removeMemberFromGroup,
 		deleteOwnerBox: deleteOwnerBox,
-		deleteMemberBox: deleteMemberBox,
-		notifyAndLeavePage: notifyAndLeavePage
+		deleteMemberBox: deleteMemberBox
 	};
 	return service;
 
@@ -144,18 +143,6 @@ function groupDetailService($state, $uibModal, layoutLoader, Group) {
 
 			if (initialsSelectedMember === initials) return members[i]._id;
 		}
-	}
-
-	function notifyAndLeavePage(options) {
-		$.smallBox({
-			title: options.title || '',
-			content: options.message || '',
-			color: '#296191',
-			timeout: 3000,
-			icon: 'fa fa-bell swing animated'
-		});
-
-		if (options.toState) $state.go(options.toState);
 	}
 
 	function formatMastermindSession(sessionConf, freqTypes, dayTypes, timeTypes) {

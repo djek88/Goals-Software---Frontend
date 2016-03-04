@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-	.module('app.basic')
+	.module('app.shared')
 	.filter('isLessThanMins', isLessThanMins);
 
 function isLessThanMins() {

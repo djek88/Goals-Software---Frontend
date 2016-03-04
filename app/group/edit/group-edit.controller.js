@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupEditController', groupEditController);
 
-function groupEditController($scope, $state, layoutLoader, groupEditService, group, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupEditController($scope, notifyAndLeave, layoutLoader, groupEditService, group, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	var isChange = false;
@@ -32,12 +32,9 @@ function groupEditController($scope, $state, layoutLoader, groupEditService, gro
 			vm.group = freshGroup;
 			isChange = false;
 
-			$.smallBox({
+			notifyAndLeave({
 				title: 'Update group...',
-				content: 'Group updated successfully!',
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
+				content: 'Group updated successfully!'
 			});
 		});
 	}

@@ -861,6 +861,98 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Session.Facilitator() instead.
+        "::get::Session::Facilitator": {
+          url: urlBase + "/Sessions/:id/Facilitator",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Session.Participants.findById() instead.
+        "::findById::Session::Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Session.Participants.destroyById() instead.
+        "::destroyById::Session::Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Session.Participants.updateById() instead.
+        "::updateById::Session::Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Session.Participants.link() instead.
+        "::link::Session::Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Session.Participants.unlink() instead.
+        "::unlink::Session::Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Session.Participants.exists() instead.
+        "::exists::Session::Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use Session.Participants() instead.
+        "::get::Session::Participants": {
+          isArray: true,
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Session.Participants.create() instead.
+        "::create::Session::Participants": {
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Session.Participants.createMany() instead.
+        "::createMany::Session::Participants": {
+          isArray: true,
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Session.Participants.destroyAll() instead.
+        "::delete::Session::Participants": {
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Session.Participants.count() instead.
+        "::count::Session::Participants": {
+          url: urlBase + "/Sessions/:id/Participants/count",
+          method: "GET"
+        },
+
         // INTERNAL. Use Goal.Approvers.findById() instead.
         "::findById::Goal::Approvers": {
           params: {
@@ -2523,6 +2615,91 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Session.Facilitator() instead.
+        "prototype$__get__Facilitator": {
+          url: urlBase + "/Sessions/:id/Facilitator",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Session.Participants.findById() instead.
+        "prototype$__findById__Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Session.Participants.destroyById() instead.
+        "prototype$__destroyById__Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Session.Participants.updateById() instead.
+        "prototype$__updateById__Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Session.Participants.link() instead.
+        "prototype$__link__Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Session.Participants.unlink() instead.
+        "prototype$__unlink__Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Session.Participants.exists() instead.
+        "prototype$__exists__Participants": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Sessions/:id/Participants/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use Session.Participants() instead.
+        "prototype$__get__Participants": {
+          isArray: true,
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Session.Participants.create() instead.
+        "prototype$__create__Participants": {
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Session.Participants.destroyAll() instead.
+        "prototype$__delete__Participants": {
+          url: urlBase + "/Sessions/:id/Participants",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Session.Participants.count() instead.
+        "prototype$__count__Participants": {
+          url: urlBase + "/Sessions/:id/Participants/count",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name backendApi.Session#create
@@ -3132,6 +3309,452 @@ module.factory(
         R.Group = function() {
           var TargetResource = $injector.get("Group");
           var action = TargetResource["::get::Session::Group"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session#Facilitator
+         * @methodOf backendApi.Session
+         *
+         * @description
+         *
+         * Fetches belongsTo relation Facilitator.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Facilitator = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::get::Session::Facilitator"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name backendApi.Session.Participants
+     * @header backendApi.Session.Participants
+     * @object
+     * @description
+     *
+     * The object `Session.Participants` groups methods
+     * manipulating `Customer` instances related to `Session`.
+     *
+     * Call {@link backendApi.Session#Participants Session.Participants()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session#Participants
+         * @methodOf backendApi.Session
+         *
+         * @description
+         *
+         * Queries Participants of Session.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::get::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#count
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Counts Participants of Session.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.Participants.count = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::count::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#create
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Creates a new instance in Participants of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants.create = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::create::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#createMany
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Creates a new instance in Participants of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants.createMany = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::createMany::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#destroyAll
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Deletes all Participants of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.Participants.destroyAll = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::delete::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#destroyById
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Delete a related item by id for Participants.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Participants
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.Participants.destroyById = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::destroyById::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#exists
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Check the existence of Participants relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Participants
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants.exists = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::exists::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#findById
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Find a related item by id for Participants.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Participants
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants.findById = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::findById::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#link
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Add a related item by id for Participants.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Participants
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants.link = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::link::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#unlink
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Remove the Participants relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Participants
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.Participants.unlink = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::unlink::Session::Participants"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Session.Participants#updateById
+         * @methodOf backendApi.Session.Participants
+         *
+         * @description
+         *
+         * Update a related item by id for Participants.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Participants
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Customer` object.)
+         * </em>
+         */
+        R.Participants.updateById = function() {
+          var TargetResource = $injector.get("Customer");
+          var action = TargetResource["::updateById::Session::Participants"];
           return action.apply(R, arguments);
         };
 

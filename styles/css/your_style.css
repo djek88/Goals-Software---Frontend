@@ -133,3 +133,47 @@ body.container {
 	margin-top: -20px;
 	margin-left: -20px;
 }
+
+.col-offset-one-and-half {
+	margin-left: 138px;
+}
+
+.session-round-desc {
+	font-size: 20px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	margin-left: 50px;
+}
+
+.session-avatar {
+	width: 252px;
+	height:252px;
+}
+
+.session-avatar-title {
+	font-size: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 0px;
+}
+
+.session-next-info {
+	font-size: 15px;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.normal-timer {
+	width: 252px;
+	height:252px;
+	background-color: #FFA834;
+	text-align: center;
+}
+
+.expired-timer {
+	width: 252px;
+	height:252px;
+	background-color: #FF2437;
+	text-align: center;
+}

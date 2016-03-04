@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupJoinRequestsController', groupJoinRequestsController);
 
-function groupJoinRequestsController(layoutLoader, groupJoinRequestsService, activeRequests) {
+function groupJoinRequestsController(notifyAndLeave, layoutLoader, groupJoinRequestsService, activeRequests) {
 	var vm = this;
 
 	vm.requests = activeRequests;
@@ -24,12 +24,9 @@ function groupJoinRequestsController(layoutLoader, groupJoinRequestsService, act
 
 			var content = 'Request was ' + (approve ? 'approved' : 'rejected') + ' successfully!';
 
-			$.smallBox({
+			notifyAndLeave({
 				title: 'Send responce...',
-				content: content,
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
+				content: content
 			});
 		});
 	}

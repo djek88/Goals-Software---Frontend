@@ -26,7 +26,8 @@ angular
 		'app.auth',
 		'app.basic',
 		'app.profile',
-		'app.group'
+		'app.group',
+		'app.session'
 	])
 	.config(config)
 	.constant('APP_CONFIG', window.appConfig)
@@ -43,7 +44,6 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	LoopBackResourceProvider.setUrlBase(window.appConfig.apiRootUrl);
 
 	$provide.factory('ErrorHttpInterceptor', function($q, $injector, LoopBackAuth, layoutLoader) {
-		var errorCounter = 0;
 
 		function notifyError(rejection){
 			console.log('app.js rejection', rejection);
@@ -53,12 +53,11 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 				data = data.error.message;
 			}
 
-			$.bigBox({
+			$injector.get('notifyAndLeave')({
+				box: 'bigBox',
 				title: rejection.status + ' ' + rejection.statusText,
 				content: data,
-				color: '#C46A69',
-				icon: 'fa fa-warning shake animated',
-				number: ++errorCounter,
+				isError: true,
 				timeout: 6000
 			});
 		}
@@ -93,6 +92,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 
 function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
+	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
 	$rootScope.logout = logout;

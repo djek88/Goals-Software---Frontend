@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupJoinController', groupJoinController);
 
-function groupJoinController($state, $stateParams, Customer, layoutLoader, groupJoinService, loadAppData) {
+function groupJoinController($state, $stateParams, Customer, notifyAndLeave, layoutLoader, groupJoinService, loadAppData) {
 	var vm = this;
 
 	vm.requestMessage = groupJoinService.defaultMessage(Customer.getCachedCurrent());
@@ -18,14 +18,10 @@ function groupJoinController($state, $stateParams, Customer, layoutLoader, group
 		groupJoinService.sendRequest(groupId, vm.requestMessage, function() {
 			layoutLoader.off();
 
-			$state.go('app.group.detail', {id: groupId});
-
-			$.smallBox({
+			notifyAndLeave({
 				title: 'Send request...',
 				content: 'Request was sent successfully!',
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
+				leave: {to: 'app.group.detail', params: {id: groupId}}
 			});
 		});
 	}

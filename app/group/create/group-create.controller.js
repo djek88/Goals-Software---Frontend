@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupCreateController', groupCreateController);
 
-function groupCreateController($state, layoutLoader, groupCreateService, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupCreateController(notifyAndLeave, layoutLoader, groupCreateService, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.groupTypes = groupTypes;
@@ -23,14 +23,10 @@ function groupCreateController($state, layoutLoader, groupCreateService, groupTy
 		groupCreateService.createGroup(vm.group, function(newGroup) {
 			layoutLoader.off();
 
-			$state.go('app.group.detail', {id: newGroup._id});
-
-			$.smallBox({
+			notifyAndLeave({
 				title: 'Create group...',
 				content: 'Group created successfully!',
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
+				leave: {to: 'app.group.detail', params: {id: newGroup._id}}
 			});
 		});
 	}
