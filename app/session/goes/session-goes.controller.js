@@ -10,6 +10,7 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 	layoutLoader.on();
 
 	vm.isFacilitator = false;
+	vm.isPause = false;
 	vm.sess = {
 		state: null,
 		timer: -1,
@@ -36,7 +37,9 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 	}
 
 	function pauseResume() {
-		socket.emit('goesSessionRoom:pauseResume', group._id);
+		socket.emit('goesSessionRoom:pauseResume', group._id, function() {
+			vm.isPause = !vm.isPause;
+		});
 	}
 
 	function onJoin(err, facilitatorId) {
@@ -55,6 +58,7 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 
 	function onStateUpdate(err, data) {
 		layoutLoader.off();
+		vm.isPause = false;
 
 		if (err || !data) {
 			socket.disconnect();

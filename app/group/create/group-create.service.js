@@ -28,7 +28,7 @@ function groupCreateService(Group) {
 				time: Object.keys(sessionTimeTypes)[0],
 				timeZone: jstz.determine().name(),
 				frequencyType: +Object.keys(sessionFrequencyTypes)[0],
-				roudLength: [120, 180, 90, 120]
+				roundLength: [120, 180, 90, 120]
 			}
 		};
 	}

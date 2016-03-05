@@ -13,7 +13,7 @@ function basicHomeService($uibModal) {
 	function excuseModalOpen(groupId, cb) {
 		$uibModal.open({
 			animation: true,
-			templateUrl: 'app/shared/modal-components/modal.view.html',
+			templateUrl: 'app/shared/modal-components/shared-modal.view.html',
 			controller: 'excuseModalController',
 			controllerAs: 'vm',
 			resolve: {

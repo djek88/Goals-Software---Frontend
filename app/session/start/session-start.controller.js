@@ -7,7 +7,7 @@ angular
 function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sessionStartService, loadAppData, group, socket) {
 	var vm = this;
 
-	group.NextSession.startAt = '2016-02-27T13:24:20.000Z';
+	//group.NextSession.startAt = '2016-03-05T14:07:00.000Z';
 	vm.isGroupOwner = Customer.getCachedCurrent()._id === group._ownerId;
 	vm.isStarted = false;
 	vm.sessionStartAt = group.NextSession.startAt;
