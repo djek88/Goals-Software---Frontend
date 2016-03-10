@@ -105,8 +105,12 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 					var id = Customer.getCachedCurrent()._id;
 
-					Group.find(
-						{filter: {where: {or: [{_ownerId: id}, {_memberIds: id}]}}},
+					Group.find({
+							filter: {
+								where: {or: [{_ownerId: id}, {_memberIds: id}]},
+								include: 'NextSession'
+							}
+						},
 						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
@@ -258,6 +262,38 @@ function config($stateProvider) {
 							id: $stateParams.id
 						},
 						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				}
+			}
+		})
+		.state('app.group.sessionExcuses', {
+			url: '/:id/next-session-excuses',
+			data: {
+				title: 'Next session excuses'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/session-excuses/group-session-excuses.view.html',
+					controller: 'groupSessionExcusesController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				group: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.findById({
+							id: $stateParams.id,
+							filter: {include: ['Members', 'Owner', 'NextSession']}
+						},
+						function(group) {
+							if (!group._nextSessionId) return deferred.reject();
+
+							deferred.resolve(group);
+						},
 						deferred.reject.bind(deferred)
 					);
 

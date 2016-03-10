@@ -28,7 +28,7 @@ function excuseModalController($uibModalInstance, layoutLoader, Group, modalTitl
 
 	function close() {
 		layoutLoader.off();
-		$uibModalInstance.close();
+		$uibModalInstance.close(arguments[0]);
 	}
 
 	function dismiss() {

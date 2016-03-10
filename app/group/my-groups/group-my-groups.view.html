@@ -11,26 +11,31 @@
 							</div>
 							<div class="col-xs-5">
 								<div class="pull-right">
-									<a class="btn btn-default"
+									<a class="btn btn-default" data-tooltip="Edit group"
 										ng-if="group._ownerId == vm.curCustomer._id"
 										ui-sref="app.group.edit({id: group._id})">
 										<i class="fa fa-pencil"></i></a>
 
-									<a class="btn btn-default"
+									<a class="btn btn-default" data-tooltip="Join requests"
 										ng-if="group._ownerId == vm.curCustomer._id"
 										ui-sref="app.group.joinRequests({id: group._id})">
-										<i class="fa fa-send"></i></a>
+										<i class="fa fa-gavel"></i></a>
 
-									<a class="btn btn-default"
+									<a class="btn btn-default" data-tooltip="Members excuses"
+										ng-if="group._ownerId == vm.curCustomer._id"
+										ui-sref="app.group.sessionExcuses({id: group._id})">
+										<i class="fa fa-frown-o"></i></a>
+
+									<a class="btn btn-default" data-tooltip="Review group"
 										ui-sref="app.group.detail({id: group._id})">
 										<i class="fa fa-eye"></i></a>
 
-									<a class="btn btn-default"
+									<a class="btn btn-default" data-tooltip="Send message"
 										ng-if="group._memberIds.length"
 										ng-click="vm.showEmailModal(group._id)">
 										<i class="fa fa-envelope"></i></a>
 
-									<a class="btn btn-default"
+									<a class="btn btn-default" data-tooltip="Leave group"
 										ng-if="group._ownerId != vm.curCustomer._id"
 										ng-click="vm.leaveGroup(group._id)">
 										<i class="fa fa-sign-out"></i></a>

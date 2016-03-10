@@ -2,9 +2,9 @@
 
 angular
 	.module('app.group')
-	.factory('myGroupsService', myGroupsService);
+	.factory('groupMyGroupsService', groupMyGroupsService);
 
-function myGroupsService($uibModal, Group) {
+function groupMyGroupsService($uibModal, Group) {
 	var service = {
 		emailModalOpen: emailModalOpen,
 		leaveGroupBox: leaveGroupBox,

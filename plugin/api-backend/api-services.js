@@ -2138,8 +2138,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -2157,10 +2156,83 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * This method returns no data.
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
          */
         "prototype$provideExcuse": {
           url: urlBase + "/Groups/:id/provide-excuse",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$activeExcuses
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Get active excuses for the next masterind session.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$activeExcuses": {
+          url: urlBase + "/Groups/:id/active-excuses",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$rejectExcuse
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Reject excuse for the next masterind session.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `excuseId` – `{string}` - Excuse id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "prototype$rejectExcuse": {
+          url: urlBase + "/Groups/:id/reject-excuse/:excuseId",
           method: "POST"
         },
 

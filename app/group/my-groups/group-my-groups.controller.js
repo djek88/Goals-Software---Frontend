@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('myGroupsController', myGroupsController);
 
-function myGroupsController(Customer, notifyAndLeave, layoutLoader, myGroupsService, loadAppData, groups) {
+function myGroupsController(Customer, notifyAndLeave, layoutLoader, groupMyGroupsService, loadAppData, groups) {
 	var vm = this;
 
 	vm.curCustomer = Customer.getCachedCurrent();
@@ -17,7 +17,7 @@ function myGroupsController(Customer, notifyAndLeave, layoutLoader, myGroupsServ
 	vm.leaveGroup = leaveGroup;
 
 	function showEmailModal(groupId) {
-		myGroupsService.emailModalOpen(groupId, function() {
+		groupMyGroupsService.emailModalOpen(groupId, function() {
 			$.smallBox({
 				title: 'Send email...',
 				content: 'Message sent success',
@@ -29,13 +29,13 @@ function myGroupsController(Customer, notifyAndLeave, layoutLoader, myGroupsServ
 	}
 
 	function leaveGroup(groupId) {
-		myGroupsService.leaveGroupBox(function() {
+		groupMyGroupsService.leaveGroupBox(function() {
 			layoutLoader.on();
 
-			myGroupsService.leaveGroup(groupId, vm.curCustomer._id, function() {
+			groupMyGroupsService.leaveGroup(groupId, vm.curCustomer._id, function() {
 				layoutLoader.off();
 
-				myGroupsService.updateGroups(groupId, vm.groups);
+				groupMyGroupsService.updateGroups(groupId, vm.groups);
 
 				notifyAndLeave({
 					title: 'Leave group...',

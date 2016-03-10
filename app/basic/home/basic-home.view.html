@@ -15,11 +15,12 @@
 									<div ng-if="!(group.NextSession.startAt | isLessThanMins:10)">
 										Next mastermind on:
 										<div style="width: 50%;">
-											<div style="min-height: 80px; background-color: #FF6624; text-align: center; line-height: 3; font-size: 26px;">
+											<div class="next-session-startAt-block">
 												{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}
 											</div>
 											<div style="margin-top: 8px;" align="right">
-												<a ng-click="vm.showExcuseModal(group._id)">
+												<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
+													ng-click="vm.showExcuseModal(group._id)">
 													Make your excuse now</a>
 											</div>
 										</div>
@@ -32,11 +33,12 @@
 										</b>
 
 										<div style="width: 50%;">
-											<a class="btn btn-primary btn-lg" style="min-height: 80px; text-align: center; line-height: 2; font-size: 26px; width: 100%;"
+											<a class="btn btn-primary btn-lg join-session-butn"
 												ui-sref="app.session.start({id: group._id})">
 												Join mastermind now</a>
 											<div style="margin-top: 8px;" align="right">
-												<a ng-click="vm.showExcuseModal(group._id)">
+												<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
+													ng-click="vm.showExcuseModal(group._id)">
 													Make your excuse now</a>
 											</div>
 										</div>
@@ -44,7 +46,7 @@
 								</div>
 
 								<div ng-if="!group._nextSessionId" style="width: 50%;">
-									<div style="min-height: 80px; background-color: #FF6624; text-align: center; line-height: 3; font-size: 26px;">
+									<div class="next-session-startAt-block">
 										Not sheduled
 									</div>
 								</div>
