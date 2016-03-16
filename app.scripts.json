@@ -10,6 +10,7 @@
 		"angular-ui-router",
 		"angular-resource",
 		"angular-bootstrap",
+		"angular-cookies",
 		"restangular",
 		"fastclick",
 		"moment",
@@ -39,6 +40,7 @@
 		"angular-sanitize": "plugin/angular-sanitize/angular-sanitize.min.js",
 		"angular-animate": "plugin/angular-animate/angular-animate.min.js",
 		"angular-ui-router": "plugin/angular-ui-router/release/angular-ui-router.min.js",
+		"angular-cookies": "plugin/angular-cookies/angular-cookies.min.js",
 
 		"angular-google-maps": "plugin/angular-google-maps/dist/angular-google-maps.2.0.5.min.js",
 

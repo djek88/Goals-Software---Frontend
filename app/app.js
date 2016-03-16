@@ -16,6 +16,7 @@ angular
 		'ui.router',
 		'ui.bootstrap',
 		'backendApi',
+		'ngCookies',
 
 		// Smartadmin Angular Common Module
 		'SmartAdmin',
@@ -55,7 +56,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 
 			$injector.get('notifyAndLeave')({
 				box: 'bigBox',
-				title: rejection.status + ' ' + rejection.statusText,
+				title: rejection.status,
 				content: data,
 				isError: true,
 				timeout: 6000
@@ -78,7 +79,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 					LoopBackAuth.clearUser();
 					LoopBackAuth.clearStorage();
 
-					$injector.get('$state').go('login');
+					window.location.href = 'http://themastermind.nz/members';
 				}
 
 				notifyError(rejection);
@@ -90,7 +91,10 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
-function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
+function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, Customer, LoopBackAuth) {
+	//$cookies.put('global_themastermind.nz_member_id', 5);
+	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
+
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.$state = $state;
@@ -110,13 +114,23 @@ function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
 
 	// UnAuthenticated redirect to login page
 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-		if (toState.name.substr(0, 3) === 'app' && !Customer.isAuthenticated()) {
-			console.log('UnAuthenticated: redirect to login.');
-			$state.nextAfterLogin = toState.name;
-			$state.nextAfterLoginParams = fromParams
+		if (toState.name.substr(0, 3) === 'app') {
+			if (!checkCookies()) {
+				event.preventDefault();
 
-			$state.go('login');
-			event.preventDefault();
+				LoopBackAuth.clearUser();
+				LoopBackAuth.clearStorage();
+
+				window.location.href = 'http://themastermind.nz/members';
+			} else if (!Customer.isAuthenticated()) {
+				event.preventDefault();
+
+				Customer.login({rememberMe: true}, {
+					_sessionId: $cookies.get('global_themastermind.nz_session_id')
+				}, function() {
+					$state.go(toState, toParams);
+				});
+			}
 		}
 	});
 
@@ -133,7 +147,12 @@ function run($rootScope, $state, $stateParams, Language, Customer, APP_CONFIG) {
 		console.log('Client logout...');
 
 		Customer.logout(null, null, function() {
-			$state.go('login');
+			window.location.href = 'http://themastermind.nz/members';
 		});
+	}
+
+	function checkCookies() {
+		return $cookies.get('global_themastermind.nz_member_id') &&
+			$cookies.get('global_themastermind.nz_session_id');
 	}
 }

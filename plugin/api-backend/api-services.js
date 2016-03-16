@@ -193,83 +193,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Customer#create
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "create": {
-          url: urlBase + "/Customers",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#createMany
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Create a new instance of the model and persist it into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "createMany": {
-          isArray: true,
-          url: urlBase + "/Customers",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Customer#exists
          * @methodOf backendApi.Customer
          *
@@ -792,8 +715,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - User id
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -953,95 +875,9 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Goal.Approvers.findById() instead.
-        "::findById::Goal::Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Goal.Approvers.destroyById() instead.
-        "::destroyById::Goal::Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Goal.Approvers.updateById() instead.
-        "::updateById::Goal::Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Goal.Approvers.link() instead.
-        "::link::Goal::Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/rel/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Goal.Approvers.unlink() instead.
-        "::unlink::Goal::Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/rel/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Goal.Approvers.exists() instead.
-        "::exists::Goal::Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/rel/:fk",
-          method: "HEAD"
-        },
-
         // INTERNAL. Use Goal.Owner() instead.
         "::get::Goal::Owner": {
           url: urlBase + "/Goals/:id/Owner",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Goal.Approvers() instead.
-        "::get::Goal::Approvers": {
-          isArray: true,
-          url: urlBase + "/Goals/:id/Approvers",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Goal.Approvers.create() instead.
-        "::create::Goal::Approvers": {
-          url: urlBase + "/Goals/:id/Approvers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Goal.Approvers.createMany() instead.
-        "::createMany::Goal::Approvers": {
-          isArray: true,
-          url: urlBase + "/Goals/:id/Approvers",
-          method: "POST"
-        },
-
-        // INTERNAL. Use Goal.Approvers.destroyAll() instead.
-        "::delete::Goal::Approvers": {
-          url: urlBase + "/Goals/:id/Approvers",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Goal.Approvers.count() instead.
-        "::count::Goal::Approvers": {
-          url: urlBase + "/Goals/:id/Approvers/count",
           method: "GET"
         },
 
@@ -3858,60 +3694,6 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Goal.Approvers.findById() instead.
-        "prototype$__findById__Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/:fk",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Goal.Approvers.destroyById() instead.
-        "prototype$__destroyById__Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Goal.Approvers.updateById() instead.
-        "prototype$__updateById__Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Goal.Approvers.link() instead.
-        "prototype$__link__Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/rel/:fk",
-          method: "PUT"
-        },
-
-        // INTERNAL. Use Goal.Approvers.unlink() instead.
-        "prototype$__unlink__Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/rel/:fk",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Goal.Approvers.exists() instead.
-        "prototype$__exists__Approvers": {
-          params: {
-          'fk': '@fk'
-          },
-          url: urlBase + "/Goals/:id/Approvers/rel/:fk",
-          method: "HEAD"
-        },
-
         // INTERNAL. Use Goal.Owner() instead.
         "prototype$__get__Owner": {
           url: urlBase + "/Goals/:id/Owner",
@@ -3924,28 +3706,110 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Goal.Approvers() instead.
-        "prototype$__get__Approvers": {
+        /**
+         * @ngdoc method
+         * @name backendApi.Goal#prototype$__get__Votes
+         * @methodOf backendApi.Goal
+         *
+         * @description
+         *
+         * Queries Votes of Goal.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Goal` object.)
+         * </em>
+         */
+        "prototype$__get__Votes": {
           isArray: true,
-          url: urlBase + "/Goals/:id/Approvers",
+          url: urlBase + "/Goals/:id/Votes",
           method: "GET"
         },
 
-        // INTERNAL. Use Goal.Approvers.create() instead.
-        "prototype$__create__Approvers": {
-          url: urlBase + "/Goals/:id/Approvers",
+        /**
+         * @ngdoc method
+         * @name backendApi.Goal#prototype$__create__Votes
+         * @methodOf backendApi.Goal
+         *
+         * @description
+         *
+         * Creates a new instance in Votes of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Goal` object.)
+         * </em>
+         */
+        "prototype$__create__Votes": {
+          url: urlBase + "/Goals/:id/Votes",
           method: "POST"
         },
 
-        // INTERNAL. Use Goal.Approvers.destroyAll() instead.
-        "prototype$__delete__Approvers": {
-          url: urlBase + "/Goals/:id/Approvers",
-          method: "DELETE"
-        },
-
-        // INTERNAL. Use Goal.Approvers.count() instead.
-        "prototype$__count__Approvers": {
-          url: urlBase + "/Goals/:id/Approvers/count",
+        /**
+         * @ngdoc method
+         * @name backendApi.Goal#prototype$__count__Votes
+         * @methodOf backendApi.Goal
+         *
+         * @description
+         *
+         * Counts Votes of Goal.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "prototype$__count__Votes": {
+          url: urlBase + "/Goals/:id/Votes/count",
           method: "GET"
         },
 
@@ -4024,44 +3888,6 @@ module.factory(
           isArray: true,
           url: urlBase + "/Goals",
           method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#upsert
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        "upsert": {
-          url: urlBase + "/Goals",
-          method: "PUT"
         },
 
         /**
@@ -4234,39 +4060,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Goal#deleteById
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        "deleteById": {
-          url: urlBase + "/Goals/:id",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Goal#count
          * @methodOf backendApi.Goal
          *
@@ -4377,41 +4170,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Goal#updateOrCreate
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Update an existing model instance or insert a new one into the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        R["updateOrCreate"] = R["upsert"];
-
-        /**
-         * @ngdoc method
          * @name backendApi.Goal#update
          * @methodOf backendApi.Goal
          *
@@ -4441,66 +4199,6 @@ module.factory(
          */
         R["update"] = R["updateAll"];
 
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#destroyById
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        R["destroyById"] = R["deleteById"];
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#removeById
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Delete a model instance by id from the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        R["removeById"] = R["deleteById"];
-
 
     /**
     * @ngdoc property
@@ -4512,416 +4210,6 @@ module.factory(
     */
     R.modelName = "Goal";
 
-    /**
-     * @ngdoc object
-     * @name backendApi.Goal.Approvers
-     * @header backendApi.Goal.Approvers
-     * @object
-     * @description
-     *
-     * The object `Goal.Approvers` groups methods
-     * manipulating `Customer` instances related to `Goal`.
-     *
-     * Call {@link backendApi.Goal#Approvers Goal.Approvers()}
-     * to query all related instances.
-     */
-
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#Approvers
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Queries Approvers of Goal.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::get::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#count
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Counts Approvers of Goal.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `where` – `{object=}` - Criteria to match model instances
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `count` – `{number=}` - 
-         */
-        R.Approvers.count = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::count::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#create
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Creates a new instance in Approvers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers.create = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::create::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#createMany
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Creates a new instance in Approvers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers.createMany = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::createMany::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#destroyAll
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Deletes all Approvers of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.Approvers.destroyAll = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::delete::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#destroyById
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Delete a related item by id for Approvers.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Approvers
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.Approvers.destroyById = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::destroyById::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#exists
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Check the existence of Approvers relation to an item by id.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Approvers
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers.exists = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::exists::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#findById
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Find a related item by id for Approvers.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Approvers
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers.findById = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::findById::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#link
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Add a related item by id for Approvers.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Approvers
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method does not accept any data. Supply an empty object.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers.link = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::link::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#unlink
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Remove the Approvers relation to an item by id.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Approvers
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        R.Approvers.unlink = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::unlink::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal.Approvers#updateById
-         * @methodOf backendApi.Goal.Approvers
-         *
-         * @description
-         *
-         * Update a related item by id for Approvers.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `fk` – `{*}` - Foreign key for Approvers
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Approvers.updateById = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::updateById::Goal::Approvers"];
-          return action.apply(R, arguments);
-        };
 
         /**
          * @ngdoc method
