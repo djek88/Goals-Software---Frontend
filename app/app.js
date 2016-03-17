@@ -24,7 +24,6 @@ angular
 		// App
 		'app.layout',
 		'app.shared',
-		'app.auth',
 		'app.basic',
 		'app.profile',
 		'app.group',
@@ -80,10 +79,10 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 					LoopBackAuth.clearStorage();
 
 					window.location.href = 'http://themastermind.nz/members';
+				} else {
+					notifyError(rejection);
+					return $q.reject(rejection);
 				}
-
-				notifyError(rejection);
-				return $q.reject(rejection);
 			}
 		};
 	});
@@ -125,9 +124,10 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 			} else if (!Customer.isAuthenticated()) {
 				event.preventDefault();
 
-				Customer.login({rememberMe: true}, {
+				Customer.login({rememberMe: false}, {
 					_sessionId: $cookies.get('global_themastermind.nz_session_id')
 				}, function() {
+					console.log('Client signin success.');
 					$state.go(toState, toParams);
 				});
 			}
