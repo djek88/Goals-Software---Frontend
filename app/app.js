@@ -93,8 +93,8 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, Customer, LoopBackAuth) {
 	//editableOptions.theme = 'bs3';
 
-	$cookies.put('global_themastermind.nz_member_id', 5);
-	$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
+	//$cookies.put('global_themastermind.nz_member_id', 5);
+	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
 
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
