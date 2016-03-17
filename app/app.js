@@ -100,7 +100,6 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.logout = logout;
 
-
 	// Set current language
 	$rootScope.lang = {};
 	$rootScope.getWord = getWord;
@@ -111,23 +110,21 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 		});
 	});
 
-	// UnAuthenticated redirect to login page
-	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
 			if (!haveFHQcookies()) {
-				//event.preventDefault();
+				event.preventDefault();
 
 				LoopBackAuth.clearUser();
 				LoopBackAuth.clearStorage();
 
 				window.location.href = 'http://themastermind.nz/members';
 			} else if (!Customer.isAuthenticated()) {
-				//event.preventDefault();
+				event.preventDefault();
 
 				Customer.login({rememberMe: false}, {
 					_sessionId: $cookies.get('global_themastermind.nz_session_id')
 				}, function() {
-					console.log('Client signin success.');
 					$state.go(toState, toParams);
 				});
 			}
@@ -152,7 +149,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 	}
 
 	function haveFHQcookies() {
-		return $cookies.get('global_themastermind.nz_member_id') &&
+		return $cookies.get('global_themastermind.nz_member_id')&&
 			$cookies.get('global_themastermind.nz_session_id');
 	}
 }

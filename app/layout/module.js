@@ -33,7 +33,13 @@ function config($stateProvider, $urlRouterProvider) {
 					]);
 				}
 			}
+		})
+		.state('wait', {
+			url: '/wait',
+			onEnter: function($state) {
+				$state.go('app.home');
+			}
 		});
 
-	$urlRouterProvider.otherwise('/home');
+	$urlRouterProvider.otherwise('/wait');
 }
