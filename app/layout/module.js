@@ -35,5 +35,5 @@ function config($stateProvider, $urlRouterProvider) {
 			}
 		});
 
-	$urlRouterProvider.otherwise('/login');
+	$urlRouterProvider.otherwise('/home');
 }

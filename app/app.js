@@ -96,9 +96,10 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
-	$rootScope.$state = $state;
-	$rootScope.$stateParams = $stateParams;
 	$rootScope.logout = logout;
+
+	// $rootScope.$state = $state;
+	// $rootScope.$stateParams = $stateParams;
 	// editableOptions.theme = 'bs3';
 
 	// Set current language
@@ -113,9 +114,12 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 
 	// UnAuthenticated redirect to login page
 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+
 		if (toState.name.substr(0, 3) === 'app') {
 			if (!checkCookies()) {
 				event.preventDefault();
+
+				alert('dont have cookies');
 
 				LoopBackAuth.clearUser();
 				LoopBackAuth.clearStorage();
@@ -123,6 +127,8 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 				window.location.href = 'http://themastermind.nz/members';
 			} else if (!Customer.isAuthenticated()) {
 				event.preventDefault();
+
+				alert('dont have auth in local storage');
 
 				Customer.login({rememberMe: false}, {
 					_sessionId: $cookies.get('global_themastermind.nz_session_id')
