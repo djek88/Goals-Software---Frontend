@@ -115,12 +115,14 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
 			if (!haveFHQcookies()) {
+				//event.preventDefault();
+
 				LoopBackAuth.clearUser();
 				LoopBackAuth.clearStorage();
 
 				window.location.href = 'http://themastermind.nz/members';
 			} else if (!Customer.isAuthenticated()) {
-				event.preventDefault();
+				//event.preventDefault();
 
 				Customer.login({rememberMe: false}, {
 					_sessionId: $cookies.get('global_themastermind.nz_session_id')
