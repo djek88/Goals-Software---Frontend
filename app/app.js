@@ -78,7 +78,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 					LoopBackAuth.clearUser();
 					LoopBackAuth.clearStorage();
 
-					//window.location.href = 'http://themastermind.nz/members';
+					window.location.href = 'http://themastermind.nz/members';
 				} else {
 					notifyError(rejection);
 					return $q.reject(rejection);

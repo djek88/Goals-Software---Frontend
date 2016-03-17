@@ -37,7 +37,6 @@ function config($stateProvider, $urlRouterProvider) {
 		.state('wait', {
 			url: '/wait',
 			onEnter: function($state) {
-				alert('wait state');
 				$state.go('app.home');
 			}
 		});
