@@ -91,6 +91,8 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 }
 
 function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, Customer, LoopBackAuth) {
+	//editableOptions.theme = 'bs3';
+
 	//$cookies.put('global_themastermind.nz_member_id', 5);
 	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
 
@@ -98,9 +100,6 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.logout = logout;
 
-	// $rootScope.$state = $state;
-	// $rootScope.$stateParams = $stateParams;
-	// editableOptions.theme = 'bs3';
 
 	// Set current language
 	$rootScope.lang = {};
@@ -116,8 +115,6 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
 			if (!haveFHQcookies()) {
-				//event.preventDefault();
-
 				LoopBackAuth.clearUser();
 				LoopBackAuth.clearStorage();
 
