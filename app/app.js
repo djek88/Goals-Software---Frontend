@@ -91,14 +91,10 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 }
 
 function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, Customer, LoopBackAuth) {
-	//editableOptions.theme = 'bs3';
-
-	//$cookies.put('global_themastermind.nz_member_id', 5);
-	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
-
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.logout = logout;
+	//editableOptions.theme = 'bs3';
 
 	// Set current language
 	$rootScope.lang = {};
@@ -109,6 +105,9 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 			$rootScope.lang = data;
 		});
 	});
+
+	//$cookies.put('global_themastermind.nz_member_id', 5);
+	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
@@ -121,10 +120,12 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 				window.location.href = 'http://themastermind.nz/members';
 			} else if (!Customer.isAuthenticated()) {
 				event.preventDefault();
+				console.log('Client logining...');
 
 				Customer.login({rememberMe: false}, {
 					_sessionId: $cookies.get('global_themastermind.nz_session_id')
 				}, function() {
+					console.log('Client login success.');
 					$state.go(toState, toParams);
 				});
 			}

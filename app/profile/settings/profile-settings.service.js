@@ -91,9 +91,8 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
 		}).success(function(result){
-			var customer = result;
 			// update cached Customer
-			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
+			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, result._id, result);
 			cb();
 		});
 	}
