@@ -1,0 +1,70 @@
+<div id="content">
+	<div class="row">
+		<div class="col-md-12" style="margin-bottom: 20px;">
+			<h2 ng-if="!vm.isOwner">
+				{{vm.goal.name}}
+			</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<h4>Comments</h4>
+		</div>
+
+		<div class="col-md-10">
+			<textarea class="custom-scroll" style="width: 100%;"
+				placeholder=""
+				rows="8"></textarea>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 50px; margin-bottom: 20px;">
+		<div class="col-md-12">
+			<h4>Evidence</h4>
+		</div>
+	</div>
+
+	<div class="well" ng-repeat="fileName in vm.goal.evidences">
+		<div class="row">
+			<div class="col-md-10">
+				{{fileName}}
+			</div>
+			<div class="col-md-2">
+				<div class="pull-right">
+					<a class="btn btn-default">
+						<i class="fa fa-eye"></i></a>
+
+					<a class="btn btn-default">
+						<i class="fa fa-trash-o"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="vm.goal.feedbacks.length" style="margin-top: 50px;">
+		<div class="row" style="margin-bottom: 10px;" ng-repeat="feedback in vm.goal.feedbacks">
+			<div class="col-md-12" style="font-size: 17px;">
+				<b>{{feedback.fullName}}</b>
+				<span style="font-size: 15px;">{{': ' + feedback.feedback}}</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<form ng-submit="vm.leaveFeedback()" class="smart-form ng-pristine ng-valid">
+				<fieldset>
+					<div class="col-md-10">
+						<textarea class="custom-scroll" style="width: 100%;" rows="4"
+							ng-model="vm.feedbackReply" required></textarea>
+					</div>
+
+					<div class="col-md-2" style="padding-top: 15px;" align="center">
+						<button type="submit" class="btn btn-primary btn-lg">
+							Reply
+						</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>

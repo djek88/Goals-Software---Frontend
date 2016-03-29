@@ -94,6 +94,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.logout = logout;
+	$rootScope.$stateParams = $stateParams;
 	//editableOptions.theme = 'bs3';
 
 	// Set current language
@@ -106,7 +107,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 		});
 	});
 
-	//$cookies.put('global_themastermind.nz_member_id', 5);
+	//$cookies.put('global_themastermind.nz_member_id', 14415587);
 	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
@@ -128,6 +129,19 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 					console.log('Client login success.');
 					$state.go(toState, toParams);
 				});
+
+				// for dev logining P.S...comment this before commit
+				// Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
+				// 	email: 'dsa@mail.ru',
+				// 	password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
+				// }, function(data) {
+				// 	LoopBackAuth.setUser(data.id, data.userId, data.user);
+				// 	LoopBackAuth.rememberMe = false;
+				// 	LoopBackAuth.save();
+
+				// 	console.log('Client login success.');
+				// 	$state.go(toState, toParams);
+				// });
 			}
 		}
 	});

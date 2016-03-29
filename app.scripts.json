@@ -21,13 +21,17 @@
 		"easy-pie",
 		"api",
 		"socket-io",
-		"file-model"
+		"file-model",
+		"datetimepicker",
+		"datetimepicker-tmpl"
 	],
 	"paths": {
 		"api": "plugin/api-backend/api-services.js",
 		"socket-io": "plugin/socket.io-client/socket.io.js",
 		"jstz": "plugin/jstz/jstz.min.js",
 		"file-model": "plugin/angular-file-model/angular-file-model.js",
+		"datetimepicker": "plugin/datetimepicker/datetimepicker.js",
+		"datetimepicker-tmpl": "plugin/datetimepicker/datetimepicker.templates.js",
 
 		"jquery": "plugin/jquery/dist/jquery.min.js",
 		"jquery-ui": "plugin/jquery-ui/jquery-ui.min.js",

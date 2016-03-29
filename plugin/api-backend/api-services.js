@@ -2822,8 +2822,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2840,6 +2839,46 @@ module.factory(
         "prototype$notifyGroupMembers": {
           url: urlBase + "/Goals/:id/notify-group-members",
           method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Goal#prototype$uploadEvidence
+         * @methodOf backendApi.Goal
+         *
+         * @description
+         *
+         * Upload goal evidence file.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Goal` object.)
+         * </em>
+         */
+        "prototype$uploadEvidence": {
+          url: urlBase + "/Goals/:id/upload-evidence",
+          method: "POST"
         },
       }
     );
@@ -2991,302 +3030,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.AvatarsContainer#getContainers
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AvatarsContainer` object.)
-         * </em>
-         */
-        "getContainers": {
-          isArray: true,
-          url: urlBase + "/AvatarsContainers",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#createContainer
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AvatarsContainer` object.)
-         * </em>
-         */
-        "createContainer": {
-          url: urlBase + "/AvatarsContainers",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#destroyContainer
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `` – `{undefined=}` - 
-         */
-        "destroyContainer": {
-          url: urlBase + "/AvatarsContainers/:container",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#getContainer
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AvatarsContainer` object.)
-         * </em>
-         */
-        "getContainer": {
-          url: urlBase + "/AvatarsContainers/:container",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#getFiles
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AvatarsContainer` object.)
-         * </em>
-         */
-        "getFiles": {
-          isArray: true,
-          url: urlBase + "/AvatarsContainers/:container/files",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#getFile
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         *  - `file` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `AvatarsContainer` object.)
-         * </em>
-         */
-        "getFile": {
-          url: urlBase + "/AvatarsContainers/:container/files/:file",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#removeFile
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         *  - `file` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `` – `{undefined=}` - 
-         */
-        "removeFile": {
-          url: urlBase + "/AvatarsContainers/:container/files/:file",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.AvatarsContainer#upload
-         * @methodOf backendApi.AvatarsContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `req` – `{object=}` - 
-         *
-         *  - `res` – `{object=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `result` – `{object=}` - 
-         */
-        "upload": {
-          url: urlBase + "/AvatarsContainers/:container/upload",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.AvatarsContainer#download
          * @methodOf backendApi.AvatarsContainer
          *
@@ -3369,225 +3112,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.FilesContainer#getContainers
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `FilesContainer` object.)
-         * </em>
-         */
-        "getContainers": {
-          isArray: true,
-          url: urlBase + "/FilesContainers",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#createContainer
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `FilesContainer` object.)
-         * </em>
-         */
-        "createContainer": {
-          url: urlBase + "/FilesContainers",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#destroyContainer
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `` – `{undefined=}` - 
-         */
-        "destroyContainer": {
-          url: urlBase + "/FilesContainers/:container",
-          method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#getContainer
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `FilesContainer` object.)
-         * </em>
-         */
-        "getContainer": {
-          url: urlBase + "/FilesContainers/:container",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#getFiles
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `FilesContainer` object.)
-         * </em>
-         */
-        "getFiles": {
-          isArray: true,
-          url: urlBase + "/FilesContainers/:container/files",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#getFile
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         *  - `file` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `FilesContainer` object.)
-         * </em>
-         */
-        "getFile": {
-          url: urlBase + "/FilesContainers/:container/files/:file",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.FilesContainer#removeFile
          * @methodOf backendApi.FilesContainer
          *
@@ -3620,47 +3144,6 @@ module.factory(
         "removeFile": {
           url: urlBase + "/FilesContainers/:container/files/:file",
           method: "DELETE"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#upload
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `req` – `{object=}` - 
-         *
-         *  - `res` – `{object=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `result` – `{object=}` - 
-         */
-        "upload": {
-          url: urlBase + "/FilesContainers/:container/upload",
-          method: "POST"
         },
 
         /**

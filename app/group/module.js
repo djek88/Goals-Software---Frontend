@@ -3,7 +3,8 @@
 angular
 	.module('app.group', [
 		'ui.router',
-		'backendApi'
+		'backendApi',
+		'ui.bootstrap.datetimepicker'
 	])
 	.config(config);
 
@@ -473,6 +474,147 @@ function config($stateProvider) {
 				},
 				scripts: function(lazyScript){
 					return lazyScript.register(['jstz']);
+				}
+			}
+		})
+		.state('app.group.goalCreate', {
+			url: '/:id/goal-create',
+			data: {
+				title: 'Create goal'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/goal-create/group-goal-create.view.html',
+					controller: 'groupGoalCreateController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				group: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.findById({
+							id: $stateParams.id,
+							filter: {include: ['NextSession']}
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				}
+			}
+		})
+		.state('app.group.goalEdit', {
+			url: '/:id/goal-edit/:goalId',
+			data: {
+				title: 'Edit goal'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/goal-edit/group-goal-edit.view.html',
+					controller: 'groupGoalEditController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				goal: function($q, $stateParams, Goal) {
+					var deferred = $q.defer();
+
+					Goal.findById({
+							id: $stateParams.goalId
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				}
+			}
+		})
+		.state('app.group.memberGoals', {
+			url: '/:id/member-goals/:memberId',
+			data: {
+				title: 'Member goals'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/member-goals/group-member-goals.view.html',
+					controller: 'groupMemberGoalsController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				goals: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.prototype$memberGoals({
+							id: $stateParams.id,
+							memberId: $stateParams.memberId
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				member: function($q, $stateParams, Customer) {
+					var deferred = $q.defer();
+
+					Customer.findById({
+							id: $stateParams.memberId
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+			}
+		})
+		.state('app.group.uploadGoalEvidence', {
+			url: '/:id/upload-goal-evidence/:goalId',
+			data: {
+				title: 'Upload goal evidence'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/upload-goal-evidence/group-upload-goal-evidence.view.html',
+					controller: 'groupUploadGoalEvidenceController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				goal: function($q, $stateParams, Goal, Customer) {
+					var deferred = $q.defer();
+
+					Goal.findById({
+							id: $stateParams.goalId
+						},
+						function(goal) {
+							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
+								return deferred.reject();
+							}
+
+							deferred.resolve(goal);
+						},
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				group: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.findById({
+							id: $stateParams.id,
+							filter: {include: ['Members', 'Owner']}
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
 				}
 			}
 		});
