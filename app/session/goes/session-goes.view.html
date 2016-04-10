@@ -76,7 +76,28 @@
 					</div>
 				</div>
 
-				<!-- Buttons block -->
+				<!-- Vote buttons block -->
+				<div ng-if="vm.sess.state[0] == 1 && vm.stillNotVotedGoals.length"
+					class="col-md-12" align="center" style="margin-top: 80px;">
+
+					<div class="col-md-12" style="padding-bottom: 15px;">
+						<b>Please Vote: </b>
+						Did {{vm.sess.focusOn.fullName}} complete the goals set for this week to a satisfactory level?
+					</div>
+
+					<div class="col-md-4 col-md-offset-2">
+						<a class="btn btn-primary btn-lg" style="min-width: 20%;"
+							ng-click="vm.leaveVote(true)">
+							Yes</a>
+					</div>
+					<div class="col-md-4">
+						<a class="btn btn-primary btn-lg" style="min-width: 20%;"
+							ng-click="vm.leaveVote(false)">
+							No</a>
+					</div>
+				</div>
+
+				<!-- Pause, resume buttons block -->
 				<div ng-if="vm.isFacilitator" class="col-md-12" align="center" style="margin-top: 80px;">
 					<div class="col-md-4 col-md-offset-2">
 						<a class="btn btn-primary btn-lg" style="min-width: 20%;"

@@ -44,13 +44,13 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 					var socket = socketIO.toStart();
 
-					socket.on('authenticated', function() {
+					socket.onSuccessAuth = function() {
 						deferred.resolve(socket);
-					});
+					};
 
-					socket.on('unauthorized', function(err) {
+					socket.onFailAuth = function() {
 						deferred.reject();
-					});
+					};
 
 					return deferred.promise;
 				}
@@ -82,17 +82,35 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
+				goals: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.prototype$relatedActiveGoals({
+							id: $stateParams.id
+						},
+						function() {
+							var goals = arguments[0].filter(function(goal) {
+								return goal.state !== 1;
+							});
+
+							deferred.resolve(goals);
+						},
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				socket: function($q, socketIO) {
 					var deferred = $q.defer();
 					var socket = socketIO.toGoes();
 
-					socket.on('authenticated', function() {
+					socket.onSuccessAuth = function() {
 						deferred.resolve(socket);
-					});
+					};
 
-					socket.on('unauthorized', function(err) {
+					socket.onFailAuth = function() {
 						deferred.reject();
-					});
+					};
 
 					return deferred.promise;
 				}

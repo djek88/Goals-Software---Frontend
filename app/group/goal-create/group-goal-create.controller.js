@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupGoalCreateController', groupGoalCreateController);
 
-function groupGoalCreateController($stateParams, notifyAndLeave, layoutLoader, groupGoalCreateService, loadAppData, group) {
+function groupGoalCreateController(Customer, $stateParams, notifyAndLeave, layoutLoader, groupGoalCreateService, loadAppData, group) {
 	var vm = this;
 
 	vm.goal = {
@@ -25,7 +25,10 @@ function groupGoalCreateController($stateParams, notifyAndLeave, layoutLoader, g
 			notifyAndLeave({
 				title: 'Creating goal...',
 				content: 'Goal was create successfully!',
-				leave: {to: 'app.home'}
+				leave: {
+					to: 'app.group.memberGoals',
+					params: {id: $stateParams.id, memberId: Customer.getCachedCurrent()._id}
+				}
 			});
 		});
 	}

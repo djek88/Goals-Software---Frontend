@@ -4,8 +4,9 @@ angular
 	.module('app.session')
 	.controller('sessionGoesController', sessionGoesController);
 
-function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, sessionGoesService, loadAppData, group, socket) {
+function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, sessionGoesService, loadAppData, group, goals, socket) {
 	var vm = this;
+	var curCustomer = Customer.getCachedCurrent();
 
 	layoutLoader.on();
 
@@ -20,12 +21,15 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 		nextFocusOn: null,
 		nextWhoGiveFeedback: null
 	};
+	vm.stillNotVotedGoals = [];
 
 	vm.skipRound = skipRound;
 	vm.pauseResume = pauseResume;
+	vm.leaveVote = leaveVote;
 
 	sessionGoesService.saveMembers(group);
-	$scope.$on('$destroy', socket.disconnect.bind(socket));
+	sessionGoesService.saveGoals(goals);
+	$scope.$on('$destroy', onDestroy);
 
 	socket.emit('goesSessionRoom:join', group._id, onJoin);
 	socket.on('session:stateUpdate', onStateUpdate);
@@ -33,7 +37,7 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 	socket.on('session:timerUpdate', onTimerUpdate);
 
 	function skipRound() {
-		socket.emit( 'goesSessionRoom:skipRound', group._id);
+		socket.emit('goesSessionRoom:skipRound', group._id);
 	}
 
 	function pauseResume() {
@@ -42,9 +46,47 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 		});
 	}
 
+	function leaveVote(isApprove) {
+		if (!vm.stillNotVotedGoals.length) return;
+
+		if (vm.stillNotVotedGoals.length === 1) {
+			sendVote(vm.stillNotVotedGoals[0]._id);
+		} else {
+			sessionGoesService.selectGoalBox(vm.stillNotVotedGoals, sendVote);
+		}
+
+		function sendVote(goalId) {
+			layoutLoader.on();
+
+			sessionGoesService.sendVote(
+				goalId,
+				isApprove,
+				function() {
+					layoutLoader.off();
+
+					vm.stillNotVotedGoals = vm.stillNotVotedGoals.filter(function(goal) {
+						return goal._id !== goalId;
+					});
+
+					notifyAndLeave({
+						title: 'Leave vote...',
+						content: 'Thanks for your vote.'
+					});
+				}
+			);
+		}
+	}
+
+	function onDestroy() {
+		socket.removeAllListeners('session:stateUpdate');
+		socket.removeAllListeners('session:nextTurnInfo');
+		socket.removeAllListeners('session:timerUpdate');
+		socket.disconnect();
+	}
+
 	function onJoin(err, facilitatorId) {
 		if (err) {
-			socket.disconnect();
+			onDestroy();
 			return notifyAndLeave({
 				title: 'Joining to session...',
 				content: 'Forbidden!',
@@ -53,15 +95,16 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 			});
 		}
 
-		vm.isFacilitator = facilitatorId === Customer.getCachedCurrent()._id;
+		vm.isFacilitator = facilitatorId === curCustomer._id;
 	}
 
 	function onStateUpdate(err, data) {
 		layoutLoader.off();
 		vm.isPause = false;
 
+		// err or session finish
 		if (err || !data) {
-			socket.disconnect();
+			onDestroy();
 			return notifyAndLeave({
 				title: err ? 'During the session...' : 'Session finish...',
 				content: err ? 'Something went wrong!' : 'Session finished success!',
@@ -70,15 +113,25 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 			});
 		}
 
+		// for 1 round
+		if (data.state[0] === 1) {
+			if (data.focusOn === curCustomer._id) {
+				vm.stillNotVotedGoals = [];
+			} else {
+				var activeGoals = sessionGoesService.getMemberActiveGoals(data.focusOn);
+				vm.stillNotVotedGoals = sessionGoesService.getGoalsInWhichMemberNotVoted(activeGoals, curCustomer._id);
+			}
+		}
+
 		vm.sess.state = data.state;
 		vm.sess.roundDesc = sessionGoesService.getRoundDesc(data.state[0]);
-		vm.sess.focusOn = sessionGoesService.getUserInfo(data.focusOn);
-		vm.sess.whoGiveFeedback = sessionGoesService.getUserInfo(data.whoGiveFeedback);
+		vm.sess.focusOn = sessionGoesService.getMemberInfo(data.focusOn);
+		vm.sess.whoGiveFeedback = sessionGoesService.getMemberInfo(data.whoGiveFeedback);
 	}
 
 	function onNextTurnInfo(data) {
-		vm.sess.nextFocusOn = sessionGoesService.getUserInfo(data.nextFocusOn);
-		vm.sess.nextWhoGiveFeedback = sessionGoesService.getUserInfo(data.nextWhoGiveFeedback);
+		vm.sess.nextFocusOn = sessionGoesService.getMemberInfo(data.nextFocusOn);
+		vm.sess.nextWhoGiveFeedback = sessionGoesService.getMemberInfo(data.nextWhoGiveFeedback);
 	}
 
 	function onTimerUpdate(sec) {

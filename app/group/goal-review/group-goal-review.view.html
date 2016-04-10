@@ -13,8 +13,7 @@
 		</div>
 
 		<div class="col-md-10">
-			<textarea class="custom-scroll" style="width: 100%;"
-				ng-model="vm.goal.comments" rows="8"></textarea>
+			<span>{{vm.goal.comments}}</span>
 		</div>
 	</div>
 
@@ -50,29 +49,12 @@
 							</div>
 						</div>
 					</script>
-
-					<a class="btn btn-default"
-						ng-click="vm.deleteEvidence(file)">
-						<i class="fa fa-trash-o"></i></a>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div align="center">
-		<label class="btn btn-primary btn-lg" for="fileInput">
-			Upload evidence file
-			<div style="display: none;">
-				<input id="fileInput" type="file" file-model="vm.newFile">
-			</div>
-		</label>
-
-		<a class="btn btn-primary btn-lg"
-			ng-click="vm.saveGoal()">
-			Save evidence</a>
-	</div>
-
-	<div ng-if="vm.goal.feedbacks.length" style="margin-top: 50px;">
+	<div style="margin-top: 50px;">
 		<div class="row" style="margin-bottom: 10px;" ng-repeat="feedback in vm.goal.feedbacks">
 			<div class="col-md-12" style="font-size: 17px;">
 				<b>{{feedback.fullName}}</b>
@@ -85,16 +67,27 @@
 				<fieldset>
 					<div class="col-md-10">
 						<textarea class="custom-scroll" style="width: 100%;" rows="4"
-							ng-model="vm.feedbackReply" required></textarea>
+							ng-model="vm.feedback" required></textarea>
 					</div>
 
 					<div class="col-md-2" style="padding-top: 15px;" align="center">
 						<button type="submit" class="btn btn-primary btn-lg">
-							Reply
+							Add Feedback
 						</button>
 					</div>
 				</fieldset>
 			</form>
 		</div>
+	</div>
+
+	<div align="center"
+		ng-if="vm.goal.state === 2 || vm.goal.state === 4 || vm.goal.state === 6">
+		<a class="btn btn-primary btn-lg"
+			ng-click="vm.leaveVote(false)">
+			Reject Evidence Is Good Enough</a>
+
+		<a class="btn btn-primary btn-lg"
+			ng-click="vm.leaveVote(true)">
+			Approve Goal Complection</a>
 	</div>
 </div>

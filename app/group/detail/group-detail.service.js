@@ -101,7 +101,7 @@ function groupDetailService($state, $uibModal, layoutLoader, Group) {
 		};
 
 		if (membList) {
-			options.content += ' or select new owner'
+			options.content += ' or select new owner';
 			options.buttons += '[Select new owner]';
 			options.input = 'select';
 			options.options = membList;

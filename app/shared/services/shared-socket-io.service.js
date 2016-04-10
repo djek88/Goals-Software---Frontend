@@ -20,11 +20,15 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 	function startNsp() {
 		if (startSocket) {
 			if (startSocket.disconnected) startSocket.connect();
-			return startSocket;
-		}
+		} else {
+			startSocket = io($rootScope.socketUrl + '/startSession');
+			startSocket.onSuccessAuth = function() {};
+			startSocket.onFailAuth = function() {};
 
-		startSocket = io($rootScope.socketUrl + '/startSession');
-		startSocket.on('connect', onConnect);
+			startSocket.on('connect', onConnect);
+			startSocket.on('authenticated', onAuthenticated);
+			startSocket.on('unauthorized', onUnauthorized);
+		}
 
 		return startSocket;
 	}
@@ -32,16 +36,28 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 	function goesNsp() {
 		if (goesSocket) {
 			if (goesSocket.disconnected) goesSocket.connect();
-			return goesSocket;
-		}
+		} else {
+			goesSocket = io($rootScope.socketUrl + '/goesSession');
+			goesSocket.onSuccessAuth = function() {};
+			goesSocket.onFailAuth = function() {};
 
-		goesSocket = io($rootScope.socketUrl + '/goesSession');
-		goesSocket.on('connect', onConnect);
+			goesSocket.on('connect', onConnect);
+			goesSocket.on('authenticated', onAuthenticated);
+			goesSocket.on('unauthorized', onUnauthorized);
+		}
 
 		return goesSocket;
 	}
 
 	function onConnect() {
 		this.emit('authentication', userCredentials);
+	}
+
+	function onAuthenticated() {
+		this.onSuccessAuth();
+	}
+
+	function onUnauthorized() {
+		this.onFailAuth();
 	}
 }

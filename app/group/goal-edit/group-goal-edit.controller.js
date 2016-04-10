@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupGoalEditController', groupGoalEditController);
 
-function groupGoalEditController(notifyAndLeave, layoutLoader, groupGoalEditService, loadAppData, goal) {
+function groupGoalEditController(Customer, $stateParams, notifyAndLeave, layoutLoader, groupGoalEditService, loadAppData, goal) {
 	var vm = this;
 
 	vm.goal = goal;
@@ -20,7 +20,10 @@ function groupGoalEditController(notifyAndLeave, layoutLoader, groupGoalEditServ
 			notifyAndLeave({
 				title: 'Changing goal...',
 				content: 'Goal was change successfully!',
-				leave: {to: 'app.home'}
+				leave: {
+					to: 'app.group.memberGoals',
+					params: {id: $stateParams.id, memberId: Customer.getCachedCurrent()._id}
+				}
 			});
 		});
 	}

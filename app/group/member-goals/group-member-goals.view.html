@@ -28,7 +28,7 @@
 						<div class="pull-right">
 							<a class="btn btn-default" data-tooltip="Review goal"
 								ng-if="!vm.isOwner"
-								ui-sref="app.home">
+								ui-sref="app.group.goalReview({id: goal._groupId, goalId: goal._id})">
 								<i class="fa fa-eye"></i></a>
 
 							<a class="btn btn-default" data-tooltip="Edit goal"
@@ -38,7 +38,7 @@
 
 							<a class="btn btn-default" data-tooltip="Upload evidence"
 								ng-if="vm.isOwner"
-								ui-sref="app.home">
+								ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
 								<i class="fa fa-thumb-tack"></i></a>
 
 							<i class="fa fa-star-o goal-state-icon" style="color: #E61610;"
@@ -55,9 +55,6 @@
 
 							<i class="fa fa-frown-o goal-state-icon"
 								ng-if="goal.state === 5"></i>
-
-							<i class="fa fa-star goal-state-icon" style="color: #355737;"
-								ng-if="goal.state === 6"></i>
 						</div>
 					</div>
 				</div>

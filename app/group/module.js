@@ -4,7 +4,8 @@ angular
 	.module('app.group', [
 		'ui.router',
 		'backendApi',
-		'ui.bootstrap.datetimepicker'
+		'ui.bootstrap.datetimepicker',
+		'file-model'
 	])
 	.config(config);
 
@@ -585,7 +586,17 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				goal: function($q, $stateParams, Goal, Customer) {
+				evidenceTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.evidenceSupportedTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				goal: function($q, $state, $stateParams, Goal, Customer) {
 					var deferred = $q.defer();
 
 					Goal.findById({
@@ -593,7 +604,59 @@ function config($stateProvider) {
 						},
 						function(goal) {
 							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
-								return deferred.reject();
+								$state.go('app.group.goalReview', {
+									id: $stateParams.id,
+									goalId: $stateParams.goalId
+								});
+							}
+
+							deferred.resolve(goal);
+						},
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				group: function($q, $stateParams, Group) {
+					var deferred = $q.defer();
+
+					Group.findById({
+							id: $stateParams.id,
+							filter: {include: ['Members', 'Owner']}
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				}
+			}
+		})
+		.state('app.group.goalReview', {
+			url: '/:id/goal-review/:goalId',
+			data: {
+				title: 'Goal review'
+			},
+			views: {
+				'content@app': {
+					templateUrl: 'app/group/goal-review/group-goal-review.view.html',
+					controller: 'groupGoalReviewController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve: {
+				goal: function($q, $state, $stateParams, Goal, Customer) {
+					var deferred = $q.defer();
+
+					Goal.findById({
+							id: $stateParams.goalId
+						},
+						function(goal) {
+							if (goal._ownerId === Customer.getCachedCurrent()._id) {
+								$state.go('app.group.uploadGoalEvidence', {
+									id: $stateParams.id,
+									goalId: $stateParams.goalId
+								});
 							}
 
 							deferred.resolve(goal);

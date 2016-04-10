@@ -7,7 +7,8 @@ angular
 function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sessionStartService, loadAppData, group, socket) {
 	var vm = this;
 
-	//group.NextSession.startAt = '2016-03-06T19:49:00.000Z';
+	//group.NextSession.startAt = '2016-04-08T14:40:00.000Z';
+
 	vm.isGroupOwner = Customer.getCachedCurrent()._id === group._ownerId;
 	vm.isStarted = false;
 	vm.sessionStartAt = group.NextSession.startAt;
@@ -16,7 +17,7 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 	vm.timeOut = timeOut;
 	vm.startSession = startSession;
 
-	$scope.$on('$destroy', socket.disconnect.bind(socket));
+	$scope.$on('$destroy', onDestroy);
 
 	socket.emit('startSessionRoom:join', group._id, onJoin);
 	socket.on('startSessionRoom:redirect', onRedirect);
@@ -35,9 +36,16 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 		socket.emit('startSessionRoom:startSession', group._id);
 	}
 
+	function onDestroy() {
+		socket.removeAllListeners('startSessionRoom:redirect');
+		socket.removeAllListeners('user:joined');
+		socket.removeAllListeners('user:left');
+		socket.disconnect();
+	}
+
 	function onJoin(err, onlineUserIds) {
 		if (err) {
-			socket.disconnect();
+			onDestroy();
 			return notifyAndLeave({
 				title: 'Session joining...',
 				content: 'Forbidden!',

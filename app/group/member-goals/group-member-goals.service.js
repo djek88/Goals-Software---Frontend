@@ -16,7 +16,7 @@ function groupMemberGoalsService(Goal) {
 
 			if (goal.state === 5) {
 				goal.dueDate = 'Given up on: ' + dueDate;
-			} else if (goal.state === 3 || goal.state === 6) {
+			} else if (goal.state === 3) {
 				goal.dueDate = 'Completed: ' + dueDate;
 			} else {
 				goal.dueDate = 'Due: ' + dueDate;

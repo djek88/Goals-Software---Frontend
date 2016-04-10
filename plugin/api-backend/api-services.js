@@ -1982,6 +1982,8 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
+         *  - `id` – `{*}` - PersistedModel id
+         *
          *  - `req` – `{object=}` - 
          *
          *  - `memberId` – `{string}` - Member id
@@ -2005,6 +2007,82 @@ module.factory(
           isArray: true,
           url: urlBase + "/Groups/:id/member-goals/:memberId",
           method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$relatedActiveGoals
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Return related active goals.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `req` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$relatedActiveGoals": {
+          isArray: true,
+          url: urlBase + "/Groups/:id/related-active-goals",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$manuallyScheduleSession
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Manually shedule next group session.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `startAt` – `{number}` - Session due date (milliseconds since 1970)
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$manuallyScheduleSession": {
+          url: urlBase + "/Groups/:id/manually-shedule-session",
+          method: "POST"
         },
 
         // INTERNAL. Use Goal.Group() instead.
@@ -2388,79 +2466,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Goal#prototype$__get__Votes
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Queries Votes of Goal.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `filter` – `{object=}` - 
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        "prototype$__get__Votes": {
-          isArray: true,
-          url: urlBase + "/Goals/:id/Votes",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#prototype$__create__Votes
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Creates a new instance in Votes of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Goal` object.)
-         * </em>
-         */
-        "prototype$__create__Votes": {
-          url: urlBase + "/Goals/:id/Votes",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Goal#create
          * @methodOf backendApi.Goal
          *
@@ -2770,44 +2775,13 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * This method returns no data.
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Goal` object.)
+         * </em>
          */
         "prototype$leaveFeedback": {
           url: urlBase + "/Goals/:id/leave-feedback",
-          method: "POST"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#prototype$addComments
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Add comments to explain what you have done to achieve the goal.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         *  - `comments` – `{string}` - Comments
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * This method returns no data.
-         */
-        "prototype$addComments": {
-          url: urlBase + "/Goals/:id/add-comments",
           method: "POST"
         },
 
@@ -2852,8 +2826,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *   This method does not accept any parameters.
-         *   Supply an empty object or omit this argument altogether.
+         *  - `id` – `{*}` - PersistedModel id
          *
          * @param {Object} postData Request data.
          *
@@ -2878,6 +2851,85 @@ module.factory(
          */
         "prototype$uploadEvidence": {
           url: urlBase + "/Goals/:id/upload-evidence",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Goal#prototype$removeEvidence
+         * @methodOf backendApi.Goal
+         *
+         * @description
+         *
+         * Remove goal evidence file.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `fileName` – `{string}` - File name
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Goal` object.)
+         * </em>
+         */
+        "prototype$removeEvidence": {
+          url: urlBase + "/Goals/:id/remove-evidence",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Goal#prototype$leaveVote
+         * @methodOf backendApi.Goal
+         *
+         * @description
+         *
+         * Leave vote for goal.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `achieve` – `{boolean}` - Goal is reached
+         *
+         *  - `comment` – `{string=}` - Your comment
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Goal` object.)
+         * </em>
+         */
+        "prototype$leaveVote": {
+          url: urlBase + "/Goals/:id/leave-vote",
           method: "POST"
         },
       }
@@ -3109,42 +3161,6 @@ module.factory(
       urlBase + "/FilesContainers/:id",
       { 'id': '@id' },
       {
-
-        /**
-         * @ngdoc method
-         * @name backendApi.FilesContainer#removeFile
-         * @methodOf backendApi.FilesContainer
-         *
-         * @description
-         *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `container` – `{string=}` - 
-         *
-         *  - `file` – `{string=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `` – `{undefined=}` - 
-         */
-        "removeFile": {
-          url: urlBase + "/FilesContainers/:container/files/:file",
-          method: "DELETE"
-        },
 
         /**
          * @ngdoc method
@@ -3396,6 +3412,40 @@ module.factory(
          */
         "sessionTimeTypes": {
           url: urlBase + "/Additionals/session-time-types",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#evidenceSupportedTypes
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return evidences supported file types.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
+         */
+        "evidenceSupportedTypes": {
+          url: urlBase + "/Additionals/evidence-supported-types",
           method: "GET"
         },
       }

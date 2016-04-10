@@ -4,7 +4,7 @@ angular
 	.module('app.profile')
 	.controller('profileSettingsController', profileSettingsController);
 
-function profileSettingsController($scope, $rootScope, notifyAndLeave, layoutLoader, profileSettingsService, loadAppData) {
+function profileSettingsController($scope, notifyAndLeave, layoutLoader, profileSettingsService, loadAppData) {
 	var vm = this;
 
 	var isChange = false;

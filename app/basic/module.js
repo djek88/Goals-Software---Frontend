@@ -37,6 +37,22 @@ function config($stateProvider) {
 					);
 
 					return deferred.promise;
+				},
+				goals: function($q, Goal) {
+					var deferred = $q.defer();
+
+					Goal.find({
+							filter: {
+								where: {
+									dueDate: {gt: Date.now()}
+								}
+							}
+						},
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
 				}
 			}
 		});
