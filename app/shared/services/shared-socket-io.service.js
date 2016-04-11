@@ -21,7 +21,7 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 		if (startSocket) {
 			if (startSocket.disconnected) startSocket.connect();
 		} else {
-			startSocket = io($rootScope.socketUrl + '/startSession');
+			startSocket = io($rootScope.socketUrl + '/startSession', {path: '/sockets'});
 			startSocket.onSuccessAuth = function() {};
 			startSocket.onFailAuth = function() {};
 
@@ -37,7 +37,7 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 		if (goesSocket) {
 			if (goesSocket.disconnected) goesSocket.connect();
 		} else {
-			goesSocket = io($rootScope.socketUrl + '/goesSession');
+			goesSocket = io($rootScope.socketUrl + '/goesSession', {path: '/sockets'});
 			goesSocket.onSuccessAuth = function() {};
 			goesSocket.onFailAuth = function() {};
 
