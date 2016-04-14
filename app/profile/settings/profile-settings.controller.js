@@ -21,18 +21,6 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 	function save() {
 		if (!isChange) return;
 
-		// Check password
-		if (vm.customer.password || vm.customer.passwordConfirm) {
-			if (vm.customer.password !== vm.customer.passwordConfirm) {
-				vm.customer.password = vm.customer.passwordConfirm = '';
-
-				return notifyAndLeave({
-					title: 'Confirm password',
-					content: 'Don\'t you know your own password?'
-				});
-			}
-		}
-
 		layoutLoader.on();
 
 		profileSettingsService.saveCustomer(vm.customer, function(customer) {

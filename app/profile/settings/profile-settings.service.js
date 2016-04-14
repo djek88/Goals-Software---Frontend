@@ -35,8 +35,6 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 	function prepareCustomer() {
 		var detectedTz = jstz.determine();
 		var customer = Customer.getCachedCurrent();
-		customer.passwordConfirm = '';
-		customer.password = '';
 
 		// Init profile timezone
 		if (customer.timeZone === '') {
@@ -50,9 +48,6 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 		var customerId = customer._id;
 
 		delete customer._id;
-		delete customer.passwordConfirm;
-		if (!customer.password) delete customer.password;
-
 
 		Customer.prototype$updateAttributes({id: customerId}, customer, function(customer) {
 			// Update localStorage

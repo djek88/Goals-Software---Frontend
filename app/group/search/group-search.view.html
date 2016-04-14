@@ -34,16 +34,16 @@
 	<div class="row">
 		<fieldset class="col-sm-12" ng-if="vm.groups.length" style="margin-top: 40px;">
 			<div class="well" style="margin: 8px;" ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
-				<div class="row">
-					<div class="col-xs-5">
+				<div class="row elemTextPaddingNgRepeat">
+					<span class="col-xs-5">
 						{{group.name}}
-					</div>
-					<div class="col-xs-3">
+					</span>
+					<span class="col-xs-3">
 						Members: {{group.members}}
-					</div>
-					<div class="col-xs-3">
+					</span>
+					<span class="col-xs-3">
 						Created: {{group.created}}
-					</div>
+					</span>
 					<div class="col-xs-1">
 						<div class="pull-right">
 							<a class="btn btn-default"

@@ -131,17 +131,17 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 				});
 
 				// for dev logining P.S...comment this before commit
-				// Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
-				// 	email: 'dsa@mail.ru',
-				// 	password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
-				// }, function(data) {
-				// 	LoopBackAuth.setUser(data.id, data.userId, data.user);
-				// 	LoopBackAuth.rememberMe = false;
-				// 	LoopBackAuth.save();
+				/*Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
+					email: 'dsa1@mail.ru',
+					password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
+				}, function(data) {
+					LoopBackAuth.setUser(data.id, data.userId, data.user);
+					LoopBackAuth.rememberMe = false;
+					LoopBackAuth.save();
 
-				// 	console.log('Client login success.');
-				// 	$state.go(toState, toParams);
-				// });
+					console.log('Client login success.');
+					$state.go(toState, toParams);
+				});*/
 			}
 		}
 	});

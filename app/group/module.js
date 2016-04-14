@@ -284,7 +284,7 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				group: function($q, $stateParams, Group) {
+				group: function($q, $stateParams, Group, notifyAndLeave) {
 					var deferred = $q.defer();
 
 					Group.findById({
@@ -292,7 +292,14 @@ function config($stateProvider) {
 							filter: {include: ['Members', 'Owner', 'NextSession']}
 						},
 						function(group) {
-							if (!group._nextSessionId) return deferred.reject();
+							if (!group._nextSessionId) {
+								notifyAndLeave({
+									title: 'Next session excuses page...',
+									content: 'Next mastermind session not sheduled!'
+								});
+
+								return deferred.reject();
+							}
 
 							deferred.resolve(group);
 						},
