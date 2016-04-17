@@ -90,22 +90,12 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
-function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, Customer, LoopBackAuth) {
+function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, LoopBackAuth) {
 	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
 	$rootScope.socketUrl = APP_CONFIG.socketUrl;
 	$rootScope.logout = logout;
 	$rootScope.$stateParams = $stateParams;
 	//editableOptions.theme = 'bs3';
-
-	// Set current language
-	$rootScope.lang = {};
-	$rootScope.getWord = getWord;
-
-	Language.getLanguages(function(data){
-		Language.getLang(data[0].key, function(data){
-			$rootScope.lang = data;
-		});
-	});
 
 	//$cookies.put('global_themastermind.nz_member_id', 14415587);
 	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
@@ -145,15 +135,6 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Language, C
 			}
 		}
 	});
-
-	function getWord(key){
-		if(angular.isDefined($rootScope.lang[key])){
-			return $rootScope.lang[key];
-		}
-		else {
-			return key;
-		}
-	}
 
 	function logout() {
 		console.log('Client logout...');
