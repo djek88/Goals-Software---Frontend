@@ -6,16 +6,10 @@ angular
 
 function groupSearchService(Group) {
 	var service = {
-		prepareGroupTypes: prepareGroupTypes,
 		findGroupsByCriteria: findGroupsByCriteria,
 		preparedGroups: preparedGroups
 	};
 	return service;
-
-	function prepareGroupTypes(types) {
-		types[0] = 'Please Choose';
-		return types;
-	}
 
 	function findGroupsByCriteria(criteria, cb) {
 		var filter = {
@@ -26,6 +20,7 @@ function groupSearchService(Group) {
 		};
 
 		if (filter.where.type === '0') delete filter.where.type;
+		if (filter.where.penalty === '0') delete filter.where.penalty;
 
 		Group.find({filter: filter}, cb);
 	}

@@ -40,7 +40,7 @@
 					<script type="text/ng-template" id="fileInfoPopover.html">
 						<div style="min-width: 220px;">
 							<div>Size: {{file.size / 1000}}kb</div>
-							<div>Granted in: {{file.createdAt | date : 'medium'}}</div>
+							<div>Added: {{file.createdAt | date : 'medium'}}</div>
 
 							<div align="right">
 								<a class="btn btn-default btn-sm"
@@ -61,7 +61,7 @@
 
 	<div align="center">
 		<label class="btn btn-primary btn-lg" for="fileInput">
-			Upload evidence file
+			Add New Evidence
 			<div style="display: none;">
 				<input id="fileInput" type="file" file-model="vm.newFile">
 			</div>
@@ -69,7 +69,7 @@
 
 		<a class="btn btn-primary btn-lg"
 			ng-click="vm.saveGoal()">
-			Save evidence</a>
+			Save Changes</a>
 	</div>
 
 	<div ng-if="vm.goal.feedbacks.length" style="margin-top: 50px;">

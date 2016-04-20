@@ -6,17 +6,19 @@
 					<section class="col col-6">
 						<label class="label">Group Type:</label>
 						<label class="select">
-							<select ng-model="vm.criteria.type"
-								ng-options="key as value for (key, value) in vm.groupTypes">
+							<select ng-model="vm.criteria.type">
+								<option value="0">All</option>
+								<option value="{{key}}" ng-repeat="(key, value) in vm.groupTypes">{{value}}</option>
 							</select> <i></i> </label>
 					</section>
 
 					<section class="col col-6">
 						<label class="label">Amount Willing To Risk:</label>
 						<label class="select">
-							<select ng-model="vm.criteria.penalty"
-								ng-options="amount as ('$' + amount) for amount in vm.penaltyAmounts">
-							</select> <i></i> </label>
+							<select ng-model="vm.criteria.penalty">
+								<option value="0">All</option>
+								<option value="{{amount}}" ng-repeat="amount in vm.penaltyAmounts">{{'$' + amount}}</option>
+							</select> <i></i></label>
 					</section>
 				</div>
 			</fieldset>

@@ -75,12 +75,22 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 
 		var supportTypes = groupUploadGoalEvidenceService.supportEvidenceTypes(evidenceTypes);
 		var supportExtns = groupUploadGoalEvidenceService.supportEvidenceExtens(evidenceTypes);
+		var maxFileSize = 10 * 1024 * 1024; // 10 MB
 
 		if (supportTypes.indexOf(newValue.type) < 0) {
 			return notifyAndLeave({
 				box: 'bigBox',
 				title: 'Supports the following types:',
 				content: 'This can be: ' + supportExtns.join(', '),
+				isError: true,
+				timeout: 8000
+			});
+		}
+
+		if (newValue.size > maxFileSize) {
+			return notifyAndLeave({
+				title: 'Upload evidence...',
+				content: 'Max file size is 10 MB.',
 				isError: true,
 				timeout: 8000
 			});

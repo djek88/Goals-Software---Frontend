@@ -7,11 +7,11 @@ angular
 function groupSearchController(layoutLoader, groupSearchService, groupTypes, penaltyAmounts) {
 	var vm = this;
 
-	vm.groupTypes = groupSearchService.prepareGroupTypes(groupTypes);
+	vm.groupTypes = groupTypes;
 	vm.penaltyAmounts = penaltyAmounts;
 	vm.criteria = {
 		type: '0',
-		penalty: penaltyAmounts[4]
+		penalty: '0'
 	};
 	vm.groups = [];
 	vm.totalGroupsCount = 0;

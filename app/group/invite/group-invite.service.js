@@ -15,8 +15,14 @@ function groupInviteService($state, Group) {
 		var linkToGroup = $state.href("reviewGroup", { id: group._id });
 		var userName = customer.firstName + ' ' + customer.lastName;
 
-		return 'Hi\n\nI would like to invite you to join my mastermind group. It is free to join and will be a lot of fun as well as a great way to increase your productivity. It is limited to only '
-			+ group.maxMembers + ' members so if you are interested join now:\n\napp.themastermind.nz' + linkToGroup + '\n\nThanks\n\n' + userName;
+		return 'Hi\n\n'
+			+ 'I would like to invite you to join my mastermind group. It is free to join and will be a lot of fun as well as a great way to increase your productivity. It is limited to only '
+			+ group.maxMembers + ' members so if you are interested apply to join now.\n\n'
+			+ 'Step 1) Create your free account at www.themastermind.nz\n\n'
+			+ 'Step 2) Go to app.themastermind.nz' + linkToGroup + ' and apply to join\n\n'
+			+ 'Step 3) Wait for me to approve your request (approval is a manual process, but I will try to process it as soon as possible)\n\n'
+			+ 'Thanks\n\n'
+			+ userName;
 	}
 
 	function sendInvite(groupId, emails, message, cb) {

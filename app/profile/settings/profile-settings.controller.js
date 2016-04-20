@@ -43,10 +43,25 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 		}
 
 		var file = newValue;
+		var maxFileSize = 10 * 1024 * 1024; // 10 MB
 
-		// If will need validate file: ext, size
-		// if (!file.type.includes('image/'))
-		// if (file.size / 1024 > 200)
+		if (!file.type.includes('image/')) {
+			return notifyAndLeave({
+				title: 'Updating picture...',
+				content: 'File is not image!',
+				isError: true,
+				timeout: 8000
+			});
+		}
+
+		if (file.size > maxFileSize) {
+			return notifyAndLeave({
+				title: 'Updating picture...',
+				content: 'Max file size is 10 MB.',
+				isError: true,
+				timeout: 8000
+			});
+		}
 
 		// Update image display
 		profileSettingsService.readFileAsDataUrl(file, function(result) {
