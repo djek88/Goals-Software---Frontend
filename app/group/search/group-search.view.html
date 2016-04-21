@@ -7,7 +7,7 @@
 						<label class="label">Group Type:</label>
 						<label class="select">
 							<select ng-model="vm.criteria.type">
-								<option value="0">All</option>
+								<option value="-1">All</option>
 								<option value="{{key}}" ng-repeat="(key, value) in vm.groupTypes">{{value}}</option>
 							</select> <i></i> </label>
 					</section>
@@ -16,7 +16,7 @@
 						<label class="label">Amount Willing To Risk:</label>
 						<label class="select">
 							<select ng-model="vm.criteria.penalty">
-								<option value="0">All</option>
+								<option value="-1">All</option>
 								<option value="{{amount}}" ng-repeat="amount in vm.penaltyAmounts">{{'$' + amount}}</option>
 							</select> <i></i></label>
 					</section>
@@ -40,10 +40,10 @@
 					<span class="col-xs-5">
 						{{group.name}}
 					</span>
-					<span class="col-xs-3">
+					<span class="col-xs-2">
 						Members: {{group.members}}
 					</span>
-					<span class="col-xs-3">
+					<span class="col-xs-4">
 						Created: {{group.created}}
 					</span>
 					<div class="col-xs-1">

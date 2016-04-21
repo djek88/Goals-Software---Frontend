@@ -155,6 +155,10 @@ function groupDetailService($state, $uibModal, layoutLoader, Group) {
 		var time = timeTypes[sessionConf.time].split(' ');
 		time = time[0] + time[1].toLowerCase();
 
+		if (sessionConf.frequencyType === 1) {
+			return ('Every ' + weekday + ' of the month at ' + time + ' ' + timeZone + offset);
+		}
+
 		return (freqType + ' on ' + weekday + ' of the month at ' + time + ' ' + timeZone + offset);
 	}
 }

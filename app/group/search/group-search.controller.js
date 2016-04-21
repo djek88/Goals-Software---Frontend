@@ -10,8 +10,8 @@ function groupSearchController(layoutLoader, groupSearchService, groupTypes, pen
 	vm.groupTypes = groupTypes;
 	vm.penaltyAmounts = penaltyAmounts;
 	vm.criteria = {
-		type: '0',
-		penalty: '0'
+		type: '-1',
+		penalty: '-1'
 	};
 	vm.groups = [];
 	vm.totalGroupsCount = 0;

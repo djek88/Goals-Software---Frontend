@@ -19,8 +19,8 @@ function groupSearchService(Group) {
 			}
 		};
 
-		if (filter.where.type === '0') delete filter.where.type;
-		if (filter.where.penalty === '0') delete filter.where.penalty;
+		if (filter.where.type === '-1') delete filter.where.type;
+		if (filter.where.penalty === '-1') delete filter.where.penalty;
 
 		Group.find({filter: filter}, cb);
 	}
