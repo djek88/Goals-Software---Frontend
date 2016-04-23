@@ -50,6 +50,7 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 		delete customer._id;
 
 		Customer.prototype$updateAttributes({id: customerId}, customer, function(customer) {
+			customer = angular.fromJson(angular.toJson(customer));
 			// Update localStorage
 			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
 

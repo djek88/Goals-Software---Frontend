@@ -8,6 +8,6 @@ function groupMemberGoalsController($state, $stateParams, Customer, notifyAndLea
 	var vm = this;
 
 	vm.memberName = member.firstName + ' ' + member.lastName;
-	vm.goals = groupMemberGoalsService.prepareGoals(goals);
+	vm.goals = goals;
 	vm.isOwner = Customer.getCachedCurrent()._id === $stateParams.memberId;
 }

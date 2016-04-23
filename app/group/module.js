@@ -98,7 +98,7 @@ function config($stateProvider) {
 			views: {
 				'content@app': {
 					templateUrl: 'app/group/my-groups/group-my-groups.view.html',
-					controller: 'myGroupsController',
+					controller: 'groupMyGroupsController',
 					controllerAs: 'vm'
 				}
 			},

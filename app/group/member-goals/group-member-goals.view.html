@@ -1,7 +1,7 @@
 <div id="content">
 	<div class="row">
 		<div class="col-sm-12" style="margin-bottom: 30px;">
-			<div ng-if="vm.isOwner"align="center">
+			<div ng-if="vm.isOwner" align="center">
 				<a class="btn btn-primary btn-lg" ui-sref="app.group.goalCreate({id: $stateParams.id})">
 					Add New Goal</a>
 			</div>
@@ -21,7 +21,7 @@
 					</span>
 
 					<span class="col-md-4">
-						<h4>{{goal.dueDate}}</h4>
+						<h4>{{goal.dueDate | formatGoalDueDate:goal.state}}</h4>
 					</span>
 
 					<div class="col-md-3">
@@ -42,20 +42,7 @@
 								<i class="fa fa-thumb-tack"></i></a>
 
 							<span>
-								<i class="fa fa-star-o goal-state-icon" style="color: #E61610;"
-									ng-if="goal.state === 1"></i>
-
-								<i class="fa fa-star-half-o goal-state-icon" style="color: #FFA834;"
-									ng-if="goal.state === 2"></i>
-
-								<i class="fa fa-star goal-state-icon" style="color: #72BB53;"
-									ng-if="goal.state === 3"></i>
-
-								<i class="fa fa-star-half-o goal-state-icon" style="color: #E61610;"
-									ng-if="goal.state === 4"></i>
-
-								<i class="fa fa-frown-o goal-state-icon"
-									ng-if="goal.state === 5"></i>
+								<g-goal-state-icon state="{{goal.state}}"></g-goal-state-icon>
 							</span>
 						</div>
 					</div>

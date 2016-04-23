@@ -2,9 +2,9 @@
 
 angular
 	.module('app.group')
-	.controller('myGroupsController', myGroupsController);
+	.controller('groupMyGroupsController', groupMyGroupsController);
 
-function myGroupsController(Customer, notifyAndLeave, layoutLoader, groupMyGroupsService, loadAppData, groups) {
+function groupMyGroupsController(Customer, notifyAndLeave, layoutLoader, groupMyGroupsService, loadAppData, groups) {
 	var vm = this;
 
 	vm.curCustomer = Customer.getCachedCurrent();

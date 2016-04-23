@@ -7,19 +7,14 @@ angular
 function profileSettingsController($scope, notifyAndLeave, layoutLoader, profileSettingsService, loadAppData) {
 	var vm = this;
 
-	var isChange = false;
 	vm.customer = profileSettingsService.getCustomer();
 	vm.timezoneMap = profileSettingsService.timeZoneMap;
 	vm.imgData = profileSettingsService.getDefaultImgData();
 
 	vm.save = save;
 
-	$scope.$watch('vm.customer', function(newValue, oldValue) {
-		isChange = newValue !== oldValue;
-	}, true);
-
 	function save() {
-		if (!isChange) return;
+		if(angular.equals(vm.customer, profileSettingsService.getCustomer())) return;
 
 		layoutLoader.on();
 
@@ -27,7 +22,6 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 			layoutLoader.off();
 
 			vm.customer = profileSettingsService.getCustomer();
-			setTimeout(function() { isChange = false; }, 50);
 
 			notifyAndLeave({
 				title: 'Saving info...',

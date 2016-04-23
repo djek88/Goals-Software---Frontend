@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app').directive('toggleShortcut', function($log,$timeout) {
+angular.module('app.layout').directive('toggleShortcut', function($log, $timeout) {
 
 	var initDomEvents = function($element){
 
@@ -21,8 +21,6 @@ angular.module('app').directive('toggleShortcut', function($log,$timeout) {
 			window.location = $(this).attr('href');
 			setTimeout(shortcut_buttons_hide, 300);
 		});
-
-		
 
 		// SHORTCUT buttons goes away if mouse is clicked outside of the area
 		$(document).mouseup(function(e) {

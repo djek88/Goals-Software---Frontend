@@ -32,15 +32,16 @@ function basicHomeService($uibModal, Group) {
 			group.goals = [];
 
 			goals.forEach(function(goal) {
+				if (group._id !== goal._groupId) return;
+
 				var curGoal = angular.copy(goal);
-				curGoal.dueDate = moment(curGoal.dueDate).format('YY/MM/DD [at] ha');
 
 				var start = moment(goal.createdAt);
 				var end = moment(goal.dueDate);
 				var cur = moment();
 				curGoal.percentDate = (((end - cur) / (end - start)) * 100).toFixed();
 
-				if (group._id === curGoal._groupId) group.goals.push(curGoal);
+				group.goals.push(curGoal);
 			});
 		});
 
