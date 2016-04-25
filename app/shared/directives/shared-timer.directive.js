@@ -13,15 +13,20 @@ function gTimer($interval) {
 			callback: '&'
 		},
 		link: function(scope, elm, attrs) {
-			var secTimeout = parseInt((new Date(scope.countTo) - new Date()) / 1000);
+			var secTimeout = parseInt((new Date(scope.countTo) - Date.now()) / 1000);
 			scope.output = null;
 
 			function updateTimer() {
 				secTimeout--;
 
 				if (secTimeout <= 0) {
+					// 15 min delay after due time reached
+					if (secTimeout > -15 * 60) {
+						return scope.output = '';
+					}
+
 					$interval.cancel(stopTime);
-					scope.callback();
+					return scope.callback();
 				}
 
 				var min = parseInt(secTimeout / 60);

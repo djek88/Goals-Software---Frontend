@@ -34,7 +34,8 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 
 	function prepareCustomer() {
 		var detectedTz = jstz.determine();
-		var customer = Customer.getCachedCurrent();
+		// copy cause internal objects are the same for any instance
+		var customer = angular.copy(Customer.getCachedCurrent());
 
 		// Init profile timezone
 		if (customer.timeZone === '') {
@@ -50,10 +51,7 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 		delete customer._id;
 
 		Customer.prototype$updateAttributes({id: customerId}, customer, function(customer) {
-			customer = angular.fromJson(angular.toJson(customer));
-			// Update localStorage
-			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
-
+			updateLocalStorage(customer);
 			cb();
 		});
 	}
@@ -86,10 +84,14 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 		$http.post(url, fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
-		}).success(function(result){
-			// update cached Customer
-			LoopBackAuth.setUser(LoopBackAuth.accessTokenId, result._id, result);
+		}).success(function(customer){
+			updateLocalStorage(customer);
 			cb();
 		});
+	}
+
+	function updateLocalStorage(customer) {
+		customer = angular.fromJson(angular.toJson(customer));
+		LoopBackAuth.setUser(LoopBackAuth.accessTokenId, customer._id, customer);
 	}
 }

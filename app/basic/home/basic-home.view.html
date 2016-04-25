@@ -35,7 +35,7 @@
 										<div style="width: 50%;">
 											<a class="btn btn-primary btn-lg join-session-butn"
 												ui-sref="app.session.start({id: group._id})">
-												Join mastermind now</a>
+												Join Mastermind Now</a>
 											<div style="margin-top: 8px;" align="right">
 												<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
 													ng-click="vm.showExcuseModal(group._id)">
@@ -47,7 +47,7 @@
 
 								<div ng-if="!group._nextSessionId" style="width: 50%;">
 									<div class="next-session-startAt-block">
-										Not Scheduled
+										Nothing Scheduled
 									</div>
 								</div>
 							</div>
@@ -88,11 +88,11 @@
 					</div>
 
 					<div ng-if="group._ownerId == vm.curCustomer._id" align="center">
-						<a class="btn btn-primary btn-lg"
+						<button class="btn btn-primary btn-lg"
 							popover-placement="top"
 							uib-popover-template="vm.popoverTemplate"
 							popover-title="Select date and time">
-							Schedule A Mastermind Session</a>
+							Schedule A Mastermind Session</button>
 
 						<script type="text/ng-template" id="shedulePopover.html">
 							<form class="smart-form ng-pristine ng-valid" style="min-width: 240px;">

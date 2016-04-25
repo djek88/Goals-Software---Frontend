@@ -201,3 +201,10 @@ body.container {
 .elemTextPaddingNgRepeat>span {
 	padding-top: 7px;
 }
+
+.media-member-desc {
+	min-height: 63px;
+	width: inherit;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

@@ -66,10 +66,14 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 	});
 
 	function updateCustomerPicture() {
+		layoutLoader.on();
+
 		profileSettingsService.uploadPicture(
 			vm.customer._id,
 			vm.imgData.newPicture,
 			function() {
+				layoutLoader.off();
+
 				vm.imgData = profileSettingsService.getDefaultImgData();
 
 				notifyAndLeave({

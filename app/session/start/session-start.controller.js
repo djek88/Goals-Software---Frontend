@@ -7,7 +7,7 @@ angular
 function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sessionStartService, loadAppData, group, socket) {
 	var vm = this;
 
-	//group.NextSession.startAt = '2016-04-08T14:40:00.000Z';
+	//group.NextSession.startAt = '2016-04-25T07:00:00.000Z';
 
 	vm.isGroupOwner = Customer.getCachedCurrent()._id === group._ownerId;
 	vm.isStarted = false;
@@ -20,8 +20,7 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 	$scope.$on('$destroy', onDestroy);
 
 	socket.emit('startSessionRoom:join', group._id, onJoin);
-	socket.on('startSessionRoom:redirect', onRedirect);
-	socket.on('user:joined', onUserJoined);
+	socket.on('user:joined', onUserJoin);
 	socket.on('user:left', onUserLeft);
 
 	function timeOut() {
@@ -33,22 +32,21 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 	}
 
 	function startSession() {
-		socket.emit('startSessionRoom:startSession', group._id);
+		socket.emit('startSessionRoom:startSession', group._id, onSessionStart);
 	}
 
 	function onDestroy() {
-		socket.removeAllListeners('startSessionRoom:redirect');
 		socket.removeAllListeners('user:joined');
 		socket.removeAllListeners('user:left');
 		socket.disconnect();
 	}
 
-	function onJoin(err, onlineUserIds) {
-		if (err) {
+	function onJoin(errMsg, onlineUserIds) {
+		if (errMsg) {
 			onDestroy();
 			return notifyAndLeave({
 				title: 'Session joining...',
-				content: 'Forbidden!',
+				content: errMsg,
 				isError: true,
 				leave: {to: 'app.home'}
 			});
@@ -57,7 +55,15 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 		sessionStartService.refreshOnline(vm.members, onlineUserIds);
 	}
 
-	function onRedirect(groupId) {
+	function onSessionStart(errMsg, groupId) {
+		if (errMsg) {
+			return notifyAndLeave({
+				title: 'Session starting...',
+				content: errMsg,
+				isError: true
+			});
+		}
+
 		notifyAndLeave({
 			title: 'Session starting...',
 			content: 'Waiting other user and starting session.',
@@ -65,7 +71,7 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 		});
 	}
 
-	function onUserJoined(userId) {
+	function onUserJoin(userId) {
 		sessionStartService.changeMemberOnline(vm.members, userId, true);
 	}
 

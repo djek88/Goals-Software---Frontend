@@ -7,7 +7,7 @@ angular
 function formatGoalDueDate() {
 	return function(dueDate, goalState) {
 		var result = '';
-		dueDate = moment(dueDate).format('YY/MM/DD [at] ha');
+		dueDate = moment(dueDate).format('DD MMMM YYYY [at] ha');
 
 		if (goalState === 5) {
 			result = 'Given up on: ' + dueDate;
