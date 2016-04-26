@@ -89,13 +89,16 @@
 
 					<div ng-if="group._ownerId == vm.curCustomer._id" align="center">
 						<button class="btn btn-primary btn-lg"
+							ng-init="vm[group._id] = false;"
+							popover-is-open="vm[group._id]"
+
 							popover-placement="top"
 							uib-popover-template="vm.popoverTemplate"
 							popover-title="Select date and time">
 							Schedule A Mastermind Session</button>
 
 						<script type="text/ng-template" id="shedulePopover.html">
-							<form class="smart-form ng-pristine ng-valid" style="min-width: 240px;">
+							<form g-click-outside="vm.closePopover(group._id)" class="smart-form ng-pristine ng-valid" style="min-width: 240px;">
 								<section>
 									<label class="input">
 										<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
@@ -104,14 +107,15 @@
 										</a>
 
 										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-											<datetimepicker ng-model="vm.scheduledTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView: 'month', minView: 'minute' }"/>
+											<datetimepicker ng-model="vm.scheduledTime"
+												data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView: 'month', minView: 'minute' }"/>
 										</ul>
 									</label>
 								</section>
 
 								<div align="right">
-									<a class="btn btn-default btn-sm"
-										ng-click="vm.scheduleSession(group._id)">Ok</a>
+									<button class="btn btn-default btn-sm"
+										ng-click="vm.scheduleSession(group._id)">Ok</button>
 								</div>
 							</form>
 						</script>

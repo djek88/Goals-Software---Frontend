@@ -18,6 +18,7 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 	vm.onSessionStart = onSessionStart;
 	vm.showExcuseModal = showExcuseModal;
 	vm.scheduleSession = scheduleSession;
+	vm.closePopover = function(id) { vm[id] = false; };
 
 	function onSessionStart(groupId) {
 		vm.groups.forEach(function(group) {
@@ -45,6 +46,8 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 
 	function scheduleSession(groupId) {
 		if (!(vm.scheduledTime instanceof Date)) return;
+
+		vm.closePopover(groupId);
 		layoutLoader.on();
 
 		var minStartAt = Date.now() + 7 * 60 * 1000;
