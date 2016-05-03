@@ -87,7 +87,6 @@ function sessionGoesService($rootScope, Goal) {
 
 		var options = {
 			title: 'Select goal to which you want vote...',
-			//content: 'You can delete group',
 			buttons: '[Cancel][Select]',
 			input: 'select',
 			options: goalList

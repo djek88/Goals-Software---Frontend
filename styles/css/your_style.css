@@ -207,4 +207,5 @@ body.container {
 	width: inherit;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: pre-wrap;
 }

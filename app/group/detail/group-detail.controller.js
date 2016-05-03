@@ -20,15 +20,6 @@ function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDe
 	vm.removeOwner = removeOwner;
 	vm.removeMember = removeMember;
 
-	function showEmailModal(memberId) {
-		groupDetailService.emailModalOpen(group._id, memberId, function() {
-			notifyAndLeave({
-				title: 'Send Email...',
-				content: 'Message sent success'
-			});
-		});
-	}
-
 	function refreshData(freshGroup) {
 		group = freshGroup;
 		vm.group = groupDetailService.prepareGroup(
@@ -39,6 +30,15 @@ function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDe
 		);
 		vm.listMembersWithOwner = groupDetailService.getMembersWithOwner(freshGroup);
 		vm.isCurCustomerGroupMember = groupDetailService.customerIsMember(vm.curCustomer._id, freshGroup);
+	}
+
+	function showEmailModal(memberId) {
+		groupDetailService.emailModalOpen(group._id, memberId, function() {
+			notifyAndLeave({
+				title: 'Send Email...',
+				content: 'Message sent success'
+			});
+		});
 	}
 
 	function removeOwner() {

@@ -32,7 +32,7 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 	function showExcuseModal(groupId) {
 		basicHomeService.excuseModalOpen(groupId, function(freshSess) {
 			vm.groups.forEach(function(group) {
-				if (group._id === groupId) {
+				if (group._id === freshSess._groupId) {
 					group.NextSession = freshSess;
 				}
 			});
@@ -59,7 +59,7 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 			vm.groups.forEach(function(group) {
 				if (group._id === groupId) {
 					group._nextSessionId = session._id;
-					group.NextSession = session;
+					group.NextSession = angular.fromJson(angular.toJson(session));
 				}
 			});
 

@@ -4,7 +4,7 @@ angular
 	.module('app.basic')
 	.factory('basicMyGoalsService', basicMyGoalsService);
 
-function basicMyGoalsService($uibModal, Group) {
+function basicMyGoalsService() {
 	var service = {
 		prepareGroupsWithGoals: prepareGroupsWithGoals
 	};

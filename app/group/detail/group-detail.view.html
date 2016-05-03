@@ -1,33 +1,36 @@
 <div id="content">
-
-	<h3>
+	<h2>
 		{{vm.group.name}}
 		<a class="btn btn-default btn-circle"
 			ng-if="vm.isCurCustomerGroupMember"
 			ng-click="vm.showEmailModal()">
 			<i class="fa fa-envelope"></i>
 		</a>
-	</h3>
+	</h2>
 
-	<h3>
-		Created: {{vm.group.created}}
-	</h3>
+	<div style="font-size: 17px;">
+		<p>
+			<b>Created:</b> {{vm.group.created}}
+		</p>
 
-	<h3>
-		Number Of Mastermind Session: {{vm.sessionsPassed}}
-	</h3>
+		<p>
+			<b>Number Of Mastermind Session:</b> {{vm.sessionsPassed}}
+		</p>
 
-	<h3>
-		Penalty Level: ${{vm.group.penalty}}
-	</h3>
+		<p>
+			<b>Penalty Level:</b> ${{vm.group.penalty}}
+		</p>
 
-	<h3>
-		<div style="white-space: pre-wrap;">Description: {{vm.group.description}}</div>
-	</h3>
+		<p>
+			<div style="white-space: pre-wrap;">
+				<b>Description:</b> {{vm.group.description}}
+			</div>
+		</p>
 
-	<h3>
-		Mastermind Sessions: {{vm.group.mastermindSessions}}
-	</h3>
+		<p>
+			<b>Mastermind Sessions:</b> {{vm.group.mastermindSessions}}
+		</p>
+	</div>
 
 	<div class="row">
 		<div class="col-md-6" ng-repeat="member in vm.listMembersWithOwner">
@@ -45,17 +48,20 @@
 
 						<a class="btn btn-default btn-circle"
 							ng-if="member.social.fb"
-							ng-href="{{member.social.fb}}">
+							ng-href="{{member.social.fb | userLink}}"
+							target="_blank">
 							<i class="fa fa-facebook-square"></i>
 						</a>
 						<a class="btn btn-default btn-circle"
 							ng-if="member.social.tw"
-							ng-href="{{member.social.tw}}">
+							ng-href="{{member.social.tw | userLink}}"
+							target="_blank">
 							<i class="fa fa-twitter-square"></i>
 						</a>
 						<a class="btn btn-default btn-circle"
 							ng-if="member.social.li"
-							ng-href="{{member.social.li}}">
+							ng-href="{{member.social.li | userLink}}"
+							target="_blank">
 							<i class="fa fa-linkedin-square"></i>
 						</a>
 						<a class="btn btn-default btn-circle"
