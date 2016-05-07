@@ -3,7 +3,8 @@
 angular
 	.module('app.basic', [
 		'ui.router',
-		'backendApi'
+		'backendApi',
+		'ui.bootstrap.datetimepicker'
 	])
 	.config(config);
 

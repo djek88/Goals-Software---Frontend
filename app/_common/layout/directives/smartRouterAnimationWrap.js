@@ -1,10 +1,10 @@
-'use strict';
+/*'use strict';
 
 angular
 	.module('SmartAdmin.Layout')
 	.directive('smartRouterAnimationWrap', smartRouterAnimationWrap);
 
-function smartRouterAnimationWrap($rootScope,$timeout) {
+function smartRouterAnimationWrap($rootScope, $timeout) {
 	return {
 		restrict: 'A',
 		compile: function (element, attributes) {
@@ -76,4 +76,4 @@ function smartRouterAnimationWrap($rootScope,$timeout) {
 			});
 		}
 	}
-}
+}*/

@@ -1,4 +1,4 @@
-
+/*
 
 'use strict';
 
@@ -22,4 +22,4 @@ angular.module('SmartAdmin.Layout').directive('smartPageTitle', function ($rootS
 
         }
     }
-});
+});*/

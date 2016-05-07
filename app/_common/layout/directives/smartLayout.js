@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 angular.module('SmartAdmin.Layout').directive('smartLayout', function ($rootScope, $timeout, $interval, $q, SmartCss) {
 	var _debug = 0;
@@ -50,7 +50,7 @@ angular.module('SmartAdmin.Layout').directive('smartLayout', function ($rootScop
 		compile: function (tElement, tAttributes) {
 			tElement.removeAttr('smart-layout data-smart-layout');
 
-			var appViewHeight = 0 ,
+			var appViewHeight = 0,
 				appViewWidth = 0,
 				calcWidth,
 				calcHeight,
@@ -61,7 +61,7 @@ angular.module('SmartAdmin.Layout').directive('smartLayout', function ($rootScop
 
 			function resizeListener() {
 
-//                    full window height appHeight = Math.max($menu.outerHeight() - 10, getDocHeight() - 10);
+				// full window height appHeight = Math.max($menu.outerHeight() - 10, getDocHeight() - 10);
 
 				var menuHeight = $body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.height() : 0;
 				var menuWidth = !$body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.width() + $menu.offset().left : 0;
@@ -163,3 +163,4 @@ angular.module('SmartAdmin.Layout').directive('smartLayout', function ($rootScop
 		}
 	}
 });
+*/
