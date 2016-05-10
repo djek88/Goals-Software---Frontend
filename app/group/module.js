@@ -569,7 +569,7 @@ function config($stateProvider) {
 				member: function($q, $stateParams, Customer) {
 					var deferred = $q.defer();
 
-					Customer.findById({
+					Customer.prototype$baseCustomerInfo({
 							id: $stateParams.memberId
 						},
 						deferred.resolve.bind(deferred),

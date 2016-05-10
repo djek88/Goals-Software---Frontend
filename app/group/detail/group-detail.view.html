@@ -39,11 +39,12 @@
 					<div class="media-left">
 						<img class="media-object" height="128px" width="128px" ng-src="{{vm.urlBase + member.avatar}}" alt="...">
 					</div>
-					<div class="media-body" style="width: 396px;">
+					<div class="media-body" style="width: 100%;">
 						<h4 class="media-heading">
 							{{member.firstName + ' ' + member.lastName}}
 							<span ng-if="vm.group._ownerId == member._id"> - Group Owner</span>
 						</h4>
+
 						<p class="media-member-desc">{{member.description}}</p>
 
 						<a class="btn btn-default btn-circle"

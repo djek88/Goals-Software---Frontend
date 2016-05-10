@@ -12,6 +12,7 @@ function notifyAndLeave($state) {
 		var leave = opts.leave || null;
 		var isError = opts.isError || false;
 		var timeout = opts.timeout || 3000;
+		var sound = opts.sound || false;
 
 		if (title && content) {
 			$[box]({
@@ -19,7 +20,8 @@ function notifyAndLeave($state) {
 				content: content,
 				timeout: timeout,
 				color: isError ? '#C46A69' : '#296191',
-				icon: isError ? 'fa fa-warning shake animated' : 'fa fa-bell swing animated'
+				icon: isError ? 'fa fa-warning shake animated' : 'fa fa-bell swing animated',
+				sound: sound
 			});
 		}
 

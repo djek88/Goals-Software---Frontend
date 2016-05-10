@@ -1,8 +1,11 @@
 <div id="content">
 	<div class="row">
-
 		<section widget-grid id="widget-grid">
 			<article class="col-sm-12">
+				<div align="center" ng-if="!vm.requests.length" style="margin-top: 120px;">
+					<h3>You currently have no new applications</h3>
+				</div>
+
 				<div>
 					<div class="well" style="margin: 8px;" ng-repeat="request in vm.requests | limitTo: vm.requestsPerPage : ((vm.curPageNumber - 1) * vm.requestsPerPage)">
 						<div class="row">
@@ -47,6 +50,5 @@
 				</div>
 			</article>
 		</section>
-
 	</div>
 </div>
