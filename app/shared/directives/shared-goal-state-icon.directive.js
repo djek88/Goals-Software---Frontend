@@ -7,7 +7,7 @@ angular
 function gGoalStateIcon($interval) {
 	return {
 		restrict: 'E',
-		template: '<i class="{{dinamicIcon}}" style="color: {{dinamicColor}}; padding-left: 10px; font-size: 23px;">',
+		template: '<i class="{{dinamicIcon}}" style="color: {{dinamicColor}}; padding-left: 10px; padding-top: 10px; font-size: 23px;">',
 		scope: {
 			state: '@'
 		},

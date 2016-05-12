@@ -20,6 +20,7 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 	$scope.$on('$destroy', onDestroy);
 
 	socket.emit('startSessionRoom:join', group._id, onJoin);
+	socket.on('startSessionRoom:redirect', onRedirect);
 	socket.on('user:joined', onUserJoin);
 	socket.on('user:left', onUserLeft);
 
@@ -32,7 +33,15 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 	}
 
 	function startSession() {
-		socket.emit('startSessionRoom:startSession', group._id, onSessionStart);
+		socket.emit('startSessionRoom:startSession', group._id, function(errMsg) {
+			if (errMsg) {
+				notifyAndLeave({
+					title: 'Session starting...',
+					content: errMsg,
+					isError: true}
+				);
+			}
+		});
 	}
 
 	function onDestroy() {
@@ -55,15 +64,7 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 		sessionStartService.refreshOnline(vm.members, onlineUserIds);
 	}
 
-	function onSessionStart(errMsg, groupId) {
-		if (errMsg) {
-			return notifyAndLeave({
-				title: 'Session starting...',
-				content: errMsg,
-				isError: true
-			});
-		}
-
+	function onRedirect(groupId) {
 		notifyAndLeave({
 			title: 'Session starting...',
 			content: 'Waiting other user and starting session.',

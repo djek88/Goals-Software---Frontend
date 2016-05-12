@@ -29,8 +29,8 @@ function groupMyGroupsService($uibModal, Group) {
 
 	function leaveGroupBox(cb) {
 		$.SmartMessageBox({
-			title: "Leave group!",
-			content: "Are you sure, you want to leave this group?",
+			title: "You are about to leave this group...",
+			content: "Are you sure? (This option cannot be undone)",
 			buttons: '[No][Yes]'
 		}, function (buttonPressed) {
 			if (buttonPressed === 'Yes') cb();

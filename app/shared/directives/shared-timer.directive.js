@@ -10,22 +10,24 @@ function gTimer($interval) {
 		template: '<span>{{output}}</span>',
 		scope: {
 			countTo: '@',
+			callbackDelaySec: '@',
 			callback: '&'
 		},
 		link: function(scope, elm, attrs) {
 			var secTimeout = parseInt((new Date(scope.countTo) - Date.now()) / 1000);
+			var delay = Number(scope.callbackDelaySec) || 0;
 			scope.output = null;
 
 			function updateTimer() {
 				secTimeout--;
 
 				if (secTimeout <= 0) {
-					// 15 min delay after due time reached
-					if (secTimeout > -15 * 60) {
+					// if have delay before call callback
+					if (delay && delay > 0 && secTimeout > (delay * -1)) {
 						return scope.output = '';
 					}
 
-					$interval.cancel(stopTime);
+					$interval.cancel(intervalId);
 					return scope.callback();
 				}
 
@@ -36,10 +38,10 @@ function gTimer($interval) {
 				scope.output += sec ? sec + ' Seconds ' : '';
 			}
 
-			var stopTime = $interval(updateTimer, 1000);
+			var intervalId = $interval(updateTimer, 1000);
 
 			elm.on('$destroy', function() {
-				$interval.cancel(stopTime);
+				$interval.cancel(intervalId);
 			});
 
 			updateTimer();

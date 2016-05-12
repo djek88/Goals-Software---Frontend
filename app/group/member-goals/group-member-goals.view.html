@@ -24,27 +24,25 @@
 						<h4>{{goal.dueDate | formatGoalDueDate:goal.state}}</h4>
 					</span>
 
-					<div class="col-md-3">
-						<div class="pull-right">
-							<a class="btn btn-default" data-tooltip="Review goal"
-								ng-if="!vm.isOwner"
-								ui-sref="app.group.goalReview({id: goal._groupId, goalId: goal._id})">
-								<i class="fa fa-eye"></i></a>
+					<div class="col-md-3 goalButtonsPadding" align="right">
+						<a class="btn btn-default" data-tooltip="Review goal"
+							ng-if="!vm.isOwner"
+							ui-sref="app.group.goalReview({id: goal._groupId, goalId: goal._id})">
+							<i class="fa fa-eye"></i></a>
 
-							<a class="btn btn-default" data-tooltip="Edit goal"
-								ng-if="vm.isOwner"
-								ui-sref="app.group.goalEdit({id: goal._groupId, goalId: goal._id})">
-								<i class="fa fa-pencil"></i></a>
+						<a class="btn btn-default" data-tooltip="Edit goal"
+							ng-if="vm.isOwner"
+							ui-sref="app.group.goalEdit({id: goal._groupId, goalId: goal._id})">
+							<i class="fa fa-pencil"></i></a>
 
-							<a class="btn btn-default" data-tooltip="Upload evidence"
-								ng-if="vm.isOwner"
-								ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
-								<i class="fa fa-thumb-tack"></i></a>
+						<a class="btn btn-default" data-tooltip="Upload evidence"
+							ng-if="vm.isOwner"
+							ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
+							<i class="fa fa-thumb-tack"></i></a>
 
-							<span>
-								<g-goal-state-icon state="{{goal.state}}"></g-goal-state-icon>
-							</span>
-						</div>
+						<span>
+							<g-goal-state-icon state="{{goal.state}}"></g-goal-state-icon>
+						</span>
 					</div>
 				</div>
 			</div>

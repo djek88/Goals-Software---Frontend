@@ -199,7 +199,16 @@ body.container {
 }
 
 .elemTextPaddingNgRepeat>span {
-	padding-top: 7px;
+	padding-top: 11px;
+}
+
+.goalProgressBar {
+	padding-top: 15px!important;
+	height: 30px;
+}
+
+.goalButtonsPadding>a {
+	margin-bottom: 5px;
 }
 
 .media-member-desc {

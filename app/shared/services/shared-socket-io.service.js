@@ -22,6 +22,8 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 			if (startSocket.disconnected) startSocket.connect();
 		} else {
 			startSocket = io($rootScope.socketUrl + '/startSession', {path: '/sockets'});
+			injectAngularApply(startSocket);
+
 			startSocket.onSuccessAuth = function() {};
 			startSocket.onFailAuth = function() {};
 
@@ -38,6 +40,8 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 			if (goesSocket.disconnected) goesSocket.connect();
 		} else {
 			goesSocket = io($rootScope.socketUrl + '/goesSession', {path: '/sockets'});
+			injectAngularApply(goesSocket);
+
 			goesSocket.onSuccessAuth = function() {};
 			goesSocket.onFailAuth = function() {};
 
@@ -59,5 +63,42 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 
 	function onUnauthorized() {
 		this.onFailAuth();
+	}
+
+	function injectAngularApply(socket) {
+		var on = socket.on;
+		var emit = socket.emit;
+
+		socket.on = function() {
+			var cb = arguments[arguments.length - 1];
+
+			arguments[arguments.length - 1] = function() {
+				var self = this;
+				var args = arguments;
+
+				$rootScope.$apply(function() {
+					cb.apply(self, args);
+				});
+			};
+
+			return on.apply(this, arguments);
+		};
+
+		socket.emit = function() {
+			if ('function' == typeof arguments[arguments.length - 1]) {
+				var cb = arguments[arguments.length - 1];
+
+				arguments[arguments.length - 1] = function() {
+					var self = this;
+					var args = arguments;
+
+					$rootScope.$apply(function() {
+						cb.apply(self, args);
+					});
+				}
+			}
+
+			return emit.apply(this, arguments);
+		};
 	}
 }

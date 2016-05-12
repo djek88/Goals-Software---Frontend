@@ -14,7 +14,7 @@
 								<div ng-if="group._nextSessionId">
 									<div ng-if="!(group.NextSession.startAt | isLessThanMins:10)">
 										Next mastermind on:
-										<div style="width: 50%; min-width: 280px;">
+										<div style="width: 50%; min-width: 300px;">
 											<div class="next-session-startAt-block">
 												{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}
 											</div>
@@ -29,10 +29,10 @@
 									<div ng-if="(group.NextSession.startAt | isLessThanMins:10)">
 										Mastermind starting in:
 										<b style="font-size: 18px;">
-											<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)"></g-timer>
+											<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)" callback-delay-sec="{{15 * 60}}"></g-timer>
 										</b>
 
-										<div style="width: 50%; min-width: 280px;">
+										<div style="width: 50%; min-width: 300px;">
 											<a class="btn btn-primary btn-lg join-session-butn"
 												ui-sref="app.session.start({id: group._id})">
 												Join Mastermind Now</a>
@@ -56,15 +56,15 @@
 
 					<div class="well" ng-repeat="goal in group.goals | orderBy:'dueDate'" style="margin: 8px;">
 						<div class="row elemTextPaddingNgRepeat">
-							<span class="col-md-5">
+							<span class="col-md-4">
 								<h4>{{goal.name}}</h4>
 							</span>
 
-							<span class="col-md-3">
+							<span class="col-md-4">
 								<h4>{{goal.dueDate | formatGoalDueDate:goal.state}}</h4>
 							</span>
 
-							<span class="col-md-2" style="padding-top: 10px; height: 30px;">
+							<span class="col-md-2 goalProgressBar">
 								<div class="progress progress-sm progress-striped active">
 									<div class="progress-bar bg-color-green"
 										ng-class="goal.percentDate > 66 ? 'bg-color-green' : goal.percentDate > 33 ? 'bg-color-orange' : 'bg-color-red'"
@@ -72,14 +72,14 @@
 								</div>
 							</span>
 
-							<div class="col-md-2" align="right">
-								<a class="btn btn-default" data-tooltip="Upload evidence"
-									ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
-									<i class="fa fa-thumb-tack"></i></a>
-
+							<div class="col-md-2 goalButtonsPadding" align="right">
 								<a class="btn btn-default" data-tooltip="Edit goal"
 									ui-sref="app.group.goalEdit({id: goal._groupId, goalId: goal._id})">
 									<i class="fa fa-pencil"></i></a>
+
+								<a class="btn btn-default" data-tooltip="Upload evidence"
+									ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
+									<i class="fa fa-thumb-tack"></i></a>
 
 								<g-goal-state-icon state="{{goal.state}}"></g-goal-state-icon>
 							</div>

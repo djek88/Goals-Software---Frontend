@@ -8,7 +8,7 @@
 							<b>Next session starting in:</b>
 						</div>
 						<div style="text-align: center; font-size: 34px; line-height: 2">
-							<b><g-timer count-to="{{vm.sessionStartAt}}" callback="vm.timeOut()"></g-timer></b>
+							<b><g-timer count-to="{{vm.sessionStartAt}}" callback="vm.timeOut()" callback-delay-sec="{{1}}"></g-timer></b>
 						</div>
 					</div>
 				</div>
