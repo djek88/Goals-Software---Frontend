@@ -271,42 +271,30 @@ function config($stateProvider) {
 				}
 			}
 		})
-		.state('app.group.sessionExcuses', {
-			url: '/:id/next-session-excuses',
-			data: {
-				title: 'Next session excuses'
-			},
+		.state('app.group.approveExcuse', {
+			url: '/:id/session/:sessionId/approve-excuse/:excuseId',
 			views: {
 				'content@app': {
-					templateUrl: 'app/group/session-excuses/group-session-excuses.view.html',
-					controller: 'groupSessionExcusesController',
-					controllerAs: 'vm'
-				}
-			},
-			resolve: {
-				group: function($q, $stateParams, Group, notifyAndLeave) {
-					var deferred = $q.defer();
+					controller: function($stateParams, Group, notifyAndLeave, layoutLoader, loadAppData) {
+						layoutLoader.on();
 
-					Group.findById({
-							id: $stateParams.id,
-							filter: {include: ['Members', 'Owner', 'NextSession']}
-						},
-						function(group) {
-							if (!group._nextSessionId) {
+						Group.prototype$approveExcuse({
+								id: $stateParams.id,
+								sessionId: $stateParams.sessionId,
+								excuseId: $stateParams.excuseId
+							}, null, function() {
 								notifyAndLeave({
-									title: 'Next session excuses page...',
-									content: 'Next mastermind session not sheduled!'
+									title: 'Approve excuse...',
+									content: 'Thanks for your vote.',
+									leave: {to: 'app.home'}
 								});
-
-								return deferred.reject();
+							}, function() {
+								notifyAndLeave({
+									leave: {to: 'app.home'}
+								});
 							}
-
-							deferred.resolve(group);
-						},
-						deferred.reject.bind(deferred)
-					);
-
-					return deferred.promise;
+						);
+					}
 				}
 			}
 		})

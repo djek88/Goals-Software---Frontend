@@ -7,8 +7,8 @@ angular
 function notifyAndLeave($state) {
 	return function(opts) {
 		var box = opts.box || 'smallBox';
-		var title = opts.title.toString() || null;
-		var content = opts.content.toString() || null;
+		var title = opts.title && opts.title.toString() || null;
+		var content = opts.content && opts.content.toString() || null;
 		var leave = opts.leave || null;
 		var isError = opts.isError || false;
 		var timeout = opts.timeout || 3000;

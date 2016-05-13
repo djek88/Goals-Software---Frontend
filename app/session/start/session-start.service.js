@@ -19,7 +19,7 @@ function sessionStartService() {
 
 		members.forEach(function(member) {
 			var id = member._id;
-			var isValidExcuse = excuses[id] && excuses[id].valid;
+			var isValidExcuse = excuses[id] && checkIsValidExcuse(id);
 
 			result[id] = {
 				fullName: member.firstName + ' ' + member.lastName,
@@ -28,6 +28,19 @@ function sessionStartService() {
 		});
 
 		return result;
+
+		function checkIsValidExcuse(excuseId) {
+			// consider only current members votes
+			var activeVotesCount = excuses[excuseId]._votes.filter(function(voterId) {
+				// check if voter still is group member
+				return members.some(function(m) { return m._id === voterId; });
+			}).length;
+
+			if (!activeVotesCount) return false;
+
+			var approveVotesPercent = ((activeVotesCount / (members.length - 1)) * 100).toFixed();
+			return approveVotesPercent > 50;
+		}
 	}
 
 	function refreshOnline(members, onlineUserIds) {
