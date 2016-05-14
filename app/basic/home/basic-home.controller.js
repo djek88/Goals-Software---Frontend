@@ -50,7 +50,7 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 		vm.closePopover(groupId);
 		layoutLoader.on();
 
-		var minStartAt = Date.now() + 7 * 60 * 1000;
+		var minStartAt = new Date().setMinutes(new Date().getMinutes() + 8);
 		var startAt = vm.scheduledTime < minStartAt ? minStartAt : vm.scheduledTime.getTime();
 
 		basicHomeService.scheduleNextSession(groupId, startAt, function(session) {

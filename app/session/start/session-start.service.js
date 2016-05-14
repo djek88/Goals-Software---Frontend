@@ -30,9 +30,10 @@ function sessionStartService() {
 		return result;
 
 		function checkIsValidExcuse(excuseId) {
+			if (!excuses[excuseId]._votes.length) return false;
+
 			// consider only current members votes
 			var activeVotesCount = excuses[excuseId]._votes.filter(function(voterId) {
-				// check if voter still is group member
 				return members.some(function(m) { return m._id === voterId; });
 			}).length;
 
