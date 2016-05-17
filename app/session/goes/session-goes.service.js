@@ -7,7 +7,7 @@ angular
 function sessionGoesService($rootScope, Goal) {
 	var ROUNDS_DESCRIPTION = [
 		'Round 1: Review last goal',
-		'Round 2: Focus on objective and challenges',
+		'Round 2: In the spotlight',
 		'Round 3: Specify exact measurable goals'
 	];
 	var members = {};

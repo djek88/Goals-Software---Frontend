@@ -19,7 +19,7 @@ function groupCreateService(Group) {
 			type: +Object.keys(groupTypes)[0],
 			penalty: penaltyAmounts[0],
 			maxMembers: 5,
-			private: false,
+			private: true,
 			memberCanInvite: false,
 			description: '',
 			sessionConf: {
