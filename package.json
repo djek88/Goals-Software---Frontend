@@ -1,25 +1,17 @@
 {
-  "name": "smartadmin-angularjs-app",
-  "version": "1.7.0",
-  "description": "Demo Application for AngularJS version of SmartAdmin application template",
-  "main": "index.html",
+  "name": "themastermind_client",
+  "version": "1.0.0",
+  "description": "Client side application",
+  "main": "dist/app.js",
   "scripts": {
-    "gulp": "./node_modules/.bin/gulp"
+    "gulp": "./node_modules/.bin/gulp",
+    "start": "./node_modules/.bin/gulp",
+    "test": "./node_modules/.bin/gulp test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://grigson@bitbucket.org/grigson/smartadmin-angularjs-version-2.git/"
-  },
-  "keywords": [
-    "angularjs",
-    "smartadmin"
-  ],
-  "author": "",
-  "license": "",
   "devDependencies": {
-    "del": "^2.2.0",
     "browser-sync": "^2.11.1",
     "connect-history-api-fallback": "^1.1.0",
+    "del": "^2.2.0",
     "event-stream": "^3.3.2",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-angular-templatecache": "^1.8.0",
@@ -35,6 +27,13 @@
     "gulp-uglify": "^1.5.2",
     "gulp-useref": "^3.0.5",
     "gulp-wrap": "^0.11.0",
+    "jasmine-core": "^2.4.0",
+    "karma": "~0.13",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
     "stream-combiner2": "^1.1.1"
   },
   "dependencies": {}

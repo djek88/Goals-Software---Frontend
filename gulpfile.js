@@ -16,6 +16,7 @@ const cssnano = require('gulp-cssnano');
 const minifyHTML = require('gulp-minify-html');
 const bs = require('browser-sync').create();
 const historyApiFallback = require('connect-history-api-fallback')
+const karmaServer = require('karma').Server;
 //const rename = require('gulp-rename');
 //const gulpIgnore = require('gulp-ignore');
 
@@ -24,7 +25,6 @@ let scripts = require('./app.scripts.json');
 let source = {
 	html: './app/**/*.html',
 	js: {
-		main: './app/main.js',
 		src: [
 			// application config
 			'./app.config.js',
@@ -40,6 +40,9 @@ let source = {
 
 			// other js files [controllers, services, etc.]
 			'./app/**/!(module)*.js',
+
+			// exept test files
+			'!./app/**/*.test.js'
 		]
 	},
 	tmpl: './app/**/*.tpl.html'
@@ -74,6 +77,7 @@ gulp.task('app:concat', function(cb) {
 
 gulp.task('vendor:concat', function(cb) {
 	var paths = [];
+
 	scripts.prebuild.forEach(function(script) {
 		paths.push(scripts.paths[script]);
 	});
@@ -89,7 +93,7 @@ gulp.task('resource', function(cb) {
 	return combiner(
 		gulp.src([
 			'{plugin,smartadmin-plugin}/**/*',
-			'{sound,langs}/**/*',
+			'sound/**/*',
 			'styles/{fonts,img}/**/*',
 			'app.scripts.json'
 		], {base: '.'}),
@@ -132,6 +136,15 @@ gulp.task('app:minify', gulp.series('app:concat', function(cb) {
 		gulp.dest(destination)
 	).on('error', notify.onError(function(err) {cb();return err;}));
 }));
+
+gulp.task('runKarmaServer', function (cb) {
+	let serverInst = new karmaServer({
+		configFile: __dirname + '/karma.conf.js',
+		singleRun: false
+	}, cb);
+
+	serverInst.start();
+});
 
 gulp.task('serve', function(cb) {
 	bs.init({
@@ -184,4 +197,17 @@ gulp.task('prod', gulp.series(
 		'resource',
 		'html:minify'
 	)
+));
+
+gulp.task('test', gulp.series(
+	function(cb) {
+		destination = './distTest';
+		cb();
+	},
+	'clean',
+	gulp.parallel(
+		'vendor:concat'
+		//'app:concat'
+	),
+	'runKarmaServer'
 ));
