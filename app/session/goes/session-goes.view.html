@@ -1,0 +1,118 @@
+<div id="content">
+	<div class="row">
+		<section widget-grid id="widget-grid">
+			<article class="col-md-12" ng-if="vm.sess.state[0]">
+
+				<!-- Round desc block -->
+				<div class="session-round-desc">
+					<b>{{vm.sess.timer < 6 ? 'Next person to speak in...' : vm.sess.roundDesc}}</b>
+					<span ng-if="vm.sess.state[0] == 2" style="font-size: 18px;">(each member to focus on their objectives, and then other members to give feedback)</span>
+				</div>
+
+				<!-- Avatars, info, timer block -->
+				<div class="col-md-12" style="margin-top: 40px;">
+					<!-- For 1 and 3 round -->
+					<div ng-if="vm.sess.state[0] != 2">
+						<div class="col-md-3 col-md-offset-3">
+							<p class="session-avatar-title">
+								Turn To Talk: {{vm.sess.focusOn.fullName}}
+							</p>
+							<div>
+								<img class="session-avatar" ng-src="{{vm.sess.focusOn.avatar}}">
+							</div>
+							<div class="session-next-info">
+								<div ng-if="vm.sess.nextFocusOn.fullName">
+									Next In The Spotlight: {{vm.sess.nextFocusOn.fullName}}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- For 2 round -->
+					<div ng-if="vm.sess.state[0] == 2">
+						<div class="col-md-3 col-offset-one-and-half">
+							<p class="session-avatar-title">
+								Spotlight On: {{vm.sess.focusOn.fullName}}
+							</p>
+							<div>
+								<img class="session-avatar" ng-src="{{vm.sess.focusOn.avatar}}">
+							</div>
+							<div class="session-next-info">
+								Next In The Spotlight: {{vm.sess.nextFocusOn.fullName}}
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<p class="session-avatar-title">
+								Turn To Talk: {{vm.sess.whoGiveFeedback.fullName}}
+							</p>
+							<div>
+								<img ng-if="vm.sess.whoGiveFeedback.avatar"
+									class="session-avatar"
+									ng-src="{{vm.sess.whoGiveFeedback.avatar}}">
+
+								<img ng-if="!vm.sess.whoGiveFeedback.avatar" class="session-avatar">
+							</div>
+							<div class="session-next-info">
+								<div ng-if="vm.sess.nextWhoGiveFeedback.fullName">
+									Next To Talk: {{vm.sess.nextWhoGiveFeedback.fullName}}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Timer block -->
+					<div class="col-md-3">
+						<p class="session-avatar-title">
+							{{vm.sess.timer < 6 ? 'In...' : 'Time Left To Talk'}}
+						</p>
+						<div ng-class="vm.sess.timer < 6 ? 'expired-timer' : 'normal-timer'">
+							<div ng-if="vm.sess.timer >= 0">
+								<div style="font-size: 65px; padding-top: 74px;">
+									<b>{{vm.sess.timer}}</b>
+								</div>
+								<div style="font-size: 20px;">seconds</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Vote buttons block -->
+				<div ng-if="vm.sess.state[0] == 1 && vm.stillNotVotedGoals.length"
+					class="col-md-12" align="center" style="margin-top: 80px;">
+
+					<div class="col-md-12" style="padding-bottom: 15px;">
+						<b>Please Vote: </b>
+						Did {{vm.sess.focusOn.fullName}} complete the goals set for this week to a satisfactory level?
+					</div>
+
+					<div class="col-md-4 col-md-offset-2">
+						<a class="btn btn-primary btn-lg" style="min-width: 20%;"
+							ng-click="vm.leaveVote(true)">
+							Yes</a>
+					</div>
+					<div class="col-md-4">
+						<a class="btn btn-primary btn-lg" style="min-width: 20%;"
+							ng-click="vm.leaveVote(false)">
+							No</a>
+					</div>
+				</div>
+
+				<!-- Pause, resume buttons block -->
+				<div ng-if="vm.isFacilitator" class="col-md-12" align="center" style="margin-top: 80px;">
+					<div class="col-md-3 col-md-offset-3">
+						<a class="btn btn-primary btn-lg" style="min-width: 90%;"
+							ng-click="vm.pauseResume()">
+							{{ vm.isPause ? 'Resume' : 'Pause'}}</a>
+					</div>
+					<div class="col-md-3">
+						<a class="btn btn-primary btn-lg" style="min-width: 90%;"
+							ng-click="vm.skipRound()">
+							Skip</a>
+					</div>
+				</div>
+
+			</article>
+		</section>
+	</div>
+</div>

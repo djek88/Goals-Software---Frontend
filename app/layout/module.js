@@ -1,29 +1,45 @@
-"use strict";
+'use strict';
 
+angular
+	.module('app.layout', [
+		'ui.router'
+	])
+	.config(config);
 
-angular.module('app.layout', ['ui.router'])
+function config($stateProvider, $urlRouterProvider) {
+	$stateProvider
+		.state('app', {
+			abstract: true,
+			views: {
+				root: {
+					templateUrl: 'app/layout/layout.tpl.html'
+				}
+			},
+			resolve: {
+				loadAppData: function($q, Customer) {
+					var deferred = $q.defer();
 
-.config(function ($stateProvider, $urlRouterProvider) {
+					Customer.getCurrent(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
 
+					return deferred.promise;
+				},
+				scripts: function(lazyScript) {
+					return lazyScript.register([
+						'sparkline',
+						'easy-pie'
+					]);
+				}
+			}
+		})
+		.state('wait', {
+			url: '/wait',
+			onEnter: function($state) {
+				$state.go('app.home');
+			}
+		});
 
-    $stateProvider
-        .state('app', {
-            abstract: true,
-            views: {
-                root: {
-                    templateUrl: 'app/layout/layout.tpl.html'
-                }
-            },
-            resolve: {
-                scripts: function(lazyScript){
-                    return lazyScript.register([
-                            'sparkline',
-                            'easy-pie'
-                        ]);
-                }
-            }
-        });
-    $urlRouterProvider.otherwise('/dashboard');
-
-})
-
+	$urlRouterProvider.otherwise('/wait');
+}

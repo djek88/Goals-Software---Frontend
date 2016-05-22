@@ -1,5 +1,4 @@
-(function(){
-    "use strict";
+"use strict";
 
-    angular.module('SmartAdmin.Forms', []);
-})();
+angular
+	.module('SmartAdmin.Forms', []);

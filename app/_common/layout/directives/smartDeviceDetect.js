@@ -19,7 +19,6 @@ angular.module('SmartAdmin.Layout').directive('smartDeviceDetect', function () {
             tElement.toggleClass('desktop-detected', !isMobile);
             tElement.toggleClass('mobile-detected', isMobile);
 
-
         }
     }
 });

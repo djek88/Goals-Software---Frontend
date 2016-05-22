@@ -1,0 +1,26 @@
+<div id="content">
+	<div class="row">
+		<div class="jarviswidget jarviswidget-sortable">
+			<form ng-submit="vm.requestToGroup()" class="form-horizontal ng-pristine ng-valid">
+				<fieldset align="center">
+					<legend>Request To Join Group</legend>
+				</fieldset>
+
+				<fieldset>
+					<div class="form-group">
+						<label class="col-md-2 control-label">Request Message</label>
+						<div class="col-md-8">
+							<textarea ng-model="vm.requestMessage" class="form-control" placeholder="Enter your request..." rows="10"></textarea>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset align="center">
+					<button class="btn btn-primary btn-lg" type="submit">
+						Send Request
+					</button>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>

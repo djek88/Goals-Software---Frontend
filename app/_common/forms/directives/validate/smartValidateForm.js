@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (formsCommon) {
+angular.module('SmartAdmin.Forms').directive('smartValidateForm', function () {
     return {
         restrict: 'A',
         link: function (scope, form, attributes) {
@@ -24,6 +24,7 @@ angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (form
                     }
                 }
             };
+
             form.find('[data-smart-validate-input], [smart-validate-input]').each(function () {
                 var $input = $(this), fieldName = $input.attr('name');
 

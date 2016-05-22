@@ -1,0 +1,34 @@
+<div id="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="media padding-10">
+				<div class="media-left">
+					<img class="media-object" height="200px" ng-src="{{vm.urlBase + vm.customer.avatar}}">
+				</div>
+				<div class="media-body">
+					<div class="media-heading">
+						<h1 style="margin: inherit;">
+							{{vm.customer.firstName + ' ' + vm.customer.lastName}}
+
+							<span class="pull-right">
+								<a class="btn btn-default btn-circle"
+									ng-href="{{vm.customer.social.fb}}">
+									<i class="fa fa-facebook-square"></i>
+								</a>
+								<a class="btn btn-default btn-circle"
+									ng-href="{{vm.customer.social.tw}}">
+									<i class="fa fa-twitter-square"></i>
+								</a>
+								<a class="btn btn-default btn-circle"
+									ng-href="{{vm.customer.social.li}}">
+									<i class="fa fa-linkedin-square"></i>
+								</a>
+							</span>
+						</h1>
+					</div>
+					<p style="margin-top: 20px;">{{vm.customer.description}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<div id="content">
+	<div class="row">
+		<section widget-grid id="widget-grid">
+			<article class="col-sm-12">
+				<div ng-if="!vm.isStarted" align="center">
+					<div style="width: 482px; margin-top: 15px; background-color: #F4EB49; min-height: 121px;">
+						<div style="padding-left: 15px; text-align: left; padding-top: 10px;">
+							<b>Next session starting in:</b>
+						</div>
+						<div style="text-align: center; font-size: 34px; line-height: 2">
+							<b><g-timer count-to="{{vm.sessionStartAt}}" callback="vm.timeOut()" callback-delay-sec="{{1}}"></g-timer></b>
+						</div>
+					</div>
+				</div>
+
+				<div style="font-size: 20px; margin-top: 40px; margin-bottom: 20px;">
+					Mastermind members:
+				</div>
+
+				<div class="well" ng-repeat="(id, data) in vm.members" style="margin-bottom: 8px; font-size: 20px;">
+					<div class="row">
+						<div class="col-xs-8">
+							<span>{{data.fullName}}</span>
+						</div>
+
+						<div class="col-xs-4">
+							<div class="pull-right">
+								<span ng-if="data.online === 1">Online <i class="fa fa-star" style="color: #00B329;"></i></span>
+								<span ng-if="data.online === -1">Offline <i class="fa fa-star" style="color: #FF0000;"></i></span>
+								<span ng-if="data.online === 0">Not comming <i class="glyphicon glyphicon-ban-circle" style="color: #ABABAB;"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div ng-if="vm.isStarted && vm.isGroupOwner" style="margin-top: 30px;">
+					<div align="center">
+						<a class="btn btn-primary btn-lg" style="min-width: 20%;"
+							ng-click="vm.startSession()">
+							Start</a>
+					</div>
+				</div>
+
+			</article>
+		</section>
+	</div>
+</div>

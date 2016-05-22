@@ -1,0 +1,51 @@
+<div id="content">
+	<div class="row">
+		<div class="col-sm-12" style="margin-bottom: 30px;">
+			<div ng-if="vm.isOwner" align="center">
+				<a class="btn btn-primary btn-lg" ui-sref="app.group.goalCreate({id: $stateParams.id})">
+					Add New Goal</a>
+			</div>
+
+			<h3 ng-if="!vm.isOwner">
+				Goals for: {{vm.memberName}}
+			</h3>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="well" style="margin-bottom: 8px;" ng-repeat="goal in vm.goals">
+				<div class="row elemTextPaddingNgRepeat">
+					<span class="col-md-5">
+						<h4>{{goal.name}}</h4>
+					</span>
+
+					<span class="col-md-4">
+						<h4>{{goal.dueDate | formatGoalDueDate:goal.state}}</h4>
+					</span>
+
+					<div class="col-md-3 goalButtonsPadding" align="right">
+						<a class="btn btn-default" data-tooltip="Review goal"
+							ng-if="!vm.isOwner"
+							ui-sref="app.group.goalReview({id: goal._groupId, goalId: goal._id})">
+							<i class="fa fa-eye"></i></a>
+
+						<a class="btn btn-default" data-tooltip="Edit goal"
+							ng-if="vm.isOwner"
+							ui-sref="app.group.goalEdit({id: goal._groupId, goalId: goal._id})">
+							<i class="fa fa-pencil"></i></a>
+
+						<a class="btn btn-default" data-tooltip="Upload evidence"
+							ng-if="vm.isOwner"
+							ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
+							<i class="fa fa-thumb-tack"></i></a>
+
+						<span>
+							<g-goal-state-icon state="{{goal.state}}"></g-goal-state-icon>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

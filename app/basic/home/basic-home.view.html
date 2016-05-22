@@ -1,0 +1,132 @@
+<div id="content">
+	<div class="row">
+
+		<section widget-grid id="widget-grid">
+			<article class="col-sm-12">
+				<div style="margin-bottom: 50px;" ng-repeat="group in vm.groups">
+					<div class="well" style="margin: 8px; min-height: 187px;">
+						<div class="col-xs-4">
+							<h4>{{group.name}}</h4>
+						</div>
+
+						<div class="col-xs-8">
+							<div style="margin-top: 10px;">
+								<div ng-if="group._nextSessionId">
+									<div ng-if="!(group.NextSession.startAt | isLessThanMins:10)">
+										Next mastermind on:
+										<div style="width: 50%; min-width: 300px;">
+											<div class="next-session-startAt-block">
+												{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}
+											</div>
+											<div style="margin-top: 8px;" align="right">
+												<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
+													ng-click="vm.showExcuseModal(group._id)">
+													Make your excuse now</a>
+											</div>
+										</div>
+									</div>
+
+									<div ng-if="(group.NextSession.startAt | isLessThanMins:10)">
+										Mastermind starting in:
+										<b style="font-size: 18px;">
+											<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)" callback-delay-sec="{{15 * 60}}"></g-timer>
+										</b>
+
+										<div style="width: 50%; min-width: 300px;">
+											<a class="btn btn-primary btn-lg join-session-butn"
+												ui-sref="app.session.start({id: group._id})">
+												Join Mastermind Now</a>
+											<div style="margin-top: 8px;" align="right">
+												<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
+													ng-click="vm.showExcuseModal(group._id)">
+													Make your excuse now</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div ng-if="!group._nextSessionId" style="width: 50%;">
+									<div class="next-session-startAt-block">
+										Nothing Scheduled
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="well" ng-repeat="goal in group.goals | orderBy:'dueDate'" style="margin: 8px;">
+						<div class="row elemTextPaddingNgRepeat">
+							<span class="col-md-4">
+								<h4>{{goal.name}}</h4>
+							</span>
+
+							<span class="col-md-4">
+								<h4>{{goal.dueDate | formatGoalDueDate:goal.state}}</h4>
+							</span>
+
+							<span class="col-md-2 goalProgressBar">
+								<div class="progress progress-sm progress-striped active">
+									<div class="progress-bar bg-color-green"
+										ng-class="goal.percentDate > 66 ? 'bg-color-green' : goal.percentDate > 33 ? 'bg-color-orange' : 'bg-color-red'"
+										role="progressbar" style="width: {{goal.percentDate}}%"></div>
+								</div>
+							</span>
+
+							<div class="col-md-2 goalButtonsPadding" align="right">
+								<a class="btn btn-default" data-tooltip="Edit goal"
+									ui-sref="app.group.goalEdit({id: goal._groupId, goalId: goal._id})">
+									<i class="fa fa-pencil"></i></a>
+
+								<a class="btn btn-default" data-tooltip="Upload evidence"
+									ui-sref="app.group.uploadGoalEvidence({id: goal._groupId, goalId: goal._id})">
+									<i class="fa fa-thumb-tack"></i></a>
+
+								<g-goal-state-icon state="{{goal.state}}"></g-goal-state-icon>
+							</div>
+						</div>
+					</div>
+
+					<div style="margin-right: 8px;" align="right">
+						<a ui-sref="app.group.memberGoals({id: group._id, memberId: vm.curCustomer._id})">
+							View and manage all goals</a>
+					</div>
+
+					<div ng-if="group._ownerId == vm.curCustomer._id" align="center">
+						<button class="btn btn-primary btn-lg"
+							ng-init="vm[group._id] = false;"
+							popover-is-open="vm[group._id]"
+
+							popover-placement="top"
+							uib-popover-template="vm.popoverTemplate"
+							popover-title="Select date and time">
+							Schedule A Mastermind Session</button>
+
+						<script type="text/ng-template" id="shedulePopover.html">
+							<form g-click-outside="vm.closePopover(group._id)" class="smart-form ng-pristine ng-valid" style="min-width: 240px;">
+								<section>
+									<label class="input">
+										<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+											<i class="icon-prepend fa fa-clock-o"></i>
+											<input type="text" class="form-control" data-ng-model="vm.scheduledTime" ng-readonly="true">
+										</a>
+
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+											<datetimepicker ng-model="vm.scheduledTime"
+												data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView: 'month', minView: 'minute' }"/>
+										</ul>
+									</label>
+								</section>
+
+								<div align="right">
+									<button class="btn btn-default btn-sm"
+										ng-click="vm.scheduleSession(group._id)">Ok</button>
+								</div>
+							</form>
+						</script>
+					</div>
+				</div>
+			</article>
+		</section>
+
+	</div>
+</div>

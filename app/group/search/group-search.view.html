@@ -1,0 +1,72 @@
+<div id="content">
+	<div class="row">
+		<form class="smart-form" novalidate="novalidate">
+			<fieldset>
+				<div class="row">
+					<section class="col col-6">
+						<label class="label">Group Type:</label>
+						<label class="select">
+							<select ng-model="vm.criteria.type">
+								<option value="-1">All</option>
+								<option value="{{key}}" ng-repeat="(key, value) in vm.groupTypes">{{value}}</option>
+							</select> <i></i> </label>
+					</section>
+
+					<section class="col col-6">
+						<label class="label">Amount Willing To Risk:</label>
+						<label class="select">
+							<select ng-model="vm.criteria.penalty">
+								<option value="-1">All</option>
+								<option value="{{amount}}" ng-repeat="amount in vm.penaltyAmounts">{{'$' + amount}}</option>
+							</select> <i></i></label>
+					</section>
+				</div>
+			</fieldset>
+
+			<div align="center">
+				<a class="btn btn-primary btn-lg"
+					ng-click="vm.searchGroups()">
+					<i class="fa fa-search"></i>
+					Search For Groups
+				</a>
+			</div>
+		</form>
+	</div>
+
+	<div class="row">
+		<fieldset class="col-sm-12" ng-if="vm.groups.length" style="margin-top: 40px;">
+			<div class="well" style="margin: 8px;" ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
+				<div class="row elemTextPaddingNgRepeat">
+					<span class="col-xs-5">
+						{{group.name}}
+					</span>
+					<span class="col-xs-2">
+						Members: {{group.members}}
+					</span>
+					<span class="col-xs-4">
+						Created: {{group.created}}
+					</span>
+					<div class="col-xs-1">
+						<div class="pull-right">
+							<a class="btn btn-default"
+								ui-sref="app.group.detail({id: group._id})">
+								<i class="fa fa-eye"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div align="center">
+				<uib-pagination class="pagination-sm"
+					ng-if="vm.totalGroupsCount > vm.groupsPerPage"
+					total-items="vm.totalGroupsCount"
+					items-per-page="vm.groupsPerPage"
+					ng-model="vm.curPageNumber"
+
+					max-size="5"
+					boundary-links="true">
+				</uib-pagination>
+			</div>
+		</fieldset>
+	</div>
+</div>

@@ -1,5 +1,3 @@
-(function(){
-    "use strict";
+"use strict";
 
-    angular.module('SmartAdmin.Layout', []);
-})();
+angular.module('SmartAdmin.Layout', []);

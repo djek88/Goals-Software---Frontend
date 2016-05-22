@@ -1,0 +1,51 @@
+<div id="content">
+	<div class="row">
+
+		<form ng-submit="vm.edit()" class="smart-form ng-pristine ng-valid">
+			<header>
+				Edit goal
+			</header>
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-6">
+						<label class="label">Goal Name</label>
+						<label class="input"> <i class="icon-prepend fa fa-group"></i>
+							<input type="text" placeholder="Goal name"
+								ng-model="vm.goal.name">
+						</label>
+					</section>
+
+					<!-- <section class="col col-6">
+						<label class="label">Due Date</label>
+						<label class="input">
+							<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+								<i class="icon-prepend fa fa-group"></i>
+								<input type="text" class="form-control" data-ng-model="vm.goal.dueDate" ng-readonly="true">
+							</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+								<datetimepicker ng-model="vm.goal.dueDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView: 'month', minView: 'hour' }"/>
+							</ul>
+						</label>
+					</section> -->
+				</div>
+
+				<section>
+					<label class="label">Description</label>
+					<label class="textarea">
+						<textarea class="custom-scroll" placeholder="Make your goal clear. Ensure you have a specific measurable. Did you do it, not. Can you quantify it? Is it something you can screen capture, photograph or provide some evidence of its completion?"
+							ng-model="vm.goal.description" rows="8">
+						</textarea>
+					</label>
+				</section>
+			</fieldset>
+
+			<fieldset align="center">
+				<button type="submit" class="btn btn-primary btn-lg">
+					Edit Goal
+				</button>
+			</fieldset>
+		</form>
+
+	</div>
+</div>

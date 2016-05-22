@@ -1,0 +1,81 @@
+<div id="content">
+	<div class="row">
+
+			<form ng-submit="vm.save()" class="smart-form ng-pristine ng-valid">
+				<header>
+					Profile Settings
+				</header>
+
+				<fieldset>
+					<div class="row">
+						<section class="col col-4">
+							<label class="label">First Name</label>
+							<label class="input"> <i class="icon-prepend fa fa-user"></i>
+								<input ng-model="vm.customer.firstName" type="text" placeholder="First name">
+							</label>
+						</section>
+
+						<section class="col col-4">
+							<label class="label">Last Name</label>
+							<label class="input"> <i class="icon-prepend fa fa-user"></i>
+								<input ng-model="vm.customer.lastName" type="text" placeholder="Last name">
+							</label>
+						</section>
+
+						<section class="col col-4">
+							<label class="label">Time Zone</label>
+							<label class="select">
+								<select 
+									ng-model="vm.customer.timeZone"
+									ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
+								</select>
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<section class="col col-4">
+							<label class="label">Facebook</label>
+							<label class="input"> <i class="icon-prepend fa fa-facebook"></i>
+								<input ng-model="vm.customer.social.fb" type="text" placeholder="Facebook">
+							</label>
+						</section>
+
+						<section class="col col-4">
+							<label class="label">Twitter</label>
+							<label class="input"> <i class="icon-prepend fa fa-twitter"></i>
+								<input ng-model="vm.customer.social.tw" type="text" placeholder="Twiter">
+							</label>
+						</section>
+
+						<section class="col col-4">
+							<label class="label">Linkedin</label>
+							<label class="input"> <i class="icon-prepend fa fa-linkedin"></i>
+								<input ng-model="vm.customer.social.li" type="text" placeholder="LinkedIn">
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<section class="col col-xs-12" style="margin-top: 23px;">
+							<label style="display: block;" for="picture">
+								<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
+								<div style="display: none;">
+									<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
+								</div>
+							</label>
+
+							<label class="textarea" style="display: flex; padding-left: 15px;">
+								<textarea rows="7" ng-model="vm.customer.description" placeholder="Description"></textarea>
+							</label>
+						</section>
+					</div>
+				</fieldset>
+
+				<div align="center">
+					<button type="submit" class="btn btn-primary btn-lg">Save</button>
+				</div>
+			</form>
+
+	</div>
+</div>

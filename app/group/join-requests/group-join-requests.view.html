@@ -1,0 +1,54 @@
+<div id="content">
+	<div class="row">
+		<section widget-grid id="widget-grid">
+			<article class="col-sm-12">
+				<div align="center" ng-if="!vm.requests.length" style="margin-top: 120px;">
+					<h3>You currently have no new applications</h3>
+				</div>
+
+				<div>
+					<div class="well" style="margin: 8px;" ng-repeat="request in vm.requests | limitTo: vm.requestsPerPage : ((vm.curPageNumber - 1) * vm.requestsPerPage)">
+						<div class="row">
+							<div class="col-xs-7">
+								<h4>{{request.createdAt | date:'medium'}}</h4>
+							</div>
+							<div class="col-xs-5">
+								<div class="pull-right">
+									<a class="btn btn-default" href-void
+										popover-placement="bottom"
+										popover-title="Request to join"
+										uib-popover="{{request.request}}">
+										<i class="fa fa-eye"></i></a>
+
+									<a class="btn btn-default"
+										ui-sref="app.profile.detail({id: request._ownerId})">
+										<i class="fa fa-user"></i></a>
+
+									<a class="btn btn-default"
+										ng-click="vm.reqManage(request._id, true)">
+										<i class="fa fa-check"></i></a>
+
+									<a class="btn btn-default"
+										ng-click="vm.reqManage(request._id, false)">
+										<i class="fa fa-times"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div align="center">
+						<uib-pagination class="pagination-sm"
+							ng-if="vm.totalRequestsCount > vm.requestsPerPage"
+							total-items="vm.totalRequestsCount"
+							items-per-page="vm.requestsPerPage"
+							ng-model="vm.curPageNumber"
+
+							max-size="5"
+							boundary-links="true">
+						</uib-pagination>
+					</div>
+				</div>
+			</article>
+		</section>
+	</div>
+</div>

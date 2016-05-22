@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en-us" class="no-js">
 	<head>
-	
+		<title>Mastermind</title>
+		<base href="/">
 		<meta charset="utf-8">
-		<title> SmartAdmin (AngularJS)</title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- #CSS Links -->
-		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/font-awesome.min.css">
+		<!-- build:css ./styles/css/vendor.css -->
+			<!-- Basic Styles -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/bootstrap.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/font-awesome.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/datetimepicker.css">
 
-		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production-plugins.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-skins.min.css">
-		
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-angular.css">
+			<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production-plugins.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-production.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-skins.min.css">
 
-		<!-- SmartAdmin RTL Support (Not using RTL? Disable the CSS below to save bandwidth) -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-rtl.min.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/smartadmin-angular.css">
 
-		<!-- We recommend you use "your_style.css" to override SmartAdmin
-		specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
-		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/css/demo.min.css">
+			<!-- Own syles -->
+			<link rel="stylesheet" type="text/css" media="screen" href="styles/css/your_style.css">
+		<!-- endbuild -->
 
 		<!-- #FAVICONS -->
-		<link rel="shortcut icon" href="styles/img/favicon/favicon.ico" type="image/x-icon">
+		<!-- <link rel="shortcut icon" href="styles/img/favicon/favicon.ico" type="image/x-icon"> -->
+		<!-- <link rel="icon" href="styles/img/favicon/favicon.ico" type="image/x-icon"> -->
+		<link rel="icon" type="image/png" href="styles/img/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="styles/img/favicon/favicon-16x16.png" sizes="16x16">
 
 		<!-- #GOOGLE FONT -->
-	<!-- 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> -->
+		<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> -->
 
 		<!-- #APP SCREEN / ICONS -->
 		<!-- Specifying a Webpage Icon for Web Clip
@@ -97,29 +96,27 @@
 
 	-->
 
-	<body data-smart-device-detect
+	<body class="no-menu container" data-smart-device-detect
 		data-smart-fast-click
 		data-smart-layout
-		data-smart-page-title="SmartAdmin AngularJS">
+		data-smart-page-title="Mastermind">
 
 		<!-- ui-view container -->
-
-		<div data-ui-view="root"  data-autoscroll="false"></div>
+		<div data-ui-view="root" data-autoscroll="false"></div>
 
 		<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
 		<!--[if lt IE 9]>
+			<!-- build:js ./ie.js -->
 			<script src="plugin/es5-shim/es5-shim.js"></script>
 			<script src="plugin/json3/lib/json3.min.js"></script>
+			<!-- endbuild -->
 		<![endif]-->
 
-		<!-- Use for production after building the project with grunt --> 
-		<script src="build/vendor.js"></script>		
-		<script src="build/app.js"></script>
-
-
-		</body>
-	
+		<!-- Use for production after building the project with gulp -->
+		<script src="./vendor.js"></script>
+		<script src="./app.js"></script>
+	</body>
 </html>

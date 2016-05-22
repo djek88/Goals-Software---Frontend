@@ -1,0 +1,204 @@
+<div id="content">
+	<div class="row">
+
+		<form ng-submit="vm.edit()" class="smart-form ng-pristine ng-valid">
+			<header>
+				Edit group
+			</header>
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-4">
+						<label class="label">Group Name</label>
+						<label class="input"> <i class="icon-prepend fa fa-group"></i>
+							<input type="text" placeholder="Group name"
+								ng-model="vm.group.name">
+						</label>
+					</section>
+
+					<section class="col col-4">
+						<label class="label">Group Type</label>
+						<label class="select">
+							<select
+								ng-model="vm.group.type"
+								ng-options="+key as value for (key, value) in vm.groupTypes">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-4">
+						<label class="label">Penalty Amount</label>
+						<label class="select">
+							<select
+								ng-model="vm.group.penalty"
+								ng-options="penalty as ('$' + penalty) for penalty in vm.penaltyAmounts">
+							</select> <i></i>
+						</label>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-3">
+						<label class="label">Maximum No. Of Members</label>
+						<label class="input"> <i class="icon-prepend fa fa-sort-numeric-asc"></i>
+							<input type="number" placeholder="Number"
+								ng-model="vm.group.maxMembers"
+								min="{{vm.group._memberIds.length + 1}}">
+						</label>
+					</section>
+
+					<section class="col col-5">
+						<label class="label">Make group</label>
+						<div class="inline-group">
+							<label class="radio">
+								<input type="radio" name="private-group"
+									 ng-model="vm.group.private"
+									ng-value="false">
+								<i></i>Public (show in group search result)
+							</label>
+							<label class="radio">
+								<input type="radio" name="private-group"
+									ng-model="vm.group.private"
+									ng-value="true">
+								<i></i>Private (invite only)
+							</label>
+						</div>
+					</section>
+
+					<section class="col col-4">
+						<label class="label">Allow members to invite new members</label>
+						<div class="inline-group">
+							<label class="checkbox">
+								<input ng-model="vm.group.memberCanInvite" type="checkbox">
+								<i></i>(you still have control to accept or reject applications)
+							</label>
+						</div>
+					</section>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<section>
+					<label class="label">Description</label>
+					<label class="textarea">
+						<textarea class="custom-scroll" placeholder="What is your group?"
+							ng-model="vm.group.description" rows="8">
+						</textarea>
+					</label>
+				</section>
+			</fieldset>
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-12">
+						<label class="label">Mastermind sessions</label>
+						<div class="inline-group">
+							<label class="radio">
+								<input type="radio" name="sheduled-group"
+									ng-model="vm.group.sessionConf.sheduled"
+									ng-value="true">
+								<i></i>Scheduled
+							</label>
+							<label class="radio">
+								<input type="radio" name="sheduled-group"
+									ng-model="vm.group.sessionConf.sheduled"
+									ng-value="false">
+								<i></i>Manually scheduled
+							</label>
+						</div>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-3">
+						<label class="label">Day</label>
+						<label class="select">
+							<select ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.day"
+								ng-options="+key as value for (key, value) in vm.days">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">Time</label>
+						<label class="select">
+							<select ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.time"
+								ng-options="time.key as time.value for time in vm.times">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">Time zone</label>
+						<label class="select">
+							<select ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.timeZone"
+								ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">Frequency</label>
+						<label class="select">
+							<select
+								ng-disabled="!vm.group.sessionConf.sheduled"
+								ng-model="vm.group.sessionConf.frequencyType"
+								ng-options="+key as value for (key, value) in vm.frequency">
+							</select> <i></i>
+						</label>
+					</section>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<section>
+					<h4>Session section lengths (length of time each person talks for each section of the mastermind)</h4>
+				</section>
+
+				<div class="row">
+					<section class="col col-3">
+						<label class="label">Round 1 (seconds)</label>
+						<label class="input">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roundLength[0]">
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">Round 2 - Part A (seconds)</label>
+						<label class="input">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roundLength[1]">
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">Round 2 - Part B (seconds)</label>
+						<label class="input">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roundLength[2]">
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">Round 3 (seconds)</label>
+						<label class="input">
+							<input type="number" min="0"
+								ng-model="vm.group.sessionConf.roundLength[3]">
+						</label>
+					</section>
+				</div>
+			</fieldset>
+
+			<fieldset align="center">
+				<button type="submit" class="btn btn-primary btn-lg">
+					Update Group
+				</button>
+			</fieldset>
+		</form>
+
+	</div>
+</div>
