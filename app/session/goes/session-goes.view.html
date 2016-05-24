@@ -51,7 +51,9 @@
 									class="session-avatar"
 									ng-src="{{vm.sess.whoGiveFeedback.avatar}}">
 
-								<img ng-if="!vm.sess.whoGiveFeedback.avatar" class="session-avatar">
+								<img ng-if="!vm.sess.whoGiveFeedback.avatar"
+									class="session-avatar"
+									ng-src="{{vm.sess.focusOn.avatar}}">
 							</div>
 							<div class="session-next-info">
 								<div ng-if="vm.sess.nextWhoGiveFeedback.fullName">
