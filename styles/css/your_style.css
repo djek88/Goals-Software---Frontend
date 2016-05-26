@@ -198,8 +198,12 @@ body.container {
 	margin-top: 20px;
 }
 
-.elemTextPaddingNgRepeat>span {
+.elemTextPaddingNgRepeat11>span {
 	padding-top: 11px;
+}
+
+.elemTextPaddingNgRepeat5>span {
+	padding-top: 5px;
 }
 
 .goalProgressBar {

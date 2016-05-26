@@ -298,6 +298,24 @@ function config($stateProvider) {
 				}
 			}
 		})
+		.state('app.group.rejectExcuse', {
+			url: '/:id/session/:sessionId/reject-excuse/:excuseId',
+			views: {
+				'content@app': {
+					controller: function($timeout, notifyAndLeave, layoutLoader, loadAppData) {
+						layoutLoader.on();
+
+						$timeout(function() {
+							notifyAndLeave({
+								title: 'Reject excuse...',
+								content: 'Thanks for your vote.',
+								leave: {to: 'app.home'}
+							});
+						}, 300);
+					}
+				}
+			}
+		})
 		.state('app.group.invite', {
 			url: '/:id/invite',
 			data: {
