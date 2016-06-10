@@ -4,13 +4,14 @@ angular
 	.module('app.group')
 	.controller('groupGoalReviewController', groupGoalReviewController);
 
-function groupGoalReviewController($rootScope, LoopBackAuth, notifyAndLeave, layoutLoader, groupGoalReviewService, loadAppData, goal, group) {
+function groupGoalReviewController(APP_CONFIG, LoopBackAuth, notifyAndLeave, layoutLoader, groupGoalReviewService, loadAppData, goal, group) {
 	var vm = this;
 
 	vm.goal = groupGoalReviewService.prepareGoal(goal, group);
 	vm.feedback = '';
 	vm.popoverTemplate = 'fileInfoPopover.html';
 	vm.token = LoopBackAuth.accessTokenId;
+	vm.urlBase = APP_CONFIG.apiRootUrl;
 
 	vm.leaveFeedback = leaveFeedback;
 	vm.leaveVote = leaveVote;
@@ -46,7 +47,7 @@ function groupGoalReviewController($rootScope, LoopBackAuth, notifyAndLeave, lay
 
 			notifyAndLeave({
 				title: 'Leave vote...',
-				content: 'Leave vote success'
+				message: 'Leave vote success'
 			});
 		}
 	}

@@ -17,6 +17,7 @@ angular
 		'ui.bootstrap',
 		'backendApi',
 		'ngCookies',
+		'ui-notification',
 
 		// Smartadmin Angular Common Module
 		'SmartAdmin',
@@ -54,11 +55,10 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 			}
 
 			$injector.get('notifyAndLeave')({
-				box: 'bigBox',
+				type: 'error',
 				title: rejection.status,
-				content: data,
-				isError: true,
-				timeout: 6000
+				message: data,
+				delay: 6000
 			});
 		}
 
@@ -90,19 +90,16 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
-function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, LoopBackAuth) {
-	$rootScope.urlBase = APP_CONFIG.apiRootUrl;
-	$rootScope.socketUrl = APP_CONFIG.socketUrl;
+function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, LoopBackAuth, notifyAndLeave) {
 	$rootScope.logout = logout;
 	$rootScope.$stateParams = $stateParams;
 	//editableOptions.theme = 'bs3';
 
-	//$cookies.put('global_themastermind.nz_member_id', 14415587);
-	//$cookies.put('global_themastermind.nz_session_id', '2cvufcl6ju3o1i0qpm1o1c5mi3');
+	//$cookies.put(APP_CONFIG.FHQSessionIdCookie, 'c8cf8569926a8f15e943420c046fefe4');
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
-			if (!haveFHQcookies()) {
+			if (!haveFHQSession()) {
 				event.preventDefault();
 
 				LoopBackAuth.clearUser();
@@ -114,24 +111,36 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 				console.log('Client logining...');
 
 				Customer.login({rememberMe: false}, {
-					_sessionId: $cookies.get('global_themastermind.nz_session_id')
-				}, function() {
+					_sessionId: $cookies.get(APP_CONFIG.FHQSessionIdCookie)
+				}, function(authToken) {
 					console.log('Client login success.');
+
+					// For first login
+					if (authToken.user.createdAt === authToken.user.updatedAt) {
+						$cookies.put(APP_CONFIG.firstLoginCookie, true);
+
+						notifyAndLeave({
+							title: 'Notification',
+							message: 'You can setup your profile on this page:<br><a style="text-decoration: underline;" href="' + $state.href('app.profile.settings') + '"><b>Profile settings page</b></a>',
+							delay: false
+						});
+					}
+
 					$state.go(toState, toParams);
 				});
 
 				// for dev logining P.S...comment this before commit
-				// Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
-				// 	email: '2@gmail.com',
-				// 	password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
-				// }, function(data) {
-				// 	LoopBackAuth.setUser(data.id, data.userId, data.user);
-				// 	LoopBackAuth.rememberMe = false;
-				// 	LoopBackAuth.save();
+				/*Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
+					email: '1@gmail.com',
+					password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
+				}, function(data) {
+					LoopBackAuth.setUser(data.id, data.userId, data.user);
+					LoopBackAuth.rememberMe = false;
+					LoopBackAuth.save();
 
-				// 	console.log('Client login success.');
-				// 	$state.go(toState, toParams);
-				// });
+					console.log('Client login success.');
+					$state.go(toState, toParams);
+				});*/
 			}
 		}
 	});
@@ -144,8 +153,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 		});
 	}
 
-	function haveFHQcookies() {
-		return $cookies.get('global_themastermind.nz_member_id') &&
-			$cookies.get('global_themastermind.nz_session_id');
+	function haveFHQSession() {
+		return angular.isString($cookies.get(APP_CONFIG.FHQSessionIdCookie));
 	}
 }

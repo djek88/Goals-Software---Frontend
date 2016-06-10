@@ -285,7 +285,7 @@ function config($stateProvider) {
 							}, null, function() {
 								notifyAndLeave({
 									title: 'Approve excuse...',
-									content: 'Thanks for your vote.',
+									message: 'Thanks for your vote.',
 									leave: {to: 'app.home'}
 								});
 							}, function() {
@@ -308,7 +308,7 @@ function config($stateProvider) {
 						$timeout(function() {
 							notifyAndLeave({
 								title: 'Reject excuse...',
-								content: 'Thanks for your vote.',
+								message: 'Thanks for your vote.',
 								leave: {to: 'app.home'}
 							});
 						}, 300);
@@ -424,13 +424,16 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				group: function($q, $stateParams, Group) {
+				group: function($q, $state, $stateParams, Group, Customer) {
 					var deferred = $q.defer();
 
-					Group.findById({
-							id: $stateParams.id
+					Group.findById({id: $stateParams.id}, function(group) {
+							if (group._ownerId !== Customer.getCachedCurrent()._id) {
+								$state.go('app.home');
+							}
+
+							deferred.resolve(group);
 						},
-						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -487,7 +490,7 @@ function config($stateProvider) {
 					return deferred.promise;
 				},
 				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
+					return lazyScript.register(['jstz', 'languages']);
 				}
 			}
 		})
@@ -532,13 +535,16 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				goal: function($q, $stateParams, Goal) {
+				goal: function($q, $state, $stateParams, Goal, Customer) {
 					var deferred = $q.defer();
 
-					Goal.findById({
-							id: $stateParams.goalId
-						},
-						deferred.resolve.bind(deferred),
+					Goal.findById({id: $stateParams.goalId}, function(goal) {
+						if (goal._ownerId !== Customer.getCachedCurrent()._id) {
+							return $state.go('app.home');
+						}
+
+						deferred.resolve(goal);
+					},
 						deferred.reject.bind(deferred)
 					);
 
@@ -612,10 +618,7 @@ function config($stateProvider) {
 				goal: function($q, $state, $stateParams, Goal, Customer) {
 					var deferred = $q.defer();
 
-					Goal.findById({
-							id: $stateParams.goalId
-						},
-						function(goal) {
+					Goal.findById({id: $stateParams.goalId}, function(goal) {
 							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
 								$state.go('app.group.goalReview', {
 									id: $stateParams.id,

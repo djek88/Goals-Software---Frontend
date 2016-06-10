@@ -8,7 +8,7 @@
 
 			<fieldset>
 				<div class="row">
-					<section class="col col-4">
+					<section class="col col-3">
 						<label class="label">Group Name</label>
 						<label class="input"> <i class="icon-prepend fa fa-group"></i>
 							<input type="text" placeholder="Group name"
@@ -16,7 +16,7 @@
 						</label>
 					</section>
 
-					<section class="col col-4">
+					<section class="col col-3">
 						<label class="label">Group Type</label>
 						<label class="select">
 							<select
@@ -26,7 +26,7 @@
 						</label>
 					</section>
 
-					<section class="col col-4">
+					<section class="col col-3">
 						<label class="label">Penalty Amount</label>
 						<label class="select">
 							<select
@@ -35,9 +35,7 @@
 							</select> <i></i>
 						</label>
 					</section>
-				</div>
 
-				<div class="row">
 					<section class="col col-3">
 						<label class="label">Maximum No. Of Members</label>
 						<label class="input"> <i class="icon-prepend fa fa-sort-numeric-asc"></i>
@@ -45,6 +43,26 @@
 								ng-model="vm.group.maxMembers"
 								min="{{vm.group._memberIds.length + 1}}">
 						</label>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-3">
+						<label class="label">Are meetings held</label>
+						<div class="inline-group">
+							<label class="radio">
+								<input type="radio" name="meetings-group"
+									 ng-model="vm.group.sessionConf.offline"
+									ng-value="false">
+								<i></i>Online
+							</label>
+							<label class="radio">
+								<input type="radio" name="meetings-group"
+									ng-model="vm.group.sessionConf.offline"
+									ng-value="true">
+								<i></i>Offline
+							</label>
+						</div>
 					</section>
 
 					<section class="col col-5">
@@ -78,19 +96,101 @@
 			</fieldset>
 
 			<fieldset>
-				<section>
-					<label class="label">Description</label>
-					<label class="textarea">
-						<textarea class="custom-scroll" placeholder="What is your group?"
-							ng-model="vm.group.description" rows="8">
-						</textarea>
-					</label>
-				</section>
+				<div class="row">
+					<section class="col col-4">
+						<label class="label">Meetings Language</label>
+						<label class="select">
+							<select
+								ng-model="vm.group.sessionConf.language"
+								ng-options="item.code as item.name for item in vm.languagesMap">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-4">
+						<label class="label">Information/Application Forms</label>
+						<div class="input input-file">
+							<span class="button">
+								<input type="file" file-model="vm.groupAttachment">
+								Browse
+							</span>
+							<input type="text"
+								placeholder="Include some files"
+								ng-model="vm.group.attachment.split('/').slice(-1)[0]"
+								ng-readonly="true">
+						</div>
+					</section>
+
+					<section class="col col-4">
+						<label class="label">Hide members</label>
+						<div class="inline-group">
+							<label class="checkbox">
+								<input ng-model="vm.group.hideMembers" type="checkbox">
+								<i></i>(Forbid display members in the public search results)
+							</label>
+						</div>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-xs-3">
+						<label class="label">Joining Fee</label>
+						<label class="input">
+							<input type="text" ng-currency ng-required="true"
+								ng-model="vm.group.joiningFee"
+								fraction="0" min="0" max="10000">
+						</label>
+					</section>
+
+					<section class="col col-xs-3">
+						<label class="label">Monthly Fee</label>
+						<label class="input">
+							<input type="text" ng-currency ng-required="true"
+								ng-model="vm.group.monthlyFee"
+								fraction="0" min="0" max="10000">
+						</label>
+					</section>
+
+					<section class="col col-xs-3">
+						<label class="label">Quarterly Fee</label>
+						<label class="input">
+							<input type="text" ng-currency ng-required="true"
+								ng-model="vm.group.quarterlyFee"
+								fraction="0" min="0" max="100000">
+						</label>
+					</section>
+
+					<section class="col col-xs-3">
+						<label class="label">Yearly Fee</label>
+						<label class="input">
+							<input type="text" ng-currency ng-required="true"
+								ng-model="vm.group.yearlyFee"
+								fraction="0" min="0" max="100000">
+						</label>
+					</section>
+				</div>
 			</fieldset>
 
 			<fieldset>
 				<div class="row">
-					<section class="col col-12">
+					<section class="col col-xs-12">
+						<label style="display: block;" for="picture">
+							<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
+							<div style="display: none;">
+								<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
+							</div>
+						</label>
+
+						<label class="textarea" style="display: flex; padding-left: 15px;">
+							<textarea rows="7" ng-model="vm.group.description" placeholder="Description"></textarea>
+						</label>
+					</section>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-4">
 						<label class="label">Mastermind sessions</label>
 						<div class="inline-group">
 							<label class="radio">
@@ -107,13 +207,23 @@
 							</label>
 						</div>
 					</section>
+
+					<section class="col col-4">
+						<label class="label">Without facilitator</label>
+						<div class="inline-group">
+							<label class="checkbox">
+								<input ng-model="vm.group.sessionConf.withoutFacilitator" type="checkbox">
+								<i></i>(facilitator does not participate in rounds)
+							</label>
+						</div>
+					</section>
 				</div>
 
-				<div class="row">
+				<div class="row" ng-if="vm.group.sessionConf.sheduled">
 					<section class="col col-3">
 						<label class="label">Day</label>
 						<label class="select">
-							<select ng-disabled="!vm.group.sessionConf.sheduled"
+							<select
 								ng-model="vm.group.sessionConf.day"
 								ng-options="+key as value for (key, value) in vm.days">
 							</select> <i></i>
@@ -123,7 +233,7 @@
 					<section class="col col-3">
 						<label class="label">Time</label>
 						<label class="select">
-							<select ng-disabled="!vm.group.sessionConf.sheduled"
+							<select
 								ng-model="vm.group.sessionConf.time"
 								ng-options="time.key as time.value for time in vm.times">
 							</select> <i></i>
@@ -133,7 +243,7 @@
 					<section class="col col-3">
 						<label class="label">Time zone</label>
 						<label class="select">
-							<select ng-disabled="!vm.group.sessionConf.sheduled"
+							<select
 								ng-model="vm.group.sessionConf.timeZone"
 								ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
 							</select> <i></i>
@@ -144,7 +254,6 @@
 						<label class="label">Frequency</label>
 						<label class="select">
 							<select
-								ng-disabled="!vm.group.sessionConf.sheduled"
 								ng-model="vm.group.sessionConf.frequencyType"
 								ng-options="+key as value for (key, value) in vm.frequency">
 							</select> <i></i>

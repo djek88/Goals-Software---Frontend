@@ -14,12 +14,24 @@ describe('app.group module ->', function() {
 				description: '',
 				firstName: "dsa12",
 				lastName: "last name",
+				timeZone: "EST",
 				social: {
 					fb: '',
 					li: '',
-					tw: ''
+					tw: '',
+					wb: ''
 				},
-				timeZone: "EST"
+				visitSeveralGroups: false,
+				groupPreferences: {
+					type: 5,
+					joiningFee: [0, 0],
+					monthlyFee: [0, 0],
+					yearlyFee: [0, 0],
+					penaltyFee: [0, 0],
+					members: [1, 1],
+					availableTime: ['0.00', '23.30'],
+					languages: ['en']
+				}
 			}
 		};
 		var group = {

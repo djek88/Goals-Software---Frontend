@@ -4,12 +4,17 @@ angular
 	.module('app.profile')
 	.controller('profileSettingsController', profileSettingsController);
 
-function profileSettingsController($scope, notifyAndLeave, layoutLoader, profileSettingsService, loadAppData) {
+function profileSettingsController($scope, $cookies, APP_CONFIG, notifyAndLeave, layoutLoader, transformTimeTypes, readFileAsDataUrl, profileSettingsService, loadAppData, groupTypes, sessionTimeTypes, penaltyAmounts) {
 	var vm = this;
 
 	vm.customer = profileSettingsService.getCustomer();
-	vm.timezoneMap = profileSettingsService.timeZoneMap;
 	vm.imgData = profileSettingsService.getDefaultImgData();
+
+	vm.groupTypes = groupTypes;
+	vm.languagesMap = profileSettingsService.languagesMap;
+	vm.timezoneMap = profileSettingsService.timeZoneMap;
+	vm.times = transformTimeTypes(sessionTimeTypes);
+	vm.penaltyAmounts = penaltyAmounts;
 
 	vm.save = save;
 
@@ -23,9 +28,19 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 
 			vm.customer = profileSettingsService.getCustomer();
 
+			if ($cookies.get(APP_CONFIG.firstLoginCookie)) {
+				$cookies.remove(APP_CONFIG.firstLoginCookie);
+
+				return notifyAndLeave({
+					title: 'Saving info...',
+					message: 'Saved.',
+					leave: {to: 'app.group.myGroups'}
+				});
+			}
+
 			notifyAndLeave({
 				title: 'Saving info...',
-				content: 'Saved.'
+				message: 'Saved.'
 			});
 		});
 	}
@@ -41,24 +56,24 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 
 		if (!file.type.includes('image/')) {
 			return notifyAndLeave({
+				type: 'error',
 				title: 'Updating picture...',
-				content: 'File is not image!',
-				isError: true,
-				timeout: 8000
+				message: 'File is not image!',
+				delay: 8000
 			});
 		}
 
 		if (file.size > maxFileSize) {
 			return notifyAndLeave({
+				type: 'error',
 				title: 'Updating picture...',
-				content: 'Max file size is 10 MB.',
-				isError: true,
-				timeout: 8000
+				message: 'Max file size is 10 MB.',
+				delay: 8000
 			});
 		}
 
 		// Update image display
-		profileSettingsService.readFileAsDataUrl(file, function(result) {
+		readFileAsDataUrl(file, function(result) {
 			vm.imgData.selectedPicture = result;
 
 			updateCustomerPicture();
@@ -68,18 +83,15 @@ function profileSettingsController($scope, notifyAndLeave, layoutLoader, profile
 	function updateCustomerPicture() {
 		layoutLoader.on();
 
-		profileSettingsService.uploadPicture(
-			vm.customer._id,
-			vm.imgData.newPicture,
-			function() {
-				layoutLoader.off();
+		profileSettingsService.uploadPicture(vm.imgData.newPicture, function() {
+			layoutLoader.off();
 
-				vm.imgData = profileSettingsService.getDefaultImgData();
+			vm.imgData = profileSettingsService.getDefaultImgData();
 
-				notifyAndLeave({
-					title: 'Updating picture...',
-					content: 'Updated.'
-				});
+			notifyAndLeave({
+				title: 'Updating picture...',
+				message: 'Updated.'
 			});
+		});
 	}
 }

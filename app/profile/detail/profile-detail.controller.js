@@ -4,9 +4,9 @@ angular
 	.module('app.profile')
 	.controller('profileDetailController', profileDetailController);
 
-function profileDetailController($rootScope, profileDetailService, customer) {
+function profileDetailController(APP_CONFIG, profileDetailService, customer) {
 	var vm = this;
 
 	vm.customer = customer;
-	vm.urlBase = $rootScope.urlBase;
+	vm.urlBase = APP_CONFIG.apiRootUrl;
 }

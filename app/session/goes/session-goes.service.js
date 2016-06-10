@@ -4,7 +4,7 @@ angular
 	.module('app.session')
 	.factory('sessionGoesService', sessionGoesService);
 
-function sessionGoesService($rootScope, Goal) {
+function sessionGoesService(APP_CONFIG, Goal) {
 	var ROUNDS_DESCRIPTION = [
 		'Round 1: Review last goal',
 		'Round 2: In the spotlight',
@@ -59,7 +59,7 @@ function sessionGoesService($rootScope, Goal) {
 
 		return {
 			fullName: member.firstName + ' ' + member.lastName,
-			avatar: $rootScope.urlBase + member.avatar
+			avatar: APP_CONFIG.apiRootUrl + member.avatar
 		};
 	}
 

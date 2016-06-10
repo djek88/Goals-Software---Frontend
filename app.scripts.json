@@ -23,7 +23,10 @@
 		"socket-io",
 		"file-model",
 		"datetimepicker",
-		"datetimepicker-tmpl"
+		"datetimepicker-tmpl",
+		"angularjs-dropdown-multiselect",
+		"ng-currency",
+		"angular-ui-notification"
 	],
 	"paths": {
 		"api": "plugin/api-backend/api-services.js",
@@ -32,6 +35,10 @@
 		"file-model": "plugin/angular-file-model/angular-file-model.js",
 		"datetimepicker": "plugin/datetimepicker/datetimepicker.js",
 		"datetimepicker-tmpl": "plugin/datetimepicker/datetimepicker.templates.js",
+		"languages": "plugin/languages/languages.min.js",
+		"angularjs-dropdown-multiselect": "plugin/angularjs-dropdown-multiselect/angularjs-dropdown-multiselect.min.js",
+		"ng-currency": "plugin/ng-currency/ng-currency.min.js",
+		"angular-ui-notification": "plugin/angular-ui-notification/angular-ui-notification.min.js",
 
 		"jquery": "plugin/jquery/dist/jquery.min.js",
 		"jquery-ui": "plugin/jquery-ui/jquery-ui.min.js",

@@ -66,6 +66,12 @@
 							<i class="fa fa-linkedin-square"></i>
 						</a>
 						<a class="btn btn-default btn-circle"
+							ng-if="member.social.wb"
+							ng-href="{{member.social.wb | userLink}}"
+							target="_blank">
+							<i class="fa fa-link"></i>
+						</a>
+						<a class="btn btn-default btn-circle"
 							ng-if="vm.isCurCustomerGroupMember
 								&& vm.curCustomer._id != member._id"
 							ng-click="vm.showEmailModal(member._id)">

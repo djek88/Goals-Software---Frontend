@@ -70,7 +70,7 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 
 					notifyAndLeave({
 						title: 'Leave vote...',
-						content: 'Thanks for your vote.'
+						message: 'Thanks for your vote.'
 					});
 				}
 			);
@@ -88,9 +88,9 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 		if (err) {
 			onDestroy();
 			return notifyAndLeave({
+				type: 'error',
 				title: 'Joining to session...',
-				content: 'Forbidden!',
-				isError: true,
+				message: 'Forbidden!',
 				leave: {to: 'app.home'}
 			});
 		}
@@ -107,8 +107,8 @@ function sessionGoesController($scope, Customer, layoutLoader, notifyAndLeave, s
 			onDestroy();
 			return notifyAndLeave({
 				title: err ? 'During the session...' : 'Session finish...',
-				content: err ? 'Something went wrong!' : 'Session finished success!',
-				isError: err ? true : false,
+				message: err ? 'Something went wrong!' : 'Session finished success!',
+				type: err ? 'error' : 'primary',
 				leave: {to: 'app.home'}
 			});
 		}

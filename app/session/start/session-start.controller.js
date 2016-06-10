@@ -36,10 +36,10 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 		socket.emit('startSessionRoom:startSession', group._id, function(errMsg) {
 			if (errMsg) {
 				notifyAndLeave({
+					type: 'error',
 					title: 'Session starting...',
-					content: errMsg,
-					isError: true}
-				);
+					message: errMsg,
+				});
 			}
 		});
 	}
@@ -54,9 +54,9 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 		if (errMsg) {
 			onDestroy();
 			return notifyAndLeave({
+				type: 'error',
 				title: 'Session joining...',
-				content: errMsg,
-				isError: true,
+				message: errMsg,
 				leave: {to: 'app.home'}
 			});
 		}
@@ -67,7 +67,7 @@ function sessionStartController($scope, $timeout, Customer, notifyAndLeave, sess
 	function onRedirect(groupId) {
 		notifyAndLeave({
 			title: 'Session starting...',
-			content: 'Waiting other user and starting session.',
+			message: 'Waiting other user and starting session.',
 			leave: {to: 'app.session.goes', params: {id: groupId}}
 		});
 	}

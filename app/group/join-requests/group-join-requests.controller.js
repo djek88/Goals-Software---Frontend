@@ -26,7 +26,7 @@ function groupJoinRequestsController(notifyAndLeave, layoutLoader, groupJoinRequ
 
 			notifyAndLeave({
 				title: 'Send responce...',
-				content: content
+				message: content
 			});
 		});
 	}

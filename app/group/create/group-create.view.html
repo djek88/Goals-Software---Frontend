@@ -109,11 +109,11 @@
 					</section>
 				</div>
 
-				<div class="row">
+				<div class="row" ng-if="vm.group.sessionConf.sheduled">
 					<section class="col col-3">
 						<label class="label">Day</label>
 						<label class="select">
-							<select ng-disabled="!vm.group.sessionConf.sheduled"
+							<select
 								ng-model="vm.group.sessionConf.day"
 								ng-options="+key as value for (key, value) in vm.days">
 							</select> <i></i>
@@ -123,7 +123,7 @@
 					<section class="col col-3">
 						<label class="label">Time</label>
 						<label class="select">
-							<select ng-disabled="!vm.group.sessionConf.sheduled"
+							<select
 								ng-model="vm.group.sessionConf.time"
 								ng-options="time.key as time.value for time in vm.times">
 							</select> <i></i>
@@ -133,7 +133,7 @@
 					<section class="col col-3">
 						<label class="label">Time zone</label>
 						<label class="select">
-							<select ng-disabled="!vm.group.sessionConf.sheduled"
+							<select
 								ng-model="vm.group.sessionConf.timeZone"
 								ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
 							</select> <i></i>
@@ -144,7 +144,6 @@
 						<label class="label">Frequency</label>
 						<label class="select">
 							<select
-								ng-disabled="!vm.group.sessionConf.sheduled"
 								ng-model="vm.group.sessionConf.frequencyType"
 								ng-options="+key as value for (key, value) in vm.frequency">
 							</select> <i></i>

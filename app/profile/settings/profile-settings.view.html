@@ -1,81 +1,265 @@
 <div id="content">
 	<div class="row">
 
-			<form ng-submit="vm.save()" class="smart-form ng-pristine ng-valid">
-				<header>
-					Profile Settings
-				</header>
+		<form ng-submit="vm.save()" class="smart-form ng-pristine ng-valid">
+			<header>
+				Profile Settings
+			</header>
 
-				<fieldset>
-					<div class="row">
-						<section class="col col-4">
-							<label class="label">First Name</label>
-							<label class="input"> <i class="icon-prepend fa fa-user"></i>
-								<input ng-model="vm.customer.firstName" type="text" placeholder="First name">
-							</label>
-						</section>
+			<fieldset>
+				<div class="row">
+					<section class="col col-xs-4">
+						<label class="label">First Name</label>
+						<label class="input"> <i class="icon-prepend fa fa-user"></i>
+							<input ng-model="vm.customer.firstName" type="text" placeholder="First name">
+						</label>
+					</section>
 
-						<section class="col col-4">
-							<label class="label">Last Name</label>
-							<label class="input"> <i class="icon-prepend fa fa-user"></i>
-								<input ng-model="vm.customer.lastName" type="text" placeholder="Last name">
-							</label>
-						</section>
+					<section class="col col-xs-4">
+						<label class="label">Last Name</label>
+						<label class="input"> <i class="icon-prepend fa fa-user"></i>
+							<input ng-model="vm.customer.lastName" type="text" placeholder="Last name">
+						</label>
+					</section>
 
-						<section class="col col-4">
-							<label class="label">Time Zone</label>
-							<label class="select">
-								<select 
-									ng-model="vm.customer.timeZone"
-									ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
-								</select>
-							</label>
-						</section>
-					</div>
-
-					<div class="row">
-						<section class="col col-4">
-							<label class="label">Facebook</label>
-							<label class="input"> <i class="icon-prepend fa fa-facebook"></i>
-								<input ng-model="vm.customer.social.fb" type="text" placeholder="Facebook">
-							</label>
-						</section>
-
-						<section class="col col-4">
-							<label class="label">Twitter</label>
-							<label class="input"> <i class="icon-prepend fa fa-twitter"></i>
-								<input ng-model="vm.customer.social.tw" type="text" placeholder="Twiter">
-							</label>
-						</section>
-
-						<section class="col col-4">
-							<label class="label">Linkedin</label>
-							<label class="input"> <i class="icon-prepend fa fa-linkedin"></i>
-								<input ng-model="vm.customer.social.li" type="text" placeholder="LinkedIn">
-							</label>
-						</section>
-					</div>
-
-					<div class="row">
-						<section class="col col-xs-12" style="margin-top: 23px;">
-							<label style="display: block;" for="picture">
-								<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
-								<div style="display: none;">
-									<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
-								</div>
-							</label>
-
-							<label class="textarea" style="display: flex; padding-left: 15px;">
-								<textarea rows="7" ng-model="vm.customer.description" placeholder="Description"></textarea>
-							</label>
-						</section>
-					</div>
-				</fieldset>
-
-				<div align="center">
-					<button type="submit" class="btn btn-primary btn-lg">Save</button>
+					<section class="col col-xs-4">
+						<label class="label">Time Zone</label>
+						<label class="select">
+							<select 
+								ng-model="vm.customer.timeZone"
+								ng-options="item.id as (item.name + ' (' + item.offset + ')') for item in vm.timezoneMap">
+							</select>
+						</label>
+					</section>
 				</div>
-			</form>
+
+				<div class="row">
+					<section class="col col-xs-3">
+						<label class="label">Facebook</label>
+						<label class="input"> <i class="icon-prepend fa fa-facebook"></i>
+							<input ng-model="vm.customer.social.fb" type="text" placeholder="Facebook">
+						</label>
+					</section>
+
+					<section class="col col-xs-3">
+						<label class="label">Twitter</label>
+						<label class="input"> <i class="icon-prepend fa fa-twitter"></i>
+							<input ng-model="vm.customer.social.tw" type="text" placeholder="Twiter">
+						</label>
+					</section>
+
+					<section class="col col-xs-3">
+						<label class="label">Linkedin</label>
+						<label class="input"> <i class="icon-prepend fa fa-linkedin"></i>
+							<input ng-model="vm.customer.social.li" type="text" placeholder="LinkedIn">
+						</label>
+					</section>
+
+					<section class="col col-xs-3">
+						<label class="label">Website</label>
+						<label class="input"> <i class="icon-prepend fa fa-link"></i>
+							<input ng-model="vm.customer.social.wb" type="text" placeholder="Website">
+						</label>
+					</section>
+				</div>
+
+				<div class="row">
+					<section class="col col-xs-12" style="margin-top: 23px;">
+						<label style="display: block;" for="picture">
+							<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
+							<div style="display: none;">
+								<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
+							</div>
+						</label>
+
+						<label class="textarea" style="display: flex; padding-left: 15px;">
+							<textarea rows="7" ng-model="vm.customer.description" placeholder="Description"></textarea>
+						</label>
+					</section>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend>Features of preferred groups</legend>
+
+				<div class="row">
+					<section class="col col-xs-12">
+						<label class="label">Are you interested to join someone else's group?</label>
+						<div class="inline-group">
+							<label class="radio">
+								<input type="radio" name="visit-several-groups"
+									ng-model="vm.customer.visitSeveralGroups"
+									ng-value="true">
+								<i></i>Yes
+							</label>
+							<label class="radio">
+								<input type="radio" name="visit-several-groups"
+									ng-model="vm.customer.visitSeveralGroups"
+									ng-value="false">
+								<i></i>No
+							</label>
+						</div>
+					</section>
+				</div>
+
+				<div ng-if="vm.customer.visitSeveralGroups">
+					<div class="row">
+						<section class="col col-xs-3">
+							<label class="label">Group Type</label>
+							<label class="select">
+								<select
+									ng-model="vm.customer.groupPreferences.type"
+									ng-options="+key as value for (key, value) in vm.groupTypes">
+								</select> <i></i>
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Languages</label>
+							<label class="select">
+								<div ng-dropdown-multiselect=""
+									selected-model="vm.customer.groupPreferences.languages"
+									options="vm.languagesMap"
+									translation-texts="{
+										buttonDefaultText: 'Select Languages',
+										dynamicButtonTextSuffix: 'languages checked'
+									}"
+									extra-settings="{
+										buttonClasses: 'btn btn-default btn-md',
+										showCheckAll: false,
+										scrollable: true,
+										idProp: 'code',
+										externalIdProp: 'code',
+										displayProp: 'name'
+									}"></div>
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Min Penalty Fee</label>
+							<label class="select">
+								<select
+									ng-model="vm.customer.groupPreferences.penaltyFee[0]"
+									ng-options="penalty as ('$' + penalty) for penalty in vm.penaltyAmounts">
+								</select> <i></i>
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Max Penalty Fee</label>
+							<label class="select">
+								<select
+									ng-model="vm.customer.groupPreferences.penaltyFee[1]"
+									ng-options="penalty as ('$' + penalty) for penalty in vm.penaltyAmounts">
+								</select> <i></i>
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<section class="col col-xs-3">
+							<label class="label">Min No. Of Members</label>
+							<label class="input"> <i class="icon-prepend fa fa-sort-numeric-asc"></i>
+								<input type="number" placeholder="Number" min="1"
+									ng-model="vm.customer.groupPreferences.members[0]">
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Max No. Of Members</label>
+							<label class="input"> <i class="icon-prepend fa fa-sort-numeric-asc"></i>
+								<input type="number" placeholder="Number" min="1"
+									ng-model="vm.customer.groupPreferences.members[1]">
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Min Joining Fee</label>
+							<label class="input">
+								<input type="text" ng-currency ng-required="true"
+									ng-model="vm.customer.groupPreferences.joiningFee[0]"
+									fraction="0" min="0" max="10000">
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Max Joining Fee</label>
+							<label class="input">
+								<input type="text" ng-currency ng-required="true"
+									ng-model="vm.customer.groupPreferences.joiningFee[1]"
+									fraction="0" min="0" max="10000">
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<section class="col col-xs-3">
+							<label class="label">Earliest Time You Can Meet</label>
+							<label class="select">
+								<select
+									ng-model="vm.customer.groupPreferences.availableTime[0]"
+									ng-options="time.key as time.value for time in vm.times">
+								</select> <i></i>
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Latest Time You Can Meet</label>
+							<label class="select">
+								<select
+									ng-model="vm.customer.groupPreferences.availableTime[1]"
+									ng-options="time.key as time.value for time in vm.times">
+								</select> <i></i>
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Min Monthly Fee</label>
+							<label class="input">
+								<input type="text" ng-currency ng-required="true"
+									ng-model="vm.customer.groupPreferences.monthlyFee[0]"
+									fraction="0" min="0" max="10000">
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Max Monthly Fee</label>
+							<label class="input">
+								<input type="text" ng-currency ng-required="true"
+									ng-model="vm.customer.groupPreferences.monthlyFee[1]"
+									fraction="0" min="0" max="10000">
+							</label>
+						</section>
+					</div>
+
+					<div class="row">
+						<section class="col col-xs-6"></section>
+
+						<section class="col col-xs-3">
+							<label class="label">Min Yearly Fee</label>
+							<label class="input">
+								<input type="text" ng-currency ng-required="true"
+									ng-model="vm.customer.groupPreferences.yearlyFee[0]"
+									fraction="0" min="0" max="100000">
+							</label>
+						</section>
+
+						<section class="col col-xs-3">
+							<label class="label">Max Yearly Fee</label>
+							<label class="input">
+								<input type="text" ng-currency ng-required="true"
+									ng-model="vm.customer.groupPreferences.yearlyFee[1]"
+									fraction="0" min="0" max="100000">
+							</label>
+						</section>
+					</div>
+				</div>
+			</fieldset>
+
+			<div align="center">
+				<button type="submit" class="btn btn-primary btn-lg">Save</button>
+			</div>
+		</form>
 
 	</div>
 </div>

@@ -4,7 +4,9 @@ angular
 	.module('app.profile', [
 		'ui.router',
 		'backendApi',
-		'file-model'
+		'file-model',
+		'angularjs-dropdown-multiselect',
+		'ng-currency'
 	])
 	.config(config);
 
@@ -58,8 +60,38 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
+				groupTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.groupTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				sessionTimeTypes: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.sessionTimeTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				penaltyAmounts: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.penaltyAmounts(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
+					return lazyScript.register(['jstz', 'languages']);
 				}
 			}
 		});

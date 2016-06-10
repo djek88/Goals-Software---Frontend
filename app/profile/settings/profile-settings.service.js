@@ -4,13 +4,13 @@ angular
 	.module('app.profile')
 	.factory('profileSettingsService', profileSettingsService);
 
-function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_CONFIG) {
+function profileSettingsService($http, LoopBackAuth, Customer, APP_CONFIG) {
 	var service = {
 		timeZoneMap: buidTimeZoneMap(),
-		getCustomer: prepareCustomer,
+		languagesMap: buidLanguagesMap(),
+		getCustomer: getCustomer,
 		saveCustomer: saveCustomer,
 		getDefaultImgData: getDefaultImgData,
-		readFileAsDataUrl: readFileAsDataUrl,
 		uploadPicture: uploadPicture
 	};
 	return service;
@@ -32,7 +32,16 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 		return results;
 	}
 
-	function prepareCustomer() {
+	function buidLanguagesMap() {
+		return languages.getAllLanguageCode().map(function(langCode) {
+			return {
+				code: langCode,
+				name: languages.getLanguageInfo(langCode).name
+			};
+		});
+	}
+
+	function getCustomer() {
 		var detectedTz = jstz.determine();
 		// copy cause internal objects are the same for any instance
 		var customer = angular.copy(Customer.getCachedCurrent());
@@ -42,22 +51,31 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 			customer.timeZone = detectedTz.name();
 		}
 
+		// Transform languages
+		customer.groupPreferences.languages = customer.groupPreferences.languages.map(function(code) {
+			return {code: code};
+		});
+
 		return customer;
 	}
 
 	function saveCustomer(customer, cb) {
-		var customerId = customer._id;
+		var sendData = angular.copy(customer);
+		delete sendData._id;
 
-		delete customer._id;
+		// Transform languages
+		sendData.groupPreferences.languages = sendData.groupPreferences.languages.map(function(lang) {
+			return lang.code;
+		});
 
-		Customer.prototype$updateAttributes({id: customerId}, customer, function(customer) {
-			updateLocalStorage(customer);
+		Customer.prototype$updateAttributes({id: customer._id}, sendData, function(freshCustomer) {
+			updateLocalStorage(freshCustomer);
 			cb();
 		});
 	}
 
 	function getDefaultImgData() {
-		var actualCustomerAvatar = $rootScope.urlBase + Customer.getCachedCurrent().avatar;
+		var actualCustomerAvatar = APP_CONFIG.apiRootUrl + Customer.getCachedCurrent().avatar;
 
 		return {
 			selectedPicture: actualCustomerAvatar,
@@ -65,18 +83,8 @@ function profileSettingsService($rootScope, $http, LoopBackAuth, Customer, APP_C
 		};
 	}
 
-	function readFileAsDataUrl(file, cb) {
-		var fileReader = new FileReader();
-
-		fileReader.onload = function() {
-			cb(fileReader.result);
-		};
-
-		fileReader.readAsDataURL(file);
-	}
-
-	function uploadPicture(customerId, pictureFile, cb) {
-		var url = APP_CONFIG.apiRootUrl + '/Customers/' + customerId + '/upload-avatar';
+	function uploadPicture(pictureFile, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Customers/' + Customer.getCachedCurrent()._id + '/upload-avatar';
 
 		var fd = new FormData();
 		fd.append('file', pictureFile);

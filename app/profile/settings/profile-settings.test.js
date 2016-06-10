@@ -14,12 +14,24 @@ describe('app.profile module ->', function() {
 				description: '',
 				firstName: "dsa12",
 				lastName: "last name",
+				timeZone: "EST",
 				social: {
 					fb: '',
 					li: '',
-					tw: ''
+					tw: '',
+					wb: '',
 				},
-				timeZone: "EST"
+				visitSeveralGroups: false,
+				groupPreferences: {
+					type: 5,
+					joiningFee: [0, 0],
+					monthlyFee: [0, 0],
+					yearlyFee: [0, 0],
+					penaltyFee: [0, 0],
+					members: [1, 1],
+					availableTime: ['0.00', '23.30'],
+					languages: ['en']
+				}
 			}
 		};
 		var $httpBackend;
@@ -37,7 +49,7 @@ describe('app.profile module ->', function() {
 			});
 		}));
 
-		beforeEach(inject(function(_LoopBackAuth_, _$httpBackend_, $controller, $rootScope) {
+		beforeEach(inject(function(_LoopBackAuth_, _$httpBackend_, $controller, $rootScope, $q) {
 			LoopBackAuth = _LoopBackAuth_;
 			$httpBackend = _$httpBackend_;
 
@@ -45,7 +57,13 @@ describe('app.profile module ->', function() {
 			LoopBackAuth.rememberMe = true;
 			LoopBackAuth.save();
 
-			curCtrl = $controller('profileSettingsController', {$scope: $rootScope.$new(), loadAppData: {}});
+			curCtrl = $controller('profileSettingsController', {
+				$scope: $rootScope.$new(),
+				loadAppData: {},
+				groupTypes: {},
+				sessionTimeTypes: {toJSON: function() {return {};}},
+				penaltyAmounts: []
+			});
 		}));
 
 		afterEach(function() {
@@ -63,7 +81,9 @@ describe('app.profile module ->', function() {
 			beforeEach(function() {
 				// Make change in customer model
 				curCtrl.customer.firstName = 'newFirstName';
+
 				resData = angular.copy(curCtrl.customer);
+				resData.groupPreferences = authData.user.groupPreferences;
 
 				$httpBackend
 					.whenPUT('/api/Customers/' + curCtrl.customer._id)
@@ -74,7 +94,11 @@ describe('app.profile module ->', function() {
 				$httpBackend.expectPUT(
 					'/api/Customers/' + curCtrl.customer._id,
 					function(data) {
-						return angular.equals(data, angular.toJson(curCtrl.customer))
+						var properlyData = angular.copy(curCtrl.customer);
+						delete properlyData._id;
+						properlyData.groupPreferences = authData.user.groupPreferences;
+
+						return angular.equals(data, angular.toJson(properlyData))
 							&& angular.isUndefined(data._id);
 					},
 					function(headers) {
@@ -104,7 +128,7 @@ describe('app.profile module ->', function() {
 				curCtrl.save();
 				$httpBackend.flush();
 
-				expect(curCtrl.customer).toEqual(resData);
+				expect(curCtrl.customer.firstName).toEqual(resData.firstName);
 			}));
 		});
 	});

@@ -3,7 +3,7 @@
 describe('app.group module ->', function() {
 	beforeEach(module('app.group'));
 
-	describe('basicHomeController ->', function() {
+	describe('groupCreateController ->', function() {
 		var authData = {
 			id: 'gX6E2dlKxOBNB4w1HAbOpKbHATNDIQaAnojwMMyVpejcO3yQAyrQWlkMY0ShQ7WD',
 			userId: '14415597',
@@ -14,18 +14,34 @@ describe('app.group module ->', function() {
 				description: '',
 				firstName: "dsa12",
 				lastName: "last name",
+				timeZone: "EST",
 				social: {
 					fb: '',
 					li: '',
-					tw: ''
+					tw: '',
+					wb: ''
 				},
-				timeZone: "EST"
+				visitSeveralGroups: false,
+				groupPreferences: {
+					type: 5,
+					joiningFee: [0, 0],
+					monthlyFee: [0, 0],
+					yearlyFee: [0, 0],
+					penaltyFee: [0, 0],
+					members: [1, 1],
+					availableTime: ['0.00', '23.30'],
+					languages: ['en']
+				}
 			}
 		};
 		var curCtrl;
 
 		beforeEach(module(function($provide) { 
 			$provide.factory('notifyAndLeave', function() {
+				return function() {};
+			});
+
+			$provide.factory('transformTimeTypes', function() {
 				return function() {};
 			});
 

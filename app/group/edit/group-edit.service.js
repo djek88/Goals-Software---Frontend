@@ -4,26 +4,16 @@ angular
 	.module('app.group')
 	.factory('groupEditService', groupEditService);
 
-function groupEditService(Group) {
+function groupEditService($http, $stateParams, Group, APP_CONFIG) {
 	var service = {
-		prepareTimeTypes: prepareTimeTypes,
 		timeZoneMap: buidTimeZoneMap(),
-		updateGroup: updateGroup
+		languagesMap: buidLanguagesMap(),
+		updateGroup: updateGroup,
+		getDefaultImgData: getDefaultImgData,
+		uploadPicture: uploadPicture,
+		uploadAttachment: uploadAttachment
 	};
 	return service;
-
-	function prepareTimeTypes(timeTypes) {
-		var result = [];
-
-		for (var key in timeTypes) {
-			result.push({
-				key: key,
-				value: timeTypes[key]
-			});
-		}
-
-		return result;
-	}
 
 	function buidTimeZoneMap() {
 		var results = [];
@@ -42,7 +32,49 @@ function groupEditService(Group) {
 		return results;
 	}
 
+	function buidLanguagesMap() {
+		return languages.getAllLanguageCode().map(function(langCode) {
+			return {
+				code: langCode,
+				name: languages.getLanguageInfo(langCode).name
+			};
+		});
+	}
+
 	function updateGroup(group, cb) {
 		Group.prototype$updateAttributes({id: group._id}, group, cb);
+	}
+
+	function getDefaultImgData(group) {
+		var actualGroupAvatar = APP_CONFIG.apiRootUrl + group.avatar;
+
+		return {
+			selectedPicture: actualGroupAvatar,
+			newPicture: null
+		};
+	}
+
+	function uploadPicture(pictureFile, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + $stateParams.id + '/upload-avatar';
+
+		var fd = new FormData();
+		fd.append('file', pictureFile);
+
+		$http.post(url, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		}).success(cb);
+	}
+
+	function uploadAttachment(attachmentFile, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + $stateParams.id + '/upload-attachment';
+
+		var fd = new FormData();
+		fd.append('file', attachmentFile);
+
+		$http.post(url, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		}).success(cb);
 	}
 }

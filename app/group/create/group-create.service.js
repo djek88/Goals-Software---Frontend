@@ -7,7 +7,6 @@ angular
 function groupCreateService(Group) {
 	var service = {
 		prepareGroup: prepareGroup,
-		prepareTimeTypes: prepareTimeTypes,
 		timeZoneMap: buidTimeZoneMap(),
 		createGroup: createGroup
 	};
@@ -31,21 +30,6 @@ function groupCreateService(Group) {
 				roundLength: [120, 180, 90, 120]
 			}
 		};
-	}
-
-	function prepareTimeTypes(timeTypes) {
-		var result = [];
-
-		for (var key in timeTypes) {
-			if (isFinite(key)) {
-				result.push({
-					key: key,
-					value: timeTypes[key]
-				});
-			}
-		}
-
-		return result;
 	}
 
 	function buidTimeZoneMap() {

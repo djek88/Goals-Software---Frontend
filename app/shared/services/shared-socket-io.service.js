@@ -4,7 +4,7 @@ angular
 	.module('app.shared')
 	.factory('socketIO', socketIO);
 
-function socketIO($rootScope, $stateParams, LoopBackAuth) {
+function socketIO($rootScope, $stateParams, LoopBackAuth, APP_CONFIG) {
 	var startSocket = null;
 	var goesSocket = null;
 	var userCredentials = {
@@ -21,7 +21,7 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 		if (startSocket) {
 			if (startSocket.disconnected) startSocket.connect();
 		} else {
-			startSocket = io($rootScope.socketUrl + '/startSession', {path: '/sockets'});
+			startSocket = io(APP_CONFIG.socketUrl + '/startSession', {path: '/sockets'});
 			injectAngularApply(startSocket);
 
 			startSocket.onSuccessAuth = function() {};
@@ -39,7 +39,7 @@ function socketIO($rootScope, $stateParams, LoopBackAuth) {
 		if (goesSocket) {
 			if (goesSocket.disconnected) goesSocket.connect();
 		} else {
-			goesSocket = io($rootScope.socketUrl + '/goesSession', {path: '/sockets'});
+			goesSocket = io(APP_CONFIG.socketUrl + '/goesSession', {path: '/sockets'});
 			injectAngularApply(goesSocket);
 
 			goesSocket.onSuccessAuth = function() {};
