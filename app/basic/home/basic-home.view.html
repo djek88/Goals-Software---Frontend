@@ -4,32 +4,33 @@
 		<section widget-grid id="widget-grid">
 			<article class="col-sm-12">
 				<div style="margin-bottom: 50px;" ng-repeat="group in vm.groups">
-					<div class="well" style="margin: 8px; min-height: 187px;">
-						<div class="col-xs-4">
-							<h4>{{group.name}}</h4>
+					<div class="well" style="margin: 8px; min-height: 180px;">
+						<div class="row">
+							<div class="col-xs-12">
+								<h4>{{group.name}}</h4>
+							</div>
 						</div>
 
-						<div class="col-xs-8">
-							<div style="margin-top: 10px;">
+						<div class="row">
+							<div class="container-fluid content-center" style="margin-top: 15px;">
 								<div ng-if="group._nextSessionId">
 									<div ng-if="!(group.NextSession.startAt | isLessThanMins:10)">
-										Next mastermind on:
-										<div style="width: 50%; min-width: 300px;">
-											<div class="next-session-startAt-block">
-												{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}
-											</div>
-											<div style="margin-top: 8px;" align="right">
-												<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
-													ng-click="vm.showExcuseModal(group._id)">
-													Make your excuse now</a>
-											</div>
+										<div>Next mastermind on:</div>
+										<g-like-calendar-date date="{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}"></g-like-calendar-date>
+										<div style="margin-top: 15px;" align="right">
+											<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
+												ng-click="vm.showExcuseModal(group._id)">
+												Make your excuse now</a>
 										</div>
 									</div>
 
 									<div ng-if="(group.NextSession.startAt | isLessThanMins:10)">
 										Mastermind starting in:
 										<b style="font-size: 18px;">
-											<g-timer count-to="{{group.NextSession.startAt}}" callback="vm.onSessionStart(group._id)" callback-delay-sec="{{15 * 60}}"></g-timer>
+											<g-timer
+												count-to="{{group.NextSession.startAt}}"
+												callback="vm.onSessionStart(group._id)"
+												callback-delay-sec="{{15 * 60}}"></g-timer>
 										</b>
 
 										<div style="width: 50%; min-width: 300px;">
@@ -45,10 +46,8 @@
 									</div>
 								</div>
 
-								<div ng-if="!group._nextSessionId" style="width: 50%;">
-									<div class="next-session-startAt-block">
-										Nothing Scheduled
-									</div>
+								<div ng-if="!group._nextSessionId" style="margin-top: 10px;">
+									<g-like-calendar-date date="Nothing Scheduled"></g-like-calendar-date>
 								</div>
 							</div>
 						</div>

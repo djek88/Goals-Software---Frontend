@@ -424,12 +424,12 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				group: function($q, $state, $stateParams, Group, Customer) {
+				group: function($q, $state, $stateParams, Group, Customer, loadAppData) {
 					var deferred = $q.defer();
 
 					Group.findById({id: $stateParams.id}, function(group) {
 							if (group._ownerId !== Customer.getCachedCurrent()._id) {
-								$state.go('app.home');
+								return $state.go('app.home');
 							}
 
 							deferred.resolve(group);
@@ -535,16 +535,16 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				goal: function($q, $state, $stateParams, Goal, Customer) {
+				goal: function($q, $state, $stateParams, Goal, Customer, loadAppData) {
 					var deferred = $q.defer();
 
 					Goal.findById({id: $stateParams.goalId}, function(goal) {
-						if (goal._ownerId !== Customer.getCachedCurrent()._id) {
-							return $state.go('app.home');
-						}
+							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
+								return $state.go('app.home');
+							}
 
-						deferred.resolve(goal);
-					},
+							deferred.resolve(goal);
+						},
 						deferred.reject.bind(deferred)
 					);
 
@@ -615,12 +615,12 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
-				goal: function($q, $state, $stateParams, Goal, Customer) {
+				goal: function($q, $state, $stateParams, Goal, Customer, loadAppData) {
 					var deferred = $q.defer();
 
 					Goal.findById({id: $stateParams.goalId}, function(goal) {
 							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
-								$state.go('app.group.goalReview', {
+								return $state.go('app.group.goalReview', {
 									id: $stateParams.id,
 									goalId: $stateParams.goalId
 								});
@@ -661,15 +661,12 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				goal: function($q, $state, $stateParams, Goal, Customer) {
+				goal: function($q, $state, $stateParams, Goal, Customer, loadAppData) {
 					var deferred = $q.defer();
 
-					Goal.findById({
-							id: $stateParams.goalId
-						},
-						function(goal) {
+					Goal.findById({id: $stateParams.goalId}, function(goal) {
 							if (goal._ownerId === Customer.getCachedCurrent()._id) {
-								$state.go('app.group.uploadGoalEvidence', {
+								return $state.go('app.group.uploadGoalEvidence', {
 									id: $stateParams.id,
 									goalId: $stateParams.goalId
 								});

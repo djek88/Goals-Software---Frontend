@@ -45,6 +45,23 @@
 						</label>
 					</section>
 				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="row">
+					<section class="col col-xs-12">
+						<label style="display: block;" for="picture">
+							<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
+							<div style="display: none;">
+								<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
+							</div>
+						</label>
+
+						<label class="textarea" style="display: flex; padding-left: 15px;">
+							<textarea rows="7" ng-model="vm.group.description" placeholder="Description"></textarea>
+						</label>
+					</section>
+				</div>
 
 				<div class="row">
 					<section class="col col-3">
@@ -98,7 +115,7 @@
 			<fieldset>
 				<div class="row">
 					<section class="col col-4">
-						<label class="label">Meetings Language</label>
+						<label class="label">Language Used During Meetings</label>
 						<label class="select">
 							<select
 								ng-model="vm.group.sessionConf.language"
@@ -108,7 +125,7 @@
 					</section>
 
 					<section class="col col-4">
-						<label class="label">Information/Application Forms</label>
+						<label class="label">Add Information/Application Form</label>
 						<div class="input input-file">
 							<span class="button">
 								<input type="file" file-model="vm.groupAttachment">
@@ -122,11 +139,11 @@
 					</section>
 
 					<section class="col col-4">
-						<label class="label">Hide members</label>
+						<label class="label">Hide Members In Public Search</label>
 						<div class="inline-group">
 							<label class="checkbox">
 								<input ng-model="vm.group.hideMembers" type="checkbox">
-								<i></i>(Forbid display members in the public search results)
+								<i></i>(hide members profiles in the groups public search result)
 							</label>
 						</div>
 					</section>
@@ -166,23 +183,6 @@
 							<input type="text" ng-currency ng-required="true"
 								ng-model="vm.group.yearlyFee"
 								fraction="0" min="0" max="100000">
-						</label>
-					</section>
-				</div>
-			</fieldset>
-
-			<fieldset>
-				<div class="row">
-					<section class="col col-xs-12">
-						<label style="display: block;" for="picture">
-							<img style="height: 124px; float: left;" class="img-responsive" ng-src="{{vm.imgData.selectedPicture}}">
-							<div style="display: none;">
-								<input id="picture" type="file" class="provider-image-file" file-model="vm.imgData.newPicture">
-							</div>
-						</label>
-
-						<label class="textarea" style="display: flex; padding-left: 15px;">
-							<textarea rows="7" ng-model="vm.group.description" placeholder="Description"></textarea>
 						</label>
 					</section>
 				</div>

@@ -27,14 +27,20 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				group: function($q, $stateParams, Group) {
+				group: function($q, $state, $stateParams, Group) {
 					var deferred = $q.defer();
 
 					Group.findById({
 							id: $stateParams.id,
 							filter: {include: ['Members', 'Owner', 'NextSession']}
 						},
-						deferred.resolve.bind(deferred),
+						function(group) {
+							if (!group.NextSession) {
+								return $state.go('app.home');
+							}
+
+							deferred.resolve(group);
+						},
 						deferred.reject.bind(deferred)
 					);
 

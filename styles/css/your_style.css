@@ -89,14 +89,17 @@ body.container {
 	border-top: none;
 }
 
-.btn-primary {
+.btn-primary,
+.smart-form .button {
 	border-color: #636363;
 	background: #b5f700;
 	color: #363636;
 }
 
 .btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:focus,
+.button:hover,
+.button:focus {
 	background-color: #ddf700;
 	color: #363636;
 }
@@ -184,20 +187,17 @@ body.container {
 	text-align: center;
 }
 
-.next-session-startAt-block {
-	min-height: 80px;
-	background-color: #FF6624;
-	text-align: center;
-	line-height: 3;
-	font-size: 26px;
-}
-
 .join-session-butn {
 	min-height: 80px;
 	text-align: center;
 	line-height: 2;
 	font-size: 26px;
 	width: 100%;
+}
+
+.container-fluid.content-center {
+	display:table;
+	margin:0 auto;
 }
 
 .MessageBoxButtonSection {
