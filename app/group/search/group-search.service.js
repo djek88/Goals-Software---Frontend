@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.factory('groupSearchService', groupSearchService);
 
-function groupSearchService(Group) {
+function groupSearchService(Group, APP_CONFIG) {
 	var service = {
 		findGroupsByCriteria: findGroupsByCriteria,
 		preparedGroups: preparedGroups
@@ -37,6 +37,7 @@ function groupSearchService(Group) {
 
 			result.push({
 				_id: group._id,
+				avatar: APP_CONFIG.apiRootUrl + group.avatar,
 				name: group.name,
 				members: group._memberIds.length,
 				created: created

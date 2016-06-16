@@ -79,9 +79,6 @@ function config($stateProvider) {
 					);
 
 					return deferred.promise;
-				},
-				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
 				}
 			}
 		})

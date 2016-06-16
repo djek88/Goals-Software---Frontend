@@ -8,31 +8,47 @@
 		</a>
 	</h2>
 
-	<div style="font-size: 17px;">
-		<p>
-			<b>Created:</b> {{vm.group.created}}
-		</p>
+	<div class="row">
+		<div class="container">
+			<div class="media">
+				<div class="media-left">
+					<img class="media-object" height="200px" width="200px" ng-src="{{vm.urlBase + vm.group.avatar}}" alt="...">
+					<a class="btn btn-default btn-sm"
+						style="width: 200px;"
+						ng-if="vm.group.attachment"
+						ng-href="{{vm.urlBase + vm.group.attachment}}"
+						download="">
+						Information/Application Form <i class="fa fa-download"></i></a>
+				</div>
 
-		<p>
-			<b>Number Of Mastermind Session:</b> {{vm.sessionsPassed}}
-		</p>
+				<div class="media-body" style="font-size: 17px;">
+					<p>
+						<b>Created:</b> {{vm.group.created}}
+					</p>
 
-		<p>
-			<b>Penalty Level:</b> ${{vm.group.penalty}}
-		</p>
+					<p>
+						<b>Number Of Mastermind Session:</b> {{vm.sessionsPassed}}
+					</p>
 
-		<p>
-			<div style="white-space: pre-wrap;">
-				<b>Description:</b> {{vm.group.description}}
+					<p>
+						<b>Penalty Level:</b> ${{vm.group.penalty}}
+					</p>
+
+					<p>
+						<div style="white-space: pre-wrap;">
+							<b>Description:</b> {{vm.group.description}}
+						</div>
+					</p>
+
+					<p>
+						<b>Mastermind Sessions:</b> {{vm.group.mastermindSessions}}
+					</p>
+				</div>
 			</div>
-		</p>
-
-		<p>
-			<b>Mastermind Sessions:</b> {{vm.group.mastermindSessions}}
-		</p>
+		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" style="margin-top: 30px;">
 		<div class="col-md-6" ng-repeat="member in vm.listMembersWithOwner">
 			<div class="well padding-10">
 				<div class="media">

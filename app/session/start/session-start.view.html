@@ -3,15 +3,8 @@
 		<section widget-grid id="widget-grid">
 			<div class="col-sm-12">
 				<div ng-if="!vm.isStarted" class="container-fluid content-center">
-					<!-- <g-timer count-to="{{vm.sessionStartAt}}" callback="vm.timeOut()" callback-delay-sec="{{1}}" calendar-design="true"></g-timer> -->
-					<div style="width: 482px; margin-top: 15px; background-color: #F4EB49; min-height: 121px;">
-						<div style="padding-left: 15px; text-align: left; padding-top: 10px;">
-							<b>Next session starting in:</b>
-						</div>
-						<div style="text-align: center; font-size: 34px; line-height: 2">
-							<b><g-timer count-to="{{vm.sessionStartAt}}" callback="vm.timeOut()" callback-delay-sec="{{1}}"></g-timer></b>
-						</div>
-					</div>
+					<div>Next session starting in:</div>
+					<g-timer count-to="{{vm.sessionStartAt}}" callback="vm.timeOut()" callback-delay-sec="{{1}}" calendar-design="true"></g-timer>
 				</div>
 
 				<div class="container" style="font-size: 20px; margin-top: 40px; margin-bottom: 20px;">

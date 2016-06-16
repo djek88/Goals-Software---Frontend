@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.factory('reviewGroupService', reviewGroupService);
 
-function reviewGroupService() {
+function reviewGroupService(APP_CONFIG) {
 	var service = {
 		prepareGroup: prepareGroup
 	};
@@ -21,6 +21,8 @@ function reviewGroupService() {
 		return {
 			_id: group._id,
 			name: group.name,
+			avatar: APP_CONFIG.apiRootUrl + group.avatar,
+			attachment: APP_CONFIG.apiRootUrl + group.attachment,
 			created: created,
 			sessionsPassed: sessPassed,
 			penalty: group.penalty,

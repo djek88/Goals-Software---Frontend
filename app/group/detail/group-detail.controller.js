@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupDetailController', groupDetailController);
 
-function groupDetailController(APP_CONFIG, notifyAndLeave, layoutLoader, groupDetailService, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupDetailController(notifyAndLeave, layoutLoader, groupDetailService, APP_CONFIG, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
 	vm.urlBase = APP_CONFIG.apiRootUrl;

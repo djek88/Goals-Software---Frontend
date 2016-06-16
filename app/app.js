@@ -95,7 +95,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 	$rootScope.$stateParams = $stateParams;
 	//editableOptions.theme = 'bs3';
 
-	//$cookies.put(APP_CONFIG.FHQSessionIdCookie, 'c8cf8569926a8f15e943420c046fefe4');
+	//$cookies.put(APP_CONFIG.FHQSessionIdCookie, '2cvufcl6ju3o1i0qpm1o1c5mi3');
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
@@ -131,7 +131,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 
 				// for dev logining P.S...comment this before commit
 				/*Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
-					email: '1@gmail.com',
+					email: '2@gmail.com',
 					password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
 				}, function(data) {
 					LoopBackAuth.setUser(data.id, data.userId, data.user);
