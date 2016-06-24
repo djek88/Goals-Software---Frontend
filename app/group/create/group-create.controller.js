@@ -7,13 +7,15 @@ angular
 function groupCreateController(notifyAndLeave, layoutLoader, transformTimeTypes, groupCreateService, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
+	vm.group = groupCreateService.prepareGroup(groupTypes, penaltyAmounts, sessionDayTypes, sessionTimeTypes, sessionFrequencyTypes);
+
 	vm.groupTypes = groupTypes;
 	vm.penaltyAmounts = penaltyAmounts;
 	vm.days = sessionDayTypes;
 	vm.times = transformTimeTypes(sessionTimeTypes);
 	vm.timezoneMap = groupCreateService.timeZoneMap;
+	vm.languagesMap = groupCreateService.languagesMap;
 	vm.frequency = sessionFrequencyTypes;
-	vm.group = groupCreateService.prepareGroup(groupTypes, penaltyAmounts, sessionDayTypes, sessionTimeTypes, sessionFrequencyTypes);
 
 	vm.create = create;
 

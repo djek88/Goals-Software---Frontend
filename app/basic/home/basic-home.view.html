@@ -16,7 +16,7 @@
 								<div ng-if="group._nextSessionId">
 									<div ng-if="!(group.NextSession.startAt | isLessThanMins:10)">
 										<div>Next mastermind on:</div>
-										<g-like-calendar-date date="{{group.NextSession.startAt | date:'EEEE d MMM: ha'}}"></g-like-calendar-date>
+										<g-like-calendar-date date="{{group.NextSession.startAt | date:'EEEE d MMM ha'}}"></g-like-calendar-date>
 										<div style="margin-top: 15px;" align="right">
 											<a ng-if="!group.NextSession.excuses.hasOwnProperty(vm.curCustomer._id)"
 												ng-click="vm.showExcuseModal(group._id)">

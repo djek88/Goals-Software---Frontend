@@ -94,6 +94,7 @@ body.container {
 	border-color: #636363;
 	background: #b5f700;
 	color: #363636;
+	opacity: 1;
 }
 
 .btn-primary:hover,

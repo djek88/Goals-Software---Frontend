@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupSearchController', groupSearchController);
 
-function groupSearchController(layoutLoader, groupSearchService, groupTypes, penaltyAmounts) {
+function groupSearchController(notifyAndLeave, layoutLoader, groupSearchService, groupTypes, penaltyAmounts) {
 	var vm = this;
 
 	vm.groupTypes = groupTypes;
@@ -25,6 +25,13 @@ function groupSearchController(layoutLoader, groupSearchService, groupTypes, pen
 
 		groupSearchService.findGroupsByCriteria(vm.criteria, function(groups) {
 			layoutLoader.off();
+
+			if (!groups.length) {
+				notifyAndLeave({
+					title: 'Search Groups...',
+					message: 'Currently No Results Found That Match Your Request.'
+				});
+			}
 
 			vm.groups = groupSearchService.preparedGroups(groups);
 			vm.totalGroupsCount = vm.groups.length;

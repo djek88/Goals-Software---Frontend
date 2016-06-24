@@ -16,7 +16,7 @@ ul.flip {
 }
 
 ul.flip.small {
-	margin: 1px;
+	margin: 0px;
 	width: 30px;
 	padding: 0px;/*added manually maybe will breake some else*/
 	height: 45px;

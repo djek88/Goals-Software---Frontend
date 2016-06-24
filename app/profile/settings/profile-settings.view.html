@@ -107,10 +107,21 @@
 						<section class="col col-xs-3">
 							<label class="label">Group Type</label>
 							<label class="select">
-								<select
-									ng-model="vm.customer.groupPreferences.type"
-									ng-options="+key as value for (key, value) in vm.groupTypes">
-								</select> <i></i>
+								<div ng-dropdown-multiselect=""
+									selected-model="vm.customer.groupPreferences.types"
+									options="vm.groupTypesMap"
+									translation-texts="{
+										buttonDefaultText: 'Select Types',
+										dynamicButtonTextSuffix: 'checked'
+									}"
+									extra-settings="{
+										buttonClasses: 'btn btn-default btn-md',
+										showCheckAll: true,
+										idProp: 'code',
+										externalIdProp: 'code',
+										displayProp: 'name'
+									}">
+								</div>
 							</label>
 						</section>
 
@@ -122,7 +133,7 @@
 									options="vm.languagesMap"
 									translation-texts="{
 										buttonDefaultText: 'Select Languages',
-										dynamicButtonTextSuffix: 'languages checked'
+										dynamicButtonTextSuffix: 'checked'
 									}"
 									extra-settings="{
 										buttonClasses: 'btn btn-default btn-md',

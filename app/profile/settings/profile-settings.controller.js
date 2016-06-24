@@ -10,7 +10,7 @@ function profileSettingsController($scope, $cookies, APP_CONFIG, notifyAndLeave,
 	vm.customer = profileSettingsService.getCustomer();
 	vm.imgData = profileSettingsService.getDefaultImgData();
 
-	vm.groupTypes = groupTypes;
+	vm.groupTypesMap = profileSettingsService.buidTypesMap(groupTypes);
 	vm.languagesMap = profileSettingsService.languagesMap;
 	vm.timezoneMap = profileSettingsService.timeZoneMap;
 	vm.times = transformTimeTypes(sessionTimeTypes);

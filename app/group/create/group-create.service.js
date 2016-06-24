@@ -8,6 +8,7 @@ function groupCreateService(Group) {
 	var service = {
 		prepareGroup: prepareGroup,
 		timeZoneMap: buidTimeZoneMap(),
+		languagesMap: buidLanguagesMap(),
 		createGroup: createGroup
 	};
 	return service;
@@ -21,8 +22,16 @@ function groupCreateService(Group) {
 			private: true,
 			memberCanInvite: false,
 			description: '',
+			joiningFee: 0,
+			quarterlyFee: 0,
+			monthlyFee: 0,
+			yearlyFee: 0,
+			hideMembers: false,
 			sessionConf: {
 				sheduled: true,
+				language:  "en",
+				offline: false,
+				withoutFacilitator: false,
 				day: +Object.keys(sessionDayTypes)[0],
 				time: Object.keys(sessionTimeTypes)[0],
 				timeZone: jstz.determine().name(),
@@ -47,6 +56,15 @@ function groupCreateService(Group) {
 		});
 
 		return results;
+	}
+
+	function buidLanguagesMap() {
+		return languages.getAllLanguageCode().map(function(langCode) {
+			return {
+				code: langCode,
+				name: languages.getLanguageInfo(langCode).name
+			};
+		});
 	}
 
 	function createGroup(group, cb) {

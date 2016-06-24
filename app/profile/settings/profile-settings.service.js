@@ -8,6 +8,7 @@ function profileSettingsService($http, LoopBackAuth, Customer, APP_CONFIG) {
 	var service = {
 		timeZoneMap: buidTimeZoneMap(),
 		languagesMap: buidLanguagesMap(),
+		buidTypesMap: buidTypesMap,
 		getCustomer: getCustomer,
 		saveCustomer: saveCustomer,
 		getDefaultImgData: getDefaultImgData,
@@ -41,6 +42,17 @@ function profileSettingsService($http, LoopBackAuth, Customer, APP_CONFIG) {
 		});
 	}
 
+	function buidTypesMap(groupTypes) {
+		groupTypes = JSON.parse(JSON.stringify(groupTypes));
+
+		return Object.keys(groupTypes).map(function(typeId) {
+			return {
+				code: Number(typeId),
+				name: groupTypes[typeId]
+			};
+		});
+	}
+
 	function getCustomer() {
 		var detectedTz = jstz.determine();
 		// copy cause internal objects are the same for any instance
@@ -51,9 +63,14 @@ function profileSettingsService($http, LoopBackAuth, Customer, APP_CONFIG) {
 			customer.timeZone = detectedTz.name();
 		}
 
+		// Transform types
+		customer.groupPreferences.types = customer.groupPreferences.types.map(function(typeId) {
+			return {code: typeId};
+		});
+
 		// Transform languages
-		customer.groupPreferences.languages = customer.groupPreferences.languages.map(function(code) {
-			return {code: code};
+		customer.groupPreferences.languages = customer.groupPreferences.languages.map(function(langCode) {
+			return {code: langCode};
 		});
 
 		return customer;
@@ -66,6 +83,11 @@ function profileSettingsService($http, LoopBackAuth, Customer, APP_CONFIG) {
 		// Transform languages
 		sendData.groupPreferences.languages = sendData.groupPreferences.languages.map(function(lang) {
 			return lang.code;
+		});
+
+		// Transform types
+		sendData.groupPreferences.types = sendData.groupPreferences.types.map(function(type) {
+			return type.code;
 		});
 
 		Customer.prototype$updateAttributes({id: customer._id}, sendData, function(freshCustomer) {
