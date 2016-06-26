@@ -56,7 +56,7 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 
 			$injector.get('notifyAndLeave')({
 				type: 'error',
-				title: rejection.status,
+				title: rejection.statusText + ' ' + rejection.status.toString(),
 				message: data,
 				delay: 6000
 			});

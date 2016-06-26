@@ -403,6 +403,16 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
+				countriesData: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.supportedCountries(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
 					return lazyScript.register(['jstz', 'languages']);
 				}
@@ -480,6 +490,16 @@ function config($stateProvider) {
 					var deferred = $q.defer();
 
 					Additional.sessionTimeTypes(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
+				countriesData: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.supportedCountries(
 						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);

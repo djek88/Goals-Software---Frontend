@@ -4,9 +4,11 @@ angular
 	.module('app.group')
 	.factory('groupCreateService', groupCreateService);
 
-function groupCreateService(Group) {
+function groupCreateService(Group, Additional) {
 	var service = {
 		prepareGroup: prepareGroup,
+		countriesMap: countriesMap,
+		uploadStatesOrCitiesMap: uploadStatesOrCitiesMap,
 		timeZoneMap: buidTimeZoneMap(),
 		languagesMap: buidLanguagesMap(),
 		createGroup: createGroup
@@ -29,8 +31,11 @@ function groupCreateService(Group) {
 			hideMembers: false,
 			sessionConf: {
 				sheduled: true,
-				language:  "en",
+				language: 'en',
 				offline: false,
+				country: '',
+				state: '',
+				city: '',
 				withoutFacilitator: false,
 				day: +Object.keys(sessionDayTypes)[0],
 				time: Object.keys(sessionTimeTypes)[0],
@@ -39,6 +44,36 @@ function groupCreateService(Group) {
 				roundLength: [120, 180, 90, 120]
 			}
 		};
+	}
+
+	function countriesMap(countries) {
+		countries = angular.copy(countries);
+		countries.unshift({ id: '', name: 'Please select' });
+		return countries;
+	}
+
+	function uploadStatesOrCitiesMap(countryId, stateId, cb) {
+		var defaultOptions = [{ id: '', name: 'Please select' }];
+
+		if (countryId) {
+			if (stateId) {
+				Additional.supportedCountries({
+					countryId: countryId,
+					stateId: stateId
+				}, resolveOpts);
+			} else {
+				Additional.supportedCountries({
+					countryId: countryId
+				}, resolveOpts);
+			}
+		} else {
+			return defaultOptions;
+		}
+
+		function resolveOpts(opts) {
+			opts.unshift(defaultOptions[0]);
+			cb(opts);
+		}
 	}
 
 	function buidTimeZoneMap() {

@@ -3006,13 +3006,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name backendApi.GroupAttachment
- * @header backendApi.GroupAttachment
+ * @name backendApi.GroupAttachments
+ * @header backendApi.GroupAttachments
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `GroupAttachment` model.
+ * A $resource object for interacting with the `GroupAttachments` model.
  *
  * ## Example
  *
@@ -3022,7 +3022,7 @@ module.factory(
  *
  */
 module.factory(
-  "GroupAttachment",
+  "GroupAttachments",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
       urlBase + "/GroupAttachments/:id",
@@ -3031,8 +3031,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.GroupAttachment#download
-         * @methodOf backendApi.GroupAttachment
+         * @name backendApi.GroupAttachments#download
+         * @methodOf backendApi.GroupAttachments
          *
          * @description
          *
@@ -3074,13 +3074,13 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name backendApi.GroupAttachment#modelName
-    * @propertyOf backendApi.GroupAttachment
+    * @name backendApi.GroupAttachments#modelName
+    * @propertyOf backendApi.GroupAttachments
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `GroupAttachment`.
+    * i.e. `GroupAttachments`.
     */
-    R.modelName = "GroupAttachment";
+    R.modelName = "GroupAttachments";
 
 
     return R;
@@ -3313,6 +3313,42 @@ module.factory(
          */
         "evidenceSupportedTypes": {
           url: urlBase + "/Additionals/evidence-supported-types",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#supportedCountries
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return data about country.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `countryId` – `{number=}` - Country id
+         *
+         *  - `stateId` – `{number=}` - State id
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
+         */
+        "supportedCountries": {
+          isArray: true,
+          url: urlBase + "/Additionals/contries-data",
           method: "GET"
         },
       }

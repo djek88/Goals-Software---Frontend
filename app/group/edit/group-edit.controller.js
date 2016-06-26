@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupEditController', groupEditController);
 
-function groupEditController($scope, notifyAndLeave, layoutLoader, transformTimeTypes, readFileAsDataUrl, groupEditService, group, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupEditController($scope, notifyAndLeave, layoutLoader, transformTimeTypes, readFileAsDataUrl, groupEditService, group, groupTypes, penaltyAmounts, sessionFrequencyTypes, sessionDayTypes, sessionTimeTypes, countriesData) {
 	var vm = this;
 
 	vm.group = angular.copy(group);
@@ -12,6 +12,9 @@ function groupEditController($scope, notifyAndLeave, layoutLoader, transformTime
 	vm.groupAttachment = null;
 
 	vm.groupTypes = groupTypes;
+	vm.countriesMap = groupEditService.countriesMap(countriesData);
+	vm.statesMap = groupEditService.uploadStatesOrCitiesMap();
+	vm.citiesMap = groupEditService.uploadStatesOrCitiesMap();
 	vm.penaltyAmounts = penaltyAmounts;
 	vm.days = sessionDayTypes;
 	vm.times = transformTimeTypes(sessionTimeTypes);
@@ -37,6 +40,47 @@ function groupEditController($scope, notifyAndLeave, layoutLoader, transformTime
 			});
 		});
 	}
+
+	$scope.$watch('vm.group.sessionConf.country', function(newValue, oldValue) {
+		var isFirstIteration = newValue === oldValue;
+
+		if (!isFirstIteration) {
+			vm.group.sessionConf.state = '';
+		}
+
+		if (newValue) {
+			layoutLoader.on();
+
+			groupEditService.uploadStatesOrCitiesMap(newValue, null, function(states) {
+				layoutLoader.off();
+				vm.statesMap = states;
+			});
+		} else {
+			vm.statesMap = groupEditService.uploadStatesOrCitiesMap();
+		}
+	});
+
+	$scope.$watch('vm.group.sessionConf.state', function(newValue, oldValue) {
+		var isFirstIteration = newValue === oldValue;
+
+		if (!isFirstIteration) {
+			vm.group.sessionConf.city = '';
+		}
+
+		if (newValue) {
+			layoutLoader.on();
+
+			groupEditService.uploadStatesOrCitiesMap(
+				vm.group.sessionConf.country,
+				newValue,
+				function(cities) {
+					layoutLoader.off();
+					vm.citiesMap = cities;
+				});
+		} else {
+			vm.citiesMap = groupEditService.uploadStatesOrCitiesMap();
+		}
+	});
 
 	$scope.$watch('vm.imgData.newPicture', function(newValue, oldValue) {
 		if (newValue === oldValue || !newValue) {

@@ -112,6 +112,38 @@
 						</div>
 					</section>
 				</div>
+
+				<div class="row" ng-if="vm.group.sessionConf.offline">
+					<section class="col col-3">
+						<label class="label">Country</label>
+						<label class="select">
+							<select
+								ng-model="vm.group.sessionConf.country"
+								ng-options="item.id as item.name for item in vm.countriesMap">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">State</label>
+						<label class="select">
+							<select
+								ng-model="vm.group.sessionConf.state"
+								ng-options="item.id as item.name for item in vm.statesMap">
+							</select> <i></i>
+						</label>
+					</section>
+
+					<section class="col col-3">
+						<label class="label">City</label>
+						<label class="select">
+							<select
+								ng-model="vm.group.sessionConf.city"
+								ng-options="item.id as item.name for item in vm.citiesMap">
+							</select> <i></i>
+						</label>
+					</section>
+				</div>
 			</fieldset>
 
 			<fieldset>

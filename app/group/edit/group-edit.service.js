@@ -4,8 +4,10 @@ angular
 	.module('app.group')
 	.factory('groupEditService', groupEditService);
 
-function groupEditService($http, $stateParams, Group, APP_CONFIG) {
+function groupEditService($http, $stateParams, Group, Additional, APP_CONFIG) {
 	var service = {
+		countriesMap: countriesMap,
+		uploadStatesOrCitiesMap: uploadStatesOrCitiesMap,
 		timeZoneMap: buidTimeZoneMap(),
 		languagesMap: buidLanguagesMap(),
 		updateGroup: updateGroup,
@@ -14,6 +16,36 @@ function groupEditService($http, $stateParams, Group, APP_CONFIG) {
 		uploadAttachment: uploadAttachment
 	};
 	return service;
+
+	function countriesMap(countries) {
+		countries = angular.copy(countries);
+		countries.unshift({ id: '', name: 'Please select' });
+		return countries;
+	}
+
+	function uploadStatesOrCitiesMap(countryId, stateId, cb) {
+		var defaultOptions = [{ id: '', name: 'Please select' }];
+
+		if (countryId) {
+			if (stateId) {
+				Additional.supportedCountries({
+					countryId: countryId,
+					stateId: stateId
+				}, resolveOpts);
+			} else {
+				Additional.supportedCountries({
+					countryId: countryId
+				}, resolveOpts);
+			}
+		} else {
+			return defaultOptions;
+		}
+
+		function resolveOpts(opts) {
+			opts.unshift(defaultOptions[0]);
+			cb(opts);
+		}
+	}
 
 	function buidTimeZoneMap() {
 		var results = [];
