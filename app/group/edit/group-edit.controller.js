@@ -14,7 +14,6 @@ function groupEditController($scope, notifyAndLeave, layoutLoader, transformTime
 	vm.groupTypes = groupTypes;
 	vm.countriesMap = groupEditService.countriesMap(countriesData);
 	vm.statesMap = groupEditService.uploadStatesOrCitiesMap();
-	vm.citiesMap = groupEditService.uploadStatesOrCitiesMap();
 	vm.penaltyAmounts = penaltyAmounts;
 	vm.days = sessionDayTypes;
 	vm.times = transformTimeTypes(sessionTimeTypes);
@@ -61,24 +60,8 @@ function groupEditController($scope, notifyAndLeave, layoutLoader, transformTime
 	});
 
 	$scope.$watch('vm.group.sessionConf.state', function(newValue, oldValue) {
-		var isFirstIteration = newValue === oldValue;
-
-		if (!isFirstIteration) {
+		if (newValue !== oldValue) {
 			vm.group.sessionConf.city = '';
-		}
-
-		if (newValue) {
-			layoutLoader.on();
-
-			groupEditService.uploadStatesOrCitiesMap(
-				vm.group.sessionConf.country,
-				newValue,
-				function(cities) {
-					layoutLoader.off();
-					vm.citiesMap = cities;
-				});
-		} else {
-			vm.citiesMap = groupEditService.uploadStatesOrCitiesMap();
 		}
 	});
 
@@ -151,7 +134,7 @@ function groupEditController($scope, notifyAndLeave, layoutLoader, transformTime
 		// Upload attachment
 		layoutLoader.on();
 
-		groupEditService.uploadAttachment(vm.groupAttachment, function(freshGroup) {
+		groupEditService.uploadAttachment(vm.groupAttachment, vm.group._id, function(freshGroup) {
 			layoutLoader.off();
 
 			group = freshGroup;
@@ -168,7 +151,7 @@ function groupEditController($scope, notifyAndLeave, layoutLoader, transformTime
 	function updateGroupPicture() {
 		layoutLoader.on();
 
-		groupEditService.uploadPicture(vm.imgData.newPicture, function(freshGroup) {
+		groupEditService.uploadPicture(vm.imgData.newPicture, vm.group._id, function(freshGroup) {
 			layoutLoader.off();
 
 			group = freshGroup;

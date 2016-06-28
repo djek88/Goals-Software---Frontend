@@ -90,12 +90,12 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	$httpProvider.interceptors.push('ErrorHttpInterceptor');
 }
 
-function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, LoopBackAuth, notifyAndLeave) {
+function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, LoopBackAuth) {
 	$rootScope.logout = logout;
 	$rootScope.$stateParams = $stateParams;
 	//editableOptions.theme = 'bs3';
 
-	//$cookies.put(APP_CONFIG.FHQSessionIdCookie, '2cvufcl6ju3o1i0qpm1o1c5mi3');
+	//$cookies.put(APP_CONFIG.FHQSessionIdCookie, '84b8eeed7b3a8f2549243048d72108e4');
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
@@ -119,11 +119,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 					if (authToken.user.createdAt === authToken.user.updatedAt) {
 						$cookies.put(APP_CONFIG.firstLoginCookie, true);
 
-						notifyAndLeave({
-							title: 'Notification',
-							message: 'You can setup your profile on this page:<br><a style="text-decoration: underline;" href="' + $state.href('app.profile.settings') + '"><b>Profile settings page</b></a>',
-							delay: false
-						});
+						return $state.go('app.profile.settings');
 					}
 
 					$state.go(toState, toParams);

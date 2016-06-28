@@ -136,11 +136,10 @@
 
 					<section class="col col-3">
 						<label class="label">City</label>
-						<label class="select">
-							<select
-								ng-model="vm.group.sessionConf.city"
-								ng-options="item.id as item.name for item in vm.citiesMap">
-							</select> <i></i>
+						<label class="input">
+							<input type="text" placeholder="Please input a city name" 
+								ng-disabled="!vm.group.sessionConf.state"
+								ng-model="vm.group.sessionConf.city">
 						</label>
 					</section>
 				</div>

@@ -4,14 +4,17 @@ angular
 	.module('app.group')
 	.factory('groupCreateService', groupCreateService);
 
-function groupCreateService(Group, Additional) {
+function groupCreateService($http, Group, Additional, APP_CONFIG) {
 	var service = {
 		prepareGroup: prepareGroup,
+		getDefaultImgData: getDefaultImgData,
 		countriesMap: countriesMap,
 		uploadStatesOrCitiesMap: uploadStatesOrCitiesMap,
 		timeZoneMap: buidTimeZoneMap(),
 		languagesMap: buidLanguagesMap(),
-		createGroup: createGroup
+		createGroup: createGroup,
+		uploadPicture: uploadPicture,
+		uploadAttachment: uploadAttachment
 	};
 	return service;
 
@@ -19,6 +22,7 @@ function groupCreateService(Group, Additional) {
 		return {
 			name: '',
 			type: +Object.keys(groupTypes)[0],
+			avatar: '/GroupAvatars/default-avatar/download/group.png',
 			penalty: penaltyAmounts[0],
 			maxMembers: 5,
 			private: true,
@@ -104,5 +108,38 @@ function groupCreateService(Group, Additional) {
 
 	function createGroup(group, cb) {
 		Group.create(group, cb);
+	}
+
+	function uploadPicture(pictureFile, groupId, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId + '/upload-avatar';
+
+		var fd = new FormData();
+		fd.append('file', pictureFile);
+
+		$http.post(url, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		}).success(cb);
+	}
+
+	function uploadAttachment(attachmentFile, groupId, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId + '/upload-attachment';
+
+		var fd = new FormData();
+		fd.append('file', attachmentFile);
+
+		$http.post(url, fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		}).success(cb);
+	}
+
+	function getDefaultImgData(group) {
+		var actualGroupAvatar = APP_CONFIG.apiRootUrl + group.avatar;
+
+		return {
+			selectedPicture: actualGroupAvatar,
+			newPicture: null
+		};
 	}
 }

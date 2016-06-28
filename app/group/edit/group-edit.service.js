@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.factory('groupEditService', groupEditService);
 
-function groupEditService($http, $stateParams, Group, Additional, APP_CONFIG) {
+function groupEditService($http, Group, Additional, APP_CONFIG) {
 	var service = {
 		countriesMap: countriesMap,
 		uploadStatesOrCitiesMap: uploadStatesOrCitiesMap,
@@ -86,8 +86,8 @@ function groupEditService($http, $stateParams, Group, Additional, APP_CONFIG) {
 		};
 	}
 
-	function uploadPicture(pictureFile, cb) {
-		var url = APP_CONFIG.apiRootUrl + '/Groups/' + $stateParams.id + '/upload-avatar';
+	function uploadPicture(pictureFile, groupId, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId + '/upload-avatar';
 
 		var fd = new FormData();
 		fd.append('file', pictureFile);
@@ -98,8 +98,8 @@ function groupEditService($http, $stateParams, Group, Additional, APP_CONFIG) {
 		}).success(cb);
 	}
 
-	function uploadAttachment(attachmentFile, cb) {
-		var url = APP_CONFIG.apiRootUrl + '/Groups/' + $stateParams.id + '/upload-attachment';
+	function uploadAttachment(attachmentFile, groupId, cb) {
+		var url = APP_CONFIG.apiRootUrl + '/Groups/' + groupId + '/upload-attachment';
 
 		var fd = new FormData();
 		fd.append('file', attachmentFile);
