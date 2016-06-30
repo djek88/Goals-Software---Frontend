@@ -33,7 +33,8 @@ function groupSearchController(notifyAndLeave, layoutLoader, groupSearchService,
 				});
 			}
 
-			vm.groups = groupSearchService.preparedGroups(groups);
+			vm.groups = groupSearchService.preparedGroups(groups, groupTypes);
+			console.log(vm.groups);
 			vm.totalGroupsCount = vm.groups.length;
 		});
 	}
