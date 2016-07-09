@@ -44,10 +44,8 @@ appConfig.skins = [
 		label: "Glass"}
 ];
 
-
-
 appConfig.sound_path = "sound/";
-appConfig.sound_on = true; 
+appConfig.sound_on = false;
 
 
 /*
