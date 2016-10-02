@@ -115,19 +115,15 @@ body.container {
 	color: #363636;
 }
 
-.smart-form .checkbox:hover i,
-.smart-form .checkbox:focus i,
-.smart-form .radio:hover i,
-.smart-form .radio:focus i,
-.smart-form .input input:hover,
+.smart-form .input:hover input,
 .smart-form .input input:focus,
-.smart-form .select select:hover,
+.smart-form .select:hover select,
 .smart-form .select select:focus,
-.smart-form .textarea textarea:hover,
+.smart-form .textarea:hover textarea,
 .smart-form .textarea textarea:focus,
-.smart-form .toggle i:hover,
-.smart-form .toggle i:focus {
-	border-color: #ddf700!important;
+.smart-form .radio:hover i,
+.smart-form .checkbox:hover i {
+	border-color: #ddf700;
 }
 
 .loader {

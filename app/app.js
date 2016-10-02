@@ -127,7 +127,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 
 				// for dev logining P.S...comment this before commit
 				Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
-					email: '1@gmail.com',
+					email: '2@gmail.com',
 					password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
 				}, function(data) {
 					LoopBackAuth.setUser(data.id, data.userId, data.user);

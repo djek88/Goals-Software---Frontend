@@ -116,20 +116,29 @@ function groupCreateController($scope, notifyAndLeave, layoutLoader, transformTi
 			var reqsAlreadyDone = 0;
 			var reqsNeedPerform = 0;
 
+			if (!vm.groupAttachment && !vm.imgData.newPicture) {
+				leavePage();
+				return;
+			}
+
 			if (vm.groupAttachment) {
 				reqsNeedPerform++;
-				groupCreateService.uploadAttachment(vm.groupAttachment, newGroup._id, leavePage);
+				groupCreateService.uploadAttachment(vm.groupAttachment, newGroup._id, confirmComplete);
 			}
 
 			if (vm.imgData.newPicture) {
 				reqsNeedPerform++;
-				groupCreateService.uploadPicture(vm.imgData.newPicture, newGroup._id, leavePage);
+				groupCreateService.uploadPicture(vm.imgData.newPicture, newGroup._id, confirmComplete);
 			}
 
-			function leavePage() {
+			function confirmComplete() {
 				reqsAlreadyDone++;
 				if (reqsAlreadyDone !== reqsNeedPerform) return;
 
+				leavePage();
+			}
+
+			function leavePage() {
 				layoutLoader.off();
 
 				notifyAndLeave({
