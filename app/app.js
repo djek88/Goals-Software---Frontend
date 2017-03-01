@@ -95,6 +95,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 	$rootScope.$stateParams = $stateParams;
 	//editableOptions.theme = 'bs3';
 
+	// for dev logining P.S...comment this before commit
 	$cookies.put(APP_CONFIG.FHQSessionIdCookie, '84b8eeed7b3a8f2549243048d72108e4');
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
