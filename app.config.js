@@ -250,6 +250,7 @@ if (appConfig.voice_command) {
 		}
 	};
 }
+
 appConfig.socketUrl = 'http://localhost:3443';
 appConfig.apiRootUrl = 'http://localhost:3443/api';
 
@@ -257,7 +258,3 @@ appConfig.FHQSessionIdCookie = 'global_themastermind.nz_session_id';
 appConfig.firstLoginCookie = 'firstLogin';
 
 window.appConfig = appConfig;
-
-/*
-* END APP.appConfig
-*/

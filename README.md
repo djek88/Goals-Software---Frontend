@@ -8,7 +8,7 @@
 3. Install node dependencies - 
 ```npm install```
 3. Build application for production -
-```npm start prod```
+```npm run prod```
 
 **Gulp build application to the `./dist` folder.**
 
