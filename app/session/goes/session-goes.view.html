@@ -6,7 +6,9 @@
 				<!-- Round desc block -->
 				<div class="session-round-desc">
 					<b>{{vm.sess.timer < 6 ? 'Next person to speak in...' : vm.sess.roundDesc}}</b>
-					<span ng-if="vm.sess.state[0] == 2" style="font-size: 18px;">(each member to focus on their objectives, and then other members to give feedback)</span>
+					<span ng-if="vm.sess.state[0] == 2" style="font-size: 18px;">
+						(each member to focus on their objectives, and then other members to give feedback)
+					</span>
 				</div>
 
 				<!-- Avatars, info, timer block -->
@@ -22,7 +24,10 @@
 							</div>
 							<div class="session-next-info">
 								<div ng-if="vm.sess.nextFocusOn.fullName">
-									Next In The Spotlight: {{vm.sess.nextFocusOn.fullName}}
+									<div ng-if="vm.sess.state[0] == 1">
+										Next In The Spotlight: {{vm.sess.nextFocusOn.fullName}}</div>
+									<div ng-if="vm.sess.state[0] == 3">
+										Next to set their goals: {{vm.sess.nextFocusOn.fullName}}</div>
 								</div>
 							</div>
 						</div>
@@ -51,7 +56,9 @@
 									class="session-avatar"
 									ng-src="{{vm.sess.whoGiveFeedback.avatar}}">
 
-								<img ng-if="!vm.sess.whoGiveFeedback.avatar" class="session-avatar">
+								<img ng-if="!vm.sess.whoGiveFeedback.avatar"
+									class="session-avatar"
+									ng-src="{{vm.sess.focusOn.avatar}}">
 							</div>
 							<div class="session-next-info">
 								<div ng-if="vm.sess.nextWhoGiveFeedback.fullName">

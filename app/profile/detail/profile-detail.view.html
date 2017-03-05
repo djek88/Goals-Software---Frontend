@@ -12,16 +12,28 @@
 
 							<span class="pull-right">
 								<a class="btn btn-default btn-circle"
-									ng-href="{{vm.customer.social.fb}}">
+									ng-if="vm.customer.social.fb"
+									ng-href="{{vm.customer.social.fb | userLink}}"
+									target="_blank">
 									<i class="fa fa-facebook-square"></i>
 								</a>
 								<a class="btn btn-default btn-circle"
-									ng-href="{{vm.customer.social.tw}}">
+									ng-if="vm.customer.social.tw"
+									ng-href="{{vm.customer.social.tw | userLink}}"
+									target="_blank">
 									<i class="fa fa-twitter-square"></i>
 								</a>
 								<a class="btn btn-default btn-circle"
-									ng-href="{{vm.customer.social.li}}">
+									ng-if="vm.customer.social.li"
+									ng-href="{{vm.customer.social.li | userLink}}"
+									target="_blank">
 									<i class="fa fa-linkedin-square"></i>
+								</a>
+								<a class="btn btn-default btn-circle"
+									ng-if="vm.customer.social.wb"
+									ng-href="{{vm.customer.social.wb | userLink}}"
+									target="_blank">
+									<i class="fa fa-link"></i>
 								</a>
 							</span>
 						</h1>

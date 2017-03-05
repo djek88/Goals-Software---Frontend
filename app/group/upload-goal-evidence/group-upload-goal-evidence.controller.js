@@ -4,7 +4,7 @@ angular
 	.module('app.group')
 	.controller('groupUploadGoalEvidenceController', groupUploadGoalEvidenceController);
 
-function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, notifyAndLeave, layoutLoader, groupUploadGoalEvidenceService, loadAppData, evidenceTypes, goal, group) {
+function groupUploadGoalEvidenceController($scope, APP_CONFIG, LoopBackAuth, notifyAndLeave, layoutLoader, groupUploadGoalEvidenceService, loadAppData, evidenceTypes, goal, group) {
 	var vm = this;
 
 	vm.goal = groupUploadGoalEvidenceService.prepareGoal(goal, group);
@@ -12,6 +12,7 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 	vm.newFile = null;
 	vm.popoverTemplate = 'fileInfoPopover.html';
 	vm.token = LoopBackAuth.accessTokenId;
+	vm.urlBase = APP_CONFIG.apiRootUrl;
 
 	vm.leaveFeedback = leaveFeedback;
 	vm.deleteEvidence = deleteEvidence;
@@ -38,7 +39,7 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 
 			notifyAndLeave({
 				title: 'Remove evidence...',
-				content: 'Removed.'
+				message: 'Removed.'
 			});
 		});
 	}
@@ -48,7 +49,7 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 			angular.equals(goal.evidences, vm.goal.evidences)) {
 			return notifyAndLeave({
 				title: 'Save evidence...',
-				content: 'You are not change comments or evidence files!'
+				message: 'You are not change comments or evidence files!'
 			});
 		}
 
@@ -60,7 +61,7 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 
 				notifyAndLeave({
 					title: 'Save evidence...',
-					content: 'Evidence save successfully!',
+					message: 'Evidence save successfully!',
 					leave: {
 						to: 'app.group.memberGoals',
 						params: {id: goal._groupId, memberId: goal._ownerId}
@@ -79,20 +80,18 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 
 		if (supportTypes.indexOf(newValue.type) < 0) {
 			return notifyAndLeave({
-				box: 'bigBox',
+				type: 'error',
 				title: 'Supports the following types:',
-				content: 'This can be: ' + supportExtns.join(', '),
-				isError: true,
-				timeout: 8000
+				message: 'This can be: ' + supportExtns.join(', '),
+				delay: 8000
 			});
 		}
 
 		if (newValue.size > maxFileSize) {
 			return notifyAndLeave({
 				title: 'Upload evidence...',
-				content: 'Max file size is 10 MB.',
-				isError: true,
-				timeout: 8000
+				message: 'Max file size is 10 MB.',
+				delay: 8000
 			});
 		}
 
@@ -106,7 +105,7 @@ function groupUploadGoalEvidenceController($scope, $rootScope, LoopBackAuth, not
 
 			notifyAndLeave({
 				title: 'Upload evidence...',
-				content: 'Uploaded.'
+				message: 'Uploaded.'
 			});
 		});
 	});

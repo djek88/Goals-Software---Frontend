@@ -9,34 +9,51 @@
 </header>
 
 <div id="main" role="main">
-
 	<div data-smart-router-animation-wrap="content content@app" data-wrap-for="#content">
 		<div id="content">
-			<h3>
+			<h2>
 				{{vm.group.name}}
-			</h3>
+			</h2>
 
-			<span>
-				<h3>
-					Created: {{vm.group.created}}
-				</h3>
+			<div class="row">
+				<div class="container">
+					<div class="media">
+						<div class="media-left">
+							<img class="media-object" height="250px" width="250px" ng-src="{{vm.group.avatar}}" alt="...">
+							<a class="btn btn-default btn-sm"
+								style="width: 250px;"
+								ng-if="vm.group.attachment"
+								ng-href="{{vm.group.attachment}}"
+								download="">
+								Information/Application Form <i class="fa fa-download"></i></a>
+						</div>
 
-				<h3>
-					Number Of Mastermind Session: {{vm.group.sessionsPassed}}
-				</h3>
+						<div class="media-body" style="font-size: 17px;">
+							<p>
+								<b>Created:</b> {{vm.group.created}}
+							</p>
 
-				<h3>
-					Penalty Level: ${{vm.group.penalty}}
-				</h3>
+							<p>
+								<b>Number Of Mastermind Session:</b> {{vm.sessionsPassed}}
+							</p>
 
-				<h3>
-					Description: {{vm.group.description}}
-				</h3>
+							<p>
+								<b>Penalty Level:</b> ${{vm.group.penalty}}
+							</p>
 
-				<h3>
-					Mastermind Sessions: {{vm.group.mastermindSessions}}
-				</h3>
-			</span>
+							<p>
+								<div style="white-space: pre-wrap;">
+									<b>Description:</b> {{vm.group.description}}
+								</div>
+							</p>
+
+							<p>
+								<b>Mastermind Sessions:</b> {{vm.group.mastermindSessions}}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div align="center" style="padding-top: 50px;">
 				<span>
@@ -48,5 +65,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>

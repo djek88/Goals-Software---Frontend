@@ -27,10 +27,7 @@ function config($stateProvider, $urlRouterProvider) {
 					return deferred.promise;
 				},
 				scripts: function(lazyScript) {
-					return lazyScript.register([
-						'sparkline',
-						'easy-pie'
-					]);
+					return lazyScript.register(['sparkline', 'easy-pie']);
 				}
 			}
 		})

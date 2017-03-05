@@ -49,182 +49,6 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name backendApi.Customer#prototype$__get__Social
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Fetches hasOne relation Social.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__get__Social": {
-          url: urlBase + "/Customers/:id/Social",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__update__Social
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Update Social of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__update__Social": {
-          url: urlBase + "/Customers/:id/Social",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__get__Balance
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Fetches hasOne relation Balance.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__get__Balance": {
-          url: urlBase + "/Customers/:id/Balance",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#prototype$__update__Balance
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Update Balance of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - User id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        "prototype$__update__Balance": {
-          url: urlBase + "/Customers/:id/Balance",
-          method: "PUT"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Customer#exists
-         * @methodOf backendApi.Customer
-         *
-         * @description
-         *
-         * Check whether a model instance exists in the data source.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - Model id
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * Data properties:
-         *
-         *  - `exists` – `{boolean=}` - 
-         */
-        "exists": {
-          url: urlBase + "/Customers/:id/exists",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
          * @name backendApi.Customer#findById
          * @methodOf backendApi.Customer
          *
@@ -786,12 +610,6 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Goal.Owner() instead.
-        "::get::Goal::Owner": {
-          url: urlBase + "/Goals/:id/Owner",
-          method: "GET"
-        },
-
         /**
          * @ngdoc method
          * @name backendApi.Customer#getCurrent
@@ -1108,78 +926,6 @@ module.factory(
         "prototype$__get__LastSession": {
           url: urlBase + "/Groups/:id/LastSession",
           method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group#prototype$__get__SessionConf
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Fetches hasOne relation SessionConf.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        "prototype$__get__SessionConf": {
-          url: urlBase + "/Groups/:id/SessionConf",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Group#prototype$__update__SessionConf
-         * @methodOf backendApi.Group
-         *
-         * @description
-         *
-         * Update SessionConf of this model.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         * @param {Object} postData Request data.
-         *
-         * This method expects a subset of model properties as request parameters.
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        "prototype$__update__SessionConf": {
-          url: urlBase + "/Groups/:id/SessionConf",
-          method: "PUT"
         },
 
         // INTERNAL. Use Group.Members() instead.
@@ -1508,6 +1254,84 @@ module.factory(
         "prototype$updateAttributes": {
           url: urlBase + "/Groups/:id",
           method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$uploadAvatar
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Upload group img.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$uploadAvatar": {
+          url: urlBase + "/Groups/:id/upload-avatar",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Group#prototype$uploadAttachment
+         * @methodOf backendApi.Group
+         *
+         * @description
+         *
+         * Upload group information/application forms.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Group` object.)
+         * </em>
+         */
+        "prototype$uploadAttachment": {
+          url: urlBase + "/Groups/:id/upload-attachment",
+          method: "POST"
         },
 
         /**
@@ -2053,12 +1877,6 @@ module.factory(
           url: urlBase + "/Groups/:id/manually-shedule-session",
           method: "POST"
         },
-
-        // INTERNAL. Use Goal.Group() instead.
-        "::get::Goal::Group": {
-          url: urlBase + "/Goals/:id/Group",
-          method: "GET"
-        },
       }
     );
 
@@ -2420,18 +2238,6 @@ module.factory(
       urlBase + "/Goals/:id",
       { 'id': '@id' },
       {
-
-        // INTERNAL. Use Goal.Owner() instead.
-        "prototype$__get__Owner": {
-          url: urlBase + "/Goals/:id/Owner",
-          method: "GET"
-        },
-
-        // INTERNAL. Use Goal.Group() instead.
-        "prototype$__get__Group": {
-          url: urlBase + "/Goals/:id/Group",
-          method: "GET"
-        },
 
         /**
          * @ngdoc method
@@ -2949,90 +2755,18 @@ module.factory(
     R.modelName = "Goal";
 
 
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#Owner
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Fetches belongsTo relation Owner.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Customer` object.)
-         * </em>
-         */
-        R.Owner = function() {
-          var TargetResource = $injector.get("Customer");
-          var action = TargetResource["::get::Goal::Owner"];
-          return action.apply(R, arguments);
-        };
-
-        /**
-         * @ngdoc method
-         * @name backendApi.Goal#Group
-         * @methodOf backendApi.Goal
-         *
-         * @description
-         *
-         * Fetches belongsTo relation Group.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Group` object.)
-         * </em>
-         */
-        R.Group = function() {
-          var TargetResource = $injector.get("Group");
-          var action = TargetResource["::get::Goal::Group"];
-          return action.apply(R, arguments);
-        };
-
     return R;
   }]);
 
 /**
  * @ngdoc object
- * @name backendApi.AvatarsContainer
- * @header backendApi.AvatarsContainer
+ * @name backendApi.GroupAvatars
+ * @header backendApi.GroupAvatars
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `AvatarsContainer` model.
+ * A $resource object for interacting with the `GroupAvatars` model.
  *
  * ## Example
  *
@@ -3042,17 +2776,17 @@ module.factory(
  *
  */
 module.factory(
-  "AvatarsContainer",
+  "GroupAvatars",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/AvatarsContainers/:id",
+      urlBase + "/GroupAvatars/:id",
       { 'id': '@id' },
       {
 
         /**
          * @ngdoc method
-         * @name backendApi.AvatarsContainer#download
-         * @methodOf backendApi.AvatarsContainer
+         * @name backendApi.GroupAvatars#download
+         * @methodOf backendApi.GroupAvatars
          *
          * @description
          *
@@ -3083,7 +2817,7 @@ module.factory(
          * This method returns no data.
          */
         "download": {
-          url: urlBase + "/AvatarsContainers/:container/download/:file",
+          url: urlBase + "/GroupAvatars/:container/download/:file",
           method: "GET"
         },
       }
@@ -3094,13 +2828,13 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name backendApi.AvatarsContainer#modelName
-    * @propertyOf backendApi.AvatarsContainer
+    * @name backendApi.GroupAvatars#modelName
+    * @propertyOf backendApi.GroupAvatars
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `AvatarsContainer`.
+    * i.e. `GroupAvatars`.
     */
-    R.modelName = "AvatarsContainer";
+    R.modelName = "GroupAvatars";
 
 
     return R;
@@ -3108,13 +2842,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name backendApi.FilesContainer
- * @header backendApi.FilesContainer
+ * @name backendApi.CustomerAvatars
+ * @header backendApi.CustomerAvatars
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `FilesContainer` model.
+ * A $resource object for interacting with the `CustomerAvatars` model.
  *
  * ## Example
  *
@@ -3124,17 +2858,17 @@ module.factory(
  *
  */
 module.factory(
-  "FilesContainer",
+  "CustomerAvatars",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/FilesContainers/:id",
+      urlBase + "/CustomerAvatars/:id",
       { 'id': '@id' },
       {
 
         /**
          * @ngdoc method
-         * @name backendApi.FilesContainer#download
-         * @methodOf backendApi.FilesContainer
+         * @name backendApi.CustomerAvatars#download
+         * @methodOf backendApi.CustomerAvatars
          *
          * @description
          *
@@ -3165,7 +2899,7 @@ module.factory(
          * This method returns no data.
          */
         "download": {
-          url: urlBase + "/FilesContainers/:container/download/:file",
+          url: urlBase + "/CustomerAvatars/:container/download/:file",
           method: "GET"
         },
       }
@@ -3176,13 +2910,177 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name backendApi.FilesContainer#modelName
-    * @propertyOf backendApi.FilesContainer
+    * @name backendApi.CustomerAvatars#modelName
+    * @propertyOf backendApi.CustomerAvatars
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `FilesContainer`.
+    * i.e. `CustomerAvatars`.
     */
-    R.modelName = "FilesContainer";
+    R.modelName = "CustomerAvatars";
+
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name backendApi.GoalEvidences
+ * @header backendApi.GoalEvidences
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `GoalEvidences` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "GoalEvidences",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/GoalEvidences/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name backendApi.GoalEvidences#download
+         * @methodOf backendApi.GoalEvidences
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `container` – `{string=}` - 
+         *
+         *  - `file` – `{string=}` - 
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "download": {
+          url: urlBase + "/GoalEvidences/:container/download/:file",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name backendApi.GoalEvidences#modelName
+    * @propertyOf backendApi.GoalEvidences
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `GoalEvidences`.
+    */
+    R.modelName = "GoalEvidences";
+
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name backendApi.GroupAttachments
+ * @header backendApi.GroupAttachments
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `GroupAttachments` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "GroupAttachments",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/GroupAttachments/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name backendApi.GroupAttachments#download
+         * @methodOf backendApi.GroupAttachments
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `container` – `{string=}` - 
+         *
+         *  - `file` – `{string=}` - 
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "download": {
+          url: urlBase + "/GroupAttachments/:container/download/:file",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name backendApi.GroupAttachments#modelName
+    * @propertyOf backendApi.GroupAttachments
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `GroupAttachments`.
+    */
+    R.modelName = "GroupAttachments";
 
 
     return R;
@@ -3415,6 +3313,42 @@ module.factory(
          */
         "evidenceSupportedTypes": {
           url: urlBase + "/Additionals/evidence-supported-types",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name backendApi.Additional#supportedCountries
+         * @methodOf backendApi.Additional
+         *
+         * @description
+         *
+         * Return data about country.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `countryId` – `{number=}` - Country id
+         *
+         *  - `stateId` – `{number=}` - State id
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Additional` object.)
+         * </em>
+         */
+        "supportedCountries": {
+          isArray: true,
+          url: urlBase + "/Additionals/contries-data",
           method: "GET"
         },
       }

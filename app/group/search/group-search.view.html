@@ -36,22 +36,37 @@
 	<div class="row">
 		<fieldset class="col-sm-12" ng-if="vm.groups.length" style="margin-top: 40px;">
 			<div class="well" style="margin: 8px;" ng-repeat="group in vm.groups | limitTo: vm.groupsPerPage : ((vm.curPageNumber - 1) * vm.groupsPerPage)">
-				<div class="row elemTextPaddingNgRepeat">
-					<span class="col-xs-5">
-						{{group.name}}
-					</span>
-					<span class="col-xs-2">
-						Members: {{group.members}}
-					</span>
-					<span class="col-xs-4">
-						Created: {{group.created}}
-					</span>
-					<div class="col-xs-1">
-						<div class="pull-right">
-							<a class="btn btn-default"
-								ui-sref="app.group.detail({id: group._id})">
-								<i class="fa fa-eye"></i></a>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="media">
+							<div class="media-left">
+								<img class="media-object" height="100px" width="100px" ng-src="{{group.avatar}}" alt="...">
+							</div>
+
+							<div class="media-body">
+								<p>
+									<b>Name:</b> {{group.name}}
+								</p>
+
+								<p style="width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+									<b>Description:</b> {{group.description}}
+								</p>
+
+								<p>
+									<b>Max Members:</b> {{group.maxMembers}}
+								</p>
+
+								<p>
+									<b>Type:</b> {{group.type}}
+								</p>
+							</div>
 						</div>
+					</div>
+
+					<div class="col-md-1 col-md-offset-5" align="right">
+						<a class="btn btn-default" style="margin-top: 32px;" 
+							ui-sref="app.group.detail({id: group._id})">
+							<i class="fa fa-eye"></i></a>
 					</div>
 				</div>
 			</div>

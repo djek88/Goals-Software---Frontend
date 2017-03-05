@@ -15,15 +15,16 @@
 		"fastclick",
 		"moment",
 		"moment-timezone-with-data",
-		"fullcalendar",
 		"notification",
-		"smartwidgets",
 		"easy-pie",
 		"api",
 		"socket-io",
 		"file-model",
 		"datetimepicker",
-		"datetimepicker-tmpl"
+		"datetimepicker-tmpl",
+		"angularjs-dropdown-multiselect",
+		"ng-currency",
+		"angular-ui-notification"
 	],
 	"paths": {
 		"api": "plugin/api-backend/api-services.js",
@@ -32,6 +33,10 @@
 		"file-model": "plugin/angular-file-model/angular-file-model.js",
 		"datetimepicker": "plugin/datetimepicker/datetimepicker.js",
 		"datetimepicker-tmpl": "plugin/datetimepicker/datetimepicker.templates.js",
+		"languages": "plugin/languages/languages.min.js",
+		"angularjs-dropdown-multiselect": "plugin/angularjs-dropdown-multiselect/angularjs-dropdown-multiselect.min.js",
+		"ng-currency": "plugin/ng-currency/ng-currency.min.js",
+		"angular-ui-notification": "plugin/angular-ui-notification/angular-ui-notification.min.js",
 
 		"jquery": "plugin/jquery/dist/jquery.min.js",
 		"jquery-ui": "plugin/jquery-ui/jquery-ui.min.js",
@@ -139,9 +144,7 @@
 		"jquery-jvectormap": "plugin/vectormap/jquery-jvectormap-1.2.2.min.js",
 		"jquery-jvectormap-world-mill-en": "plugin/vectormap/jquery-jvectormap-world-mill-en.js",
 
-
 		"lodash": "plugin/lodash/lodash.min.js",
-
 
 		"magnific-popup": "plugin/magnific-popup/dist/jquery.magnific-popup.js",
 

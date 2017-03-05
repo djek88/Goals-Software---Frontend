@@ -148,7 +148,7 @@ gulp.task('runKarmaServer', function (cb) {
 
 gulp.task('serve', function(cb) {
 	bs.init({
-		notify: true,
+		notify: false,
 		server: {
 			baseDir: destination,
 			middleware: [historyApiFallback()]

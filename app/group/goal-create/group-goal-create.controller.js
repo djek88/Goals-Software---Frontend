@@ -24,7 +24,7 @@ function groupGoalCreateController(Customer, $stateParams, notifyAndLeave, layou
 
 			notifyAndLeave({
 				title: 'Creating goal...',
-				content: 'Goal was create successfully!',
+				message: 'Goal was create successfully!',
 				leave: {
 					to: 'app.group.memberGoals',
 					params: {id: $stateParams.id, memberId: Customer.getCachedCurrent()._id}

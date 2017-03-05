@@ -8,27 +8,35 @@
 
 				<div>
 					<div class="well" style="margin: 8px;" ng-repeat="request in vm.requests | limitTo: vm.requestsPerPage : ((vm.curPageNumber - 1) * vm.requestsPerPage)">
-						<div class="row">
-							<div class="col-xs-7">
+						<div class="row elemTextPaddingNgRepeat5">
+							<span class="col-xs-4">
+								<h4>{{request.Owner.firstName + ' ' + request.Owner.lastName}}</h4>
+							</span>
+
+							<span class="col-xs-4">
 								<h4>{{request.createdAt | date:'medium'}}</h4>
-							</div>
-							<div class="col-xs-5">
+							</span>
+
+							<div class="col-xs-4">
 								<div class="pull-right">
 									<a class="btn btn-default" href-void
+										data-tooltip="Request to join"
 										popover-placement="bottom"
-										popover-title="Request to join"
 										uib-popover="{{request.request}}">
 										<i class="fa fa-eye"></i></a>
 
 									<a class="btn btn-default"
+										data-tooltip="See user profile"
 										ui-sref="app.profile.detail({id: request._ownerId})">
 										<i class="fa fa-user"></i></a>
 
 									<a class="btn btn-default"
+										data-tooltip="Approve"
 										ng-click="vm.reqManage(request._id, true)">
 										<i class="fa fa-check"></i></a>
 
 									<a class="btn btn-default"
+										data-tooltip="Reject"
 										ng-click="vm.reqManage(request._id, false)">
 										<i class="fa fa-times"></i></a>
 								</div>

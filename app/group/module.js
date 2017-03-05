@@ -79,9 +79,6 @@ function config($stateProvider) {
 					);
 
 					return deferred.promise;
-				},
-				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
 				}
 			}
 		})
@@ -285,7 +282,7 @@ function config($stateProvider) {
 							}, null, function() {
 								notifyAndLeave({
 									title: 'Approve excuse...',
-									content: 'Thanks for your vote.',
+									message: 'Thanks for your vote.',
 									leave: {to: 'app.home'}
 								});
 							}, function() {
@@ -294,6 +291,24 @@ function config($stateProvider) {
 								});
 							}
 						);
+					}
+				}
+			}
+		})
+		.state('app.group.rejectExcuse', {
+			url: '/:id/session/:sessionId/reject-excuse/:excuseId',
+			views: {
+				'content@app': {
+					controller: function($timeout, notifyAndLeave, layoutLoader, loadAppData) {
+						layoutLoader.on();
+
+						$timeout(function() {
+							notifyAndLeave({
+								title: 'Reject excuse...',
+								message: 'Thanks for your vote.',
+								leave: {to: 'app.home'}
+							});
+						}, 300);
 					}
 				}
 			}
@@ -388,8 +403,18 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
+				countriesData: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.supportedCountries(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
+					return lazyScript.register(['jstz', 'languages']);
 				}
 			}
 		})
@@ -406,13 +431,16 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				group: function($q, $stateParams, Group) {
+				group: function($q, $state, $stateParams, Group, Customer, loadAppData) {
 					var deferred = $q.defer();
 
-					Group.findById({
-							id: $stateParams.id
+					Group.findById({id: $stateParams.id}, function(group) {
+							if (group._ownerId !== Customer.getCachedCurrent()._id) {
+								return $state.go('app.home');
+							}
+
+							deferred.resolve(group);
 						},
-						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -468,8 +496,18 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
+				countriesData: function($q, Additional) {
+					var deferred = $q.defer();
+
+					Additional.supportedCountries(
+						deferred.resolve.bind(deferred),
+						deferred.reject.bind(deferred)
+					);
+
+					return deferred.promise;
+				},
 				scripts: function(lazyScript){
-					return lazyScript.register(['jstz']);
+					return lazyScript.register(['jstz', 'languages']);
 				}
 			}
 		})
@@ -514,13 +552,16 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				goal: function($q, $stateParams, Goal) {
+				goal: function($q, $state, $stateParams, Goal, Customer, loadAppData) {
 					var deferred = $q.defer();
 
-					Goal.findById({
-							id: $stateParams.goalId
+					Goal.findById({id: $stateParams.goalId}, function(goal) {
+							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
+								return $state.go('app.home');
+							}
+
+							deferred.resolve(goal);
 						},
-						deferred.resolve.bind(deferred),
 						deferred.reject.bind(deferred)
 					);
 
@@ -591,15 +632,12 @@ function config($stateProvider) {
 
 					return deferred.promise;
 				},
-				goal: function($q, $state, $stateParams, Goal, Customer) {
+				goal: function($q, $state, $stateParams, Goal, Customer, loadAppData) {
 					var deferred = $q.defer();
 
-					Goal.findById({
-							id: $stateParams.goalId
-						},
-						function(goal) {
+					Goal.findById({id: $stateParams.goalId}, function(goal) {
 							if (goal._ownerId !== Customer.getCachedCurrent()._id) {
-								$state.go('app.group.goalReview', {
+								return $state.go('app.group.goalReview', {
 									id: $stateParams.id,
 									goalId: $stateParams.goalId
 								});
@@ -640,15 +678,12 @@ function config($stateProvider) {
 				}
 			},
 			resolve: {
-				goal: function($q, $state, $stateParams, Goal, Customer) {
+				goal: function($q, $state, $stateParams, Goal, Customer, loadAppData) {
 					var deferred = $q.defer();
 
-					Goal.findById({
-							id: $stateParams.goalId
-						},
-						function(goal) {
+					Goal.findById({id: $stateParams.goalId}, function(goal) {
 							if (goal._ownerId === Customer.getCachedCurrent()._id) {
-								$state.go('app.group.uploadGoalEvidence', {
+								return $state.go('app.group.uploadGoalEvidence', {
 									id: $stateParams.id,
 									goalId: $stateParams.goalId
 								});

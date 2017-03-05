@@ -44,10 +44,8 @@ appConfig.skins = [
 		label: "Glass"}
 ];
 
-
-
 appConfig.sound_path = "sound/";
-appConfig.sound_on = true; 
+appConfig.sound_on = false;
 
 
 /*
@@ -66,7 +64,7 @@ appConfig.debugStyle_success = 'background-color:green; font-weight:bold; color:
 appConfig.debugStyle_error = 'background-color:#ed1c24; font-weight:bold; color:#fff;';
 
 
-appConfig.voice_command = true;
+appConfig.voice_command = false;
 appConfig.voice_command_auto = false;
 
 /*
@@ -140,7 +138,7 @@ appConfig.voice_command_lang = 'en-US';
 /*
  *  Use localstorage to remember on/off (best used with HTML Version)
  */ 
-appConfig.voice_localStorage = true;
+appConfig.voice_localStorage = false;
 /*
  * Voice Commands
  * Defines all voice command variables and functions
@@ -252,11 +250,11 @@ if (appConfig.voice_command) {
 		}
 	};
 }
+
 appConfig.socketUrl = 'http://localhost:3443';
 appConfig.apiRootUrl = 'http://localhost:3443/api';
 
-window.appConfig = appConfig;
+appConfig.FHQSessionIdCookie = 'global_themastermind.nz_session_id';
+appConfig.firstLoginCookie = 'firstLogin';
 
-/*
-* END APP.appConfig
-*/
+window.appConfig = appConfig;

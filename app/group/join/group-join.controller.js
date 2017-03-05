@@ -20,7 +20,7 @@ function groupJoinController($state, $stateParams, Customer, notifyAndLeave, lay
 
 			notifyAndLeave({
 				title: 'Send request...',
-				content: 'Request was sent successfully!',
+				message: 'Request was sent successfully!',
 				leave: {to: 'app.group.detail', params: {id: groupId}}
 			});
 		});

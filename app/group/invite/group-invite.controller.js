@@ -20,7 +20,7 @@ function groupInviteController(Customer, notifyAndLeave, layoutLoader, groupInvi
 
 			notifyAndLeave({
 				title: 'Send invite...',
-				content: 'Invite was sent successfully!',
+				message: 'Invite was sent successfully!',
 				leave: {to: 'app.group.myGroups'}
 			});
 		});

@@ -19,7 +19,7 @@ function groupGoalEditController(Customer, $stateParams, notifyAndLeave, layoutL
 
 			notifyAndLeave({
 				title: 'Changing goal...',
-				content: 'Goal was change successfully!',
+				message: 'Goal was change successfully!',
 				leave: {
 					to: 'app.group.memberGoals',
 					params: {id: $stateParams.id, memberId: Customer.getCachedCurrent()._id}

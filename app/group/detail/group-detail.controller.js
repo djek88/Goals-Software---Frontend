@@ -4,10 +4,10 @@ angular
 	.module('app.group')
 	.controller('groupDetailController', groupDetailController);
 
-function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDetailService, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
+function groupDetailController(notifyAndLeave, layoutLoader, groupDetailService, APP_CONFIG, Customer, loadAppData, group, sessionsPassed, frequencyTypes, sessionDayTypes, sessionTimeTypes) {
 	var vm = this;
 
-	vm.urlBase = $rootScope.urlBase;
+	vm.urlBase = APP_CONFIG.apiRootUrl;
 	vm.curCustomer = Customer.getCachedCurrent();
 	vm.sessionsPassed = sessionsPassed;
 	vm.group = null;
@@ -36,7 +36,7 @@ function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDe
 		groupDetailService.emailModalOpen(group._id, memberId, function() {
 			notifyAndLeave({
 				title: 'Send Email...',
-				content: 'Message sent success'
+				message: 'Message sent success'
 			});
 		});
 	}
@@ -50,7 +50,7 @@ function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDe
 					groupDetailService.deleteGroup(group._id, function() {
 						notifyAndLeave({
 							title: 'Remove group...',
-							content: 'Group removed success!',
+							message: 'Group removed success!',
 							leave: {to: 'app.group.myGroups'}
 						});
 					});
@@ -62,7 +62,7 @@ function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDe
 					groupDetailService.changeOwner(group._id, newOwnerId, function() {
 						notifyAndLeave({
 							title: 'Change owner...',
-							content: 'Owner changed success!',
+							message: 'Owner changed success!',
 							leave: {to: 'app.group.myGroups'}
 						});
 					});
@@ -81,7 +81,7 @@ function groupDetailController($rootScope, notifyAndLeave, layoutLoader, groupDe
 
 				notifyAndLeave({
 					title: 'Remove member...',
-					content: 'Group member removed success!'
+					message: 'Group member removed success!'
 				});
 			});
 		});

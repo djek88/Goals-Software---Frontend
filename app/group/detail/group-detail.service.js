@@ -31,6 +31,8 @@ function groupDetailService($state, $uibModal, layoutLoader, Group) {
 			_ownerId: group._ownerId,
 			name: group.name,
 			created: created,
+			avatar: group.avatar,
+			attachment: group.attachment,
 			penalty: group.penalty,
 			description: group.description,
 			mastermindSessions: mastermindSessions,

@@ -1,0 +1,81 @@
+<span ng-if="!calendarDesign">
+	{{min ? min + ' Minutes' : ''}}
+	{{sec ? sec + ' Seconds' : ''}}
+</span>
+
+<div ng-if="calendarDesign">
+	<ul class="flip minuteTens">
+		<li ng-repeat="num in [5, 4, 3, 2, 1, 0]">
+			<a href="#">
+				<div class="up">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+				<div class="down">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<ul class="flip minuteOnes">
+		<li ng-repeat="num in [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]">
+			<a href="#">
+				<div class="up">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+				<div class="down">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<ul class="flip">
+		<li>
+			<a href="#">
+				<div class="up">
+					<div class="shadow"></div>
+					<div class="inn">:</div>
+				</div>
+				<div class="down">
+					<div class="shadow"></div>
+					<div class="inn">:</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<ul class="flip secondTens">
+		<li ng-repeat="num in [5, 4, 3, 2, 1, 0]">
+			<a href="#">
+				<div class="up">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+				<div class="down">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<ul class="flip secondOnes">
+		<li ng-repeat="num in [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]">
+			<a href="#">
+				<div class="up">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+				<div class="down">
+					<div class="shadow"></div>
+					<div class="inn">{{num}}</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>

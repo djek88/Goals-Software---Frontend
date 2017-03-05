@@ -18,12 +18,9 @@ function groupMyGroupsController(Customer, notifyAndLeave, layoutLoader, groupMy
 
 	function showEmailModal(groupId) {
 		groupMyGroupsService.emailModalOpen(groupId, function() {
-			$.smallBox({
+			notifyAndLeave({
 				title: 'Send email...',
-				content: 'Message sent success',
-				color: '#296191',
-				timeout: 3000,
-				icon: 'fa fa-bell swing animated'
+				message: 'Message sent success'
 			});
 		});
 	}
@@ -39,7 +36,7 @@ function groupMyGroupsController(Customer, notifyAndLeave, layoutLoader, groupMy
 
 				notifyAndLeave({
 					title: 'Leave group...',
-					content: 'Leave group success'
+					message: 'Leave group success'
 				});
 			});
 		});

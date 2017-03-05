@@ -6,6 +6,7 @@ module.exports = function(config){
 		'distTest/vendor.js',
 		scripts.paths['angular-mocks'],
 		scripts.paths['jstz'],
+		scripts.paths['languages'],
 
 		'app/shared/module.js',
 		'app/shared/**/*.js',
@@ -32,7 +33,7 @@ module.exports = function(config){
 
 		frameworks: ['jasmine'],
 
-		browsers: ['Chrome','PhantomJS', 'Chrome_without_security'],
+		browsers: ['Chrome'/*,'PhantomJS', 'Chrome_without_security'*/],
 
 		plugins: [
 			'karma-chrome-launcher',

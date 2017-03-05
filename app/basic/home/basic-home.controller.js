@@ -39,7 +39,7 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 
 			notifyAndLeave({
 				title: 'Send excuse...',
-				content: 'Excuse was sent successfully!',
+				message: 'Excuse was sent successfully!',
 			});
 		});
 	}
@@ -65,7 +65,7 @@ function basicHomeController(Customer, notifyAndLeave, layoutLoader, basicHomeSe
 
 			notifyAndLeave({
 				title: 'Scheduled next session...',
-				content: 'Next session start at date scheduled success!'
+				message: 'Next session start at date scheduled success!'
 			});
 		});
 
