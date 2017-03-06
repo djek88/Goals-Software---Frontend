@@ -96,7 +96,8 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 	//editableOptions.theme = 'bs3';
 
 	// for dev logining P.S...comment this before commit
-	$cookies.put(APP_CONFIG.FHQSessionIdCookie, '84b8eeed7b3a8f2549243048d72108e4');
+	// $cookies.put(APP_CONFIG.FHQSessionIdCookie, '84b8eeed7b3a8f2549243048d72108e4');
+	// end for dev logining
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		if (toState.name.substr(0, 3) === 'app') {
@@ -111,7 +112,22 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 				event.preventDefault();
 				console.log('Client logining...');
 
-				/*Customer.login({rememberMe: false}, {
+				// for dev logining P.S...comment this before commit
+				/*Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
+					email: '2@gmail.com',
+					password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
+				}, function(data) {
+					LoopBackAuth.setUser(data.id, data.userId, data.user);
+					LoopBackAuth.rememberMe = false;
+					LoopBackAuth.save();
+
+					console.log('Client login success.');
+					$state.go(toState, toParams);
+				});
+				return;*/
+				// end for dev logining
+
+				Customer.login({rememberMe: false}, {
 					_sessionId: $cookies.get(APP_CONFIG.FHQSessionIdCookie)
 				}, function(authToken) {
 					console.log('Client login success.');
@@ -123,19 +139,6 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 						return $state.go('app.profile.settings');
 					}
 
-					$state.go(toState, toParams);
-				});*/
-
-				// for dev logining P.S...comment this before commit
-				Customer.devLoginnnnnnnnnnnnnnnnnnnnnnnnn({
-					email: '2@gmail.com',
-					password: '2cvufcl6ju3o1i0qpm1o1c5mi3'
-				}, function(data) {
-					LoopBackAuth.setUser(data.id, data.userId, data.user);
-					LoopBackAuth.rememberMe = false;
-					LoopBackAuth.save();
-
-					console.log('Client login success.');
 					$state.go(toState, toParams);
 				});
 			}
