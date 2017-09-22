@@ -7,7 +7,8 @@
 2. Install [GIT](https://git-scm.com/downloads)
 3. Install node dependencies - 
 ```npm install```
-3. Build application for production -
+4. Setup ```serverHost``` in app.config.js
+5. Build application for production -
 ```npm run prod```
 
 **Gulp build application to the `./dist` folder.**

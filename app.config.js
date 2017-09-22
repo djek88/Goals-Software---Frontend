@@ -2,8 +2,14 @@
 
 var appConfig = window.appConfig || {};
 
-appConfig.menu_speed = 200;
+var serverHost = 'http://localhost:3443';
 
+appConfig.socketUrl = serverHost;
+appConfig.apiRootUrl = serverHost + '/api';
+
+appConfig.FHQSessionIdCookie = 'global_themastermind.nz_session_id';
+appConfig.firstLoginCookie = 'firstLogin';
+appConfig.menu_speed = 200;
 appConfig.smartSkin = "smart-style-2";
 
 appConfig.skins = [
@@ -250,11 +256,5 @@ if (appConfig.voice_command) {
 		}
 	};
 }
-
-appConfig.socketUrl = 'http://localhost:3443';
-appConfig.apiRootUrl = 'http://localhost:3443/api';
-
-appConfig.FHQSessionIdCookie = 'global_themastermind.nz_session_id';
-appConfig.firstLoginCookie = 'firstLogin';
 
 window.appConfig = appConfig;

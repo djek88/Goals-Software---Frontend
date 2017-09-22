@@ -1,14 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name app [smartadminApp]
- * @description
- * # app [smartadminApp]
- *
- * Main module of the application.
- */
-
 angular
 	.module('app', [
 		'ngAnimate',
@@ -45,7 +36,6 @@ function config($provide, $httpProvider, $locationProvider, LoopBackResourceProv
 	LoopBackResourceProvider.setUrlBase(window.appConfig.apiRootUrl);
 
 	$provide.factory('ErrorHttpInterceptor', function($q, $injector, LoopBackAuth, layoutLoader) {
-
 		function notifyError(rejection){
 			console.log('app.js rejection', rejection);
 			var data = rejection.data || 'Lost connection!';
@@ -96,7 +86,7 @@ function run($rootScope, $cookies, $state, $stateParams, APP_CONFIG, Customer, L
 	//editableOptions.theme = 'bs3';
 
 	// for dev logining P.S...comment this before commit
-	// $cookies.put(APP_CONFIG.FHQSessionIdCookie, '84b8eeed7b3a8f2549243048d72108e4');
+	//$cookies.put(APP_CONFIG.FHQSessionIdCookie, '84b8eeed7b3a8f2549243048d72108e4');
 	// end for dev logining
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {

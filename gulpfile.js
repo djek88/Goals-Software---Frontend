@@ -16,7 +16,7 @@ const cssnano = require('gulp-cssnano');
 const minifyHTML = require('gulp-minify-html');
 const bs = require('browser-sync').create();
 const historyApiFallback = require('connect-history-api-fallback')
-const karmaServer = require('karma').Server;
+const KarmaServer = require('karma').Server;
 //const rename = require('gulp-rename');
 //const gulpIgnore = require('gulp-ignore');
 
@@ -138,7 +138,7 @@ gulp.task('app:minify', gulp.series('app:concat', function(cb) {
 }));
 
 gulp.task('runKarmaServer', function (cb) {
-	let serverInst = new karmaServer({
+	let serverInst = new KarmaServer({
 		configFile: __dirname + '/karma.conf.js',
 		singleRun: false
 	}, cb);
